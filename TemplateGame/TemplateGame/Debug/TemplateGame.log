@@ -1,0 +1,38 @@
+﻿  DeviceManager.cpp
+c:\users\user\desktop\templategame\templategame\gamedefine.h(20): warning C4005: 'KEY_DOWN': macro redefinition
+  c:\users\user\desktop\templategame\templategame\gamedefine.h(19): note: see previous definition of 'KEY_DOWN'
+  DXGraphics.cpp
+c:\users\user\desktop\templategame\templategame\gamedefine.h(20): warning C4005: 'KEY_DOWN': macro redefinition
+  c:\users\user\desktop\templategame\templategame\gamedefine.h(19): note: see previous definition of 'KEY_DOWN'
+  Grid.cpp
+c:\users\user\desktop\templategame\templategame\gamedefine.h(20): warning C4005: 'KEY_DOWN': macro redefinition
+  c:\users\user\desktop\templategame\templategame\gamedefine.h(19): note: see previous definition of 'KEY_DOWN'
+c:\users\user\desktop\templategame\templategame\grid.cpp(64): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\templategame\templategame\grid.cpp(65): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\templategame\templategame\grid.cpp(67): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\templategame\templategame\grid.cpp(68): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\templategame\templategame\grid.cpp(105): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\user\desktop\templategame\templategame\grid.cpp(106): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Input.cpp
+c:\users\user\desktop\templategame\templategame\gamedefine.h(20): warning C4005: 'KEY_DOWN': macro redefinition
+  c:\users\user\desktop\templategame\templategame\gamedefine.h(19): note: see previous definition of 'KEY_DOWN'
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Main.cpp
+c:\users\user\desktop\templategame\templategame\gamedefine.h(20): warning C4005: 'KEY_DOWN': macro redefinition
+  c:\users\user\desktop\templategame\templategame\gamedefine.h(19): note: see previous definition of 'KEY_DOWN'
+  Object.cpp
+  ObjectPosition.cpp
+  ObjectVelocity.cpp
+  trace.cpp
+c:\users\user\desktop\templategame\templategame\gamedefine.h(20): warning C4005: 'KEY_DOWN': macro redefinition
+  c:\users\user\desktop\templategame\templategame\gamedefine.h(19): note: see previous definition of 'KEY_DOWN'
+  utils.cpp
+c:\users\user\desktop\templategame\templategame\gamedefine.h(20): warning C4005: 'KEY_DOWN': macro redefinition
+  c:\users\user\desktop\templategame\templategame\gamedefine.h(19): note: see previous definition of 'KEY_DOWN'
+  MetroidGame.cpp
+c:\users\user\desktop\templategame\templategame\gamedefine.h(20): warning C4005: 'KEY_DOWN': macro redefinition
+  c:\users\user\desktop\templategame\templategame\gamedefine.h(19): note: see previous definition of 'KEY_DOWN'
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\user\desktop\templategame\templategame\metroidgame.cpp(64): warning C4244: 'argument': conversion from 'DWORD' to 'float', possible loss of data
+  Generating Code...
+  TemplateGame.vcxproj -> C:\Users\User\Desktop\TemplateGame\Debug\TemplateGame.exe

@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\Log">
+      <UniqueIdentifier>{0f271c8d-a8e9-4565-b905-a575d57af997}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Framework">
+      <UniqueIdentifier>{0526491e-7e24-4907-93a3-8254e23703b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Framework">
+      <UniqueIdentifier>{fdddc708-9d07-4a9e-a36a-9527211d848d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\PartitioningOfSpace">
+      <UniqueIdentifier>{260604b3-55c9-4220-986e-35d6c22753d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\PartitioningOfSpace">
+      <UniqueIdentifier>{2f93c384-7261-4a5f-b4f9-3d33184312a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Object">
+      <UniqueIdentifier>{fc17e513-3590-4fc5-b870-a389c5e0c30e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object">
+      <UniqueIdentifier>{2590965d-a7fb-41d2-80cc-5a7f5f3536cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Object\MainCharacter">
+      <UniqueIdentifier>{8800681e-d647-450c-b3fb-a715d0d04b79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Object\Enemy">
+      <UniqueIdentifier>{41fbad3f-4542-46da-9bf9-7ecdc8d1a6af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Object\OtherObjects">
+      <UniqueIdentifier>{d2588ab4-4a50-44c9-9c3b-5541bc49fa74}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="trace.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="DXGraphics.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceManager.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="MetroidGame.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Source Files\PartitioningOfSpace</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectPosition.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectVelocity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDefine.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="trace.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceManager.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="DXGraphics.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="MetroidGame.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Header Files\PartitioningOfSpace</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="OtherObjectsDefine.h">
+      <Filter>Header Files\Object\OtherObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="SpaceDefine.h">
+      <Filter>Header Files\PartitioningOfSpace</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPosition.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectDefine.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectVelocity.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Log\trace.log">
+      <Filter>Resource Files\Log</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
