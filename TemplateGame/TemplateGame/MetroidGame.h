@@ -9,7 +9,7 @@
 
 class MetroidGame
 {
-private:
+protected:
 	DWORD deltaTime;	// Thời gian giữa frame hiện tại và frame trước đó đã được vẽ ra
 	Input *input;		// Quản lý input
 	DXGraphics *dxGraphics;		// Quản lý đồ họa
