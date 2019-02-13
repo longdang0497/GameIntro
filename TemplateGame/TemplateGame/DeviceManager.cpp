@@ -45,28 +45,28 @@ DeviceManager::~DeviceManager()
 }
 
 // Xóa màn hình hiện hành
-void DeviceManager::clearScreen()
+void DeviceManager::ClearScreen()
 {
 	this->d3ddv->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 }
 
 // Get/set methods
-void DeviceManager::setDevice(LPDIRECT3DDEVICE9 d3ddv)
+void DeviceManager::SetDevice(LPDIRECT3DDEVICE9 d3ddv)
 {
 	this->d3ddv = d3ddv;
 }
 
-void DeviceManager::setBackBuffer(LPDIRECT3DSURFACE9 backBuffer)
+void DeviceManager::SetBackBuffer(LPDIRECT3DSURFACE9 backBuffer)
 {
 	this->backBuffer = backBuffer;
 }
 
-LPDIRECT3DDEVICE9 DeviceManager::getDevice()
+LPDIRECT3DDEVICE9 DeviceManager::GetDevice()
 {
 	return this->d3ddv;
 }
 
-LPDIRECT3DSURFACE9 DeviceManager::getBackBuffer()
+LPDIRECT3DSURFACE9 DeviceManager::GetBackBuffer()
 {
 	return this->backBuffer;
 }

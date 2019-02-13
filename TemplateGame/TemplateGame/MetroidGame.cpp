@@ -61,7 +61,7 @@ void MetroidGame::GameRun()
 		this->input->ProcessEscKeyCode();
 		this->checkKey();
 
-		ProcessInput(this->deviceManager->getDevice(), this->deltaTime);
+		ProcessInput(this->deviceManager->GetDevice(), this->deltaTime);
 
 	}
 }
@@ -86,23 +86,23 @@ void MetroidGame::checkKey()
 // Dùng để render 1 frame lên màn ảnh
 void MetroidGame::RenderFrame()
 {
-	auto result = this->deviceManager->getDevice()->BeginScene();
+	auto result = this->deviceManager->GetDevice()->BeginScene();
 
 	if (result == D3D_OK)
 	{
 		// Clear back buffer with BLACK
-		this->deviceManager->clearScreen();
+		this->deviceManager->ClearScreen();
 
 		//if (camera)
 		//{
 		//	camera->SetTransform(_device);
 		//}
 
-		Render(this->deviceManager->getDevice());
-		this->deviceManager->getDevice()->EndScene();
+		Render(this->deviceManager->GetDevice());
+		this->deviceManager->GetDevice()->EndScene();
 	}
 
-	this->deviceManager->getDevice()->Present(NULL, NULL, NULL, NULL);
+	this->deviceManager->GetDevice()->Present(NULL, NULL, NULL, NULL);
 }
 
 void MetroidGame::Update(float deltaTime)
