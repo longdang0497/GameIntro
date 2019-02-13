@@ -24,27 +24,27 @@ ObjectPosition::~ObjectPosition()
 }
 
 // Get/set methods
-void ObjectPosition::setPosX(float posX)
+void ObjectPosition::SetPosX(float posX)
 {
 	this->posX = posX;
 }
 
-void ObjectPosition::setPosY(float posY)
+void ObjectPosition::SetPosY(float posY)
 {
 	this->posY = posY;
 }
 
-float ObjectPosition::getPosX()
+float ObjectPosition::GetPosX()
 {
 	return this->posX;
 }
 
-float ObjectPosition::getPosY()
+float ObjectPosition::GetPosY()
 {
 	return this->posY;
 }
 
-ObjectPosition* ObjectPosition::getPosCenter()
+ObjectPosition* ObjectPosition::GetPosCenter()
 {
 	
 	float x = (this->posX + this->objectWidth) / 2;
@@ -55,22 +55,22 @@ ObjectPosition* ObjectPosition::getPosCenter()
 	return this->posCenter;
 }
 
-void ObjectPosition::setObjectWidth(int width)
+void ObjectPosition::SetObjectWidth(int width)
 {
 	this->objectWidth = width;
 }
 
-void ObjectPosition::setObjectHeight(int height)
+void ObjectPosition::SetObjectHeight(int height)
 {
 	this->objectHeight = height;
 }
 
-int ObjectPosition::getObjectWidth()
+int ObjectPosition::GetObjectWidth()
 {
 	return this->objectWidth;
 }
 
-int ObjectPosition::getObjectHeight()
+int ObjectPosition::GetObjectHeight()
 {
 	return this->objectHeight;
 }
