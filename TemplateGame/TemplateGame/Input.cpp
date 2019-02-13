@@ -89,7 +89,7 @@ void Input::ProcessEscKeyCode()
 	// Collect all key states first
 	result = this->keyboard->GetDeviceState(sizeof(this->keyStates), this->keyStates);
 
-	if (this->isKeyDown(DIK_ESCAPE))
+	if (this->IsKeyDown(DIK_ESCAPE))
 	{
 		PostMessage(this->hwnd, WM_QUIT, 0, 0);
 	}
@@ -103,18 +103,18 @@ void Input::ProcessEscKeyCode()
 	}
 }
 
-int Input::isKeyDown(int keyCode)
+int Input::IsKeyDown(int keyCode)
 {
 	return (this->keyStates[keyCode] & 0x80) > 0;
 }
 
 // Get/set methods
-LPDIRECTINPUTDEVICE8 Input::getKeyboard()
+LPDIRECTINPUTDEVICE8 Input::GetKeyboard()
 {
 	return this->keyboard;
 }
 
-LPDIDEVICEOBJECTDATA Input::getKeyEvents()
+LPDIDEVICEOBJECTDATA Input::GetKeyEvents()
 {
 	return this->keyEvents;
 }

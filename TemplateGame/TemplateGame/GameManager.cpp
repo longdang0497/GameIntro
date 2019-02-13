@@ -1,22 +1,22 @@
 ﻿#include "GameManager.h"
 
-void GameManager::_InitBackground()
+void GameManager::InitBackground()
 {
 }
 
-void GameManager::_InitSprites(LPDIRECT3DDEVICE9 d3ddv)
+void GameManager::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 {
 	//world->InitSprites(d3ddv);
 }
 
-void GameManager::_InitPositions()
+void GameManager::InitPositions()
 {
 }
 
-GameManager::GameManager(HINSTANCE hInstance, LPWSTR Name, int Mode, int IsFullScreen, int FrameRate)
-	:MetroidGame(hInstance, Name, Mode, IsFullScreen, FrameRate)
+GameManager::GameManager(HINSTANCE hInstance, LPWSTR name, int mode, int isFullScreen, int frameRate)
+	:MetroidGame(hInstance, name, mode, isFullScreen, frameRate)
 {
-	tick_per_frame = 1000 / this->dxGraphics->getFrameRate();
+	tickPerFrame = 1000 / this->dxGraphics->GetFrameRate();
 
 	//sound = new GameSound();
 }
@@ -38,17 +38,17 @@ void GameManager::LoadResources(LPDIRECT3DDEVICE9 d3ddev)
 	//---------Khởi tạo spriteHandler---------------
 	if (d3ddev == NULL) return;
 
-	HRESULT result = D3DXCreateSprite(d3ddev, &spriteHandler);
+	HRESULT result = D3DXCreateSprite(d3ddev, &this->spriteHandler);
 	if (result != D3D_OK)
 		trace(L"Unable to create SpriteHandler");
 
-	//_texture = texture.loadTexture(d3ddev, BRICK_TEXTURE);
-	//if (_texture == NULL)
+	//texture = texture.loadTexture(d3ddev, BRICK_TEXTURE);
+	//if (texture == NULL)
 		//trace(L"Unable to load BrickTexture");
 
 	srand((unsigned)time(NULL));
-	this->_InitSprites(d3ddev);
-	this->_InitPositions();
+	this->InitSprites(d3ddev);
+	this->InitPositions();
 }
 
 void GameManager::Update(float Delta)
@@ -76,10 +76,10 @@ void GameManager::OnKeyUp(int KeyCode)
 
 DWORD GameManager::GetTickPerFrame()
 {
-	return this->tick_per_frame;
+	return this->tickPerFrame;
 }
 
-LPD3DXSPRITE GameManager::getSpriteHandler()
+LPD3DXSPRITE GameManager::GetSpriteHandler()
 {
 	return this->spriteHandler;
 }

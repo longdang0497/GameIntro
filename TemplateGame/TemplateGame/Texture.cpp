@@ -8,9 +8,9 @@ Texture::~Texture() {
 
 }
 
-LPDIRECT3DTEXTURE9 Texture::loadTexture(LPDIRECT3DDEVICE9 d3ddev, LPCWSTR fileName) {
+LPDIRECT3DTEXTURE9 Texture::LoadTexture(LPDIRECT3DDEVICE9 d3ddev, LPCWSTR fileName) {
 	HRESULT result;
-	LPDIRECT3DTEXTURE9 _texture = NULL;
+	LPDIRECT3DTEXTURE9 texture = NULL;
 
 	// Doc thong tin file anh de tao texture
 	D3DXIMAGE_INFO infoOfTexture;
@@ -32,9 +32,9 @@ LPDIRECT3DTEXTURE9 Texture::loadTexture(LPDIRECT3DDEVICE9 d3ddev, LPCWSTR fileNa
 		transColor,
 		&infoOfTexture,
 		NULL,
-		&_texture);
+		&texture);
 
 	if (result != D3D_OK)
 		return NULL;
-	return _texture;
+	return texture;
 }

@@ -17,7 +17,7 @@ protected:
 
 	void GameRun();
 
-	void checkKey();
+	void CheckKey();
 	void RenderFrame();
 
 	void Update(float deltaTime);

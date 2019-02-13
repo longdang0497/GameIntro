@@ -16,15 +16,15 @@ DeviceManager::DeviceManager(DXGraphics* dxGraphics) {
 	ZeroMemory(&d3dpp, sizeof(d3dpp));
 	d3dpp.BackBufferCount = 1;
 	d3dpp.BackBufferFormat = this->backBufferFormat;
-	d3dpp.BackBufferWidth = dxGraphics->getScreenWidth();
-	d3dpp.BackBufferHeight = dxGraphics->getScreenHeight();
+	d3dpp.BackBufferWidth = dxGraphics->GetScreenWidth();
+	d3dpp.BackBufferHeight = dxGraphics->GetScreenHeight();
 	d3dpp.Windowed = TRUE;
-	d3dpp.hDeviceWindow = dxGraphics->getHwnd();
+	d3dpp.hDeviceWindow = dxGraphics->GetHwnd();
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 	const auto rs = this->d3d->CreateDevice(
 		D3DADAPTER_DEFAULT,
 		D3DDEVTYPE_HAL,
-		dxGraphics->getHwnd(),
+		dxGraphics->GetHwnd(),
 		D3DCREATE_HARDWARE_VERTEXPROCESSING,
 		&d3dpp,
 		&this->d3ddv);
