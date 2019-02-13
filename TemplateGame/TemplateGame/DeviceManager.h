@@ -14,11 +14,11 @@ public:
 	DeviceManager(DXGraphics*);
 	~DeviceManager();
 
-	void clearScreen();
+	void ClearScreen();
 
-	void setDevice(LPDIRECT3DDEVICE9 d3ddv);
-	void setBackBuffer(LPDIRECT3DSURFACE9 backBuffer);
-	LPDIRECT3DDEVICE9 getDevice();
-	LPDIRECT3DSURFACE9 getBackBuffer();
+	void SetDevice(LPDIRECT3DDEVICE9 d3ddv);
+	void SetBackBuffer(LPDIRECT3DSURFACE9 backBuffer);
+	LPDIRECT3DDEVICE9 GetDevice();
+	LPDIRECT3DSURFACE9 GetBackBuffer();
 };
 

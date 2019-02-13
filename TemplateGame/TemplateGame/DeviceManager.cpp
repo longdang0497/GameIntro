@@ -16,15 +16,15 @@ DeviceManager::DeviceManager(DXGraphics* dxGraphics) {
 	ZeroMemory(&d3dpp, sizeof(d3dpp));
 	d3dpp.BackBufferCount = 1;
 	d3dpp.BackBufferFormat = this->backBufferFormat;
-	d3dpp.BackBufferWidth = dxGraphics->getScreenWidth();
-	d3dpp.BackBufferHeight = dxGraphics->getScreenHeight();
+	d3dpp.BackBufferWidth = dxGraphics->GetScreenWidth();
+	d3dpp.BackBufferHeight = dxGraphics->GetScreenHeight();
 	d3dpp.Windowed = TRUE;
-	d3dpp.hDeviceWindow = dxGraphics->getHwnd();
+	d3dpp.hDeviceWindow = dxGraphics->GetHwnd();
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 	const auto rs = this->d3d->CreateDevice(
 		D3DADAPTER_DEFAULT,
 		D3DDEVTYPE_HAL,
-		dxGraphics->getHwnd(),
+		dxGraphics->GetHwnd(),
 		D3DCREATE_HARDWARE_VERTEXPROCESSING,
 		&d3dpp,
 		&this->d3ddv);
@@ -45,28 +45,28 @@ DeviceManager::~DeviceManager()
 }
 
 // Xóa màn hình hiện hành
-void DeviceManager::clearScreen()
+void DeviceManager::ClearScreen()
 {
 	this->d3ddv->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 }
 
 // Get/set methods
-void DeviceManager::setDevice(LPDIRECT3DDEVICE9 d3ddv)
+void DeviceManager::SetDevice(LPDIRECT3DDEVICE9 d3ddv)
 {
 	this->d3ddv = d3ddv;
 }
 
-void DeviceManager::setBackBuffer(LPDIRECT3DSURFACE9 backBuffer)
+void DeviceManager::SetBackBuffer(LPDIRECT3DSURFACE9 backBuffer)
 {
 	this->backBuffer = backBuffer;
 }
 
-LPDIRECT3DDEVICE9 DeviceManager::getDevice()
+LPDIRECT3DDEVICE9 DeviceManager::GetDevice()
 {
 	return this->d3ddv;
 }
 
-LPDIRECT3DSURFACE9 DeviceManager::getBackBuffer()
+LPDIRECT3DSURFACE9 DeviceManager::GetBackBuffer()
 {
 	return this->backBuffer;
 }

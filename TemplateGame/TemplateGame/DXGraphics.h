@@ -27,24 +27,24 @@ public:
 	DXGraphics(HINSTANCE hInstance, LPCWSTR nameOfGame, int mode, int framerate, bool isFullScreen);
 	~DXGraphics();
 
-	void setHInstance(HINSTANCE hInstance);
-	void setNameOfGame(LPCWSTR nameOfGame);
-	void setHwnd(HWND hWnd);
-	void setIsFullScreen(bool isFullScreen);
-	void setScreenHeight(int screenHeight);
-	void setScreenWidth(int screenWidth);
-	void setFrameRate(int frameRate);
-	void setMode(int mode);
-	void setDepth(int depth);
+	void SetHInstance(HINSTANCE hInstance);
+	void SetNameOfGame(LPCWSTR nameOfGame);
+	void SetHwnd(HWND hWnd);
+	void SetIsFullScreen(bool isFullScreen);
+	void SetScreenHeight(int screenHeight);
+	void SetScreenWidth(int screenWidth);
+	void SetFrameRate(int frameRate);
+	void SetMode(int mode);
+	void SetDepth(int depth);
 
-	HINSTANCE getHInstance();
-	LPCWSTR getNameOfGame();
-	HWND getHwnd();
-	bool getIsFullScreen();
-	int getScreenWidth();
-	int getScreenHeight();
-	int getFrameRate();
-	int getMode();
-	int getDepth();
+	HINSTANCE GetHInstance();
+	LPCWSTR GetNameOfGame();
+	HWND GetHwnd();
+	bool GetIsFullScreen();
+	int GetScreenWidth();
+	int GetScreenHeight();
+	int GetFrameRate();
+	int GetMode();
+	int GetDepth();
 };
 

@@ -84,9 +84,6 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
-    <ClCompile Include="World.cpp">
-      <Filter>Source Files\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
@@ -141,9 +138,6 @@
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
-      <Filter>Header Files\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="World.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">

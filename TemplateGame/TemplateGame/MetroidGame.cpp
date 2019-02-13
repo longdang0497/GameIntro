@@ -8,7 +8,7 @@ MetroidGame::MetroidGame()
 MetroidGame::MetroidGame(HINSTANCE hInstance, LPCWSTR nameOfGame, int mode, bool isFullScreen, int frameRate)
 {
 	this->dxGraphics = new DXGraphics(hInstance, nameOfGame, mode, frameRate, isFullScreen);
-	this->input = new Input(hInstance, this->dxGraphics->getHwnd());
+	this->input = new Input(hInstance, this->dxGraphics->GetHwnd());
 	this->deviceManager = new DeviceManager(this->dxGraphics);
 }
 
@@ -27,7 +27,7 @@ void MetroidGame::GameRun()
 	int done = 0;
 	DWORD frameStartTime = GetTickCount();
 
-	DWORD tickPerFrame = 100 / this->dxGraphics->getFrameRate();
+	DWORD tickPerFrame = 100 / this->dxGraphics->GetFrameRate();
 
 	while (!done)
 	{
@@ -35,8 +35,8 @@ void MetroidGame::GameRun()
 		{
 			if (msg.message == WM_QUIT) done = 1;
 			else if (msg.message == WM_ACTIVATE) {
-				if (this->input->getKeyboard() != NULL && this->input->getKeyboard()->Poll() != DI_OK) {
-					this->input->getKeyboard()->Acquire();
+				if (this->input->GetKeyboard() != NULL && this->input->GetKeyboard()->Poll() != DI_OK) {
+					this->input->GetKeyboard()->Acquire();
 				}
 				msg.message = 0;
 			}
@@ -59,50 +59,50 @@ void MetroidGame::GameRun()
 		}
 
 		this->input->ProcessEscKeyCode();
-		this->checkKey();
+		this->CheckKey();
 
-		ProcessInput(this->deviceManager->getDevice(), this->deltaTime);
+		ProcessInput(this->deviceManager->GetDevice(), this->deltaTime);
 
 	}
 }
 
 // Mặc định
-void MetroidGame::checkKey()
+void MetroidGame::CheckKey()
 {
 	DWORD dwElements = KEYBOARD_BUFFER_SIZE;
-	HRESULT hr = this->input->getKeyboard()->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), this->input->getKeyEvents(), &dwElements, 0);
+	HRESULT hr = this->input->GetKeyboard()->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), this->input->GetKeyEvents(), &dwElements, 0);
 
 	for (DWORD i = 0; i < dwElements; i++)
 	{
-		int KeyCode = this->input->getKeyEvents()[i].dwOfs;
-		int KeyState = this->input->getKeyEvents()[i].dwData;
-		if ((KeyState & 0x80) > 0)
-			OnKeyDown(KeyCode);
+		int keyCode = this->input->GetKeyEvents()[i].dwOfs;
+		int keyState = this->input->GetKeyEvents()[i].dwData;
+		if ((keyState & 0x80) > 0)
+			OnKeyDown(keyCode);
 		else
-			OnKeyUp(KeyCode);
+			OnKeyUp(keyCode);
 	}
 }
 
 // Dùng để render 1 frame lên màn ảnh
 void MetroidGame::RenderFrame()
 {
-	auto result = this->deviceManager->getDevice()->BeginScene();
+	auto result = this->deviceManager->GetDevice()->BeginScene();
 
 	if (result == D3D_OK)
 	{
 		// Clear back buffer with BLACK
-		this->deviceManager->clearScreen();
+		this->deviceManager->ClearScreen();
 
 		//if (camera)
 		//{
 		//	camera->SetTransform(_device);
 		//}
 
-		Render(this->deviceManager->getDevice());
-		this->deviceManager->getDevice()->EndScene();
+		Render(this->deviceManager->GetDevice());
+		this->deviceManager->GetDevice()->EndScene();
 	}
 
-	this->deviceManager->getDevice()->Present(NULL, NULL, NULL, NULL);
+	this->deviceManager->GetDevice()->Present(NULL, NULL, NULL, NULL);
 }
 
 void MetroidGame::Update(float deltaTime)

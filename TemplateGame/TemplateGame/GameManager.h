@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "MetroidGame.h"
-#include "World.h"
 #include "Grid.h"
 #include <time.h>
 #include "trace.h"
@@ -10,17 +9,17 @@ class GameManager : public MetroidGame
 {
 protected:
 	LPD3DXSPRITE spriteHandler;
-	LPDIRECT3DTEXTURE9 _texture;
-	World * world;
+	LPDIRECT3DTEXTURE9 texture;
 	//CSound * intro;
 	//CSound * appear;
 	//GameSound *sound;
 	Grid *grid;
-	DWORD tick_per_frame;
+	DWORD tickPerFrame;
+	int screenMode;
 private:
-	void _InitBackground();
-	void _InitSprites(LPDIRECT3DDEVICE9 d3ddv);
-	void _InitPositions();
+	void InitBackground();
+	void InitSprites(LPDIRECT3DDEVICE9 d3ddv);
+	void InitPositions();
 
 	//Map *map;
 
@@ -41,9 +40,7 @@ public:
 
 	DWORD GetTickPerFrame();
 
-	int screenMode;
-
-	LPD3DXSPRITE getSpriteHandler();
+	LPD3DXSPRITE GetSpriteHandler();
 	//Map *getMap();
 	//Grid* getGrid();
 };
