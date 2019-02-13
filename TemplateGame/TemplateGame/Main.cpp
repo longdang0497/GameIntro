@@ -15,8 +15,8 @@ int WINAPI WinMain(
 {
 	ObjectPosition *position = new ObjectPosition(1.0f, 1.0f);
 	
-	cout << position->getObjectWidth() << endl;
-	cout << position->getObjectHeight() << endl;
+	cout << position->GetObjectWidth() << endl;
+	cout << position->GetObjectHeight() << endl;
 
 	system("pause");
 

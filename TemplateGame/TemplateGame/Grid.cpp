@@ -1,8 +1,5 @@
 ﻿#include "Grid.h"
 
-
-
-
 Grid::Grid()
 {
 	this->numOfColumn = DEFAULT_GRID_COLUMN;
@@ -61,8 +58,8 @@ bool Grid::HandleObject(Object * objSrc, Object * objDes)
 void Grid::UpdateGrid(Object * object, float newPosX, float newPosY)
 {
 	// Kiểm tra xem có thay đổi cell hay không
-	int oldRow = floor(object->GetLastPos()->getPosY() / CELL_SIZE);
-	int oldColumn = floor(object->GetLastPos()->getPosX() / CELL_SIZE);
+	int oldRow = floor(object->GetLastPos()->GetPosY() / CELL_SIZE);
+	int oldColumn = floor(object->GetLastPos()->GetPosX() / CELL_SIZE);
 
 	int newRow = floor(newPosY / CELL_SIZE);
 	int newColumn = floor(newPosX / CELL_SIZE);
@@ -87,8 +84,8 @@ void Grid::UpdateGrid(Object * object, float newPosX, float newPosY)
 	this->Add(object);
 
 	// Cập nhật lại vị trí last của object
-	object->GetLastPos()->setPosX(object->GetCurPos()->getPosX());
-	object->GetLastPos()->setPosY(object->GetCurPos()->getPosY());
+	object->GetLastPos()->SetPosX(object->GetCurPos()->GetPosX());
+	object->GetLastPos()->SetPosY(object->GetCurPos()->GetPosY());
 }
 
 // Bản chất của Grid là DSLK đôi, nên mình sẽ thao tác giống danh sách liên kết đôi
@@ -98,12 +95,12 @@ void Grid::UpdateGrid(Object * object, float newPosX, float newPosY)
 void Grid::Add(Object *object) {
 
 	// Lưu lại giá trị cũ của object sau mỗi lần update
-	object->GetLastPos()->setPosX(object->GetCurPos()->getPosX());
-	object->GetLastPos()->setPosY(object->GetCurPos()->getPosY());
+	object->GetLastPos()->SetPosX(object->GetCurPos()->GetPosX());
+	object->GetLastPos()->SetPosY(object->GetCurPos()->GetPosY());
 
 	// Xác định object đang nằm ở grid nào
-	int column = floor(object->GetCurPos()->getPosX() / CELL_SIZE);
-	int row = floor(object->GetCurPos()->getPosY() / CELL_SIZE);
+	int column = floor(object->GetCurPos()->GetPosX() / CELL_SIZE);
+	int row = floor(object->GetCurPos()->GetPosY() / CELL_SIZE);
 
 	// Thêm object vào đầu dslk
 	object->SetPreObject(NULL);
