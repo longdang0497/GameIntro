@@ -1,18 +1,10 @@
-﻿  GameManager.cpp
-d:\documents\github\gameintro\templategame\templategame\gamedefine.h(20): warning C4005: 'KEY_DOWN': macro redefinition
-  d:\documents\github\gameintro\templategame\templategame\gamedefine.h(19): note: see previous definition of 'KEY_DOWN'
-  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-  Sprite.cpp
-d:\documents\github\gameintro\templategame\templategame\gamedefine.h(20): warning C4005: 'KEY_DOWN': macro redefinition
-  d:\documents\github\gameintro\templategame\templategame\gamedefine.h(19): note: see previous definition of 'KEY_DOWN'
-d:\documents\github\gameintro\templategame\templategame\sprite.cpp(89): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
-d:\documents\github\gameintro\templategame\templategame\sprite.cpp(132): warning C4018: '<': signed/unsigned mismatch
-  Texture.cpp
-  MetroidGame.cpp
-d:\documents\github\gameintro\templategame\templategame\gamedefine.h(20): warning C4005: 'KEY_DOWN': macro redefinition
-  d:\documents\github\gameintro\templategame\templategame\gamedefine.h(19): note: see previous definition of 'KEY_DOWN'
-  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-d:\documents\github\gameintro\templategame\templategame\metroidgame.cpp(64): warning C4244: 'argument': conversion from 'DWORD' to 'float', possible loss of data
-  World.cpp
-  Generating Code...
-  TemplateGame.vcxproj -> D:\Documents\GitHub\GameIntro\TemplateGame\Debug\TemplateGame.exe
+﻿  Grid.cpp
+d:\github\gameintro\templategame\templategame\gamedefine.h(20): warning C4005: 'KEY_DOWN': macro redefinition
+  d:\github\gameintro\templategame\templategame\gamedefine.h(19): note: see previous definition of 'KEY_DOWN'
+d:\github\gameintro\templategame\templategame\grid.cpp(61): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\github\gameintro\templategame\templategame\grid.cpp(62): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\github\gameintro\templategame\templategame\grid.cpp(64): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\github\gameintro\templategame\templategame\grid.cpp(65): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\github\gameintro\templategame\templategame\grid.cpp(102): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\github\gameintro\templategame\templategame\grid.cpp(103): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  TemplateGame.vcxproj -> D:\GitHub\GameIntro\TemplateGame\Debug\TemplateGame.exe

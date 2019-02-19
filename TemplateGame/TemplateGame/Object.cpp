@@ -39,32 +39,32 @@ float Object::GetCollisionTime(Object * otherObject, COLLISION_DIRECTION & colli
 	float xInvEntry, yInvEntry;
 	float xInvExit, yInvExit;
 
-	float vX = this->curVec->getVx() * deltaTime;
-	float vY = this->curVec->getVy() * deltaTime;
+	float vX = this->curVec->GetVx() * deltaTime;
+	float vY = this->curVec->GetVy() * deltaTime;
 
 	// Tìm khoảng cách giữa 2 vật thể
 	// Object đang đi qua phải
 	if (vX > 0.0f) {
-		xInvEntry = otherObject->GetCurPos()->getPosX() - (this->GetCurPos()->getPosX() + this->objectWidth);
-		xInvExit = (otherObject->objectWidth + otherObject->GetCurPos()->getPosX()) - this->curPos->getPosX();
+		xInvEntry = otherObject->GetCurPos()->GetPosX() - (this->GetCurPos()->GetPosX() + this->objectWidth);
+		xInvExit = (otherObject->objectWidth + otherObject->GetCurPos()->GetPosX()) - this->curPos->GetPosX();
 	}
 
 	// Object đang đi qua bên trái
 	else {
-		xInvEntry = (otherObject->curPos->getPosX() + otherObject->GetObjectWidth()) - this->curPos->getPosX();
-		xInvExit = otherObject->GetCurPos()->getPosX() - (this->curPos->getPosX() + this->objectWidth);
+		xInvEntry = (otherObject->curPos->GetPosX() + otherObject->GetObjectWidth()) - this->curPos->GetPosX();
+		xInvExit = otherObject->GetCurPos()->GetPosX() - (this->curPos->GetPosX() + this->objectWidth);
 	}
 
 	// Vật thể đang đi xuống
 	if (vY > 0.0f) {
-		yInvEntry = otherObject->GetCurPos()->getPosY() - (this->curPos->getPosY() + this->objectHeight);
-		yInvExit = otherObject->curPos->getPosY() + otherObject->objectHeight - this->curPos->getPosY();
+		yInvEntry = otherObject->GetCurPos()->GetPosY() - (this->curPos->GetPosY() + this->objectHeight);
+		yInvExit = otherObject->curPos->GetPosY() + otherObject->objectHeight - this->curPos->GetPosY();
 	}
 
 	// Vật thể đang đi lên
 	else {
-		yInvEntry = (otherObject->curPos->getPosY() + otherObject->objectHeight) - this->curPos->getPosY();
-		yInvExit = otherObject->curPos->getPosY() - (this->curPos->getPosY() + this->objectHeight);
+		yInvEntry = (otherObject->curPos->GetPosY() + otherObject->objectHeight) - this->curPos->GetPosY();
+		yInvExit = otherObject->curPos->GetPosY() - (this->curPos->GetPosY() + this->objectHeight);
 	}
 
 	// Tính khoảng thời gian va chạm và thời gian hết va chạm
@@ -99,16 +99,16 @@ float Object::GetCollisionTime(Object * otherObject, COLLISION_DIRECTION & colli
 	else {
 		if (xEntry > yEntry) { // này là đã va chạm ở trục Y rồi
 			if (xInvEntry >= 0.0f) {
-				if (this->curPos->getPosY() + this->objectHeight <= otherObject->curPos->getPosY() 
-					|| this->curPos->getPosY() >= otherObject->curPos->getPosY() + otherObject->objectHeight)
+				if (this->curPos->GetPosY() + this->objectHeight <= otherObject->curPos->GetPosY() 
+					|| this->curPos->GetPosY() >= otherObject->curPos->GetPosY() + otherObject->objectHeight)
 
 					collisionDirection = NONE;
 				else
 					collisionDirection = RIGHT;
 			}
 			else {
-				if (this->curPos->getPosY() >= otherObject->curPos->getPosY() + otherObject->objectHeight
-					|| this->curPos->getPosY() + this->objectHeight <= otherObject->curPos->getPosY())
+				if (this->curPos->GetPosY() >= otherObject->curPos->GetPosY() + otherObject->objectHeight
+					|| this->curPos->GetPosY() + this->objectHeight <= otherObject->curPos->GetPosY())
 
 					collisionDirection = NONE;
 				else
@@ -117,15 +117,15 @@ float Object::GetCollisionTime(Object * otherObject, COLLISION_DIRECTION & colli
 		}
 		else {			// Này là va chạm với trục X rồi nè
 			if (yInvEntry >= 0.0f) {
-				if (this->curPos->getPosX() + this->objectWidth<= otherObject->curPos->getPosX()
-					|| this->curPos->getPosX() >= otherObject->curPos->getPosX() + otherObject->objectWidth)
+				if (this->curPos->GetPosX() + this->objectWidth<= otherObject->curPos->GetPosX()
+					|| this->curPos->GetPosX() >= otherObject->curPos->GetPosX() + otherObject->objectWidth)
 					collisionDirection = NONE;
 				else
 					collisionDirection = BOTTOM;
 			}
 			else {
-				if (this->curPos->getPosX() + this->objectWidth <= otherObject->curPos->getPosX()
-					|| this->curPos->getPosX() >= otherObject->curPos->getPosX() + otherObject->objectWidth)
+				if (this->curPos->GetPosX() + this->objectWidth <= otherObject->curPos->GetPosX()
+					|| this->curPos->GetPosX() >= otherObject->curPos->GetPosX() + otherObject->objectWidth)
 					collisionDirection = NONE;
 				else
 					collisionDirection = TOP;
@@ -137,31 +137,14 @@ float Object::GetCollisionTime(Object * otherObject, COLLISION_DIRECTION & colli
 	return entryTime;
 }
 
-// Đám này là hàm ảo, để mấy con sau kế thừa rồi xài
-void Object::InitSprites()
-{
-}
-
-void Object::Update(float deltaTime)
-{
-}
-
-void Object::Render()
-{
-}
-
 void Object::Init(float posX, float posY)
 {
-	this->curPos->setPosX(posX);
-	this->curPos->setPosY(posY);
+	this->curPos->SetPosX(posX);
+	this->curPos->SetPosY(posY);
 	this->isActive = true;
 }
 
-void Object::Destroy()
-{
-}
-
-// Get/set methods
+// Get/Set methods
 void Object::SetObjectType(OBJECT_TYPE objectType)
 {
 	this->objectType = objectType;

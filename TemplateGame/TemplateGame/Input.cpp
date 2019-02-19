@@ -46,7 +46,7 @@ Input::Input(HINSTANCE hInstance, HWND hwnd) {
 	// IMPORTANT STEP TO USE BUFFERED DEVICE DATA!
 	//
 	// DirectInput uses unbuffered I/O (buffer size = 0) by default.
-	// If you want to read buffered data, you need to set a nonzero
+	// If you want to read buffered data, you need to Set a nonzero
 	// buffer size.
 	//
 	// Set the buffer size to DINPUT_BUFFERSIZE (defined above) elements.
@@ -108,13 +108,13 @@ int Input::isKeyDown(int keyCode)
 	return (this->keyStates[keyCode] & 0x80) > 0;
 }
 
-// Get/set methods
-LPDIRECTINPUTDEVICE8 Input::getKeyboard()
+// Get/Set methods
+LPDIRECTINPUTDEVICE8 Input::GetKeyboard()
 {
 	return this->keyboard;
 }
 
-LPDIDEVICEOBJECTDATA Input::getKeyEvents()
+LPDIDEVICEOBJECTDATA Input::GetKeyEvents()
 {
 	return this->keyEvents;
 }

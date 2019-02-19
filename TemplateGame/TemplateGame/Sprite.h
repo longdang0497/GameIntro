@@ -34,13 +34,13 @@ public:
 	void drawSprite(int x, int y, int width, int height, D3DXVECTOR3 position);	//draw 1 sprite
 	void drawSprite(int width, int height, D3DXVECTOR3 position);	//draw multi sprites
 	RECT ReadCoord();
-	void Reset();
+	void ReSet();
 
-	void setWidth(int value);
-	int getWidth();
+	void SetWidth(int value);
+	int GetWidth();
 
-	void setHeight(int value);
-	int getHeight();
+	void SetHeight(int value);
+	int GetHeight();
 
 	int GetIndex();
 	int GetCount();

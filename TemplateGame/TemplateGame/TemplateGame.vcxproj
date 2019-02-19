@@ -130,7 +130,6 @@
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="DXGraphics.cpp" />
-    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -147,8 +146,6 @@
   <ItemGroup>
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="DXGraphics.h" />
-    <ClInclude Include="GameDefine.h" />
-    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Object.h" />

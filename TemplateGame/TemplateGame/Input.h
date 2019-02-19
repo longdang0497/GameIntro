@@ -21,8 +21,8 @@ public:
 	void ProcessEscKeyCode();
 	int isKeyDown(int keyCode);
 
-	LPDIRECTINPUTDEVICE8 getKeyboard();
-	LPDIDEVICEOBJECTDATA getKeyEvents();
+	LPDIRECTINPUTDEVICE8 GetKeyboard();
+	LPDIDEVICEOBJECTDATA GetKeyEvents();
 
 };
 

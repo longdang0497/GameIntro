@@ -94,7 +94,7 @@ void Sprite::drawSprite(int width, int height, D3DXVECTOR3 position) {
 	this->spriteHandler->End();
 }
 
-void Sprite::Reset()
+void Sprite::ReSet()
 {
 	_Index = 0;
 }
@@ -121,10 +121,10 @@ RECT Sprite::ReadCoord()
 	{
 		vector<string> pos;
 		string split;
-		getline(f, line);
+		Getline(f, line);
 		istringstream iss(line);
 
-		while (getline(iss, split, '\t'))
+		while (Getline(iss, split, '\t'))
 		{
 			pos.push_back(split);
 		}
@@ -151,22 +151,22 @@ RECT Sprite::ReadCoord()
 	return srect;
 }
 
-void Sprite::setWidth(int value)
+void Sprite::SetWidth(int value)
 {
 	width = value;
 }
 
-int Sprite::getWidth()
+int Sprite::GetWidth()
 {
 	return width;
 }
 
-void Sprite::setHeight(int value)
+void Sprite::SetHeight(int value)
 {
 	height = value;
 }
 
-int Sprite::getHeight()
+int Sprite::GetHeight()
 {
 	return height;
 }

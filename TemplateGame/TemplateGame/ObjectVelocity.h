@@ -10,9 +10,9 @@ public:
 	ObjectVelocity(float vx, float vy);
 	~ObjectVelocity();
 
-	void setVx(float vx);
-	void setVy(float vy);
-	float getVx();
-	float getVy();
+	void SetVx(float vx);
+	void SetVy(float vy);
+	float GetVx();
+	float GetVy();
 };
 

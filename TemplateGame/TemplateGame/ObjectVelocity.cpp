@@ -19,22 +19,22 @@ ObjectVelocity::~ObjectVelocity()
 {
 }
 
-void ObjectVelocity::setVx(float vx)
+void ObjectVelocity::SetVx(float vx)
 {
 	this->vx = vx;
 }
 
-void ObjectVelocity::setVy(float vy)
+void ObjectVelocity::SetVy(float vy)
 {
 	this->vy = vy;
 }
 
-float ObjectVelocity::getVx()
+float ObjectVelocity::GetVx()
 {
 	return this->vx;
 }
 
-float ObjectVelocity::getVy()
+float ObjectVelocity::GetVy()
 {
 	return this->vy;
 }
