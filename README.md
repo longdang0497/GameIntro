@@ -28,3 +28,5 @@ dsound.lib
 ## 2. Thay đổi Include hay Lib thì sử dụng x86 nha
 
 ## 3. Lúc chạy ứng dụng thì nhớ chỉnh chế độ x86
+
+## 4. Grid (mai update nha, ngủ đã <3 )
