@@ -99,6 +99,9 @@
     <ClCompile Include="World.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectVelocity.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -150,6 +153,9 @@
       <Filter>Header Files\Log</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
   </ItemGroup>

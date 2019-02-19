@@ -3,15 +3,15 @@
 class ObjectVelocity
 {
 private:
-	float vx;
-	float vy;
+	float vX;
+	float vY;
 public:
 	ObjectVelocity();
-	ObjectVelocity(float vx, float vy);
+	ObjectVelocity(float vX, float vY);
 	~ObjectVelocity();
 
-	void SetVx(float vx);
-	void SetVy(float vy);
+	void SetVx(float vX);
+	void SetVy(float vY);
 	float GetVx();
 	float GetVy();
 };

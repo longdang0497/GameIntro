@@ -1,35 +1,33 @@
-#include "Sprite.h"
+﻿#include "Sprite.h"
 #include <vector>
 
-Sprite::Sprite(LPD3DXSPRITE SpriteHandler, LPDIRECT3DTEXTURE9 texture, LPWSTR _coord, int count)
+Sprite::Sprite(LPD3DXSPRITE spriteHandler, LPDIRECT3DTEXTURE9 texture, LPWSTR coord, int count, int width, int height)
 {
 	this->count = count;
-	spriteHandler = SpriteHandler;
-	this->_Coord = _coord;
-
-	// Gan he mau trong suot
-	transColor = D3DCOLOR_ARGB(255, 255, 255, 255);
-	this->_Index = 0;
-
 	this->width = width;
 	this->height = height;
-
-	LPDIRECT3DDEVICE9 d3ddv;
-	SpriteHandler->GetDevice(&d3ddv);
-
+	this->spriteHandler = spriteHandler;
+	this->coord = coord;
 	this->texture = texture;
 	if (this->texture == NULL)
 		return;
+
+	// Gan he mau trong suot
+	transColor = D3DCOLOR_ARGB(255, 255, 255, 255);
+	this->index = 0;
+
+	LPDIRECT3DDEVICE9 d3ddv;
+	this->spriteHandler->GetDevice(&d3ddv);	
 }
 
 Sprite::~Sprite() {
 	texture->Release();
-	delete(_Coord);
+	delete(coord);
 }
 
 // Cap nhat vi tri cua sprite tiep theo
-void Sprite::updateSprite() {
-	this->_Index = (this->_Index + 1) % count;
+void Sprite::UpdateSprite() {
+	this->index = (this->index + 1) % count;
 }
 
 /*
@@ -41,15 +39,15 @@ void Sprite::updateSprite() {
 */
 
 //draw 1 sprite
-void Sprite::drawSprite(int x, int y, int width, int height, D3DXVECTOR3 position) {
+void Sprite::DrawSprite(int x, int y, D3DXVECTOR3 position) {
 	if (this->spriteHandler == NULL || this->texture == NULL)
 		return;
 
 	RECT rect;
 	rect.left = x;
 	rect.top = y;
-	rect.right = x + width;
-	rect.bottom = y + height;
+	rect.right = x + this->width;
+	rect.bottom = y + this->height;
 
 	//using this line for camera only
 	this->spriteHandler->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE);
@@ -65,15 +63,12 @@ void Sprite::drawSprite(int x, int y, int width, int height, D3DXVECTOR3 positio
 }
 
 //draw multi sprites
-void Sprite::drawSprite(int width, int height, D3DXVECTOR3 position) {
+void Sprite::DrawSprite(D3DXVECTOR3 position) {
 	if (this->spriteHandler == NULL || this->texture == NULL)
 		return;
-	RECT rect;
-	rect = ReadCoord();
+	RECT rect = ReadCoord();
 
 	D3DXVECTOR3 pos(0, 0, 0);
-	//pos.x = position.x;
-	//pos.y = position.y;
 
 	this->spriteHandler->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE);
 
@@ -96,28 +91,28 @@ void Sprite::drawSprite(int width, int height, D3DXVECTOR3 position) {
 
 void Sprite::ReSet()
 {
-	_Index = 0;
+	index = 0;
 }
 
 RECT Sprite::ReadCoord()
 {
 	//init array Sprite's position
-	vector<vector<int>> coord;
-	coord.resize(count);
+	vector<vector<int>> arrCoord;
+	arrCoord.resize(this->count);
 
 	//Read file info of file
 	fstream f;
 	try
 	{
-		f.open(_Coord);
+		f.open(this->coord);
 	}
-	catch (std::fstream::failure e)
+	catch (fstream::failure e)
 	{
 		MessageBox(NULL, L"[Sprite class]--Read sprite info from file failed", L"Error", NULL);
 	}
 	string line;
 	int id = 0;
-	while (!f.eof() && id < count)
+	while (!f.eof() && id < this->count)
 	{
 		vector<string> pos;
 		string split;
@@ -129,19 +124,21 @@ RECT Sprite::ReadCoord()
 			pos.push_back(split);
 		}
 
-		for (int i = 0; i < coord.size(); i++)
-			coord[i].resize(2);
+		for (int i = 0; i < arrCoord.size(); i++)
+			arrCoord[i].resize(2);
 
-		coord[id][0] = stoi(pos[0]);
-		srect.left = coord[id][0];
+		//lưu hoành độ x
+		arrCoord[id][0] = stoi(pos[0]);
+		srect.left = arrCoord[id][0];
 
-		coord[id][1] = stoi(pos[1]);
-		srect.top = coord[id][1];
+		//lưu tung độ y
+		arrCoord[id][1] = stoi(pos[1]);
+		srect.top = arrCoord[id][1];
 
 		srect.right = srect.left + width;
 		srect.bottom = srect.top + height + 1;
 
-		if (id == _Index)
+		if (id == index)
 		{
 			break;
 		}
@@ -153,30 +150,30 @@ RECT Sprite::ReadCoord()
 
 void Sprite::SetWidth(int value)
 {
-	width = value;
+	this->width = value;
 }
 
 int Sprite::GetWidth()
 {
-	return width;
+	return this->width;
 }
 
 void Sprite::SetHeight(int value)
 {
-	height = value;
+	this->height = value;
 }
 
 int Sprite::GetHeight()
 {
-	return height;
+	return this->height;
 }
 
 int Sprite::GetIndex()
 {
-	return this->_Index;
+	return this->index;
 }
 
 int Sprite::GetCount()
 {
-	return count;
+	return this->count;
 }

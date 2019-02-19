@@ -141,7 +141,6 @@
     <ClCompile Include="trace.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="MetroidGame.cpp" />
-    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DeviceManager.h" />
@@ -160,7 +159,6 @@
     <ClInclude Include="trace.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="MetroidGame.h" />
-    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Log\trace.log" />

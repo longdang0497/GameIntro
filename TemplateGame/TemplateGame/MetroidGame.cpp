@@ -85,12 +85,12 @@ void MetroidGame::CheckKey()
 
 	for (DWORD i = 0; i < dwElements; i++)
 	{
-		int KeyCode = this->input->GetKeyEvents()[i].dwOfs;
-		int KeyState = this->input->GetKeyEvents()[i].dwData;
-		if ((KeyState & 0x80) > 0)
-			OnKeyDown(KeyCode);
+		int keyCode = this->input->GetKeyEvents()[i].dwOfs;
+		int keyState = this->input->GetKeyEvents()[i].dwData;
+		if ((keyState & 0x80) > 0)
+			OnKeyDown(keyCode);
 		else
-			OnKeyUp(KeyCode);
+			OnKeyUp(keyCode);
 	}
 }
 

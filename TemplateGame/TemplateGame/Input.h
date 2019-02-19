@@ -19,7 +19,7 @@ public:
 	~Input();
 
 	void ProcessEscKeyCode();
-	int isKeyDown(int keyCode);
+	int IsKeyDown(int keyCode);
 
 	LPDIRECTINPUTDEVICE8 GetKeyboard();
 	LPDIDEVICEOBJECTDATA GetKeyEvents();

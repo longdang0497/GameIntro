@@ -4,14 +4,14 @@
 
 ObjectVelocity::ObjectVelocity()
 {
-	this->vx = DEFAULT_VX;
-	this->vy = DEFAULT_VY;
+	this->vX = DEFAULT_VX;
+	this->vY = DEFAULT_VY;
 }
 
-ObjectVelocity::ObjectVelocity(float vx, float vy)
+ObjectVelocity::ObjectVelocity(float vX, float vY)
 {
-	this->vx = vx;
-	this->vy = vy;
+	this->vX = vX;
+	this->vY = vY;
 }
 
 
@@ -19,22 +19,22 @@ ObjectVelocity::~ObjectVelocity()
 {
 }
 
-void ObjectVelocity::SetVx(float vx)
+void ObjectVelocity::SetVx(float vX)
 {
-	this->vx = vx;
+	this->vX = vX;
 }
 
-void ObjectVelocity::SetVy(float vy)
+void ObjectVelocity::SetVy(float vY)
 {
-	this->vy = vy;
+	this->vY = vY;
 }
 
 float ObjectVelocity::GetVx()
 {
-	return this->vx;
+	return this->vX;
 }
 
 float ObjectVelocity::GetVy()
 {
-	return this->vy;
+	return this->vY;
 }
