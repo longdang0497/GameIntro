@@ -116,10 +116,10 @@ RECT Sprite::ReadCoord()
 	{
 		vector<string> pos;
 		string split;
-		Getline(f, line);
+		getline(f, line);
 		istringstream iss(line);
 
-		while (Getline(iss, split, '\t'))
+		while (getline(iss, split, '\t'))
 		{
 			pos.push_back(split);
 		}
