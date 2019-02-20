@@ -1,6 +1,7 @@
 # GameIntro
 
 ## 1. Linker -> Input
+```
 d3dx9.lib
 d3d9.lib
 kernel32.lib
@@ -24,6 +25,7 @@ comctl32.lib
 dxerr.lib
 legacy_stdio_definitions.lib
 dsound.lib
+```
 
 ## 2. Thay đổi Include hay Lib thì sử dụng x86 nha
 
