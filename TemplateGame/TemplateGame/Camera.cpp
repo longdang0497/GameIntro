@@ -58,10 +58,10 @@ void Camera::UpdateCamera()
 	eye.y = this->followingObject->GetCurPos()->GetPosY();
 
 	// Điều chỉnh boundary cho camera (cái khúc này tính tay từ từ nó ra ~~ )
-	this->cameraBound->top = this->mapBoundary->top - CAMERA_FOLLOW_POINT_TOP_RATIO * this->cameraHeight;
-	this->cameraBound->bottom = this->mapBoundary->bottom + CAMERA_FOLLOW_POINT_BOTTOM_RATIO * this->cameraHeight;
-	this->cameraBound->left = this->followingObject->GetCurPos()->GetPosX() - CAMERA_FOLLOW_POINT_LEFT_RATIO * this->cameraWidth;
-	this->cameraBound->right = this->followingObject->GetCurPos()->GetPosX() + CAMERA_FOLLOW_POINT_RIGHT_RATIO * this->cameraWidth;
+	this->cameraBound->top = this->mapBoundary->top - (long long) CAMERA_FOLLOW_POINT_TOP_RATIO * this->cameraHeight;
+	this->cameraBound->bottom = this->mapBoundary->bottom + (long long)CAMERA_FOLLOW_POINT_BOTTOM_RATIO * this->cameraHeight;
+	this->cameraBound->left = this->followingObject->GetCurPos()->GetPosX() - (long long)CAMERA_FOLLOW_POINT_LEFT_RATIO * this->cameraWidth;
+	this->cameraBound->right = this->followingObject->GetCurPos()->GetPosX() + (long long)CAMERA_FOLLOW_POINT_RIGHT_RATIO * this->cameraWidth;
 
 	// Kiểm tra cái camera vs cái map của mình, có tách dụng để giới hạn lại sự xuất hiện lên màn hình
 	if (this->cameraBound->left < this->mapBoundary->left)
@@ -75,10 +75,10 @@ void Camera::UpdateCamera()
 		eye.y = this->mapBoundary->bottom - CAMERA_FOLLOW_POINT_BOTTOM_RATIO * this->cameraHeight;
 
 	//update camera bound
-	this->cameraBound->top = eye.y - CAMERA_FOLLOW_POINT_TOP_RATIO * this->cameraHeight;
-	this->cameraBound->bottom = eye.y + CAMERA_FOLLOW_POINT_BOTTOM_RATIO * this->cameraHeight;
-	this->cameraBound->left = eye.x - CAMERA_FOLLOW_POINT_LEFT_RATIO * this->cameraWidth;
-	this->cameraBound->right = eye.x + CAMERA_FOLLOW_POINT_RIGHT_RATIO * this->cameraWidth;
+	this->cameraBound->top = eye.y - (long long)(CAMERA_FOLLOW_POINT_TOP_RATIO * this->cameraHeight);
+	this->cameraBound->bottom = eye.y + (long long)(CAMERA_FOLLOW_POINT_BOTTOM_RATIO * this->cameraHeight);
+	this->cameraBound->left = eye.x - (long long)(CAMERA_FOLLOW_POINT_LEFT_RATIO * this->cameraWidth);
+	this->cameraBound->right = eye.x + (long long)(CAMERA_FOLLOW_POINT_RIGHT_RATIO * this->cameraWidth);
 }
 
 void Camera::SetTransform(DeviceManager * device)

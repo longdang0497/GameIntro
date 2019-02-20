@@ -22,7 +22,7 @@
 // ========= START: INPUT HANDLE =========
 #define KEYBOARD_BUFFER_SIZE	1024
 #define KEY_DOWN(code) ( IsKeyDown(code) )
-#define KEY_DOWN(vk_code) ( (GetAsyncKeyState(vk_code)&0x8000)?1:0 )
+//#define KEY_DOWN(vk_code) ( (GetAsyncKeyState(vk_code)&0x8000)?1:0 )
 // ========= END: INPUT HANDLE =========
 
 // ========= START: GAME MODE =========
