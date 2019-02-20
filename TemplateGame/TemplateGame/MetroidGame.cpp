@@ -139,7 +139,7 @@ void MetroidGame::UpdateBelongToGameMode(float deltaTime)
 
 void MetroidGame::UpdateObjects(float deltaTime)
 {
-	// this->world->Update(deltaTime);
+	this->world->UpdateObjects(deltaTime);
 
 	//if (world->samus->isSamusDeath() == true)
 	//{
@@ -168,7 +168,7 @@ void MetroidGame::RenderBelongToGameMode()
 
 void MetroidGame::RenderObjects()
 {
-	// this->world->Render();
+	this->world->RenderObjects();
 }
 
 void MetroidGame::ProcessInput(LPDIRECT3DDEVICE9, float)
