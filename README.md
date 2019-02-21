@@ -125,4 +125,3 @@ void Grid::InitObjectForGrid()
 - Thứ tự code tham khảo `handleCell() -> handleObject() -> handleCollision()`, mọi hàm đều có comment đầy đủ
 - Cái chỗ hàm  `handleCollision()` có liên quan một chút đến va chạm giữa các vật thể, cái này sẽ cập nhật sau ~~
 
-test ở chỗ làm
