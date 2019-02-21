@@ -21,7 +21,7 @@ protected:
 	LPD3DXSPRITE spriteHandler;		// Cái này dùng để vẽ Sprite nè
 	bool isActive;					// Biến để xác định Object có đang hoạt động hay không
 	DWORD lastTime;					// Cái này để điều khiển được tỉ lệ animate của object
-	D3DXVECTOR2 rigidBody;			// TODO: Cái này thì chưa biết làm gì
+	D3DXVECTOR2 rigidBody;			// Cái này đùng để điều khiển camera
 
 public:
 	Object();
@@ -29,17 +29,21 @@ public:
 
 	float GetCollisionTime(Object* otherObject, COLLISION_DIRECTION& collisionDirection, float deltaTime);
 
-	virtual void InitSprites();
-
-	// Phải update thông tin của Object trước rồi mới render lên lại màn hình
-	virtual void Update(float deltaTime);
-	virtual void Render();
-
 	// Phương thức để active lại GameObject
 	virtual void Init(float posX, float posY);
 
+	// Khởi tạo Sprite cho Object
+	virtual void InitSprites() = 0;
+
+	// Phải update thông tin của Object trước rồi mới render lên lại màn hình
+	virtual void Update(float deltaTime) = 0;
+	virtual void Render() = 0;
+
 	// Phương thức này được hiểu theo nghĩa là khi object đã chết (tức là chỉ có làm cho isActive là false thôi chứ k xóa khỏi bộ nhớ)
-	virtual void Destroy();
+	virtual void Destroy() = 0;
+
+	// Phương thức này dùng để xử lý va chạm giữa các Object với nhau
+	virtual bool handleCollision(Object *otherObject) = 0;
 
 	void SetObjectType(OBJECT_TYPE objectType);
 	void SetIsActive(bool isActive);

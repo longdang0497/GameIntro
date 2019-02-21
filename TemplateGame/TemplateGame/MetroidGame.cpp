@@ -8,15 +8,26 @@ MetroidGame::MetroidGame()
 MetroidGame::MetroidGame(HINSTANCE hInstance, LPCWSTR nameOfGame, int mode, bool isFullScreen, int frameRate)
 {
 	this->dxGraphics = new DXGraphics(hInstance, nameOfGame, mode, frameRate, isFullScreen);
-	this->input = new Input(hInstance, this->dxGraphics->getHwnd());
+	this->input = new Input(hInstance, this->dxGraphics->GetHwnd());
 	this->deviceManager = new DeviceManager(this->dxGraphics);
-}
 
+	this->gameMode = GAME_MODE_RUN;
+
+	this->world = new World(this->deviceManager->GetDevice());
+}
 
 MetroidGame::~MetroidGame()
 {
+	this->world = nullptr;
+	delete this->world;
+
+	this->deviceManager = nullptr;
 	delete(this->deviceManager);
+
+	this->input = nullptr;
 	delete(this->input);
+
+	this->dxGraphics = nullptr;
 	delete(this->dxGraphics);
 }
 
@@ -27,7 +38,7 @@ void MetroidGame::GameRun()
 	int done = 0;
 	DWORD frameStartTime = GetTickCount();
 
-	DWORD tickPerFrame = 100 / this->dxGraphics->getFrameRate();
+	DWORD tickPerFrame = 100 / this->dxGraphics->GetFrameRate();
 
 	while (!done)
 	{
@@ -35,8 +46,8 @@ void MetroidGame::GameRun()
 		{
 			if (msg.message == WM_QUIT) done = 1;
 			else if (msg.message == WM_ACTIVATE) {
-				if (this->input->getKeyboard() != NULL && this->input->getKeyboard()->Poll() != DI_OK) {
-					this->input->getKeyboard()->Acquire();
+				if (this->input->GetKeyboard() != NULL && this->input->GetKeyboard()->Poll() != DI_OK) {
+					this->input->GetKeyboard()->Acquire();
 				}
 				msg.message = 0;
 			}
@@ -50,7 +61,7 @@ void MetroidGame::GameRun()
 		if (this->deltaTime >= tickPerFrame)
 		{
 			frameStartTime = now;
-			Update(this->deltaTime / 1000.0f);
+			this->UpdateBelongToGameMode(this->deltaTime / 1000.0f);
 			this->RenderFrame();
 
 		}
@@ -59,62 +70,105 @@ void MetroidGame::GameRun()
 		}
 
 		this->input->ProcessEscKeyCode();
-		this->checkKey();
+		this->CheckKey();
 
-		ProcessInput(this->deviceManager->getDevice(), this->deltaTime);
+		ProcessInput(this->deviceManager->GetDevice(), this->deltaTime);
 
 	}
 }
 
 // Mặc định
-void MetroidGame::checkKey()
+void MetroidGame::CheckKey()
 {
 	DWORD dwElements = KEYBOARD_BUFFER_SIZE;
-	HRESULT hr = this->input->getKeyboard()->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), this->input->getKeyEvents(), &dwElements, 0);
+	HRESULT hr = this->input->GetKeyboard()->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), this->input->GetKeyEvents(), &dwElements, 0);
 
 	for (DWORD i = 0; i < dwElements; i++)
 	{
-		int KeyCode = this->input->getKeyEvents()[i].dwOfs;
-		int KeyState = this->input->getKeyEvents()[i].dwData;
-		if ((KeyState & 0x80) > 0)
-			OnKeyDown(KeyCode);
+		int keyCode = this->input->GetKeyEvents()[i].dwOfs;
+		int keyState = this->input->GetKeyEvents()[i].dwData;
+		if ((keyState & 0x80) > 0)
+			OnKeyDown(keyCode);
 		else
-			OnKeyUp(KeyCode);
+			OnKeyUp(keyCode);
 	}
 }
 
 // Dùng để render 1 frame lên màn ảnh
 void MetroidGame::RenderFrame()
 {
-	auto result = this->deviceManager->getDevice()->BeginScene();
+	auto result = this->deviceManager->GetDevice()->BeginScene();
 
 	if (result == D3D_OK)
 	{
 		// Clear back buffer with BLACK
-		this->deviceManager->clearScreen();
+		this->deviceManager->ClearScreen();
 
 		//if (camera)
 		//{
 		//	camera->SetTransform(_device);
 		//}
 
-		Render(this->deviceManager->getDevice());
-		this->deviceManager->getDevice()->EndScene();
+		this->RenderBelongToGameMode();
+		this->deviceManager->GetDevice()->EndScene();
 	}
 
-	this->deviceManager->getDevice()->Present(NULL, NULL, NULL, NULL);
+	this->deviceManager->GetDevice()->Present(NULL, NULL, NULL, NULL);
 }
 
-void MetroidGame::Update(float deltaTime)
+void MetroidGame::UpdateBelongToGameMode(float deltaTime)
 {
+	switch (this->gameMode)
+	{
+	case GAME_MODE_INTRO:
+		break;
+	case GAME_MODE_START:
+		break;
+	case GAME_MODE_RUN:
+		// this->camera->Update();
+		// this->world->GetGrid()->SetDeltaTime(deltaTime);
+		// this->world->GetMap()->UpdateMap();
+		this->UpdateObjects(deltaTime);
+		break;
+	case GAME_MODE_END:
+		break;
+	default:
+		break;
+	}
 }
 
-void MetroidGame::Render(LPDIRECT3DDEVICE9)
+void MetroidGame::UpdateObjects(float deltaTime)
 {
+	this->world->UpdateObjects(deltaTime);
+
+	//if (world->samus->isSamusDeath() == true)
+	//{
+	//	screenMode = GAMEMODE_GAMEOVER;
+	//	return;
+	//}
 }
 
-void MetroidGame::LoadResources(LPDIRECT3DDEVICE9)
+void MetroidGame::RenderBelongToGameMode()
 {
+	switch (this->gameMode)
+	{
+	case GAME_MODE_INTRO:
+		break;
+	case GAME_MODE_START:
+		break;
+	case GAME_MODE_RUN:
+		this->RenderObjects();
+		break;
+	case GAME_MODE_END:
+		break;
+	default:
+		break;
+	}
+}
+
+void MetroidGame::RenderObjects()
+{
+	this->world->RenderObjects();
 }
 
 void MetroidGame::ProcessInput(LPDIRECT3DDEVICE9, float)

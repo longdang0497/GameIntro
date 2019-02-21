@@ -17,14 +17,14 @@ public:
 	ObjectPosition(float postX, float posY, int width = DEFAULT_OBJECT_WIDTH, int height = DEFAULT_OBJECT_HEIGHT);
 	~ObjectPosition();
 
-	void setPosX(float posX);
-	void setPosY(float posY);
-	float getPosX();
-	float getPosY();
-	ObjectPosition* getPosCenter();
-	void setObjectWidth(int width);
-	void setObjectHeight(int height);
-	int getObjectWidth();
-	int getObjectHeight();
+	void SetPosX(float posX);
+	void SetPosY(float posY);
+	float GetPosX();
+	float GetPosY();
+	ObjectPosition* GetPosCenter();
+	void SetObjectWidth(int width);
+	void SetObjectHeight(int height);
+	int GetObjectWidth();
+	int GetObjectHeight();
 };
 

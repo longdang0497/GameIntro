@@ -16,31 +16,28 @@ private:
 	LPDIRECT3DTEXTURE9 texture;      // file chua sprite lon
 	LPD3DXSPRITE spriteHandler;			  // Dung de xu ly xuat hien sprite dua vao texture
 	D3DCOLOR transColor;			  // transparent color
-	LPWSTR _Coord;
+	LPWSTR coord;
 
 	int width;
 	int height;
-	int x;
-	int y;	
 	int count;						  // So luong sprite trong texture
-	int _Index;
+	int index;
 	RECT srect;
 public:
-	Sprite(LPD3DXSPRITE, LPDIRECT3DTEXTURE9, LPWSTR, int);
+	Sprite(LPD3DXSPRITE, LPDIRECT3DTEXTURE9, LPWSTR, int, int, int);
 	~Sprite();
-	void updateSprite();
+	void UpdateSprite();
 
-	//Ex: player->drawSprite(0, 0, 16, 32, D3DXVECTOR3(10, 10, 0));
-	void drawSprite(int x, int y, int width, int height, D3DXVECTOR3 position);	//draw 1 sprite
-	void drawSprite(int width, int height, D3DXVECTOR3 position);	//draw multi sprites
+	void DrawSprite(int x, int y, D3DXVECTOR3 position);	//draw 1 sprite
+	void DrawSprite(D3DXVECTOR3 position);	//draw multi sprites
 	RECT ReadCoord();
-	void Reset();
+	void ReSet();
 
-	void setWidth(int value);
-	int getWidth();
+	void SetWidth(int value);
+	int GetWidth();
 
-	void setHeight(int value);
-	int getHeight();
+	void SetHeight(int value);
+	int GetHeight();
 
 	int GetIndex();
 	int GetCount();

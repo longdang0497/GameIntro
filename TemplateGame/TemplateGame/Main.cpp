@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include <iostream>
 #include "trace.h"
-#include "ObjectPosition.h"
+#include "MetroidGame.h"
 
 using namespace std;
 
@@ -13,13 +13,7 @@ int WINAPI WinMain(
 	LPSTR lpStrCmdLine,
 	int nShowCmd)
 {
-	ObjectPosition *position = new ObjectPosition(1.0f, 1.0f);
-	
-	cout << position->getObjectWidth() << endl;
-	cout << position->getObjectHeight() << endl;
-
-	system("pause");
-
-	trace(L"Start game");
+	MetroidGame* metroidGame = new MetroidGame(hInstance, DEFAULT_NAME_OF_GAME, DEFAULT_SCREEN_MODE, false, DEFAULT_FRAME_RATE);
+	metroidGame->GameRun();
 	return 0;
 }

@@ -5,7 +5,7 @@
 #define DEFAULT_OBJECT_HEIGHT 1
 
 enum OBJECT_TYPE {
-
+	BRICK
 };
 
 enum COLLISION_DIRECTION {

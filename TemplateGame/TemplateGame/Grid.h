@@ -2,8 +2,10 @@
 #include "GameDefine.h"
 #include "SpaceDefine.h"
 #include "OtherObjectsDefine.h"
+#include "ObjectDefine.h"
 #include "Object.h"
 #include <cmath>
+#include <iostream>
 
 class Grid
 {
@@ -15,7 +17,6 @@ private:
 
 	void InitObjectForGrid();
 
-	bool HandleCollision(Object* objSrc, Object* objDes);
 	bool HandleObject(Object* objSrc, Object* objDes);
 public:
 	Grid();
@@ -23,7 +24,7 @@ public:
 	~Grid();
 
 	void Add(Object *object);
-	void ResetGrid(int width, int height);
+	void ReSetGrid(int width, int height);
 	bool HandleCell(Object* object, int row, int column);
 	void UpdateGrid(Object* object, float newPosX, float newPosY);
 

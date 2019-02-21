@@ -8,7 +8,7 @@ DXGraphics::DXGraphics()
 }
 
 DXGraphics::DXGraphics(HINSTANCE hInstance, LPCWSTR nameOfGame = DEFAULT_NAME_OF_GAME, int mode = DEFAULT_SCREEN_MODE,
-	int framerate = DEFAULT_FRAME_RATE, bool isFullScreen = DEFAULT_IS_FULL_SCREEN) {
+	int frameRate = DEFAULT_FRAME_RATE, bool isFullScreen = DEFAULT_IS_FULL_SCREEN) {
 
 	this->hInstance = hInstance;
 	this->nameOfGame = nameOfGame;
@@ -46,7 +46,7 @@ void DXGraphics::SetScreenDimension() {
 		break;
 
 	default:
-		trace(L"Unable setting screen's dimension");
+		trace(L"Unable Setting screen's dimension");
 	}
 
 
@@ -123,93 +123,93 @@ LRESULT DXGraphics::WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 	return DefWindowProc(hWnd, message, wParam, lParam);
 }
 
-// Get/set Methods
-void DXGraphics::setHInstance(HINSTANCE hInstance)
+// Get/Set Methods
+void DXGraphics::SetHInstance(HINSTANCE hInstance)
 {
 	this->hInstance = hInstance;
 }
 
-void DXGraphics::setNameOfGame(LPCWSTR nameOfGame)
+void DXGraphics::SetNameOfGame(LPCWSTR nameOfGame)
 {
 	this->nameOfGame = nameOfGame;
 }
 
-void DXGraphics::setHwnd(HWND hWnd)
+void DXGraphics::SetHwnd(HWND hWnd)
 {
 	this->hwnd = hwnd;
 }
 
-void DXGraphics::setIsFullScreen(bool isFullScreen)
+void DXGraphics::SetIsFullScreen(bool isFullScreen)
 {
 	this->isFullScreen = isFullScreen;
 }
 
-void DXGraphics::setScreenHeight(int screenHeight)
+void DXGraphics::SetScreenHeight(int screenHeight)
 {
 	this->screenHeight = screenHeight;
 }
 
-void DXGraphics::setScreenWidth(int screenWidth)
+void DXGraphics::SetScreenWidth(int screenWidth)
 {
 	this->screenWidth = screenWidth;
 }
 
-void DXGraphics::setFrameRate(int frameRate)
+void DXGraphics::SetFrameRate(int frameRate)
 {
 	this->frameRate = frameRate;
 }
 
-void DXGraphics::setMode(int mode)
+void DXGraphics::SetMode(int mode)
 {
 	this->mode = mode;
 }
 
-void DXGraphics::setDepth(int depth)
+void DXGraphics::SetDepth(int depth)
 {
 	this->depth = depth;
 }
 
-HINSTANCE DXGraphics::getHInstance()
+HINSTANCE DXGraphics::GetHInstance()
 {
 	return this->hInstance;
 }
 
-LPCWSTR DXGraphics::getNameOfGame()
+LPCWSTR DXGraphics::GetNameOfGame()
 {
 	return this->nameOfGame;
 }
 
-HWND DXGraphics::getHwnd()
+HWND DXGraphics::GetHwnd()
 {
 	return this->hwnd;
 }
 
-bool DXGraphics::getIsFullScreen()
+bool DXGraphics::GetIsFullScreen()
 {
 	return this->isFullScreen;
 }
 
-int DXGraphics::getScreenWidth()
+int DXGraphics::GetScreenWidth()
 {
 	return this->screenWidth;
 }
 
-int DXGraphics::getScreenHeight()
+int DXGraphics::GetScreenHeight()
 {
 	return this->screenHeight;
 }
 
-int DXGraphics::getFrameRate()
+int DXGraphics::GetFrameRate()
 {
 	return this->frameRate;
 }
 
-int DXGraphics::getMode()
+int DXGraphics::GetMode()
 {
 	return this->mode;
 }
 
-int DXGraphics::getDepth()
+int DXGraphics::GetDepth()
 {
 	return this->depth;
 }

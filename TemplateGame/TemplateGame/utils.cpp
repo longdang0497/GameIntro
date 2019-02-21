@@ -8,7 +8,7 @@ LPDIRECT3DSURFACE9 CreateSurfaceFromFile(LPDIRECT3DDEVICE9 d3ddv, LPCWSTR FilePa
 	HRESULT result = D3DXGetImageInfoFromFile(FilePath, &info);
 	if (result != D3D_OK)
 	{
-		trace(L"[ERROR] Failed to get image info '%s'", FilePath);
+		trace(L"[ERROR] Failed to Get image info '%s'", FilePath);
 		return NULL;
 	}
 
