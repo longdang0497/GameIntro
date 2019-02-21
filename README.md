@@ -124,3 +124,5 @@ void Grid::InitObjectForGrid()
 - Cái việc xử lý va chạm trong Grid là mình cần phải xác định được các object đó đang ở cell nào và cần xét va chạm với các cell nào. Tuyệt đối tránh trường hợp xét va chạm với tất cả các cell, CPU lên cao ráng chịu :V 
 - Thứ tự code tham khảo `handleCell() -> handleObject() -> handleCollision()`, mọi hàm đều có comment đầy đủ
 - Cái chỗ hàm  `handleCollision()` có liên quan một chút đến va chạm giữa các vật thể, cái này sẽ cập nhật sau ~~
+
+test ở chỗ làm
