@@ -15,6 +15,7 @@ Sprite::Sprite(LPD3DXSPRITE spriteHandler, LPDIRECT3DTEXTURE9 texture, LPWSTR co
 	// Gan he mau trong suot
 	transColor = D3DCOLOR_ARGB(255, 255, 255, 255);
 	this->index = 0;
+	camera = new Camera();
 
 	LPDIRECT3DDEVICE9 d3ddv;
 	this->spriteHandler->GetDevice(&d3ddv);	
@@ -66,11 +67,23 @@ void Sprite::DrawSprite(int x, int y, D3DXVECTOR3 position) {
 void Sprite::DrawSprite(D3DXVECTOR3 position) {
 	if (this->spriteHandler == NULL || this->texture == NULL)
 		return;
-	RECT rect = ReadCoord();
+	RECT rect = ReadCoord();	//đọc tọa độ của sprite trong file txt
 
-	D3DXVECTOR3 pos(0, 0, 0);
+	//D3DXVECTOR3 pos(0, 0, 0);
 
 	this->spriteHandler->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE);
+
+	//D3DXMATRIX mt;
+	//D3DXMatrixIdentity(&mt);
+	//mt._22 = -1.0f;
+	//mt._41 = -camera->GetCameraBoundary()->left;
+	//mt._42 = camera->GetCameraBoundary()->top;	// --TO DO:  Fix lại chỗ này sau
+	//D3DXVECTOR4 vp_pos;
+	//D3DXVec3Transform(&vp_pos, &position, &mt);
+
+	//D3DXVECTOR3 p(vp_pos.x, vp_pos.y, 0);
+
+	//D3DXVECTOR3 center((float)width / 2, (float)height / 2, 0);
 
 	// Texture being used is width by height:
 	D3DXVECTOR3 spriteCentre = D3DXVECTOR3((float)width, (float)height, 0);
@@ -84,12 +97,13 @@ void Sprite::DrawSprite(D3DXVECTOR3 position) {
 	D3DXMatrixTransformation(&mat, &D3DXVECTOR3(width / 2, height / 2, 0), NULL, &scaling, &spriteCentre, NULL, &position);
 
 	this->spriteHandler->SetTransform(&mat);
-	this->spriteHandler->Draw(this->texture, &rect, NULL, NULL, this->transColor);
 
+	//this->spriteHandler->Draw(this->texture, &rect, &center, &p, this->transColor);
+	this->spriteHandler->Draw(this->texture, &rect, NULL, NULL, this->transColor);
 	this->spriteHandler->End();
 }
 
-void Sprite::ReSet()
+void Sprite::Reset()
 {
 	index = 0;
 }

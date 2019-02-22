@@ -8,11 +8,13 @@
 #include <iostream>
 #include <sstream>
 #include "trace.h"
+#include "Camera.h"
 
 using namespace std;
 
 class Sprite {
 private:
+	Camera * camera;
 	LPDIRECT3DTEXTURE9 texture;      // file chua sprite lon
 	LPD3DXSPRITE spriteHandler;			  // Dung de xu ly xuat hien sprite dua vao texture
 	D3DCOLOR transColor;			  // transparent color
@@ -31,7 +33,7 @@ public:
 	void DrawSprite(int x, int y, D3DXVECTOR3 position);	//draw 1 sprite
 	void DrawSprite(D3DXVECTOR3 position);	//draw multi sprites
 	RECT ReadCoord();
-	void ReSet();
+	void Reset();
 
 	void SetWidth(int value);
 	int GetWidth();

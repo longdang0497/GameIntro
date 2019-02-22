@@ -1,11 +1,18 @@
 #pragma once
 
+class World;
+class Grid;
+
+#define ANIMATE_RATE 30
+#define TEXTURE_GAME_CHARACTERS L"sprite\\samus_sprites.png"
+
 // ========== START: OBJECT ============
-#define DEFAULT_OBJECT_WIDTH 1
-#define DEFAULT_OBJECT_HEIGHT 1
+#define DEFAULT_OBJECT_WIDTH 42
+#define DEFAULT_OBJECT_HEIGHT 64
 
 enum OBJECT_TYPE {
-	BRICK
+	BRICK,
+	MAIN_CHARACTER
 };
 
 enum COLLISION_DIRECTION {
@@ -15,7 +22,17 @@ enum COLLISION_DIRECTION {
 	TOP,
 	BOTTOM
 };
+
+enum MAIN_CHARACTER_MOVEMENT {
+	STAND_LEFT,
+	STAND_RIGHT,
+};
 // ========== END: OBJECT ============
+
+// ========== START: MAIN CHARACTER =============
+#define STANDRIGHT_PATH L"sprite\\STANDING_RIGHT.txt"
+#define STANDLEFT_PATH L"sprite\\STANDING_LEFT.txt"
+// ========== END: MAIN CHARACTER ========
 
 // ========== START: POSITION ============
 #define DEFAULT_POS_X 1.0
