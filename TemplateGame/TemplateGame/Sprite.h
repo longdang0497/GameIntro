@@ -8,13 +8,11 @@
 #include <iostream>
 #include <sstream>
 #include "trace.h"
-#include "Camera.h"
 
 using namespace std;
 
 class Sprite {
 private:
-	Camera * camera;
 	LPDIRECT3DTEXTURE9 texture;      // file chua sprite lon
 	LPD3DXSPRITE spriteHandler;			  // Dung de xu ly xuat hien sprite dua vao texture
 	D3DCOLOR transColor;			  // transparent color

@@ -11,16 +11,17 @@ Texture::~Texture() {
 LPDIRECT3DTEXTURE9 Texture::LoadTexture(LPDIRECT3DDEVICE9 d3ddev, LPCWSTR fileName) {
 	HRESULT result;
 	LPDIRECT3DTEXTURE9 texture = NULL;
-
+	this->textureFilePath = fileName;
+	
 	// Doc thong tin file anh de tao texture
 	D3DXIMAGE_INFO infoOfTexture;
 
-	result = D3DXGetImageInfoFromFile(fileName, &infoOfTexture);
+	result = D3DXGetImageInfoFromFile(this->textureFilePath, &infoOfTexture);
 	if (result != D3D_OK)
 		return NULL;
 
 	result = D3DXCreateTextureFromFileEx(d3ddev,
-		fileName,
+		this->textureFilePath,
 		infoOfTexture.Width,
 		infoOfTexture.Height,
 		1,

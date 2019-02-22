@@ -32,8 +32,8 @@ void MainCharacter::InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 text
 
 void MainCharacter::InitPostition()
 {
-	this->curPos->SetPosX(-320);
-	this->curPos->SetPosY(320);
+	this->curPos->SetPosX(300);
+	this->curPos->SetPosY(300);
 	this->curVec->SetVx(0);
 	this->curVec->SetVy(0);
 	this->lastVec->SetVx(1.0f);
