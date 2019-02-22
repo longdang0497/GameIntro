@@ -190,6 +190,12 @@
     <Text Include="sprite\STANDING_RIGHT.txt">
       <Filter>Resource Files\sprite</Filter>
     </Text>
+    <Text Include="sprite\RUNNING_LEFT.txt">
+      <Filter>Resource Files\sprite</Filter>
+    </Text>
+    <Text Include="sprite\RUNNING_RIGHT.txt">
+      <Filter>Resource Files\sprite</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Image Include="sprite\samus_sprites.png">

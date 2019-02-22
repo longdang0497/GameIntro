@@ -11,6 +11,8 @@ protected:
 	MAIN_CHARACTER_MOVEMENT state;
 	Sprite * stand_right;
 	Sprite * stand_left;
+	Sprite * run_right;
+	Sprite * run_left;
 
 	bool isCollided = false;
 public:

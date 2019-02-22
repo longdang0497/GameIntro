@@ -96,3 +96,8 @@ Texture * World::GetTexture()
 {
 	return this->texture;
 }
+
+MainCharacter * World::GetMainCharacter()
+{
+	return this->gameCharacter;
+}

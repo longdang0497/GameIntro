@@ -1,12 +1,4 @@
-﻿  Main.cpp
-  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-  MainCharacter.cpp
-  MetroidGame.cpp
+﻿  MetroidGame.cpp
   c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
 d:\documents\github\gameintro\templategame\templategame\metroidgame.cpp(75): warning C4244: 'argument': conversion from 'DWORD' to 'float', possible loss of data
-  Sprite.cpp
-d:\documents\github\gameintro\templategame\templategame\sprite.cpp(83): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
-d:\documents\github\gameintro\templategame\templategame\sprite.cpp(126): warning C4018: '<': signed/unsigned mismatch
-  World.cpp
-  Generating Code...
   TemplateGame.vcxproj -> D:\Documents\GitHub\GameIntro\TemplateGame\Debug\TemplateGame.exe

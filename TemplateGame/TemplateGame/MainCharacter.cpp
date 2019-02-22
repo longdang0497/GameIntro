@@ -11,23 +11,24 @@ MainCharacter::MainCharacter(LPD3DXSPRITE spriteHandler)
 	this->isActive = true;
 	this->SetObjectType(MAIN_CHARACTER);
 	this->spriteHandler = spriteHandler;
-
-	this->objectHeight = 64;
-	this->objectWidth = 42;
 }
 
 MainCharacter::~MainCharacter()
 {
 	delete(stand_right);
 	delete(stand_left);
+	delete(run_right);
+	delete(run_left);
 }
 
 void MainCharacter::InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 texture)
 {
 	if(d3ddv == NULL) return;
 
-	stand_right = new Sprite(this->spriteHandler, texture, STANDRIGHT_PATH, 1, this->objectWidth, this->objectHeight);
-	stand_left = new Sprite(this->spriteHandler, texture, STANDLEFT_PATH, 1, this->objectWidth, this->objectHeight);
+	stand_right = new Sprite(this->spriteHandler, texture, STANDRIGHT_PATH, 1, STAND_WIDTH, STAND_HEIGHT);
+	stand_left = new Sprite(this->spriteHandler, texture, STANDLEFT_PATH, 1, STAND_WIDTH, STAND_HEIGHT);
+	run_right = new Sprite(this->spriteHandler, texture, RUNRIGHT_PATH, 3, RUN_WIDTH, RUN_HEIGHT);
+	run_left = new Sprite(this->spriteHandler, texture, RUNLEFT_PATH, 3, RUN_WIDTH, RUN_HEIGHT);
 }
 
 void MainCharacter::InitPostition()
@@ -51,6 +52,10 @@ void MainCharacter::SetState(MAIN_CHARACTER_MOVEMENT value)
 
 void MainCharacter::ResetAllSprites()
 {
+	stand_left->Reset();
+	stand_right->Reset();
+	run_left->Reset();
+	run_right->Reset();
 }
 
 bool MainCharacter::GetStateActive()
@@ -60,8 +65,12 @@ bool MainCharacter::GetStateActive()
 
 void MainCharacter::Reset(float x, float y)
 {
-	stand_left->Reset();
-	stand_right->Reset();
+	// Cho samus active trở lại
+	this->isActive = true;
+
+	//Đặt lại vị trí
+	this->curPos->SetPosX(x);
+	this->curPos->SetPosY(y);
 }
 
 void MainCharacter::Update(float t)
@@ -76,6 +85,12 @@ void MainCharacter::Update(float t)
 			break;
 		case STAND_LEFT:
 			stand_left->UpdateSprite();
+			break;
+		case RUN_RIGHT:
+			run_right->UpdateSprite();
+			break;
+		case RUN_LEFT:
+			run_left->UpdateSprite();
 			break;
 		}
 		lastTime = now;
@@ -100,6 +115,12 @@ void MainCharacter::Render()
 			break;
 		case STAND_LEFT:
 			stand_left->DrawSprite(position);
+			break;
+		case RUN_RIGHT:
+			run_right->DrawSprite(position);
+			break;
+		case RUN_LEFT:
+			run_left->DrawSprite(position);
 			break;
 		}
 

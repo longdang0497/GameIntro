@@ -169,6 +169,8 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Log\trace.log" />
+    <Text Include="sprite\RUNNING_LEFT.txt" />
+    <Text Include="sprite\RUNNING_RIGHT.txt" />
     <Text Include="sprite\STANDING_LEFT.txt" />
     <Text Include="sprite\STANDING_RIGHT.txt" />
   </ItemGroup>

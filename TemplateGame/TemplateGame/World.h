@@ -29,5 +29,6 @@ public:
 	Grid* GetGrid();
 	void SetTexture(Texture* texture);
 	Texture* GetTexture();
+	MainCharacter* GetMainCharacter();
 };
 
