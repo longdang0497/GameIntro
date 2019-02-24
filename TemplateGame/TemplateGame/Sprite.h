@@ -31,7 +31,7 @@ public:
 	void DrawSprite(int x, int y, D3DXVECTOR3 position);	//draw 1 sprite
 	void DrawSprite(D3DXVECTOR3 position);	//draw multi sprites
 	RECT ReadCoord();
-	void ReSet();
+	void Reset();
 
 	void SetWidth(int value);
 	int GetWidth();

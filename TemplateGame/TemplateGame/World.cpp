@@ -27,6 +27,7 @@ World::~World()
 // Hàm dùng để cập nhật lại vị trí của các Object
 void World::UpdateObjects(float deltaTime)
 {
+	this->gameCharacter->Update(deltaTime);
 }
 
 // Hàm dùng để Render Object lên màn hình
@@ -34,6 +35,7 @@ void World::UpdateObjects(float deltaTime)
 // Việc này giúp cho việc Render nó trong đẹp hơn
 void World::RenderObjects()
 {
+	this->gameCharacter->Render();
 }
 
 // Khởi tạo SpriteHandler, Map và Grid
@@ -47,7 +49,9 @@ void World::LoadResources(LPDIRECT3DDEVICE9 device)
 		trace(L"Lỗi khi tạo Sprite");
 
 	this->grid = new Grid();
-
+	this->gameCharacter = new MainCharacter(spriteHandler);
+	this->gameCharacter->SetState(STAND_RIGHT);
+	 
 	this->InitSprite(device);
 	this->InitObjectPosition();
 	
@@ -59,7 +63,8 @@ void World::InitSprite(LPDIRECT3DDEVICE9 device)
 	this->texture = new Texture();
 
 	// Start: Insert code here
-
+	LPDIRECT3DTEXTURE9 gameTexture = this->texture->LoadTexture(device, TEXTURE_GAME_CHARACTERS);
+	this->gameCharacter->InitSprites(device, gameTexture);
 	// End: Insert Code above
 
 	this->texture = nullptr;
@@ -69,6 +74,7 @@ void World::InitSprite(LPDIRECT3DDEVICE9 device)
 // Hàm này dùng để khởi tạo vị trí cho Object và add vào Grid
 void World::InitObjectPosition()
 {
+	this->gameCharacter->InitPostition();
 }
 
 void World::SetGrid(Grid * grid)
@@ -89,4 +95,9 @@ void World::SetTexture(Texture * texture)
 Texture * World::GetTexture()
 {
 	return this->texture;
+}
+
+MainCharacter * World::GetMainCharacter()
+{
+	return this->gameCharacter;
 }

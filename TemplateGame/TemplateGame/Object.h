@@ -33,7 +33,7 @@ public:
 	virtual void Init(float posX, float posY);
 
 	// Khởi tạo Sprite cho Object
-	virtual void InitSprites() = 0;
+	virtual void InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 texture) = 0;
 
 	// Phải update thông tin của Object trước rồi mới render lên lại màn hình
 	virtual void Update(float deltaTime) = 0;

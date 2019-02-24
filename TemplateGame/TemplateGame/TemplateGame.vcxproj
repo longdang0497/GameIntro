@@ -81,8 +81,8 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <ConformanceMode>true</ConformanceMode>
+      <SDLCheck>false</SDLCheck>
+      <ConformanceMode>false</ConformanceMode>
     </ClCompile>
     <Link>
       <AdditionalDependencies>d3dx9.lib;d3d9.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;d3dcompiler.lib;avrt.lib;winmm.lib;dinput8.lib;dxguid.lib;comctl32.lib;dxerr.lib;legacy_stdio_definitions.lib;dsound.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -134,6 +134,7 @@
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MainCharacter.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectPosition.cpp" />
     <ClCompile Include="ObjectVelocity.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="GameDefine.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="MainCharacter.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectDefine.h" />
     <ClInclude Include="ObjectPosition.h" />
@@ -167,6 +169,13 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Log\trace.log" />
+    <Text Include="sprite\RUNNING_LEFT.txt" />
+    <Text Include="sprite\RUNNING_RIGHT.txt" />
+    <Text Include="sprite\STANDING_LEFT.txt" />
+    <Text Include="sprite\STANDING_RIGHT.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="sprite\samus_sprites.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

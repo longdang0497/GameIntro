@@ -66,11 +66,10 @@ void Sprite::DrawSprite(int x, int y, D3DXVECTOR3 position) {
 void Sprite::DrawSprite(D3DXVECTOR3 position) {
 	if (this->spriteHandler == NULL || this->texture == NULL)
 		return;
-	RECT rect = ReadCoord();
+	RECT rect = ReadCoord();	//đọc tọa độ của sprite trong file txt
 
-	D3DXVECTOR3 pos(0, 0, 0);
-
-	this->spriteHandler->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE);
+	//this->spriteHandler->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE);
+	this->spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 
 	// Texture being used is width by height:
 	D3DXVECTOR3 spriteCentre = D3DXVECTOR3((float)width, (float)height, 0);
@@ -84,12 +83,12 @@ void Sprite::DrawSprite(D3DXVECTOR3 position) {
 	D3DXMatrixTransformation(&mat, &D3DXVECTOR3(width / 2, height / 2, 0), NULL, &scaling, &spriteCentre, NULL, &position);
 
 	this->spriteHandler->SetTransform(&mat);
-	this->spriteHandler->Draw(this->texture, &rect, NULL, NULL, this->transColor);
 
+	this->spriteHandler->Draw(this->texture, &rect, NULL, NULL, this->transColor);
 	this->spriteHandler->End();
 }
 
-void Sprite::ReSet()
+void Sprite::Reset()
 {
 	index = 0;
 }

@@ -55,6 +55,12 @@
     <Filter Include="Source Files\Log">
       <UniqueIdentifier>{3aefe0cf-3c65-4392-ad47-75424f3a8ad4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Object\MainCharacter">
+      <UniqueIdentifier>{31d777e6-2b9b-4dbf-b07f-4403b29e59ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\sprite">
+      <UniqueIdentifier>{763c2e22-a1e4-4cfc-a0c7-71ba452e3766}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -104,6 +110,9 @@
     </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="MainCharacter.cpp">
+      <Filter>Source Files\Object\MainCharacter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,10 +176,30 @@
     <ClInclude Include="World.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
+    <ClInclude Include="MainCharacter.h">
+      <Filter>Header Files\Object\MainCharacter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Log\trace.log">
       <Filter>Resource Files\Log</Filter>
     </Text>
+    <Text Include="sprite\STANDING_LEFT.txt">
+      <Filter>Resource Files\sprite</Filter>
+    </Text>
+    <Text Include="sprite\STANDING_RIGHT.txt">
+      <Filter>Resource Files\sprite</Filter>
+    </Text>
+    <Text Include="sprite\RUNNING_LEFT.txt">
+      <Filter>Resource Files\sprite</Filter>
+    </Text>
+    <Text Include="sprite\RUNNING_RIGHT.txt">
+      <Filter>Resource Files\sprite</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="sprite\samus_sprites.png">
+      <Filter>Resource Files\sprite</Filter>
+    </Image>
   </ItemGroup>
 </Project>
