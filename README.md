@@ -1,6 +1,7 @@
 # GameIntro
 
 ## 1. Linker -> Input
+```
 d3dx9.lib
 d3d9.lib
 kernel32.lib
@@ -24,6 +25,7 @@ comctl32.lib
 dxerr.lib
 legacy_stdio_definitions.lib
 dsound.lib
+```
 
 ## 2. Thay đổi Include hay Lib thì sử dụng x86 nha
 
@@ -122,3 +124,6 @@ void Grid::InitObjectForGrid()
 - Cái việc xử lý va chạm trong Grid là mình cần phải xác định được các object đó đang ở cell nào và cần xét va chạm với các cell nào. Tuyệt đối tránh trường hợp xét va chạm với tất cả các cell, CPU lên cao ráng chịu :V 
 - Thứ tự code tham khảo `handleCell() -> handleObject() -> handleCollision()`, mọi hàm đều có comment đầy đủ
 - Cái chỗ hàm  `handleCollision()` có liên quan một chút đến va chạm giữa các vật thể, cái này sẽ cập nhật sau ~~
+
+## 5. SweptAABB (va chạm giữa 2 vật thể)
+- https://gamedevelopment.tutsplus.com/tutorials/quick-tip-use-quadtrees-to-detect-likely-collisions-in-2d-space--gamedev-374

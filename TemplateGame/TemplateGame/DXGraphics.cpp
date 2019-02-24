@@ -8,7 +8,7 @@ DXGraphics::DXGraphics()
 }
 
 DXGraphics::DXGraphics(HINSTANCE hInstance, LPCWSTR nameOfGame = DEFAULT_NAME_OF_GAME, int mode = DEFAULT_SCREEN_MODE,
-	int framerate = DEFAULT_FRAME_RATE, bool isFullScreen = DEFAULT_IS_FULL_SCREEN) {
+	int frameRate = DEFAULT_FRAME_RATE, bool isFullScreen = DEFAULT_IS_FULL_SCREEN) {
 
 	this->hInstance = hInstance;
 	this->nameOfGame = nameOfGame;
