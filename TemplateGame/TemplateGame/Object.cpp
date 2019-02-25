@@ -137,6 +137,12 @@ float Object::GetCollisionTime(Object * otherObject, COLLISION_DIRECTION & colli
 	return entryTime;
 }
 
+// Lấy giá trị BoudingBox của Object và trả về dạng RECT*
+RECT * Object::GetBoundingBox()
+{
+	return this->curPos->GetBoudingBox();
+}
+
 void Object::Init(float posX, float posY)
 {
 	this->curPos->SetPosX(posX);
