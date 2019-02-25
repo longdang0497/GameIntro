@@ -24,24 +24,26 @@ enum COLLISION_DIRECTION {
 	BOTTOM
 };
 
-enum MAIN_CHARACTER_MOVEMENT {
+
+// ========== END: OBJECT ============
+
+// ========== START: MAIN CHARACTER =============
+enum MAIN_CHARACTER_STATE{
 	STAND_LEFT,
 	STAND_RIGHT,
 	RUN_LEFT,
 	RUN_RIGHT
 };
-// ========== END: OBJECT ============
 
-// ========== START: MAIN CHARACTER =============
-#define STANDRIGHT_PATH L"sprite\\STANDING_RIGHT.txt"
-#define STANDLEFT_PATH L"sprite\\STANDING_LEFT.txt"
-#define STAND_WIDTH 42
-#define STAND_HEIGHT 64
+#define MAIN_STAND_PATH L"sprite\\main\\MAIN_STAND.txt"
+#define MAIN_STAND_COUNT 1
+#define MAIN_STAND_WIDTH 42
+#define MAIN_STAND_HEIGHT 64
 
-#define RUNRIGHT_PATH L"sprite\\RUNNING_RIGHT.txt"
-#define RUNLEFT_PATH L"sprite\\RUNNING_LEFT.txt"
-#define RUN_WIDTH 40
-#define RUN_HEIGHT 64
+#define MAIN_RUN_PATH L"sprite\\main\\MAIN_RUN.txt"
+#define MAIN_RUN_COUNT 3
+#define MAIN_RUN_WIDTH 40
+#define MAIN_RUN_HEIGHT 64
 // ========== END: MAIN CHARACTER ========
 
 // ========== START: POSITION ============

@@ -1,7 +1,7 @@
 #pragma once
 
 // ========= START: DEFAULT SETTING =========
-#define TRACE_LOG_PATH "Log\\trace.log";
+#define TRACE_LOG_PATH "Log\\trace.log"
 #define DEFAULT_SCREEN_MODE 0
 #define DEFAULT_IS_FULL_SCREEN false
 #define DEFAULT_FRAME_RATE 30
