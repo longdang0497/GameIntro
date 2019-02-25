@@ -15,22 +15,20 @@ MainCharacter::MainCharacter(LPD3DXSPRITE spriteHandler)
 
 MainCharacter::~MainCharacter()
 {
-	delete(stand_right);
-	delete(stand_left);
-	delete(run_right);
-	delete(run_left);
+	delete(this->standSprite);
+	delete(this->runSprite);
 }
 
+// Khởi tạo Sprite với texture có sẵn (texture ở đây là một hình chứa tất cả các sprite ở trong đó)
 void MainCharacter::InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 texture)
 {
 	if(d3ddv == NULL) return;
 
-	stand_right = new Sprite(this->spriteHandler, texture, STANDRIGHT_PATH, 1, STAND_WIDTH, STAND_HEIGHT);
-	stand_left = new Sprite(this->spriteHandler, texture, STANDLEFT_PATH, 1, STAND_WIDTH, STAND_HEIGHT);
-	run_right = new Sprite(this->spriteHandler, texture, RUNRIGHT_PATH, 3, RUN_WIDTH, RUN_HEIGHT);
-	run_left = new Sprite(this->spriteHandler, texture, RUNLEFT_PATH, 3, RUN_WIDTH, RUN_HEIGHT);
+	this->standSprite = new Sprite(this->spriteHandler, texture, MAIN_STAND_PATH, MAIN_STAND_COUNT, MAIN_STAND_WIDTH, MAIN_STAND_HEIGHT);
+	this->runSprite = new Sprite(this->spriteHandler, texture, MAIN_RUN_PATH, MAIN_RUN_COUNT, MAIN_RUN_WIDTH, MAIN_RUN_HEIGHT);
 }
 
+// Khởi tạo vị trí ban đầu cho main
 void MainCharacter::InitPostition()
 {
 	this->curPos->SetPosX(300);
@@ -40,22 +38,10 @@ void MainCharacter::InitPostition()
 	this->lastVec->SetVx(1.0f);
 }
 
-MAIN_CHARACTER_MOVEMENT MainCharacter::GetState()
-{
-	return this->state;
-}
-
-void MainCharacter::SetState(MAIN_CHARACTER_MOVEMENT value)
-{
-	this->state = value;
-}
-
 void MainCharacter::ResetAllSprites()
 {
-	stand_left->Reset();
-	stand_right->Reset();
-	run_left->Reset();
-	run_right->Reset();
+	this->standSprite->Reset();
+	this->runSprite->Reset();
 }
 
 bool MainCharacter::GetStateActive()
@@ -67,6 +53,10 @@ void MainCharacter::Reset(float x, float y)
 {
 	// Cho samus active trở lại
 	this->isActive = true;
+
+	// Đặt vị trí trước đó
+	this->lastPos->SetPosX(this->curPos->GetPosX());
+	this->lastPos->SetPosY(this->curPos->GetPosY());
 
 	//Đặt lại vị trí
 	this->curPos->SetPosX(x);
@@ -80,23 +70,20 @@ void MainCharacter::Update(float t)
 	{
 		switch (state)
 		{
-		case STAND_RIGHT:
-			stand_right->UpdateSprite();
+		case STAND_RIGHT: case STAND_LEFT:
+			this->standSprite->UpdateSprite();
 			break;
-		case STAND_LEFT:
-			stand_left->UpdateSprite();
-			break;
-		case RUN_RIGHT:
-			run_right->UpdateSprite();
-			break;
-		case RUN_LEFT:
-			run_left->UpdateSprite();
+		case RUN_RIGHT: case RUN_LEFT:
+			this->runSprite->UpdateSprite();
 			break;
 		}
 		lastTime = now;
 	}
 }
 
+// cái render này là render sprite lên nè
+// Sprite nào quay qua phải thì tham số truyền vào là true
+// Ngược lại là false
 void MainCharacter::Render()
 {
 	// Nếu không active thì không render
@@ -111,16 +98,16 @@ void MainCharacter::Render()
 		switch (state)
 		{
 		case STAND_RIGHT:
-			stand_right->DrawSprite(position);
+			this->standSprite->DrawSprite(position, true);
 			break;
 		case STAND_LEFT:
-			stand_left->DrawSprite(position);
+			this->standSprite->DrawSprite(position, false);
 			break;
 		case RUN_RIGHT:
-			run_right->DrawSprite(position);
+			this->runSprite->DrawSprite(position, true);
 			break;
 		case RUN_LEFT:
-			run_left->DrawSprite(position);
+			this->runSprite->DrawSprite(position, false);
 			break;
 		}
 
@@ -131,6 +118,16 @@ void MainCharacter::Destroy()
 {
 	//Ngưng active
 	this->isActive = false;
+}
+
+MAIN_CHARACTER_STATE MainCharacter::GetState()
+{
+	return this->state;
+}
+
+void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
+{
+	this->state = value;
 }
 
 bool MainCharacter::handleCollision(Object * otherObject)

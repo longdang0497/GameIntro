@@ -1,16 +1,15 @@
 ﻿#include "Sprite.h"
-#include <vector>
 
-Sprite::Sprite(LPD3DXSPRITE spriteHandler, LPDIRECT3DTEXTURE9 texture, LPWSTR coord, int count, int width, int height)
+Sprite::Sprite(LPD3DXSPRITE spriteHandler, LPDIRECT3DTEXTURE9 texture, LPCWSTR filePath, int count, int width, int height)
 {
+	
+	if (texture == NULL)
+		return;
+	this->texture = texture;
 	this->count = count;
 	this->width = width;
 	this->height = height;
 	this->spriteHandler = spriteHandler;
-	this->coord = coord;
-	this->texture = texture;
-	if (this->texture == NULL)
-		return;
 
 	// Gan he mau trong suot
 	transColor = D3DCOLOR_ARGB(255, 255, 255, 255);
@@ -18,11 +17,57 @@ Sprite::Sprite(LPD3DXSPRITE spriteHandler, LPDIRECT3DTEXTURE9 texture, LPWSTR co
 
 	LPDIRECT3DDEVICE9 d3ddv;
 	this->spriteHandler->GetDevice(&d3ddv);	
+
+	this->spritePositions = new vector<vector<int>*>();
+
+	this->SetSpritePositions(filePath);
+}
+
+// Phương thức này dùng để đọc file txt rồi sau đó lưu vào vector (hạn chế việc đọc file)
+void Sprite::SetSpritePositions(LPCWSTR filePath)
+{
+
+	// Đọc thông tin file
+	fstream f;
+	try
+	{
+		f.open(filePath);
+	}
+	catch (fstream::failure e)
+	{
+		trace(L"Error when Init Sprite %s", filePath);
+	}
+	
+	string line;
+	while (!f.eof()) {
+		getline(f, line);
+
+		string splitString;
+
+		istringstream iss(line);
+
+		vector<int> * tempVector = new vector<int>();
+
+		while (getline(iss, splitString, '\t'))
+		{
+			tempVector->push_back(stoi(splitString));
+		}
+
+		this->spritePositions->push_back(tempVector);
+	}
+
+	trace(L"Done Init Sprite %s", filePath);
+	f.close();
 }
 
 Sprite::~Sprite() {
 	texture->Release();
-	delete(coord);
+
+	for (int i = 0; i < this->spritePositions->size(); i++) {
+		delete this->spritePositions->at(i);
+	}
+
+	delete this->spritePositions;
 }
 
 // Cap nhat vi tri cua sprite tiep theo
@@ -62,11 +107,13 @@ void Sprite::DrawSprite(int x, int y, D3DXVECTOR3 position) {
 	this->spriteHandler->End();
 }
 
-//draw multi sprites
-void Sprite::DrawSprite(D3DXVECTOR3 position) {
+// draw multi sprites
+// flagRight dùng để xác định được là sprite đang quay qua trái hay phải, điều này giúp cho tiết kiệm việc khởi tạo Sprite ban đầu
+void Sprite::DrawSprite(D3DXVECTOR3 position, bool flagRight) {
 	if (this->spriteHandler == NULL || this->texture == NULL)
 		return;
-	RECT rect = ReadCoord();	//đọc tọa độ của sprite trong file txt
+
+	RECT* rect = ReadCurrentSpritePosition();	//đọc tọa độ của sprite trong file txt
 
 	//this->spriteHandler->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE);
 	this->spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
@@ -77,14 +124,21 @@ void Sprite::DrawSprite(D3DXVECTOR3 position) {
 	// Build our matrix to rotate, scale and position our sprite
 	D3DXMATRIX mat;
 
-	D3DXVECTOR3 scaling(1.0f, 1.0f, 1.0f);
+	// Biến này làm cho object quay theo trục X (trục dọc)
+	float tempTurnRight = 1.0f;
+
+	if (!flagRight) {
+		tempTurnRight = -1.0f;
+	}
+
+	D3DXVECTOR3 scaling(tempTurnRight, 1.0f, 1.0f);
 
 	// out, scaling centre, scaling rotation, scaling, rotation centre, rotation, translation
 	D3DXMatrixTransformation(&mat, &D3DXVECTOR3(width / 2, height / 2, 0), NULL, &scaling, &spriteCentre, NULL, &position);
 
 	this->spriteHandler->SetTransform(&mat);
 
-	this->spriteHandler->Draw(this->texture, &rect, NULL, NULL, this->transColor);
+	this->spriteHandler->Draw(this->texture, rect, NULL, NULL, this->transColor);
 	this->spriteHandler->End();
 }
 
@@ -93,58 +147,19 @@ void Sprite::Reset()
 	index = 0;
 }
 
-RECT Sprite::ReadCoord()
+RECT* Sprite::ReadCurrentSpritePosition()
 {
-	//init array Sprite's position
-	vector<vector<int>> arrCoord;
-	arrCoord.resize(this->count);
 
-	//Read file info of file
-	fstream f;
-	try
-	{
-		f.open(this->coord);
-	}
-	catch (fstream::failure e)
-	{
-		MessageBox(NULL, L"[Sprite class]--Read sprite info from file failed", L"Error", NULL);
-	}
-	string line;
-	int id = 0;
-	while (!f.eof() && id < this->count)
-	{
-		vector<string> pos;
-		string split;
-		getline(f, line);
-		istringstream iss(line);
+	RECT * rect = new RECT();
+	vector<int>* tempVector = this->spritePositions->at(this->index);
+	
+	// Giá trị đầu tiên là x, giá trị thứ 2 là y
+	rect->left = tempVector->at(0);
+	rect->top = tempVector->at(1);
+	rect->right = rect->left + this->width;
+	rect->bottom = rect->top + this->height;
 
-		while (getline(iss, split, '\t'))
-		{
-			pos.push_back(split);
-		}
-
-		for (int i = 0; i < arrCoord.size(); i++)
-			arrCoord[i].resize(2);
-
-		//lưu hoành độ x
-		arrCoord[id][0] = stoi(pos[0]);
-		srect.left = arrCoord[id][0];
-
-		//lưu tung độ y
-		arrCoord[id][1] = stoi(pos[1]);
-		srect.top = arrCoord[id][1];
-
-		srect.right = srect.left + width;
-		srect.bottom = srect.top + height + 1;
-
-		if (id == index)
-		{
-			break;
-		}
-		id++;
-	}
-	f.close();
-	return srect;
+	return rect;
 }
 
 void Sprite::SetWidth(int value)
