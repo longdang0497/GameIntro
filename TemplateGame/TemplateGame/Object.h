@@ -28,6 +28,7 @@ public:
 	~Object();
 
 	float GetCollisionTime(Object* otherObject, COLLISION_DIRECTION& collisionDirection, float deltaTime);
+	RECT* GetBoundingBox();
 
 	// Phương thức để active lại GameObject
 	virtual void Init(float posX, float posY);
