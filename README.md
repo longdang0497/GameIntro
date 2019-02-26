@@ -125,5 +125,5 @@ void Grid::InitObjectForGrid()
 - Thứ tự code tham khảo `handleCell() -> handleObject() -> handleCollision()`, mọi hàm đều có comment đầy đủ
 - Cái chỗ hàm  `handleCollision()` có liên quan một chút đến va chạm giữa các vật thể, cái này sẽ cập nhật sau ~~
 
-## 5. Quadtree
+## 5. SweptAABB (va chạm giữa 2 vật thể)
 - https://gamedevelopment.tutsplus.com/tutorials/quick-tip-use-quadtrees-to-detect-likely-collisions-in-2d-space--gamedev-374
