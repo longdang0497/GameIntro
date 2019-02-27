@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "ObjectDefine.h"
+#include <d3dx9.h>
 
 // Class này dùng để chứa thông tin vị trí của Object
 // Position này được xác định là vị trí TOP LEFT
@@ -16,6 +17,8 @@ public:
 	ObjectPosition();
 	ObjectPosition(float postX, float posY, int width = DEFAULT_OBJECT_WIDTH, int height = DEFAULT_OBJECT_HEIGHT);
 	~ObjectPosition();
+
+	RECT* GetBoudingBox();
 
 	void SetPosX(float posX);
 	void SetPosY(float posY);

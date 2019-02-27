@@ -13,6 +13,7 @@ int WINAPI WinMain(
 	LPSTR lpStrCmdLine,
 	int nShowCmd)
 {
+	clearFile();
 	MetroidGame* metroidGame = new MetroidGame(hInstance, DEFAULT_NAME_OF_GAME, DEFAULT_SCREEN_MODE, false, DEFAULT_FRAME_RATE);
 	metroidGame->GameRun();
 	return 0;
