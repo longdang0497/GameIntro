@@ -2,11 +2,9 @@
 #include "trace.h"
 
 static const char* PATH = TRACE_LOG_PATH;
-int traceFlag = 1;
 
 void trace(const LPCWSTR format, ...)
 {
-	if (!traceFlag) return;
 
 	FILE *f = stderr;
 
@@ -25,7 +23,21 @@ void trace(const LPCWSTR format, ...)
 	vfwprintf(f, format, ap);
 	va_end(ap);
 
-	fprintf(f, "\n==========\n");
+	fprintf(f, "\n");
+
+	if (PATH != NULL) fclose(f);
+}
+
+void clearFile() {
+	FILE *f = stderr;
+	if (PATH != NULL)
+	{
+		if (fopen_s(&f, PATH, "a") != 0)
+		{
+			fprintf(stderr, "WARNING: Failed to open trace file '%s' for writing!\n", PATH);
+			return;
+		}
+	}
 
 	if (PATH != NULL) fclose(f);
 }

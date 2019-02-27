@@ -23,6 +23,18 @@ ObjectPosition::~ObjectPosition()
 {
 }
 
+RECT * ObjectPosition::GetBoudingBox()
+{
+	RECT* rect = new RECT();
+
+	rect->top = posY;
+	rect->left = posX;
+	rect->bottom = posY + objectHeight;
+	rect->right = posX + objectWidth;
+
+	return rect;
+}
+
 // Get/Set methods
 void ObjectPosition::SetPosX(float posX)
 {

@@ -114,6 +114,9 @@
     <ClCompile Include="MainCharacter.cpp">
       <Filter>Source Files\Object\MainCharacter</Filter>
     </ClCompile>
+    <ClCompile Include="QuadTree.cpp">
+      <Filter>Source Files\PartitioningOfSpace</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -178,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="MainCharacter.h">
       <Filter>Header Files\Object\MainCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTree.h">
+      <Filter>Header Files\PartitioningOfSpace</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

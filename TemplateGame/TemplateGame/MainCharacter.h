@@ -7,12 +7,10 @@
 
 class MainCharacter : public Object
 {
-protected:
-	MAIN_CHARACTER_MOVEMENT state;
-	Sprite * stand_right;
-	Sprite * stand_left;
-	Sprite * run_right;
-	Sprite * run_left;
+private:
+	MAIN_CHARACTER_STATE state;
+	Sprite * standSprite;
+	Sprite * runSprite;
 
 	bool isCollided = false;
 public:
@@ -23,8 +21,8 @@ public:
 	void InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 texture);
 	void InitPostition();
 
-	MAIN_CHARACTER_MOVEMENT GetState();
-	void SetState(MAIN_CHARACTER_MOVEMENT value);
+	MAIN_CHARACTER_STATE GetState();
+	void SetState(MAIN_CHARACTER_STATE value);
 
 	void ResetAllSprites();
 	bool GetStateActive();

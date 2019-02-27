@@ -138,6 +138,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectPosition.cpp" />
     <ClCompile Include="ObjectVelocity.cpp" />
+    <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="trace.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="ObjectPosition.h" />
     <ClInclude Include="ObjectVelocity.h" />
     <ClInclude Include="OtherObjectsDefine.h" />
+    <ClInclude Include="QuadTree.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SpaceDefine.h" />
     <ClInclude Include="Sprite.h" />
