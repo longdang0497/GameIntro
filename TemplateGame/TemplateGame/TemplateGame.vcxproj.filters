@@ -61,6 +61,9 @@
     <Filter Include="Resource Files\sprite">
       <UniqueIdentifier>{763c2e22-a1e4-4cfc-a0c7-71ba452e3766}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\map">
+      <UniqueIdentifier>{92b4e61e-77db-4dc2-b02e-d00072cd3f45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -116,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="QuadTree.cpp">
       <Filter>Source Files\PartitioningOfSpace</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files\Framework</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +191,9 @@
     <ClInclude Include="QuadTree.h">
       <Filter>Header Files\PartitioningOfSpace</Filter>
     </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Log\trace.log">
@@ -206,6 +215,9 @@
   <ItemGroup>
     <Image Include="sprite\samus_sprites.png">
       <Filter>Resource Files\sprite</Filter>
+    </Image>
+    <Image Include="map\bg2.png">
+      <Filter>Resource Files\map</Filter>
     </Image>
   </ItemGroup>
 </Project>
