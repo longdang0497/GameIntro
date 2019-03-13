@@ -12,13 +12,6 @@ Object::Object()
 
 Object::~Object()
 {
-	curPos = nullptr;
-	lastPos = nullptr;
-	curVec = nullptr;
-	lastVec = nullptr;
-	nextObject = nullptr;
-	preObject = nullptr;
-
 	delete curPos;
 	delete lastPos;
 	delete curVec;
@@ -137,6 +130,154 @@ float Object::GetCollisionTime(Object * otherObject, COLLISION_DIRECTION & colli
 	return entryTime;
 }
 
+void Object::SweptAABB(Object * otherObject, float dx, float dy, float & collisionTime, float & nx, float & ny)
+{
+	float dxEntry, dxExit, txEntry, txExit;
+	float dyEntry, dyExit, tyEntry, tyExit;
+
+	float entryTime;
+	float exitTime;
+
+	float movingTop = this->curPos->GetPosY();
+	float movingBottom = this->curPos->GetPosY() + this->objectHeight;
+	float movingLeft = this->curPos->GetPosX();
+	float movingRight = this->curPos->GetPosX() + this->objectWidth;
+
+	float staticTop = otherObject->GetCurPos()->GetPosY();
+	float staticBottom = otherObject->GetCurPos()->GetPosY() + otherObject->GetObjectHeight();
+	float staticLeft = otherObject->GetCurPos()->GetPosX();
+	float staticRight = otherObject->GetCurPos()->GetPosX() + otherObject->GetObjectWidth();
+
+	collisionTime = -1.0f; // Không có va chạm
+	nx = ny = 0;
+
+	// Broad-phase test
+	float bl = dx > 0 ? movingLeft : movingLeft + dx;
+	float bt = dy > 0 ? movingTop : movingTop + dy;
+	float br = dx > 0 ? movingRight + dx : movingRight;
+	float bb = dy > 0 ? movingBottom + dy : movingBottom;
+
+	// Nếu không nằm trong vùng va chạm với nhau thì không cần xét
+	if (br < staticLeft || bl >  staticRight
+		|| bb < staticTop || bt > staticBottom)
+		return;
+
+	if (dx == 0 && dy == 0) return; // Không di chuyển cũng thoát ra
+
+	// đi qua phải
+	if (dx > 0) {
+		dxEntry = staticLeft - movingRight;
+		dxExit = staticRight - movingLeft;
+	}
+	else if (dx < 0) {
+		dxEntry = staticRight - movingLeft;
+		dxExit = staticLeft - movingRight;
+	}
+
+	// đi xuống
+	if (dy > 0) {
+		dyEntry = staticTop - movingBottom;
+		dyExit = staticBottom - movingTop;
+	}
+	else if (dy < 0) {
+		dyEntry = staticBottom - movingTop;
+		dyExit = staticTop - movingBottom;
+	}
+
+	if (dx == 0) {
+		txEntry = -std::numeric_limits<float>::infinity();
+		txExit = std::numeric_limits<float>::infinity();
+	}
+	else {
+		txEntry = dxEntry / dx;
+		txExit = dxExit / dx;
+	}
+
+	if (dy == 0) {
+		tyEntry = -std::numeric_limits<float>::infinity();
+		tyExit = std::numeric_limits<float>::infinity();
+	}
+	else {
+		tyEntry = dyEntry / dy;
+		tyExit = dyExit / dy;
+	}
+
+	if ((txEntry < 0.0f && tyEntry < 0.0f) || txEntry > 1.0f || tyEntry > 1.0f) return;
+
+	entryTime = max(txEntry, tyEntry);
+	exitTime = min(txExit, tyExit);
+
+	if (entryTime > exitTime) return;
+	collisionTime = entryTime;
+
+	if (txEntry > tyEntry) {
+		ny = 0.0f;
+		dx > 0 ? nx = -1.0f : nx = 1.0f;
+	}
+	else {
+		nx = 0.0f;
+		dy > 0 ? ny = -1.0f : ny = 1.0f;
+	}
+}
+
+CollisionEvent* Object::GetCollsionObjectsBySweptAABB(Object* obj)
+{
+	ObjectVelocity* otherObjectVec = obj->GetCurVec();
+	float dx = this->deltaPosX - otherObjectVec->GetVx()*this->deltaTime;
+	float dy = this->deltaPosY - otherObjectVec->GetVy() * this->deltaTime;
+
+	float collisionTime, nx, ny;
+
+	this->SweptAABB(obj, dx, dy, collisionTime, nx, ny);
+	return new CollisionEvent(collisionTime, nx, ny, obj);
+}
+
+void Object::CalcPotentialCollisions(vector<Object*>* objects, vector<CollisionEvent*>* coEvents)
+{
+	for (UINT i = 0; i < objects->size(); i++) {
+		CollisionEvent* coEvent = this->GetCollsionObjectsBySweptAABB(objects->at(i));
+
+		if (coEvent->GetCollisionTime() > 0 && coEvent->GetCollisionTime() <= 1.0f)
+			coEvents->push_back(coEvent);
+		else
+			delete coEvent;
+	}
+
+	sort(coEvents->begin(), coEvents->end(), CollisionEvent::Compare);
+}
+
+void Object::FilterCollision(vector<CollisionEvent*> *coEvents, vector<CollisionEvent*> *coEventsResult, float & minTx, float & minTy, float & nx, float & ny)
+{
+	minTx = 1.0f;
+	minTy = 1.0f;
+	int minIx = -1; // Index của object có khả năng va chạm gần nhất theo X (chiều ngang)
+	int minIy = -1; // index của Object có khả năng va chạm gần nhất theo Y (chiều dọc)
+
+	ny = 0.0f;
+	nx = 0.0f;
+
+	coEventsResult->clear();
+
+	for (UINT i = 0; i < coEvents->size(); i++) {
+		CollisionEvent* c = coEvents->at(i);
+
+		if (c->GetCollisionTime() < minTx && c->GetNx() != 0) {
+			minTx = c->GetCollisionTime();
+			nx = c->GetNx();
+			minIx = i;
+		}
+
+		if (c->GetCollisionTime() < minTy && c->GetNy() != 0) {
+			minTy = c->GetCollisionTime();
+			ny = c->GetNy();
+			minIy = i;
+		}
+	}
+
+	if (minIx >= 0) coEventsResult->push_back(coEvents->at(minIx));
+	if (minIy >= 0) coEventsResult->push_back(coEvents->at(minIy));
+}
+
 // Lấy giá trị BoudingBox của Object và trả về dạng RECT*
 RECT * Object::GetBoundingBox()
 {
@@ -148,6 +289,29 @@ void Object::Init(float posX, float posY)
 	this->curPos->SetPosX(posX);
 	this->curPos->SetPosY(posY);
 	this->isActive = true;
+}
+
+void Object::Update(float deltaTime, std::vector<Object*>* objects)
+{
+	this->deltaTime = deltaTime;
+	this->deltaPosX = this->curVec->GetVx() * deltaTime;
+	this->deltaPosY = this->curVec->GetVy() * deltaTime;
+}
+
+void Object::SetPosition(float posX, float posY)
+{
+	this->lastPos->SetPosX(this->curPos->GetPosX());
+	this->lastPos->SetPosY(this->curPos->GetPosY());
+	this->curPos->SetPosX(posX);
+	this->curPos->SetPosY(posY);
+}
+
+void Object::SetVeclocity(float vX, float vY)
+{
+	this->lastVec->SetVx(this->curVec->GetVx());
+	this->lastVec->SetVy(this->curVec->GetVy());
+	this->curVec->SetVx(vX);
+	this->curVec->SetVy(vY);
 }
 
 // Get/Set methods
@@ -272,4 +436,17 @@ float Object::GetGravity()
 LPD3DXSPRITE Object::GetSpriteHandler()
 {
 	return this->spriteHandler;
+}
+
+CollisionEvent::CollisionEvent(float collisionTime, float nx, float ny, Object* obj)
+{
+	this->collisionTime = collisionTime;
+	this->nx = nx;
+	this->ny = ny;
+	this->obj = obj;
+}
+
+
+CollisionEvent::~CollisionEvent()
+{
 }

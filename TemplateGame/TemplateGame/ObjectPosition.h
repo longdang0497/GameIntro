@@ -22,6 +22,9 @@ public:
 
 	void SetPosX(float posX);
 	void SetPosY(float posY);
+
+	void Add(float deltaX, float deltaY);
+
 	float GetPosX();
 	float GetPosY();
 	ObjectPosition* GetPosCenter();

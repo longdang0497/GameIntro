@@ -3,6 +3,12 @@
 #include "ObjectVelocity.h"
 #include <d3dx9.h>
 #include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+class CollisionEvent;
 
 class Object
 {
@@ -23,11 +29,24 @@ protected:
 	DWORD lastTime;					// Cái này để điều khiển được tỉ lệ animate của object
 	D3DXVECTOR2 rigidBody;			// Cái này đùng để điều khiển camera
 
+	float deltaPosX;
+	float deltaPosY;
+	DWORD deltaTime;
+
 public:
 	Object();
 	~Object();
 
 	float GetCollisionTime(Object* otherObject, COLLISION_DIRECTION& collisionDirection, float deltaTime);
+
+	// Này là thuật toán sweptAABB
+	void SweptAABB(Object* otherObject, float dx, float dy, float &t, float &nx, float &ny);
+	
+	// Này dùng để lấy thông số tất cả object có khả năng va chạm với object đang xét
+	CollisionEvent* GetCollsionObjectsBySweptAABB(Object* obj);
+	void CalcPotentialCollisions(vector<Object*> *objects, vector<CollisionEvent*> *coEvents);
+	void FilterCollision(vector<CollisionEvent*> *coEvents, vector<CollisionEvent*> *coEventsResult, float &minTx, float &minTy, float &nx, float &ny);
+
 	RECT* GetBoundingBox();
 
 	// Phương thức để active lại GameObject
@@ -37,7 +56,7 @@ public:
 	virtual void InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 texture) = 0;
 
 	// Phải update thông tin của Object trước rồi mới render lên lại màn hình
-	virtual void Update(float deltaTime) = 0;
+	virtual void Update(float deltaTime, std::vector<Object*> *objects = NULL);
 	virtual void Render() = 0;
 
 	// Phương thức này được hiểu theo nghĩa là khi object đã chết (tức là chỉ có làm cho isActive là false thôi chứ k xóa khỏi bộ nhớ)
@@ -45,6 +64,9 @@ public:
 
 	// Phương thức này dùng để xử lý va chạm giữa các Object với nhau
 	virtual bool handleCollision(Object *otherObject) = 0;
+
+	void SetPosition(float posX, float posY);
+	void SetVeclocity(float vX, float vY);
 
 	void SetObjectType(OBJECT_TYPE objectType);
 	void SetIsActive(bool isActive);
@@ -73,3 +95,30 @@ public:
 	LPD3DXSPRITE GetSpriteHandler();
 };
 
+// Class này quản lý các vật có khả năng va chạm với Object đang xét
+// Thông số nx, ny này dùng để xác định đc phần nào va chạm trc rồi lùi cái frame lại cho nó khỏi bị chồng lên nhau (nếu trường hợp xét khi di chuyển)
+class CollisionEvent
+{
+private:
+	Object* obj;
+	float collisionTime, nx, ny;
+public:
+	CollisionEvent(float collisionTime, float nx, float ny, Object* obj = NULL);
+	~CollisionEvent();
+
+	static bool Compare(const CollisionEvent* a, const CollisionEvent *b) {
+		return a->collisionTime < b->collisionTime;
+	}
+
+	float GetCollisionTime() {
+		return this->collisionTime;
+	}
+
+	float GetNx() {
+		return this->nx;
+	}
+
+	float GetNy() {
+		return this->ny;
+	}
+};

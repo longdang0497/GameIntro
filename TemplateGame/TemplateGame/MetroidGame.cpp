@@ -18,16 +18,9 @@ MetroidGame::MetroidGame(HINSTANCE hInstance, LPCWSTR nameOfGame, int mode, bool
 
 MetroidGame::~MetroidGame()
 {
-	this->world = nullptr;
 	delete this->world;
-
-	this->deviceManager = nullptr;
 	delete(this->deviceManager);
-
-	this->input = nullptr;
 	delete(this->input);
-
-	this->dxGraphics = nullptr;
 	delete(this->dxGraphics);
 }
 
@@ -173,31 +166,18 @@ void MetroidGame::RenderObjects()
 
 void MetroidGame::ProcessInput(LPDIRECT3DDEVICE9, float)
 {
+	
 	if (input->IsKeyDown(DIK_RIGHT))
 	{
-		if (world->GetMainCharacter()->GetState() == STAND_RIGHT || world->GetMainCharacter()->GetState() == STAND_LEFT
-			|| world->GetMainCharacter()->GetState() == RUN_LEFT)
-			world->GetMainCharacter()->SetState(RUN_RIGHT);
+
 	}
 	else if (input->IsKeyDown(DIK_LEFT))
 	{
-		if (world->GetMainCharacter()->GetState() == STAND_LEFT || world->GetMainCharacter()->GetState() == STAND_RIGHT
-			|| world->GetMainCharacter()->GetState() == RUN_RIGHT)
-			world->GetMainCharacter()->SetState(RUN_LEFT);
+
 	}
 	else
 	{
-		if (world->GetMainCharacter()->GetState() == RUN_RIGHT)
-		{
-			world->GetMainCharacter()->ResetAllSprites();
-			world->GetMainCharacter()->SetState(STAND_RIGHT);
-		}		
-		if (world->GetMainCharacter()->GetState() == RUN_LEFT)
-		{
-			world->GetMainCharacter()->ResetAllSprites();
-			world->GetMainCharacter()->SetState(STAND_LEFT);
-		}
-		
+
 	}
 }
 

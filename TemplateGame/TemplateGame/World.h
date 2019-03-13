@@ -3,6 +3,7 @@
 #include "DXGraphics.h"
 #include "Texture.h"
 #include "MainCharacter.h"
+#include "Brick.h"
 
 // Class này dùng để quản lý các object của thế giới Game
 // Bao gồm Map, Sprite, Main, Enemy, Grid, ...
@@ -14,9 +15,12 @@ private:
 	Texture* texture;
 	MainCharacter * gameCharacter;
 
+	vector<Object*> *objects;
+
 	void LoadResources(LPDIRECT3DDEVICE9);
 	void InitSprite(LPDIRECT3DDEVICE9);
 	void InitObjectPosition();
+	void InitMap(LPCWSTR path, LPD3DXSPRITE);
 public:
 	World();
 	World(LPDIRECT3DDEVICE9);

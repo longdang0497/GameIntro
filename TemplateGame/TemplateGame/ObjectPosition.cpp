@@ -46,6 +46,12 @@ void ObjectPosition::SetPosY(float posY)
 	this->posY = posY;
 }
 
+void ObjectPosition::Add(float deltaX, float deltaY)
+{
+	this->posX += deltaX;
+	this->posY += deltaY;
+}
+
 float ObjectPosition::GetPosX()
 {
 	return this->posX;

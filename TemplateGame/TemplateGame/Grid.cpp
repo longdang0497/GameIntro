@@ -47,6 +47,11 @@ void Grid::InitObjectForGrid()
 // Cập nhật lại Grid sau khi xử lý va chạm này nọ
 void Grid::UpdateGrid(Object * object, float newPosX, float newPosY)
 {
+	if (newPosX == 0.0f && newPosY == 0.0f) {
+		newPosX = object->GetCurPos()->GetPosX();
+		newPosY = object->GetCurPos()->GetPosY();
+	}
+
 	// Kiểm tra xem có thay đổi cell hay không
 	int oldRow = floor(object->GetLastPos()->GetPosY() / CELL_SIZE);
 	int oldColumn = floor(object->GetLastPos()->GetPosX() / CELL_SIZE);
@@ -95,6 +100,7 @@ void Grid::Add(Object *object) {
 	// Thêm object vào đầu dslk
 	object->SetPreObject(NULL);
 	object->SetNextObject(this->cells[row][column]);
+	this->cells[row][column] = object;
 
 	if (object->GetNextObject() != NULL) {
 		object->GetNextObject()->SetPreObject(object);
@@ -164,6 +170,61 @@ bool Grid::HandleCell(Object * object, int row, int column)
 		
 	
 	return isCollided;
+}
+
+// Lấy tất cả object có khả năng va chạm với object đang xét
+std::vector<Object*> *Grid::GetCollisionObjects(Object * object)
+{
+
+	std::vector<Object*> *objects = new std::vector<Object*>();
+
+	if (object == nullptr || object->GetObjectType() == BRICK)
+		return objects;
+
+	int row = (int)floor(object->GetCurPos()->GetPosY() / CELL_SIZE);
+	int column = (int) floor(object->GetCurPos()->GetPosX() / CELL_SIZE);
+
+	// Lấy object ở cell hiện tại
+	this->PushObjectToVector(objects, this->cells[row][column]);
+
+	// Lấy các cell ở kế bên
+
+	// Nếu đang đi qua trái
+	if (object->GetCurVec()->GetVx() < 0) {
+		if (column > 0) this->PushObjectToVector(objects, this->cells[row][column - 1]); // Bên trái
+
+		if (column > 0 && row > 0) this->PushObjectToVector(objects, this->cells[row - 1][column - 1]); // Trái trên
+
+		if (column > 0 && row < this->numOfRow - 1) this->PushObjectToVector(objects, this->cells[row + 1][column - 1]); //Trái dưới
+	}
+
+	// Nếu đang đi qua phải
+	else {
+		if (column < this->numOfColumn - 1) this->PushObjectToVector(objects, this->cells[row][column + 1]); //Bên phải
+
+		if (column < this->numOfColumn - 1 && row > 0) this->PushObjectToVector(objects, this->cells[row - 1][column + 1]); // Phải trên
+
+		if (column < this->numOfColumn - 1 && row < this->numOfRow - 1) this->PushObjectToVector(objects, this->cells[row + 1][column + 1]); // Phải dưới
+	}
+
+	// Nếu đang đi lên
+	if (object->GetCurVec()->GetVy() < 0) {
+		if (row > 0) this->PushObjectToVector(objects, this->cells[row - 1][column]);
+	}
+	// Nếu đang đi xuống
+	else {
+		if (row < this->numOfRow - 1) this->PushObjectToVector(objects, this->cells[row + 1][column]);
+	}
+
+	return objects;
+}
+
+void Grid::PushObjectToVector(std::vector<Object*> *vectors, Object*cell) {
+	while (cell != NULL) {
+		
+		vectors->push_back(cell);
+		cell = cell->GetNextObject();
+	}
 }
 
 // Dùng để xét giữa object đang xét với các object còn lại trong cell hoặc cell lân cận

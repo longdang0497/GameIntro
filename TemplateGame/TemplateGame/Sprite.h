@@ -27,6 +27,7 @@ private:
 	void SetSpritePositions(LPCWSTR filePath);
 public:
 	Sprite(LPD3DXSPRITE, LPDIRECT3DTEXTURE9, LPCWSTR, int, int, int);
+	Sprite(LPD3DXSPRITE, LPDIRECT3DTEXTURE9, int, int, int, int); // Phương thức dùng để khởi tạo sprite đối vs những viên gạch
 	~Sprite();
 	void UpdateSprite();
 

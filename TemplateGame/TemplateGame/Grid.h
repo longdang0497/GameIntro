@@ -6,6 +6,7 @@
 #include "Object.h"
 #include <cmath>
 #include <iostream>
+#include <vector>
 
 class Grid
 {
@@ -18,6 +19,7 @@ private:
 	void InitObjectForGrid();
 
 	bool HandleObject(Object* objSrc, Object* objDes);
+	void PushObjectToVector(std::vector<Object*> * vector, Object* cell);
 public:
 	Grid();
 	Grid(int mapHeight, int mapWidth);
@@ -26,7 +28,8 @@ public:
 	void Add(Object *object);
 	void ReSetGrid(int width, int height);
 	bool HandleCell(Object* object, int row, int column);
-	void UpdateGrid(Object* object, float newPosX, float newPosY);
+	std::vector<Object*>* GetCollisionObjects(Object* object);
+	void UpdateGrid(Object* object, float newPosX = 0.0f, float newPosY = 0.0f);
 
 	void SetDeltaTime(float deltaTime);
 	float GetDeltaTime();
