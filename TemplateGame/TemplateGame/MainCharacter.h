@@ -28,7 +28,7 @@ public:
 	bool GetStateActive();
 
 	void Reset(float  x, float y);
-	void Update(float t);
+	void Update(float t, vector<Object*> *object = NULL);
 	void Render();
 	void Destroy();
 

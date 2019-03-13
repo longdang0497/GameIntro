@@ -23,6 +23,32 @@ Sprite::Sprite(LPD3DXSPRITE spriteHandler, LPDIRECT3DTEXTURE9 texture, LPCWSTR f
 	this->SetSpritePositions(filePath);
 }
 
+Sprite::Sprite(LPD3DXSPRITE spriteHandler, LPDIRECT3DTEXTURE9 texture, int index, int count, int width, int height)
+{
+	if (texture == NULL)
+		return;
+	this->texture = texture;
+	this->count = count;
+	this->width = width;
+	this->height = height;
+
+	this->spriteHandler = spriteHandler;
+	// Gan he mau trong suot
+	transColor = D3DCOLOR_ARGB(255, 255, 255, 255);
+	this->index = 0;
+
+	LPDIRECT3DDEVICE9 d3ddv;
+	this->spriteHandler->GetDevice(&d3ddv);
+
+	this->spritePositions = new vector<vector<int>*>();
+
+	vector<int> * positions = new vector<int>();
+	positions->push_back((index - 1) * 32);
+	positions->push_back(0);
+	this->spritePositions->push_back(positions);
+
+}
+
 // Phương thức này dùng để đọc file txt rồi sau đó lưu vào vector (hạn chế việc đọc file)
 void Sprite::SetSpritePositions(LPCWSTR filePath)
 {
@@ -140,6 +166,7 @@ void Sprite::DrawSprite(D3DXVECTOR3 position, bool flagRight) {
 
 	this->spriteHandler->Draw(this->texture, rect, NULL, NULL, this->transColor);
 	this->spriteHandler->End();
+	delete rect;
 }
 
 void Sprite::Reset()

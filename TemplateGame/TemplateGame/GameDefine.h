@@ -40,3 +40,7 @@ enum GAME_MODE {
 #define CAMERA_FOLLOW_POINT_BOTTOM_RATIO 1.0/4
 #define CAMERA_FOLLOW_POINT_TOP_RATIO    3.0/4
 // ========= END: CAMERA =========
+
+// ========= START: MAP =========
+#define TEST_MAP_PATH L"sprite\\testmap.txt"
+// ========= END: MAP=========

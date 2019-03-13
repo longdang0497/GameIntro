@@ -18,16 +18,9 @@ MetroidGame::MetroidGame(HINSTANCE hInstance, LPCWSTR nameOfGame, int mode, bool
 
 MetroidGame::~MetroidGame()
 {
-	this->world = nullptr;
 	delete this->world;
-
-	this->deviceManager = nullptr;
 	delete(this->deviceManager);
-
-	this->input = nullptr;
 	delete(this->input);
-
-	this->dxGraphics = nullptr;
 	delete(this->dxGraphics);
 }
 
@@ -173,40 +166,18 @@ void MetroidGame::RenderObjects()
 
 void MetroidGame::ProcessInput(LPDIRECT3DDEVICE9, float)
 {
-	ObjectVelocity * temp = new ObjectVelocity();
 	
 	if (input->IsKeyDown(DIK_RIGHT))
 	{
-		temp->SetVx(world->GetMainCharacter()->GetCurVec()->GetVx() + CHARACTER_SPEED);
-		temp->SetVy(0);
-		world->GetMainCharacter()->SetCurVec(temp);
-		world->GetMainCharacter()->SetState(RUN_RIGHT);
+
 	}
 	if (input->IsKeyDown(DIK_LEFT))
 	{
-		temp->SetVx(world->GetMainCharacter()->GetCurVec()->GetVx() - CHARACTER_SPEED);
-		temp->SetVy(0);
-		world->GetMainCharacter()->SetCurVec(temp);
-		world->GetMainCharacter()->SetState(RUN_LEFT);
+
 	}
 	else
 	{
-		temp->SetVx(0);
-		temp->SetVy(0);
-		world->GetMainCharacter()->SetCurVec(temp);
-		if (world->GetMainCharacter()->GetLastVec() > 0)
-		{
-			if (world->GetMainCharacter()->GetState() == RUN_RIGHT)
-			{
-				world->GetMainCharacter()->ResetAllSprites();
-				world->GetMainCharacter()->SetState(STAND_RIGHT);				
-			}
-		}
-		else if (world->GetMainCharacter()->GetLastVec() < 0)
-		{
-			world->GetMainCharacter()->ResetAllSprites();
-			world->GetMainCharacter()->SetState(STAND_LEFT);
-		}
+
 	}
 }
 

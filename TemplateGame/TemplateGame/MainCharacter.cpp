@@ -11,6 +11,14 @@ MainCharacter::MainCharacter(LPD3DXSPRITE spriteHandler)
 	this->isActive = true;
 	this->SetObjectType(MAIN_CHARACTER);
 	this->spriteHandler = spriteHandler;
+	this->SetState(STAND_RIGHT);
+	this->objectWidth = 32;
+	this->objectHeight = 64;
+
+	this->curPos->SetPosX(8 * 32);
+	this->curPos->SetPosY(10);
+	this->curVec->SetVx(0);
+	this->curVec->SetVy(30.0f);
 }
 
 MainCharacter::~MainCharacter()
@@ -31,10 +39,10 @@ void MainCharacter::InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 text
 // Khởi tạo vị trí ban đầu cho main
 void MainCharacter::InitPostition()
 {
-	this->curPos->SetPosX(300);
-	this->curPos->SetPosY(300);
+	this->curPos->SetPosX(8*32);
+	this->curPos->SetPosY(10);
 	this->curVec->SetVx(0);
-	this->curVec->SetVy(0);
+	this->curVec->SetVy(10.0f);
 	this->lastVec->SetVx(1.0f);
 }
 
@@ -63,8 +71,39 @@ void MainCharacter::Reset(float x, float y)
 	this->curPos->SetPosY(y);
 }
 
-void MainCharacter::Update(float t)
+void MainCharacter::Update(float t, vector<Object*> *collisionObjects)
 {
+
+	Object::Update(t);
+
+	// Gỉa bộ rơi xuống
+	this->curVec->SetVy(this->curVec->GetVy() + 20.0f * t);
+	
+	vector<CollisionEvent *> *coEvents = new vector<CollisionEvent*>();
+	vector<CollisionEvent*> *coEventsResult = new vector<CollisionEvent*>();
+
+	coEvents->clear();
+
+	this->CalcPotentialCollisions(collisionObjects, coEvents);
+
+	if (coEvents->size() == 0) {
+		this->curPos->Add(this->deltaPosX, this->deltaPosY);
+	}
+	else {
+		float minTx, minTy, nx = 0, ny;
+		this->FilterCollision(coEvents, coEventsResult, minTx, minTy, nx, ny);
+
+		this->curPos->Add(minTx*this->deltaPosX + nx * 0.4f, minTy*this->deltaPosY + ny * 0.4f);
+
+		if (nx != 0) this->curVec->SetVx(0);
+		if (ny != 0)  this->curVec->SetVy(0);
+
+	}
+
+	for (UINT i = 0; i < coEvents->size(); i++) {
+		delete coEvents->at(i);
+	}
+
 	DWORD now = GetTickCount();
 	if (now - lastTime > 1000 / ANIMATE_RATE)
 	{
