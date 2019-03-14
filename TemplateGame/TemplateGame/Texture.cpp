@@ -1,7 +1,7 @@
 #include "Texture.h"
 
 Texture::Texture() {
-	this->transColor = D3DCOLOR_ARGB(255, 255, 255, 255);
+	this->transColor = D3DCOLOR_ARGB(255, 255, 163, 177);
 }
 
 Texture::~Texture() {
