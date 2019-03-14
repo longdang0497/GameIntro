@@ -15,33 +15,25 @@ MainCharacter::MainCharacter(LPD3DXSPRITE spriteHandler)
 
 MainCharacter::~MainCharacter()
 {
-	delete(this->standSprite);
-	delete(this->runSprite);
 }
 
 // Khởi tạo Sprite với texture có sẵn (texture ở đây là một hình chứa tất cả các sprite ở trong đó)
-void MainCharacter::InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 texture)
-{
-	if(d3ddv == NULL) return;
-
-	this->standSprite = new Sprite(this->spriteHandler, texture, MAIN_STAND_PATH, MAIN_STAND_COUNT, MAIN_STAND_WIDTH, MAIN_STAND_HEIGHT);
-	this->runSprite = new Sprite(this->spriteHandler, texture, MAIN_RUN_PATH, MAIN_RUN_COUNT, MAIN_RUN_WIDTH, MAIN_RUN_HEIGHT);
-}
+//void MainCharacter::InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 texture)
+//{
+//	if(d3ddv == NULL) return;
+//
+//	//this->standSprite = new Sprite(this->spriteHandler, texture, MAIN_STAND_PATH, MAIN_STAND_COUNT, MAIN_STAND_WIDTH, MAIN_STAND_HEIGHT);
+//	//this->runSprite = new Sprite(this->spriteHandler, texture, MAIN_RUN_PATH, MAIN_RUN_COUNT, MAIN_RUN_WIDTH, MAIN_RUN_HEIGHT);
+//}
 
 // Khởi tạo vị trí ban đầu cho main
 void MainCharacter::InitPostition()
 {
-	this->curPos->SetPosX(300);
-	this->curPos->SetPosY(300);
+	this->curPos->SetPosX(50);
+	this->curPos->SetPosY(50);
 	this->curVec->SetVx(0);
 	this->curVec->SetVy(0);
 	this->lastVec->SetVx(1.0f);
-}
-
-void MainCharacter::ResetAllSprites()
-{
-	this->standSprite->Reset();
-	this->runSprite->Reset();
 }
 
 bool MainCharacter::GetStateActive()
@@ -65,16 +57,19 @@ void MainCharacter::Reset(float x, float y)
 
 void MainCharacter::Update(float t)
 {
+	this->curPos->SetPosX(this->curPos->GetPosX() + this->curVec->GetVx() * t);
+	this->curPos->SetPosY(this->curPos->GetPosY() + this->curVec->GetVy() * t);
+
 	DWORD now = GetTickCount();
 	if (now - lastTime > 1000 / ANIMATE_RATE)
 	{
 		switch (state)
 		{
 		case STAND_RIGHT: case STAND_LEFT:
-			this->standSprite->UpdateSprite();
+			//this->standSprite->UpdateSprite();
 			break;
 		case RUN_RIGHT: case RUN_LEFT:
-			this->runSprite->UpdateSprite();
+			//this->runSprite->UpdateSprite();
 			break;
 		}
 		lastTime = now;
@@ -98,16 +93,16 @@ void MainCharacter::Render()
 		switch (state)
 		{
 		case STAND_RIGHT:
-			this->standSprite->DrawSprite(position, true);
+			this->animations[0]->Render(position);
 			break;
 		case STAND_LEFT:
-			this->standSprite->DrawSprite(position, false);
+			//this->standSprite->DrawSprite(position, false);
 			break;
 		case RUN_RIGHT:
-			this->runSprite->DrawSprite(position, true);
+			//this->runSprite->DrawSprite(position, true);
 			break;
 		case RUN_LEFT:
-			this->runSprite->DrawSprite(position, false);
+			//this->runSprite->DrawSprite(position, false);
 			break;
 		}
 

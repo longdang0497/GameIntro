@@ -1,7 +1,7 @@
 #include "Texture.h"
 
 Texture::Texture() {
-	this->transColor = D3DCOLOR_ARGB(255, 255, 255, 255);
+	this->transColor = D3DCOLOR_ARGB(255, 255, 163, 177);
 }
 
 Texture::~Texture() {
@@ -30,7 +30,7 @@ LPDIRECT3DTEXTURE9 Texture::LoadTexture(LPDIRECT3DDEVICE9 d3ddev, LPCWSTR fileNa
 		D3DPOOL_DEFAULT,
 		D3DX_DEFAULT,
 		D3DX_DEFAULT,
-		transColor,
+		this->transColor,
 		&infoOfTexture,
 		NULL,
 		&texture);

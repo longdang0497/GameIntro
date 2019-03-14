@@ -1,5 +1,5 @@
 ﻿#include "Object.h"
-
+//#include "CSprites.h"
 
 
 Object::Object()
@@ -148,6 +148,12 @@ void Object::Init(float posX, float posY)
 	this->curPos->SetPosX(posX);
 	this->curPos->SetPosY(posY);
 	this->isActive = true;
+}
+
+void Object::AddAnimation(int aniId)
+{
+	CAnimation * ani = CAnimations::GetInstance()->Get(aniId);
+	animations.push_back(ani);
 }
 
 // Get/Set methods

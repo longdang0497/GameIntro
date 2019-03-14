@@ -1,13 +1,4 @@
 ﻿#include "World.h"
-#include "World.h"
-#include "World.h"
-#include "World.h"
-#include "World.h"
-#include "World.h"
-#include "World.h"
-#include "World.h"
-#include "World.h"
-
 
 World::World()
 {
@@ -38,6 +29,65 @@ void World::RenderObjects()
 	this->gameCharacter->Render();
 }
 
+vector<D3DXVECTOR2> World::ReadCoord(LPCWSTR filePath, int count)
+{
+	vector<D3DXVECTOR2> tempVector;
+	tempVector.resize(count);
+
+	// Đọc thông tin file
+	fstream f;
+	try
+	{
+		f.open(filePath);
+	}
+	catch (fstream::failure e)
+	{
+		trace(L"Error when Init Sprite %s", filePath);
+	}
+
+	string line;
+	int id = 0;
+	while (!f.eof() && id < count) {
+		getline(f, line);
+
+		string splitString;
+
+		istringstream iss(line);
+
+		vector<int> tempCoord;
+
+		while (getline(iss, splitString, '\t'))
+		{
+			tempCoord.push_back(stoi(splitString));
+		}
+
+		tempVector[id].x = tempCoord[0];
+		tempVector[id].y = tempCoord[1];
+
+		//	this->spritePositions->push_back(tempVector);
+		id++;
+	}
+
+	trace(L"Done Init Sprite %s", filePath);
+	f.close();
+
+	return tempVector;
+}
+
+//RECT * World::ReadCurrentSpritePosition()
+//{
+//	RECT * rect = new RECT();
+//	vector<int>* tempVector = this->spritePositions->at(this->index);
+//
+//	// Giá trị đầu tiên là x, giá trị thứ 2 là y
+//	rect->left = tempVector->at(0);
+//	rect->top = tempVector->at(1);
+//	rect->right = rect->left + this->width;
+//	rect->bottom = rect->top + this->height;
+//
+//	return rect;
+//}
+
 // Khởi tạo SpriteHandler, Map và Grid
 void World::LoadResources(LPDIRECT3DDEVICE9 device)
 {
@@ -64,7 +114,29 @@ void World::InitSprite(LPDIRECT3DDEVICE9 device)
 
 	// Start: Insert code here
 	LPDIRECT3DTEXTURE9 gameTexture = this->texture->LoadTexture(device, TEXTURE_GAME_CHARACTERS);
-	this->gameCharacter->InitSprites(device, gameTexture);
+	//this->gameCharacter->InitSprites(device, gameTexture);
+
+	CSprites * sprites = CSprites::GetInstance();
+	CAnimations * animations = CAnimations::GetInstance();
+
+	//MAIN_STAND
+	spriteCoord = ReadCoord(MAIN_STAND_PATH, MAIN_STAND_COUNT);
+	int id = 10001;
+	LPANIMATION ani;
+	ani = new CAnimation(100);	// stand
+
+	for (int i = 0; i < spriteCoord.size(); i++)
+	{
+		sprites->Add(id + i, spriteCoord[i], MAIN_STAND_WIDTH, MAIN_STAND_HEIGHT, gameTexture, this->spriteHandler);
+		ani->Add(id);
+		animations->Add(400, ani, true);
+
+		gameCharacter->AddAnimation(400);		// stand
+	}
+
+	spriteCoord.clear();
+
+
 	// End: Insert Code above
 
 	this->texture = nullptr;

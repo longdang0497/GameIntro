@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CSprites.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="DXGraphics.cpp" />
     <ClCompile Include="Grid.cpp" />
@@ -148,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CSprites.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="DXGraphics.h" />
     <ClInclude Include="GameDefine.h" />
@@ -171,13 +173,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Log\trace.log" />
-    <Text Include="sprite\RUNNING_LEFT.txt" />
-    <Text Include="sprite\RUNNING_RIGHT.txt" />
-    <Text Include="sprite\STANDING_LEFT.txt" />
-    <Text Include="sprite\STANDING_RIGHT.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="sprite\samus_sprites.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

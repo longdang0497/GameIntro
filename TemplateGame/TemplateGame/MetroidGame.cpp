@@ -12,6 +12,8 @@ MetroidGame::MetroidGame(HINSTANCE hInstance, LPCWSTR nameOfGame, int mode, bool
 	this->deviceManager = new DeviceManager(this->dxGraphics);
 
 	this->gameMode = GAME_MODE_RUN;
+	//LPDIRECT3DDEVICE9 d3ddv = this->deviceManager->GetDevice();
+	//this->spriteHandler->GetDevice(&d3ddv);
 
 	this->world = new World(this->deviceManager->GetDevice());
 }
@@ -76,6 +78,13 @@ void MetroidGame::GameRun()
 
 	}
 }
+
+//MetroidGame * MetroidGame::GetInstance()
+//{
+//	if (instance == NULL) 
+//		instance = new MetroidGame();
+//	return instance;
+//}
 
 // Mặc định
 void MetroidGame::CheckKey()
@@ -189,12 +198,12 @@ void MetroidGame::ProcessInput(LPDIRECT3DDEVICE9, float)
 	{
 		if (world->GetMainCharacter()->GetState() == RUN_RIGHT)
 		{
-			world->GetMainCharacter()->ResetAllSprites();
+			//world->GetMainCharacter()->ResetAllSprites();
 			world->GetMainCharacter()->SetState(STAND_RIGHT);
 		}		
 		if (world->GetMainCharacter()->GetState() == RUN_LEFT)
 		{
-			world->GetMainCharacter()->ResetAllSprites();
+			//world->GetMainCharacter()->ResetAllSprites();
 			world->GetMainCharacter()->SetState(STAND_LEFT);
 		}
 		

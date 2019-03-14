@@ -13,6 +13,7 @@ private:
 	LPD3DXSPRITE spriteHandler;
 	Texture* texture;
 	MainCharacter * gameCharacter;
+	vector<D3DXVECTOR2> spriteCoord; // Dùng để lưu lại tọa độ của sprite
 
 	void LoadResources(LPDIRECT3DDEVICE9);
 	void InitSprite(LPDIRECT3DDEVICE9);
@@ -25,10 +26,14 @@ public:
 	void UpdateObjects(float deltaTime);
 	void RenderObjects();
 
+	vector<D3DXVECTOR2> ReadCoord(LPCWSTR filePath, int count);
+	//RECT * ReadCurrentSpritePosition();
+
 	void SetGrid(Grid* grid);
 	Grid* GetGrid();
 	void SetTexture(Texture* texture);
 	Texture* GetTexture();
 	MainCharacter* GetMainCharacter();
+	//LPD3DXSPRITE GetSpriteHandler() { return this->spriteHandler; }
 };
 

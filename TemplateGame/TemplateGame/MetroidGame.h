@@ -12,13 +12,15 @@
 class MetroidGame
 {
 private:
+	//static MetroidGame * instance;
+
 	DWORD deltaTime;	// Thời gian giữa frame hiện tại và frame trước đó đã được vẽ ra
 	Input *input;		// Quản lý input
 	DXGraphics *dxGraphics;		// Quản lý đồ họa
 	DeviceManager *deviceManager;		// Quản lý thiết bị
-	World *world;
+	World * world;
 	GAME_MODE gameMode;
-
+	//LPD3DXSPRITE spriteHandler;			  // Dung de xu ly xuat hien sprite dua vao texture
 
 	void UpdateBelongToGameMode(float deltaTime);
 	void UpdateObjects(float deltaTime);
@@ -37,6 +39,7 @@ public:
 	~MetroidGame();
 
 	void GameRun();
-
+	//World * GetWorld();
+	//static MetroidGame * GetInstance();
 };
 

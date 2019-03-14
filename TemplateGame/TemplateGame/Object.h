@@ -3,6 +3,10 @@
 #include "ObjectVelocity.h"
 #include <d3dx9.h>
 #include <iostream>
+#include "Sprite.h"
+#include "CSprites.h"
+
+//class CAnimation;
 
 class Object
 {
@@ -22,7 +26,7 @@ protected:
 	bool isActive;					// Biến để xác định Object có đang hoạt động hay không
 	DWORD lastTime;					// Cái này để điều khiển được tỉ lệ animate của object
 	D3DXVECTOR2 rigidBody;			// Cái này đùng để điều khiển camera
-
+	vector<LPANIMATION> animations;
 public:
 	Object();
 	~Object();
@@ -34,7 +38,7 @@ public:
 	virtual void Init(float posX, float posY);
 
 	// Khởi tạo Sprite cho Object
-	virtual void InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 texture) = 0;
+	//virtual void InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 texture) = 0;
 
 	// Phải update thông tin của Object trước rồi mới render lên lại màn hình
 	virtual void Update(float deltaTime) = 0;
@@ -45,6 +49,8 @@ public:
 
 	// Phương thức này dùng để xử lý va chạm giữa các Object với nhau
 	virtual bool handleCollision(Object *otherObject) = 0;
+
+	void AddAnimation(int aniId);
 
 	void SetObjectType(OBJECT_TYPE objectType);
 	void SetIsActive(bool isActive);
