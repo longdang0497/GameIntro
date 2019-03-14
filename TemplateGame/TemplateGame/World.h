@@ -3,9 +3,18 @@
 #include "DXGraphics.h"
 #include "Texture.h"
 #include "MainCharacter.h"
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include "trace.h"
+#include <vector>
 
 // Class này dùng để quản lý các object của thế giới Game
 // Bao gồm Map, Sprite, Main, Enemy, Grid, ...
+
+using namespace std; 
+
 class World
 {
 private:

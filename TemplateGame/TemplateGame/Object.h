@@ -3,10 +3,7 @@
 #include "ObjectVelocity.h"
 #include <d3dx9.h>
 #include <iostream>
-#include "Sprite.h"
 #include "CSprites.h"
-
-//class CAnimation;
 
 class Object
 {

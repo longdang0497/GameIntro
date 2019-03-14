@@ -87,9 +87,6 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files\Sprite</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectVelocity.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
@@ -154,9 +151,6 @@
     </ClInclude>
     <ClInclude Include="ObjectVelocity.h">
       <Filter>Header Files\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Header Files\Sprite</Filter>
