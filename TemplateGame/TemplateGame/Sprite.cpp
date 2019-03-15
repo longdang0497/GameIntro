@@ -151,13 +151,13 @@ void Sprite::DrawSprite(D3DXVECTOR3 position, bool flagRight) {
 	D3DXMATRIX mat;
 
 	// Biến này làm cho object quay theo trục X (trục dọc)
-	float tempTurnRight = 2.0f;
+	float tempTurnRight = 1.0f;
 
 	if (!flagRight) {
-		tempTurnRight = -2.0f;
+		tempTurnRight = -1.0f;
 	}
 
-	D3DXVECTOR3 scaling(tempTurnRight, 2.0f, 2.0f);
+	D3DXVECTOR3 scaling(tempTurnRight, 1.0f, 1.0f);
 
 	// out, scaling centre, scaling rotation, scaling, rotation centre, rotation, translation
 	D3DXMatrixTransformation(&mat, &D3DXVECTOR3(width / 2, height / 2, 0), NULL, &scaling, &spriteCentre, NULL, &position);

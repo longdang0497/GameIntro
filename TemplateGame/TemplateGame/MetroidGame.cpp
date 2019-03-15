@@ -166,19 +166,17 @@ void MetroidGame::RenderObjects()
 
 void MetroidGame::ProcessInput(LPDIRECT3DDEVICE9, float)
 {
-	
 	if (input->IsKeyDown(DIK_RIGHT))
 	{
-
+		world->GetMainCharacter()->GetCurVec()->SetVx(CHARACTER_SPEED);
+		world->GetMainCharacter()->SetState(RUN_RIGHT);
 	}
-	else if (input->IsKeyDown(DIK_LEFT))
+	if (input->IsKeyDown(DIK_LEFT))
 	{
-
+		world->GetMainCharacter()->GetCurVec()->SetVx(-CHARACTER_SPEED);
+		world->GetMainCharacter()->SetState(RUN_LEFT);
 	}
-	else
-	{
 
-	}
 }
 
 // Xử lý khi nhấn phím
@@ -186,21 +184,37 @@ void MetroidGame::OnKeyDown(int keyCode)
 {
 	if (input->IsKeyDown(DIK_RIGHT))
 	{
-		world->GetMainCharacter()->GetCurVec()->SetVx(world->GetMainCharacter()->GetCurVec()->GetVx() + CHARACTER_SPEED);
+		world->GetMainCharacter()->GetCurVec()->SetVx(CHARACTER_SPEED);
 		world->GetMainCharacter()->SetState(RUN_RIGHT);
 	}
 	if (input->IsKeyDown(DIK_LEFT))
 	{
-		world->GetMainCharacter()->GetCurVec()->SetVx(world->GetMainCharacter()->GetCurVec()->GetVx() - CHARACTER_SPEED);
+		world->GetMainCharacter()->GetCurVec()->SetVx(-CHARACTER_SPEED);
 		world->GetMainCharacter()->SetState(RUN_LEFT);
 	}
-	else
-		world->GetMainCharacter()->GetCurVec()->SetVx(0);
+	
+	if (input->IsKeyDown(DIK_SPACE)) {
+		world->GetMainCharacter()->SetVeclocity(0, -300.0f);
+	}
+		
 }
 
 // Xử lý khi thả phím ra
 void MetroidGame::OnKeyUp(int keyCode)
 {
+	if (keyCode == DIK_LEFT) {
+		world->GetMainCharacter()->SetVeclocity(0, 0);
+		world->GetMainCharacter()->SetState(STAND_LEFT);
+	}
+
+	if (keyCode == DIK_RIGHT) {
+		world->GetMainCharacter()->SetVeclocity(0, 0);
+		world->GetMainCharacter()->SetState(STAND_RIGHT);
+	}
+
+	if (input->IsKeyDown(DIK_SPACE)) {
+		world->GetMainCharacter()->SetVeclocity(0, 0);
+	}
 }
 
 

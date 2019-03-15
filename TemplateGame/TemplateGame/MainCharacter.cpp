@@ -13,7 +13,7 @@ MainCharacter::MainCharacter(LPD3DXSPRITE spriteHandler)
 	this->spriteHandler = spriteHandler;
 	this->SetState(STAND_RIGHT);
 	this->objectWidth = 32;
-	this->objectHeight = 64;
+	this->objectHeight = 32;
 
 	this->curPos->SetPosX(8 * 32);
 	this->curPos->SetPosY(10);
@@ -77,7 +77,7 @@ void MainCharacter::Update(float t, vector<Object*> *collisionObjects)
 	Object::Update(t);
 
 	// Gỉa bộ rơi xuống
-	this->curVec->SetVy(this->curVec->GetVy() + 20.0f * t);
+	this->curVec->SetVy(this->curVec->GetVy() + 20.0f);
 	
 	vector<CollisionEvent *> *coEvents = new vector<CollisionEvent*>();
 	vector<CollisionEvent*> *coEventsResult = new vector<CollisionEvent*>();
