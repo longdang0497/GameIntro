@@ -43,6 +43,7 @@ void MetroidGame::GameRun()
 					this->input->GetKeyboard()->Acquire();
 				}
 				msg.message = 0;
+				trace(L"Test ");
 			}
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
