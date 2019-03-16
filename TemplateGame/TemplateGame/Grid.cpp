@@ -9,8 +9,8 @@ Grid::Grid()
 
 Grid::Grid(int height, int width)
 {
-	this->numOfRow = (int)ceil((float)height * BRICK_SIZE / CELL_SIZE);
-	this->numOfColumn = (int)ceil((float)width * BRICK_SIZE / CELL_SIZE);
+	this->numOfRow = (int) ceil((float)height * BRICK_SIZE / CELL_SIZE);
+	this->numOfColumn = (int) ceil((float)width * BRICK_SIZE / CELL_SIZE);
 	this->InitObjectForGrid();
 }
 
