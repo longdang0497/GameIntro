@@ -3,8 +3,8 @@
 class World;
 class Grid;
 
-#define ANIMATE_RATE 30
-#define CHARACTER_SPEED 200.0f
+#define ANIMATE_RATE 25
+#define CHARACTER_SPEED 100.0f
 
 // ========== START: OBJECT ============
 #define DEFAULT_OBJECT_WIDTH 42

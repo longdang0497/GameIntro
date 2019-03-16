@@ -25,14 +25,17 @@ World::~World()
 void World::UpdateObjects(float deltaTime)
 {
 	for (UINT i = 0; i < this->objects->size(); i++) {
-		vector<Object*> *collisionObjects = this->grid->GetCollisionObjects(this->objects->at(i));
-		this->objects->at(i)->Update(deltaTime, collisionObjects);
+		if (this->objects->at(i)->GetObjectType() != BRICK) {
+			vector<Object*> *collisionObjects = this->grid->GetCollisionObjects(this->objects->at(i));
+			this->objects->at(i)->Update(deltaTime, collisionObjects);
 
-		for (UINT j = 0; j < collisionObjects->size(); j++) {
-			this->grid->UpdateGrid(collisionObjects->at(j));
+			for (UINT j = 0; j < collisionObjects->size(); j++) {
+				this->grid->UpdateGrid(collisionObjects->at(j));
+			}
+
+			delete collisionObjects;
 		}
 
-		delete collisionObjects;
 	}
 }
 
@@ -136,6 +139,7 @@ void World::InitMap(LPCWSTR path, LPD3DXSPRITE spriteHandler)
 			}
 		}
 	}
+	f.close();
 }
 
 void World::SetGrid(Grid * grid)

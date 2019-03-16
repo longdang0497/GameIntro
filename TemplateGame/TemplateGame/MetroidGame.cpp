@@ -95,14 +95,39 @@ void MetroidGame::RenderFrame()
 	if (result == D3D_OK)
 	{
 		// Clear back buffer with BLACK
-		this->deviceManager->ClearScreen();
+		// this->deviceManager->ClearScreen();
 
 		//if (camera)
 		//{
 		//	camera->SetTransform(_device);
 		//}
 
-		this->RenderBelongToGameMode();
+		LPDIRECT3DSURFACE9 backbuffer = this->deviceManager->GetBackBuffer();
+
+		RECT rect;
+		rect.top = 0;
+		rect.left = 0;
+		rect.right = 600;
+		rect.bottom = 150;
+
+		D3DXLoadSurfaceFromFile(
+			this->deviceManager->GetSurface(),
+			NULL,
+			NULL,
+			L"sprite\\background.png",
+			&rect,
+			D3DX_DEFAULT,
+			0,
+			NULL
+		);
+
+		this->deviceManager->GetDevice()->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &backbuffer);
+
+		this->deviceManager->GetDevice()->StretchRect(this->deviceManager->GetSurface(), NULL, backbuffer, NULL, D3DTEXF_NONE);
+
+
+
+		// this->RenderBelongToGameMode();
 		this->deviceManager->GetDevice()->EndScene();
 	}
 

@@ -6,6 +6,7 @@ DeviceManager::DeviceManager()
 	this->d3d = NULL;
 	this->d3ddv = NULL;
 	this->backBuffer = NULL;
+	this->surface = NULL;
 }
 
 // Khởi tạo thiết bị chạy game
@@ -21,7 +22,7 @@ DeviceManager::DeviceManager(DXGraphics* dxGraphics) {
 	d3dpp.Windowed = TRUE;
 	d3dpp.hDeviceWindow = dxGraphics->GetHwnd();
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-	const auto rs = this->d3d->CreateDevice(
+	this->d3d->CreateDevice(
 		D3DADAPTER_DEFAULT,
 		D3DDEVTYPE_HAL,
 		dxGraphics->GetHwnd(),
@@ -36,12 +37,30 @@ DeviceManager::DeviceManager(DXGraphics* dxGraphics) {
 	}
 
 	this->d3ddv->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &this->backBuffer);
+
+	srand(time(NULL));
+
+	this->ClearScreen();
+
+	// create surface
+	this->d3ddv->CreateOffscreenPlainSurface(
+		640, // width
+		480, // height
+		D3DFMT_X8R8G8B8,
+		D3DPOOL_DEFAULT,
+		&this->surface,
+		NULL
+	);
+
+
 }
 
 DeviceManager::~DeviceManager()
 {
 	if (this->d3ddv != NULL) this->d3ddv->Release();
 	if (this->d3d != NULL) this->d3d->Release();
+	if (this->surface != NULL) this->surface->Release();
+	if (this->backBuffer != NULL) this->backBuffer->Release();
 }
 
 // Xóa màn hình hiện hành

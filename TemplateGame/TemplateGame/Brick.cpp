@@ -18,7 +18,7 @@ Brick::Brick(LPD3DXSPRITE spriteHandler, int index, int x, int y)
 	this->objectWidth = BRICK_SIZE;
 	this->objectHeight = BRICK_SIZE;
 
-	this->SetPosition(x*32.0f, y*32.0f);
+	this->SetPosition(x*BRICK_SIZE, y*BRICK_SIZE);
 	this->SetVeclocity(0, 0);
 }
 

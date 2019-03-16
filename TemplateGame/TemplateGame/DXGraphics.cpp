@@ -29,7 +29,7 @@ void DXGraphics::SetScreenDimension() {
 	switch (this->mode) {
 	case GAME_SCREEN_RESOLUTION_640_480_24:
 		this->screenWidth = 640;
-		this->screenHeight = 480;
+		this->screenHeight = 352;
 		this->depth = 24;
 		break;
 

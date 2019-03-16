@@ -4,7 +4,7 @@
 #define TRACE_LOG_PATH "Log\\trace.log"
 #define DEFAULT_SCREEN_MODE 0
 #define DEFAULT_IS_FULL_SCREEN false
-#define DEFAULT_FRAME_RATE 30
+#define DEFAULT_FRAME_RATE 20
 #define DEFAULT_NAME_OF_GAME L"Game Developer for beginer"
 #define DEFAULT_CAMERA_WIDTH 1
 #define DEFAULT_CAMERA_HEIGHT 1
