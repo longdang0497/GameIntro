@@ -3,6 +3,7 @@
 #include "World.h"
 #include "Define.h"
 #include "Graphic.h"
+#include "MainCharacter.h"
 
 class KeyEventHandler : public Input {
 public:
@@ -10,7 +11,6 @@ public:
 	virtual void OnKeyDown(int KeyCode);
 	virtual void OnKeyUp(int KeyCode);
 };
-
 
 
 class ProcessGame

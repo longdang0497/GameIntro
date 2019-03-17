@@ -1,20 +1,12 @@
 ﻿#include "Object.h"
 
 
-
 Object::Object()
 {
-	this->isActive = true;
-}
-
-Object::Object(LPD3DXSPRITE spriteHandler)
-{
-	this->spriteHandler = spriteHandler;
 	this->isActive = true;
 	this->nextObj = NULL;
 	this->preObj = NULL;
 }
-
 
 Object::~Object()
 {

@@ -5,11 +5,9 @@
 #include "Texture.h"
 #include "Sprite.h"
 #include "Game.h"
+#include "MainCharacter.h"
 
-#define ID_TEXTURE_MAIN 0
-#define PATH_TEXTURE_MAIN L"sprite\\main_character_sprite.png"
-#define PATH_POS_MAIN_STAND L"sprite\\main\\MAIN_STAND.txt"
-#define PATH_POS_MAIN_RUN L"sprite\\main\\MAIN_RUN.txt"
+
 
 class World
 {

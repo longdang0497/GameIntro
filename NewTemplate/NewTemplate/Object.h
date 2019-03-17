@@ -18,7 +18,6 @@ protected:
 	D3DXVECTOR3 lastPos;	// Vị trí trước đó của object
 	D3DXVECTOR3 veclocity;  // Vận tốc của Object
 	OBJECT_TYPE objectType;
-	LPD3DXSPRITE spriteHandler;
 	bool isActive;
 
 	// 2 trường này phục vụ cho Grid
@@ -32,7 +31,6 @@ protected:
 
 public:
 	Object();
-	Object(LPD3DXSPRITE spriteHandler);
 	~Object();
 
 	//Thuật toán AABB
@@ -47,9 +45,6 @@ public:
 	void FilterCollision(vector<CollisionEvent*> *coEvents, vector<CollisionEvent*> *coEventsResult, float &minTx, float &minTy, float &nx, float &ny);
 
 	RECT GetBoundingBox();
-
-	// Khởi tạo Sprite cho Object
-	virtual void InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 texture) = 0;
 
 	// Phải update thông tin của Object trước rồi mới render lên lại màn hình
 	virtual void Update(float deltaTime, std::vector<Object*> *objects = NULL);

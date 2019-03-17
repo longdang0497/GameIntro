@@ -58,7 +58,7 @@ int ProcessGame::GameRun()
 
 void ProcessGame::Update(DWORD dt)
 {
-
+	World::GetInstance()->Update(dt);
 }
 
 void ProcessGame::Render()
@@ -70,40 +70,6 @@ void ProcessGame::Render()
 		Game::GetInstance()->GetSpriteHandler()->Begin(D3DXSPRITE_ALPHABLEND);
 		
 		World::GetInstance()->Render();
-
-		//RECT rect;
-		//rect.top = 0;
-		//rect.left = 0;
-		//rect.right = 600;
-		//rect.bottom = 300;
-
-		//LPDIRECT3DSURFACE9 surface;
-		//LPDIRECT3DSURFACE9 backbuffer = Game::GetInstance()->GetBackBuffer();
-		//// create surface
-		//Game::GetInstance()->GetDirect3DDevice()->CreateOffscreenPlainSurface(
-		//	640, // width
-		//	480, // height
-		//	D3DFMT_X8R8G8B8,
-		//	D3DPOOL_DEFAULT,
-		//	&surface,
-		//	NULL
-		//);
-
-		//D3DXLoadSurfaceFromFile(
-		//	surface,
-		//	NULL,
-		//	NULL,
-		//	L"sprite\\background.png",
-		//	NULL,
-		//	D3DX_DEFAULT,
-		//	0,
-		//	NULL
-		//);
-
-		//Game::GetInstance()->GetDirect3DDevice()->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &backbuffer);
-
-		//Game::GetInstance()->GetDirect3DDevice()->StretchRect(surface, NULL, backbuffer, NULL, D3DTEXF_NONE);
-
 
 		Game::GetInstance()->GetSpriteHandler()->End();
 		d3ddv->EndScene();
@@ -121,9 +87,26 @@ void KeyEventHandler::KeyState(BYTE * states)
 
 void KeyEventHandler::OnKeyDown(int KeyCode)
 {
-	OutputDebugString(L"Nhấn phím");
+	if (Game::GetInstance()->IsKeyDown(DIK_RIGHT)) {
+		MainCharacter::GetInstance()->SetVeclocity(0.2f, 0);
+		MainCharacter::GetInstance()->SetState(RUN_RIGHT);
+	}
+
+	if (Game::GetInstance()->IsKeyDown(DIK_LEFT)) {
+		MainCharacter::GetInstance()->SetVeclocity(-0.2f, 0);
+		MainCharacter::GetInstance()->SetState(RUN_LEFT);
+	}
 }
 
 void KeyEventHandler::OnKeyUp(int KeyCode)
 {
+	if (KeyCode == DIK_RIGHT) {
+		MainCharacter::GetInstance()->SetVeclocity(0, 0);
+		MainCharacter::GetInstance()->SetState(STAND_RIGHT);
+	}
+
+	if (KeyCode == DIK_LEFT) {
+		MainCharacter::GetInstance()->SetVeclocity(0, 0);
+		MainCharacter::GetInstance()->SetState(STAND_LEFT);
+	}
 }
