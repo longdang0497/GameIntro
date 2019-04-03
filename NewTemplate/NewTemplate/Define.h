@@ -1,29 +1,90 @@
-#pragma once
+/*Screen*/
 
-// ========= GAME
-#define GAME_MODE_320_240 0
-#define GAME_MODE_640_480 1
-#define GAME_TITLE L"Ninja Gaiden"
+#define DIRECTINPUT_VERSION 0x0800
 
-// =========== TEXTURE + SPRITE
-#define ID_TEXTURE_MAIN 0
-#define PATH_TEXTURE_MAIN L"sprite\\main_character_sprite.png"
-#define PATH_POS_MAIN_STAND L"sprite\\main\\MAIN_STAND.txt"
-#define PATH_POS_MAIN_RUN L"sprite\\main\\MAIN_RUN.txt"
+#define WINDOW_CLASS_NAME L"CastleVania"
+#define MAIN_WINDOW_TITLE L"CastleVania"
 
-#define ID_TEXTURE_MAP_1 100
-#define PATH_TEXTURE_MAP_1 L"sprite\\background.png"
+#define BACKGROUND_COLOR D3DCOLOR_XRGB(0, 0, 0)
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 300
 
-// ========= OBJECT =========
-enum OBJECT_TYPE {
-	BRICK,
-	MAIN_CHARACTER
-};
+#define MAX_FRAME_RATE 120
 
-// ========== MAIN CHARACTER STATE ==========
-enum MAIN_CHARACTER_STATE {
-	STAND_RIGHT,
-	STAND_LEFT,
-	RUN_RIGHT,
-	RUN_LEFT
-};
+/*Simon*/
+
+
+#define SIMON_WIDTH_STAND		17
+#define SIMON_HEIGHT_STAND	30
+
+#define SIMON_WIDTH_SIT		16
+#define SIMON_HEIGHT_SIT	23
+
+#define LIMIT_SRCEEN_LEFT	10
+#define LIMIT_SRCEEN_RIGHT	590
+#define GROUND_HEIGHT		250
+#define	SIMON_COLOR			D3DCOLOR_XRGB(255, 0, 255)
+
+
+#define SIMON_UNTOUCHABLE_TIME	5000
+
+#define SIMON_WALKING_SPEED		0.1f
+#define SIMON_JUMP_SPEED_Y		0.6f
+#define SIMON_GRAVITY			0.0015f
+#define LIMIT_JUMP_HEIGHT	230
+#define JUMP_FAR			0.1f
+
+#define SIMON_STATE_IDDLE		0
+#define SIMON_STATE_WALK		1
+#define SIMON_STATE_ATTACK		2
+#define SIMON_STATE_SIT			3
+#define SIMON_STATE_JUMP		4
+#define SIMON_STATE_SIT_ATTACK	5
+#define SIMON_STATE_JUMP_TO		6
+#define SIMON_STATE_HURT		7
+#define SIMON_STATE_DIE			8
+#define SIMON_STATE_JUMP_ATTACK 9
+#define SIMON_STATE_JUMP_ATTACK_TO 10
+#define SIMON_STATE_HURT		11
+#define SIMON_STATE_DIE			12
+
+#define SIMON_ANI_IDLE_RIGHT		0
+#define SIMON_ANI_IDLE_LEFT			1
+
+#define SIMON_ANI_WALKING_RIGHT		2
+#define SIMON_ANI_WALKING_LEFT		3
+
+#define SIMON_ANI_ATTACK_RIGHT		8
+#define SIMON_ANI_ATTACK_LEFT		7
+
+#define SIMON_ANI_JUMP_RIGHT		6
+
+#define SIMON_ANI_SIT_RIGHT 		5
+#define SIMON_ANI_SIT_LEFT			4
+
+#define SIMON_ANI_SIT_ATTACK_RIGHT	10
+#define	SIMON_ANI_SIT_ATTACK_LEFT	9
+
+#define SIMON_ANI_JUMP_ATTACK_RIGHT	11
+#define	SIMON_ANI_JUMP_ATTACK_LEFT	12
+
+
+
+/*StaticObject*/
+/*Brick*/
+#define ID_SIMON_TEX	0
+#define ID_BRICK_TEX	1
+#define ID_ENEMY_TEX		2
+
+
+#define SIMON_TEXTURE_PATH L"sprites\\SIMON.png"
+#define STATE1_TXT L"sprites\\state1\\lv1.txt"
+#define STATE1_PNG L"sprites\\state1\\lv1.png"
+#define STATE1_INFOMATION L"sprites\\state1\\lv1info.txt"
+#define ENEMY_TEXTURE_PATH L"sprites\\enemy.png"
+
+
+/*GRID*/
+#define GRID_WIDTH 64
+#define GRID_HEIGHT 32
+

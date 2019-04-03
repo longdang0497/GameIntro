@@ -13,129 +13,138 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Log">
-      <UniqueIdentifier>{a0fc91f7-28f9-410a-a5d6-e764db107368}</UniqueIdentifier>
+    <Filter Include="Grid">
+      <UniqueIdentifier>{da7e6c0a-55d5-47d0-92a0-8e5b7b398c3a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Log">
-      <UniqueIdentifier>{46504c21-7d1b-41ce-8162-313e49a944ba}</UniqueIdentifier>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{7da18f8b-ef8f-44f5-bcc3-0bd4befcb3e3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Framework">
-      <UniqueIdentifier>{ff41abe4-d09d-42f2-9ecf-dd28d8fde60c}</UniqueIdentifier>
+    <Filter Include="Keyboard">
+      <UniqueIdentifier>{2f7da59a-962a-4811-9e13-3940dba46642}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Framework">
-      <UniqueIdentifier>{28fedde8-2907-4170-87a8-db6e69860314}</UniqueIdentifier>
+    <Filter Include="Map">
+      <UniqueIdentifier>{7bb3299c-0ca3-4d70-bb8b-c6949908f875}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Stage">
-      <UniqueIdentifier>{ac530aa9-f3d3-4263-be7a-fc7bf7b50f9d}</UniqueIdentifier>
+    <Filter Include="Object">
+      <UniqueIdentifier>{d23d84f7-19e3-4352-b1c6-ab964176f7d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Stage">
-      <UniqueIdentifier>{3dd96311-5628-4fe9-b152-f15e1ac9e871}</UniqueIdentifier>
+    <Filter Include="MainCharacter">
+      <UniqueIdentifier>{df12b115-2492-4e43-98e8-7b20df1c8b21}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Sprite">
-      <UniqueIdentifier>{b8c679cc-38b8-44d6-bd82-4a133a077e5d}</UniqueIdentifier>
+    <Filter Include="GameScene">
+      <UniqueIdentifier>{1b9e8dc8-52f5-4858-850a-8cc9799057ce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Sprite">
-      <UniqueIdentifier>{b8a15bc9-877d-4c03-8f5b-1077168d033f}</UniqueIdentifier>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{8144b691-61f3-4c79-b841-c78737d22002}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Object">
-      <UniqueIdentifier>{26d76182-a9f9-417c-a498-e3c6494734fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Object">
-      <UniqueIdentifier>{264f28cd-e7e8-4fe3-b1ef-168f83c14f88}</UniqueIdentifier>
+    <Filter Include="Enemy">
+      <UniqueIdentifier>{dbb9fe75-7eb9-4f66-9018-cc3925c8eb1e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="trace.cpp">
-      <Filter>Source Files\Log</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Source Files\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug.cpp">
-      <Filter>Source Files\Log</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage.cpp">
-      <Filter>Source Files\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Source Files\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics.cpp">
-      <Filter>Source Files\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files\Sprite</Filter>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Grid</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Source Files\Framework</Filter>
+      <Filter>Camera</Filter>
     </ClCompile>
-    <ClCompile Include="World.cpp">
-      <Filter>Source Files\Framework</Filter>
+    <ClCompile Include="KeyGame.cpp">
+      <Filter>Keyboard</Filter>
     </ClCompile>
-    <ClCompile Include="ProcessGame.cpp">
-      <Filter>Source Files\Framework</Filter>
+    <ClCompile Include="KeyBoard.cpp">
+      <Filter>Keyboard</Filter>
     </ClCompile>
-    <ClCompile Include="Grid.cpp">
-      <Filter>Source Files\Framework</Filter>
+    <ClCompile Include="Map.cpp">
+      <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="MainCharacter.cpp">
-      <Filter>Source Files\Object</Filter>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Simon.cpp">
+      <Filter>MainCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="Sword.cpp">
+      <Filter>MainCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene1.cpp">
+      <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="debug.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprites.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Textures.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Hunk.cpp">
+      <Filter>Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="trace.h">
-      <Filter>Header Files\Log</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Debug.h">
-      <Filter>Header Files\Log</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage.h">
-      <Filter>Header Files\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Define.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files\Sprite</Filter>
+    <ClInclude Include="Grid.h">
+      <Filter>Grid</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Header Files\Framework</Filter>
+      <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="World.h">
-      <Filter>Header Files\Framework</Filter>
+    <ClInclude Include="KeyBoard.h">
+      <Filter>Keyboard</Filter>
     </ClInclude>
-    <ClInclude Include="ProcessGame.h">
-      <Filter>Header Files\Framework</Filter>
+    <ClInclude Include="KeyGame.h">
+      <Filter>Keyboard</Filter>
     </ClInclude>
-    <ClInclude Include="Grid.h">
-      <Filter>Header Files\Framework</Filter>
+    <ClInclude Include="Map.h">
+      <Filter>Map</Filter>
     </ClInclude>
-    <ClInclude Include="MainCharacter.h">
-      <Filter>Header Files\Object</Filter>
+    <ClInclude Include="Brick.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Simon.h">
+      <Filter>MainCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="Sword.h">
+      <Filter>MainCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene1.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="debug.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprites.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Textures.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Hunk.h">
+      <Filter>Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
