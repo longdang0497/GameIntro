@@ -1,22 +1,39 @@
-#pragma once
-#include <set> 
-#include "Game.h"
-#include "GameObject.h"
+﻿#pragma once
+#include "Object.h"
+#include <cmath>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+#define CELL_SIZE 128
+#define BRICK_SIZE 32
 
 class Grid
 {
-	set<LPGAMEOBJECT>** groundObjects;
-	set<LPGAMEOBJECT> moveObjects;
-	int column;
-	int row;
+private:
+	static Grid* _instance;
+
+	int numOfRow;			// Số dòng của Grid (y)
+	int numOfColumn;		// Số cột của Grid (x)
+	Object ***cells;		// Với 3 tham số truyền vào lần lượt là: Số dòng, số cột, và số chiều sâu
+	float deltaTime;		// deltaTime này là cái số thời gian thực tế mà cái sprite nó được vẽ
+
+	void InitObjectForGrid();
+
+	void PushObjectToVector(std::vector<Object*> * vector, Object* cell);
+
 public:
-	Grid(int column, int row);
+	Grid();
+	Grid(int mapHeight, int mapWidth, bool isArray = true);
 	~Grid();
 
-	void InsertObject(LPGAMEOBJECT object);
-	void LoadObjects(vector<LPGAMEOBJECT>* objects);
-	void GetObjects(vector<LPGAMEOBJECT>* objects);
-	void Update(DWORD dt, vector<LPGAMEOBJECT>* objects);
+	void Add(Object *object);
+	void ReSetGrid(int height, int width, bool isArray = true);
+	vector<Object*>* GetCollisionObjects(Object* object);
+	void UpdateGrid(Object* object);
+
+	static Grid* GetInstance();
+	static Grid* GetInstance(int mapHeight, int mapWidth, bool isArray = true);
 };
 
-typedef Grid* LPGRID;
