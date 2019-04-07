@@ -3,11 +3,9 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
-
+#include "Define.h"
 using namespace std;
 
-#define CELL_SIZE 128
-#define BRICK_SIZE 32
 
 class Grid
 {
@@ -22,7 +20,8 @@ private:
 	void InitObjectForGrid();
 
 	void PushObjectToVector(std::vector<Object*> * vector, Object* cell);
-
+	void DeleteGrid();
+	void InitGrid(int mapHeight, int mapWidth, bool isArray);
 public:
 	Grid();
 	Grid(int mapHeight, int mapWidth, bool isArray = true);

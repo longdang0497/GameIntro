@@ -91,7 +91,13 @@
       <Filter>Source Files\Object</Filter>
     </ClCompile>
     <ClCompile Include="Stage1.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Source Files\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -141,7 +147,13 @@
       <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="Stage1.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

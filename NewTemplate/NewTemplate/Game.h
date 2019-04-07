@@ -6,6 +6,7 @@
 #include "Debug.h"
 #include "Texture.h"
 #include "Sprite.h"
+#include "Define.h"
 
 #define DIRECTINPUT_VERSION 0x0800
 #define KEYBOARD_BUFFER_SIZE 1024
@@ -31,6 +32,7 @@ private:
 	DIDEVICEOBJECTDATA keyEvents[KEYBOARD_BUFFER_SIZE];		// Buffered keyboard data
 
 	Input * keyHandler;
+	GAME_STAGE gameStage;
 
 public:
 	void Init(HWND hWnd);
@@ -45,6 +47,9 @@ public:
 	LPDIRECT3DDEVICE9 GetDirect3DDevice() { return this->d3ddv; }
 	LPDIRECT3DSURFACE9 GetBackBuffer() { return backBuffer; }
 	LPD3DXSPRITE GetSpriteHandler() { return this->spriteHandler; }
+
+	GAME_STAGE GetGameStage() { return this->gameStage; }
+	void SetGameStage(GAME_STAGE gameStage) { this->gameStage = gameStage; }
 
 	static Game * GetInstance() {
 		if (_instance == NULL) _instance = new Game();

@@ -16,9 +16,8 @@ ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 	Texture *texture = Texture::GetInstance();
 	texture->Add(ID_TEXTURE_MAIN, PATH_TEXTURE_MAIN);
 	texture->Add(ID_TEXTURE_MAP_1, PATH_TEXTURE_MAP_1);
-	MainCharacter *main = MainCharacter::GetInstance();
 
-	Stage1 *stage1 = Stage1::GetInstance();
+	Grid* grid = Grid::GetInstance(1, 1, true);
 }
 
 // Các xử lý update và hiển thị nhân vật
@@ -61,7 +60,14 @@ int ProcessGame::GameRun()
 
 void ProcessGame::Update(DWORD dt)
 {
-	Stage1::GetInstance()->Update(dt);
+	switch (Game::GetInstance()->GetGameStage())
+	{
+	case STAGE1:
+		Stage1::GetInstance()->Update(dt);
+		break;
+	default:
+		break;
+	}
 }
 
 void ProcessGame::Render()
@@ -72,7 +78,14 @@ void ProcessGame::Render()
 		d3ddv->ColorFill(Game::GetInstance()->GetBackBuffer(), NULL, D3DCOLOR_XRGB(0, 0, 0));
 		Game::GetInstance()->GetSpriteHandler()->Begin(D3DXSPRITE_ALPHABLEND);
 		
-		Stage1::GetInstance()->Render();
+		switch (Game::GetInstance()->GetGameStage())
+		{
+		case STAGE1:
+			Stage1::GetInstance()->Render();
+			break;
+		default:
+			break;
+		}
 
 		Game::GetInstance()->GetSpriteHandler()->End();
 		d3ddv->EndScene();
@@ -90,6 +103,9 @@ void KeyEventHandler::KeyState(BYTE * states)
 
 void KeyEventHandler::OnKeyDown(int KeyCode)
 {
+	MainCharacter* mainCharacter = MainCharacter::GetInstance();
+	MAIN_CHARACTER_STATE mainState = mainCharacter->GetState();
+
 	if (Game::GetInstance()->IsKeyDown(DIK_RIGHT)) {
 		MainCharacter::GetInstance()->SetVeclocity(0.2f, 0);
 		MainCharacter::GetInstance()->SetState(RUN_RIGHT);
@@ -98,6 +114,18 @@ void KeyEventHandler::OnKeyDown(int KeyCode)
 	if (Game::GetInstance()->IsKeyDown(DIK_LEFT)) {
 		MainCharacter::GetInstance()->SetVeclocity(-0.2f, 0);
 		MainCharacter::GetInstance()->SetState(RUN_LEFT);
+	}
+
+	if (Game::GetInstance()->IsKeyDown(DIK_DOWN)) {
+		if (mainCharacter->GetState() == RUN_RIGHT || mainCharacter->GetState() == STAND_RIGHT) {
+			mainCharacter->SetVeclocity(0, 0);
+			mainCharacter->SetPosition(mainCharacter->GetPosition().x, mainCharacter->GetPosition().y + 10);
+			mainCharacter->SetState(SIT_RIGHT);
+		}
+		else if (mainState == RUN_LEFT || mainState == STAND_LEFT) {
+			mainCharacter->SetVeclocity(0, 0);
+			mainCharacter->SetState(SIT_LEFT);
+		}
 	}
 }
 

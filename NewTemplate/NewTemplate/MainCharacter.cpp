@@ -15,6 +15,8 @@ MainCharacter::MainCharacter()
 
 	this->standSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_POS_MAIN_STAND);
 	this->runSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_POS_MAIN_RUN);
+	this->sitSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_POS_MAIN_SIT);
+	this->jumpScrollSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_POS_MAIN_JUMP_SCROLL);
 }
 
 
@@ -22,6 +24,8 @@ MainCharacter::~MainCharacter()
 {
 	if (this->standSprite != NULL) delete this->standSprite;
 	if (this->runSprite != NULL) delete this->runSprite;
+	if (this->sitSprite != NULL) delete this->sitSprite;
+	if (this->jumpScrollSprite != NULL) delete this->jumpScrollSprite;
 }
 
 
@@ -65,6 +69,8 @@ void MainCharacter::Update(float t, vector<Object*>* object)
 	case RUN_RIGHT: case RUN_LEFT: 
 		this->runSprite->UpdateSprite();
 		break;
+	case SIT_RIGHT: case SIT_LEFT:
+		this->sitSprite->UpdateSprite();
 	default:break;
 	}
 }
@@ -87,6 +93,18 @@ void MainCharacter::Render()
 		break;
 	case RUN_LEFT:
 		this->runSprite->DrawSprite(this->position, false);
+		break;
+	case SIT_RIGHT:
+		this->sitSprite->DrawSprite(this->position, true);
+		break;
+	case SIT_LEFT:
+		this->sitSprite->DrawSprite(this->position, false);
+		break;
+	case JUMP_SCROLL_RIGHT:
+		this->jumpScrollSprite->DrawSprite(this->position, true);
+		break;
+	case JUMP_SCROLL_LEFT:
+		this->jumpScrollSprite->DrawSprite(this->position, false);
 		break;
 	default:break;
 	}

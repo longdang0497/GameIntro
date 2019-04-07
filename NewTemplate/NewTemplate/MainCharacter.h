@@ -16,6 +16,8 @@ private:
 
 	Sprite* standSprite;
 	Sprite* runSprite;
+	Sprite* sitSprite;
+	Sprite* jumpScrollSprite;
 
 public:
 	MainCharacter();

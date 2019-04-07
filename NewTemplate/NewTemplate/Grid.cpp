@@ -10,30 +10,13 @@ Grid::Grid()
 
 Grid::Grid(int mapHeight, int mapWidth, bool isArray)
 {
-	if (isArray) {
-		this->numOfRow = (int)ceil((float)mapHeight * BRICK_SIZE / CELL_SIZE);
-		this->numOfColumn = (int)ceil((float)mapWidth * BRICK_SIZE / CELL_SIZE);
-	}
-	else {
-		this->numOfRow = (int)ceil((float)mapHeight / CELL_SIZE);
-		this->numOfColumn = (int)ceil((float)mapWidth / CELL_SIZE);
-	}
-
-	this->InitObjectForGrid();
+	this->InitGrid(mapHeight, mapWidth, isArray);
 }
 
 Grid::~Grid()
 {
-	for (int row = 0; row < this->numOfRow; row++) {
-		for (int column = 0; column < this->numOfColumn; column++) {
-			delete[] this->cells[row][column];
-		}
-		delete[] this->cells[row];
-	}
-
-	delete[] this->cells;
+	this->DeleteGrid();
 }
-
 
 void Grid::InitObjectForGrid()
 {
@@ -57,6 +40,45 @@ void Grid::PushObjectToVector(std::vector<Object*>* vector, Object * cell)
 	}
 }
 
+void Grid::DeleteGrid()
+{
+	for (int row = 0; row < this->numOfRow; row++) {
+		for (int column = 0; column < this->numOfColumn; column++) {
+			while (this->cells[row][column] != NULL) {
+				Object* temp = this->cells[row][column];
+				this->cells[row][column] = this->cells[row][column]->GetNextObj();
+				this->cells[row][column]->SetPreObj(NULL);
+
+				temp->SetNextObj(NULL);
+
+				if (temp->GetObjectType() != MAIN_CHARACTER) {
+					delete temp;
+				}
+			}
+
+			if(this->cells[row][column] == NULL)
+				delete this->cells[row][column];
+		}
+		delete[] this->cells[row];
+	}
+
+	delete[] this->cells;
+}
+
+void Grid::InitGrid(int mapHeight, int mapWidth, bool isArray)
+{
+	if (isArray) {
+		this->numOfRow = (int)ceil((float)mapHeight * BRICK_SIZE / CELL_SIZE);
+		this->numOfColumn = (int)ceil((float)mapWidth * BRICK_SIZE / CELL_SIZE);
+	}
+	else {
+		this->numOfRow = (int)ceil((float)mapHeight / CELL_SIZE);
+		this->numOfColumn = (int)ceil((float)mapWidth / CELL_SIZE);
+	}
+
+	this->InitObjectForGrid();
+}
+
 
 void Grid::Add(Object * obj)
 {
@@ -78,10 +100,10 @@ void Grid::Add(Object * obj)
 	}
 }
 
-void Grid::ReSetGrid(int width, int height, bool isArray)
+void Grid::ReSetGrid(int height, int width, bool isArray)
 {
-	Grid::~Grid();
-	Grid::Grid(height, width, isArray);
+	this->DeleteGrid();
+	this->InitGrid(height, width, isArray);
 }
 
 vector<Object*>* Grid::GetCollisionObjects(Object * object)
