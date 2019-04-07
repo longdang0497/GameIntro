@@ -19,7 +19,7 @@ private:
 
 	void InitObjectForGrid();
 
-	void PushObjectToVector(std::vector<Object*> * vector, Object* cell);
+	void PushObjectToVector(std::vector<Object*> * vector, Object* cell, Object * obj);
 	void DeleteGrid();
 	void InitGrid(int mapHeight, int mapWidth, bool isArray);
 public:

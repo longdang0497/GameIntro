@@ -70,10 +70,17 @@ void Stage::Update(float deltaTime)
 			vector<Object*>* collisionsObject = Grid::GetInstance()->GetCollisionObjects(this->objects->at(i));
 
 			this->objects->at(i)->Update(deltaTime, collisionsObject);
+
+			for (int j = 0; j < collisionsObject->size(); j++) {
+				Grid::GetInstance()->UpdateGrid(collisionsObject->at(j));
+			}
+
 		}
 		else {
 			this->objects->at(i)->Update(deltaTime, NULL);
 		}
+
+		Grid::GetInstance()->UpdateGrid(this->objects->at(i));
 
 
 	}

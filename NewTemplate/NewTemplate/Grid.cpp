@@ -31,11 +31,13 @@ void Grid::InitObjectForGrid()
 	}
 }
 
-void Grid::PushObjectToVector(std::vector<Object*>* vector, Object * cell)
+void Grid::PushObjectToVector(std::vector<Object*>* vector, Object * cell, Object* obj)
 {
 	while (cell != NULL) {
 
-		vector->push_back(cell);
+		if (cell != obj) {
+			vector->push_back(cell);
+		}
 		cell = cell->GetNextObj();
 	}
 }
@@ -79,7 +81,6 @@ void Grid::InitGrid(int mapHeight, int mapWidth, bool isArray)
 	this->InitObjectForGrid();
 }
 
-
 void Grid::Add(Object * obj)
 {
 	// Lưu lại giá trị cũ của object sau mỗi lần update
@@ -117,35 +118,35 @@ vector<Object*>* Grid::GetCollisionObjects(Object * object)
 	int column = (int)floor(object->GetPosition().x / CELL_SIZE);
 
 	// Lấy object ở cell hiện tại
-	this->PushObjectToVector(objects, this->cells[row][column]);
+	this->PushObjectToVector(objects, this->cells[row][column], object);
 
 	// Lấy các cell ở kế bên
 
 	// Nếu đang đi qua trái
 	if (object->GetVeclocity().x < 0) {
-		if (column > 0) this->PushObjectToVector(objects, this->cells[row][column - 1]); // Bên trái
+		if (column > 0) this->PushObjectToVector(objects, this->cells[row][column - 1], object); // Bên trái
 
-		if (column > 0 && row > 0) this->PushObjectToVector(objects, this->cells[row - 1][column - 1]); // Trái trên
+		if (column > 0 && row > 0) this->PushObjectToVector(objects, this->cells[row - 1][column - 1], object); // Trái trên
 
-		if (column > 0 && row < this->numOfRow - 1) this->PushObjectToVector(objects, this->cells[row + 1][column - 1]); //Trái dưới
+		if (column > 0 && row < this->numOfRow - 1) this->PushObjectToVector(objects, this->cells[row + 1][column - 1], object); //Trái dưới
 	}
 
 	// Nếu đang đi qua phải
 	else {
-		if (column < this->numOfColumn - 1) this->PushObjectToVector(objects, this->cells[row][column + 1]); //Bên phải
+		if (column < this->numOfColumn - 1) this->PushObjectToVector(objects, this->cells[row][column + 1], object); //Bên phải
 
-		if (column < this->numOfColumn - 1 && row > 0) this->PushObjectToVector(objects, this->cells[row - 1][column + 1]); // Phải trên
+		if (column < this->numOfColumn - 1 && row > 0) this->PushObjectToVector(objects, this->cells[row - 1][column + 1], object); // Phải trên
 
-		if (column < this->numOfColumn - 1 && row < this->numOfRow - 1) this->PushObjectToVector(objects, this->cells[row + 1][column + 1]); // Phải dưới
+		if (column < this->numOfColumn - 1 && row < this->numOfRow - 1) this->PushObjectToVector(objects, this->cells[row + 1][column + 1], object); // Phải dưới
 	}
 
 	// Nếu đang đi lên
 	if (object->GetVeclocity().y < 0) {
-		if (row > 0) this->PushObjectToVector(objects, this->cells[row - 1][column]);
+		if (row > 0) this->PushObjectToVector(objects, this->cells[row - 1][column], object);
 	}
 	// Nếu đang đi xuống
 	else {
-		if (row < this->numOfRow - 1) this->PushObjectToVector(objects, this->cells[row + 1][column]);
+		if (row < this->numOfRow - 1) this->PushObjectToVector(objects, this->cells[row + 1][column], object);
 	}
 
 	return objects;

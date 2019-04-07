@@ -35,7 +35,7 @@ void Object::SweptAABB(Object * obj, float dx, float dy, float & collisionTime, 
 	float movingLeft = movingRect.left;
 	float movingRight = movingRect.right;
 
-	RECT staticRect = this->GetBoundingBox();
+	RECT staticRect = obj->GetBoundingBox();
 	float staticTop = staticRect.top;
 	float staticBottom = staticRect.bottom;
 	float staticLeft = staticRect.left;
@@ -127,9 +127,10 @@ CollisionEvent * Object::GetCollsionObjectsBySweptAABB(Object * obj)
 void Object::CalcPotentialCollisions(vector<Object*>* objects, vector<CollisionEvent*>* coEvents)
 {
 	for (UINT i = 0; i < objects->size(); i++) {
+
 		CollisionEvent* coEvent = this->GetCollsionObjectsBySweptAABB(objects->at(i));
 
-		if (coEvent->GetCollisionTime() > 0 && coEvent->GetCollisionTime() <= 1.0f)
+		if (coEvent->GetCollisionTime() >= 0 && coEvent->GetCollisionTime() <= 1.0f)
 			coEvents->push_back(coEvent);
 		else
 			delete coEvent;
