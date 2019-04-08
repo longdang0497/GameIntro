@@ -1,0 +1,82 @@
+﻿  Brick.cpp
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\brick.cpp(6): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Camera.cpp
+  Game.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\game.h(11): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\game.cpp(76): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\game.cpp(84): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+  Graphics.cpp
+  Grid.cpp
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\grid.cpp(91): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\grid.cpp(92): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\grid.cpp(158): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\grid.cpp(159): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\grid.cpp(161): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\grid.cpp(162): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Main.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\game.h(11): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+  MainCharacter.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\game.h(11): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\maincharacter.cpp(68): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\maincharacter.cpp(97): warning C4018: '<': signed/unsigned mismatch
+  Map.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\game.h(11): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\map.cpp(36): warning C4018: '<': signed/unsigned mismatch
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\map.cpp(48): warning C4018: '<': signed/unsigned mismatch
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\map.cpp(49): warning C4018: '<': signed/unsigned mismatch
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\map.cpp(51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Object.cpp
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\object.cpp(33): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\object.cpp(34): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\object.cpp(35): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\object.cpp(36): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\object.cpp(39): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\object.cpp(40): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\object.cpp(41): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\object.cpp(42): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\object.cpp(177): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\object.cpp(178): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+  ProcessGame.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\game.h(11): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\processgame.cpp(66): warning C4244: 'argument': conversion from 'DWORD' to 'float', possible loss of data
+  Sprite.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\game.h(11): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\sprite.cpp(20): warning C4018: '<': signed/unsigned mismatch
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\sprite.cpp(90): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+  Stage.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\game.h(11): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\stage.cpp(15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\stage.cpp(41): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\stage.cpp(67): warning C4018: '<': signed/unsigned mismatch
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\stage.cpp(74): warning C4018: '<': signed/unsigned mismatch
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\stage.cpp(91): warning C4018: '<': signed/unsigned mismatch
+  Stage1.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\game.h(11): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\stage1.cpp(42): warning C4018: '<': signed/unsigned mismatch
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\stage1.cpp(48): warning C4018: '<': signed/unsigned mismatch
+  Texture.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\game.h(11): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+  World.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\gameintro\newtemplate\newtemplate\game.h(11): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+  Generating Code...
+  NewTemplate.vcxproj -> C:\Users\Long Dang\Documents\Github\GameIntro\GameIntro\NewTemplate\Debug\NewTemplate.exe
