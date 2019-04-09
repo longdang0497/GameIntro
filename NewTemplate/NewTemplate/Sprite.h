@@ -22,6 +22,11 @@ private:
 	int height;
 	int index;
 
+	bool isDone;
+
+	DWORD time;
+	DWORD lastFrameTime;
+
 	void SetSpritePositions(LPCWSTR filePath);
 
 public:
@@ -32,5 +37,10 @@ public:
 	void DrawSprite(D3DXVECTOR3 position, bool flagRight);	//draw multi sprites
 	RECT ReadCurrentSpritePosition();
 	void Reset();
+
+	DWORD GetTime() { return time; }
+
+	bool getDone() { return this->isDone; }
+	void setDone(bool a) { this->isDone = a; }
 };
 

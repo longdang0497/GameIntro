@@ -13,6 +13,7 @@ Sprite::Sprite(LPDIRECT3DTEXTURE9 texture, LPCWSTR filePath)
 	this->spritePositions = new vector<vector<int>*>();
 
 	this->SetSpritePositions(filePath);
+	isDone = false;
 }
 
 Sprite::~Sprite()
@@ -61,7 +62,27 @@ void Sprite::SetSpritePositions(LPCWSTR filePath)
 
 void Sprite::UpdateSprite()
 {
-	this->index = (this->index + 1) % this->spritePositions->size();
+	DWORD now = GetTickCount();
+	if (this->index == -1)
+	{
+		this->index = 0;
+		lastFrameTime = now;
+	}
+	else
+	{
+		DWORD t =this->GetTime();
+		if (now - lastFrameTime > 100)
+		{
+			lastFrameTime = now;
+			if (this->index == this->spritePositions->size()-1)
+			{
+				isDone = true;
+				this->index = 0;
+			}
+			else this->index = (this->index + 1) % this->spritePositions->size();
+		}
+	}
+	
 }
 
 void Sprite::DrawSprite(D3DXVECTOR3 position, bool flagRight)

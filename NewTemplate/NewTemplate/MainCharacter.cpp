@@ -4,21 +4,26 @@ MainCharacter* MainCharacter::_instance = NULL;
 
 MainCharacter::MainCharacter()
 {
+	this->standSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_STAND);
+	this->runSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_RUN);
+	this->sitSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_SIT);
+	this->jumpScrollSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_JUMP_SCROLL);
+	this->hitSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_STAND_KILL);
+	this->jumpHitSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_JUMP_SCROLL_KILL);
+	this->sitHitSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_SIT_KILL);
+
 	this->SetObjectType(MAIN_CHARACTER);
-	this->SetState(STAND_RIGHT);
+	this->SetState(STATE_IDLE);
 
 	this->objectWidth = 20;
 	this->objectHeight = 31;
 
 	this->SetPosition(10, 10);
 	this->SetVeclocity(0, 0);
+	this->SetDirection(1); //Right
+	this->isOnGround = false;
 
-	this->standSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_STAND);
-	this->runSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_RUN);
-	this->sitSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_SIT);
-	this->jumpScrollSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_JUMP_SCROLL);
 }
-
 
 MainCharacter::~MainCharacter()
 {
@@ -28,7 +33,6 @@ MainCharacter::~MainCharacter()
 	if (this->jumpScrollSprite != NULL) delete this->jumpScrollSprite;
 }
 
-
 MAIN_CHARACTER_STATE MainCharacter::GetState()
 {
 	return this->state;
@@ -37,6 +41,47 @@ MAIN_CHARACTER_STATE MainCharacter::GetState()
 void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 {
 	this->state = value;
+
+	switch (this->state)
+	{
+	case STATE_IDLE:
+		SetVx(0);
+		currentSprite = standSprite;
+		break;
+	case STATE_WALK:
+		SetVx(MAIN_WALK_PACE*direction);
+		currentSprite = runSprite;
+		break;
+	case STATE_SIT:
+		SetVx(0);
+		currentSprite = sitSprite;
+		break;
+	case STATE_JUMP:
+		SetVeclocity(0, -MAIN_JUMP_SPEED_Y);
+		currentSprite = jumpScrollSprite;
+		break;
+	case STATE_JUMP_TO:
+		SetVx(MAIN_WALK_PACE*direction);
+		break;
+	case STATE_ATTACK:
+		SetVx(0);
+		currentSprite = hitSprite;
+		break;
+
+	case STATE_SIT_ATTACK:
+		SetVx(0);
+		currentSprite = sitHitSprite;
+		break;
+	case STATE_JUMP_ATTACK:
+		currentSprite = jumpHitSprite;
+		break;
+	case STATE_JUMP_ATTACK_TO:
+		SetVx(MAIN_WALK_PACE*direction);
+		currentSprite = jumpHitSprite;
+		break;
+
+	default:break;
+	}
 }
 
 void MainCharacter::ResetAllSprites()
@@ -65,33 +110,61 @@ void MainCharacter::Update(float t, vector<Object*>* object)
 	Object::Update(t);
 
 	// simple fall down
-	this->veclocity.y += 0.0002*t;
+	
+
+	if (GetState() == STATE_ATTACK)
+	{
+		if (hitSprite->getDone())
+		{
+			hitSprite->setDone(false);
+			SetState(STATE_IDLE);
+		}
+	}
+	if (GetState() == STATE_SIT_ATTACK)
+	{
+		if (sitHitSprite->getDone())
+		{
+			sitHitSprite->setDone(false);
+			SetState(STATE_SIT);
+		}
+	}
+	this->veclocity.y += 0.0015f *t;
+	KeyBoardHandle();
+	currentSprite->UpdateSprite();
+
 
 	vector<CollisionEvent*> *coEvents = new vector<CollisionEvent*>();
 	vector<CollisionEvent*> *coEventsResult = new vector<CollisionEvent*>();
 
 	coEvents->clear();
 
-	if (this->veclocity.y > 0 && this->deltaY > 0)
-		int i = 0;
-
 	this->CalcPotentialCollisions(object, coEvents);
-
-	if (this->position.x > 544)
-		int i = 0;
 
 	if (coEvents->size() == 0) {
 		this->PlusPosition(this->deltaX, this->deltaY);
+		isOnGround = false;
 	}
 	else {
+		isOnGround = true;
 		float minTx, minTy, nX = 0, nY;
 
 		this->FilterCollision(coEvents, coEventsResult, minTx, minTy, nX, nY);
 
-		this->PlusPosition(minTx*this->deltaX + nX * 0.4f, minTy*this->deltaY + nY * 0.4f);
+		this->PlusPosition(minTx*this->deltaX + nX * 0.1f, minTy*this->deltaY + nY * 0.1f);
 
-		if (nX != 0) this->veclocity.x = 0;
-		if (nY != 0) this->veclocity.y = 0;
+		if (nX != 0)
+		{
+			this->veclocity.x = 0;
+		}
+		if (nY != 0)
+		{
+			this->veclocity.y = 0;
+		
+			if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_HURT)
+			{
+				SetState(STATE_IDLE);
+			}
+		}
 	}
 
 	for (int i = 0; i < coEvents->size(); i++)
@@ -100,51 +173,112 @@ void MainCharacter::Update(float t, vector<Object*>* object)
 
 	delete coEventsResult;
 
-	switch (this->state) {
-	case STAND_RIGHT: case STAND_LEFT:
-		this->standSprite->UpdateSprite();
-		break;
-	case RUN_RIGHT: case RUN_LEFT: 
-		this->runSprite->UpdateSprite();
-		break;
-	case SIT_RIGHT: case SIT_LEFT:
-		this->sitSprite->UpdateSprite();
-	default:break;
-	}
+
+
 }
 
 void MainCharacter::Render()
 {
-
 	this->position.z = 0;
-
-	switch (this->state) {
-	case STAND_RIGHT:
-		this->standSprite->DrawSprite(this->position, true);
-		break;
-
-	case STAND_LEFT:
-		this->standSprite->DrawSprite(this->position, false);
-		break;
-	case RUN_RIGHT:
-		this->runSprite->DrawSprite(this->position, true);
-		break;
-	case RUN_LEFT:
-		this->runSprite->DrawSprite(this->position, false);
-		break;
-	case SIT_RIGHT:
-		this->sitSprite->DrawSprite(this->position, true);
-		break;
-	case SIT_LEFT:
-		this->sitSprite->DrawSprite(this->position, false);
-		break;
-	case JUMP_SCROLL_RIGHT:
-		this->jumpScrollSprite->DrawSprite(this->position, true);
-		break;
-	case JUMP_SCROLL_LEFT:
-		this->jumpScrollSprite->DrawSprite(this->position, false);
-		break;
-	default:break;
-	}
+	if (direction == 1)
+		this->currentSprite->DrawSprite(this->position, true);
+	else
+		this->currentSprite->DrawSprite(this->position, false);
+	
 }
 
+void MainCharacter::KeyBoardHandle()
+{
+	CKeyGame* k = CKeyGame::getInstance();
+
+	if (isOnGround)
+	{
+		if (k->keyJump && (GetState() != STATE_JUMP || GetState() != STATE_JUMP_TO))
+		{
+			SetState( STATE_JUMP);
+			isOnGround = false;
+		}
+		else if (k->keyAttack)
+		{
+			if (k->keyDown)
+			{
+				SetState( STATE_SIT_ATTACK);
+			}
+			else
+			{
+				SetState( STATE_ATTACK);
+			}
+		}
+		else if (k->keyDown && state !=  STATE_SIT_ATTACK)
+		{
+			SetState( STATE_SIT);
+
+			if (k->keyLeft)
+				direction = -1;
+			else if (k->keyRight)
+				direction = 1;
+		}
+		else if (k->keyRight && GetState() !=  STATE_SIT && GetState() !=  STATE_SIT_ATTACK && GetState() !=  STATE_ATTACK && GetState() !=  STATE_HURT)
+		{
+			direction = 1;
+			SetState( STATE_WALK);
+		}
+		else if (k->keyLeft  && GetState() !=  STATE_SIT && GetState() !=  STATE_SIT_ATTACK && GetState() !=  STATE_ATTACK && GetState() !=  STATE_HURT)
+		{
+			direction = -1;
+			SetState( STATE_WALK);
+		}
+		else if (k->keyAttack)
+		{
+			if (k->keyDown)
+			{
+				SetState( STATE_SIT_ATTACK);
+			}
+			else
+			{
+				SetState( STATE_ATTACK);
+			}
+		}
+		else if (k->keyDown && state !=  STATE_SIT_ATTACK)
+		{
+			SetState( STATE_SIT);
+
+			if (k->keyLeft)
+				direction = -1;
+			else if (k->keyRight)
+				direction = 1;
+		}
+		else if (GetState() !=  STATE_ATTACK && GetState() !=  STATE_SIT_ATTACK)
+		{
+			SetState( STATE_IDLE);
+			isOnGround = true;
+		}
+	}
+	else
+	{
+		if (k->keyAttack)
+		{
+			if (GetState() ==  STATE_JUMP)
+				SetState( STATE_JUMP_ATTACK);
+			else if (GetState() ==  STATE_JUMP_TO)
+				SetState( STATE_JUMP_ATTACK_TO);
+		}
+
+		if (k->keyLeft && (GetState() ==  STATE_JUMP || GetState() ==  STATE_JUMP_ATTACK))
+		{
+			direction = -1;
+			if (GetState() ==  STATE_JUMP)
+				SetState( STATE_JUMP_TO);
+			else
+				SetState( STATE_JUMP_ATTACK_TO);
+		}
+		else if (k->keyRight && (GetState() ==  STATE_JUMP || GetState() ==  STATE_JUMP_ATTACK))
+		{
+			direction = 1;
+			if (GetState() ==  STATE_JUMP)
+				SetState( STATE_JUMP_TO);
+			else
+				SetState( STATE_JUMP_ATTACK_TO);
+		}
+	}
+}

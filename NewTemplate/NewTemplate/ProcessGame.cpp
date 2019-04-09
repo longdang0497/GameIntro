@@ -5,13 +5,16 @@ ProcessGame *ProcessGame::_instance = NULL;
 ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 {
 	Graphic *graphic = Graphic::GetInstance(hInstance, nShowCmd, GAME_TITLE, GAME_MODE_640_480);
-	
 
 	Game *game = Game::GetInstance();
+
 	game->Init(graphic->GetHWnd());
+
+	CKeyBoard::Create(hInstance, graphic->GetHWnd());
 	
-	this->keyHandler = new KeyEventHandler();
-	game->InitKeyboard(this->keyHandler);
+	
+	/*this->keyHandler = new KeyEventHandler();
+	game->InitKeyboard(this->keyHandler);*/
 
 	Texture *texture = Texture::GetInstance();
 	texture->Add(ID_TEXTURE_MAIN, PATH_TEXTURE_MAIN);
@@ -38,6 +41,9 @@ int ProcessGame::GameRun()
 		}
 
 		DWORD now = GetTickCount();
+		CKeyBoard::getInstance()->PollKeyboard();
+		CKeyBoard::getInstance()->UpdateKeyboard();
+		CKeyGame::getInstance()->update();
 
 		// dt: the time between (beginning of last frame) and now
 		DWORD deltaTime = now - frameStart;
@@ -46,7 +52,7 @@ int ProcessGame::GameRun()
 		{
 			frameStart = now;
 
-			Game::GetInstance()->ProcessKeyboard();
+			//Game::GetInstance()->ProcessKeyboard();
 
 			this->Update(deltaTime);
 			this->Render();
@@ -103,35 +109,35 @@ void KeyEventHandler::KeyState(BYTE * states)
 
 void KeyEventHandler::OnKeyDown(int KeyCode)
 {
-	MainCharacter* mainCharacter = MainCharacter::GetInstance();
-	MAIN_CHARACTER_STATE mainState = mainCharacter->GetState();
-
-	if (Game::GetInstance()->IsKeyDown(DIK_RIGHT)) {
-		MainCharacter::GetInstance()->SetVeclocity(0.2f, 0);
-		MainCharacter::GetInstance()->SetState(RUN_RIGHT);
-	}
-
-	if (Game::GetInstance()->IsKeyDown(DIK_LEFT)) {
-		MainCharacter::GetInstance()->SetVeclocity(-0.2f, 0);
-		MainCharacter::GetInstance()->SetState(RUN_LEFT);
-	}
-
-	if (Game::GetInstance()->IsKeyDown(DIK_DOWN)) {
-		if (mainCharacter->GetState() == RUN_RIGHT || mainCharacter->GetState() == STAND_RIGHT) {
-			mainCharacter->SetVeclocity(0, 0);
-			mainCharacter->SetPosition(mainCharacter->GetPosition().x, mainCharacter->GetPosition().y + 10);
-			mainCharacter->SetState(SIT_RIGHT);
-		}
-		else if (mainState == RUN_LEFT || mainState == STAND_LEFT) {
-			mainCharacter->SetVeclocity(0, 0);
-			mainCharacter->SetState(SIT_LEFT);
-		}
-	}
+//	MainCharacter* mainCharacter = MainCharacter::GetInstance();
+//	MAIN_CHARACTER_STATE mainState = mainCharacter->GetState();
+//
+//	if (Game::GetInstance()->IsKeyDown(DIK_RIGHT)) {
+//		MainCharacter::GetInstance()->SetVeclocity(0.2f, 0);
+//		MainCharacter::GetInstance()->SetState(RUN_RIGHT);
+//	}
+//
+//	if (Game::GetInstance()->IsKeyDown(DIK_LEFT)) {
+//		MainCharacter::GetInstance()->SetVeclocity(-0.2f, 0);
+//		MainCharacter::GetInstance()->SetState(RUN_LEFT);
+//	}
+//
+//	if (Game::GetInstance()->IsKeyDown(DIK_DOWN)) {
+//		if (mainCharacter->GetState() == RUN_RIGHT || mainCharacter->GetState() == STAND_RIGHT) {
+//			mainCharacter->SetVeclocity(0, 0);
+//			mainCharacter->SetPosition(mainCharacter->GetPosition().x, mainCharacter->GetPosition().y + 10);
+//			mainCharacter->SetState(SIT_RIGHT);
+//		}
+//		else if (mainState == RUN_LEFT || mainState == STAND_LEFT) {
+//			mainCharacter->SetVeclocity(0, 0);
+//			mainCharacter->SetState(SIT_LEFT);
+//		}
+//	}
 }
 
 void KeyEventHandler::OnKeyUp(int KeyCode)
 {
-	if (KeyCode == DIK_RIGHT) {
+	/*if (KeyCode == DIK_RIGHT) {
 		MainCharacter::GetInstance()->SetVeclocity(0, 0);
 		MainCharacter::GetInstance()->SetState(STAND_RIGHT);
 	}
@@ -139,5 +145,5 @@ void KeyEventHandler::OnKeyUp(int KeyCode)
 	if (KeyCode == DIK_LEFT) {
 		MainCharacter::GetInstance()->SetVeclocity(0, 0);
 		MainCharacter::GetInstance()->SetState(STAND_LEFT);
-	}
+	}*/
 }

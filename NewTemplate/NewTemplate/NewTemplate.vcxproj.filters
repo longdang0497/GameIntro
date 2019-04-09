@@ -43,6 +43,12 @@
     <Filter Include="Source Files\Object">
       <UniqueIdentifier>{264f28cd-e7e8-4fe3-b1ef-168f83c14f88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\KeyBoard">
+      <UniqueIdentifier>{85ec4d48-21dc-4e2a-958f-2f1677ff53f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\KeyBoard">
+      <UniqueIdentifier>{82a13663-67c7-4a8d-98bd-f1a66a3486a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -99,6 +105,12 @@
     <ClCompile Include="Brick.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
+    <ClCompile Include="KeyBoard.cpp">
+      <Filter>Source Files\KeyBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyGame.cpp">
+      <Filter>Source Files\KeyBoard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="trace.h">
@@ -154,6 +166,12 @@
     </ClInclude>
     <ClInclude Include="Brick.h">
       <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyBoard.h">
+      <Filter>Header Files\KeyBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyGame.h">
+      <Filter>Header Files\KeyBoard</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@
 #include "Graphic.h"
 #include "MainCharacter.h"
 #include "Stage1.h"
+#include "KeyGame.h"
 
 class KeyEventHandler : public Input {
 public:
