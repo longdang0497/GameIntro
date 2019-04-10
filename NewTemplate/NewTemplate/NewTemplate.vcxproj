@@ -138,6 +138,7 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Stage1.cpp" />
+    <ClCompile Include="Sword.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="trace.cpp" />
     <ClCompile Include="World.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Stage1.h" />
+    <ClInclude Include="Sword.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="trace.h" />
     <ClInclude Include="World.h" />

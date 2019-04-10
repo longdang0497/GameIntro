@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include "Define.h"
+#include "Game.h"
 
 using namespace std;
 
@@ -31,12 +32,18 @@ protected:
 
 	int direction;
 
+
+	Sprite* currentSprite;
+
 public:
 	Object();
 	~Object();
 
 	//Thuật toán AABB
 	bool checkAABB(Object* obj);
+
+	CollisionEvent* SweptAABBEx(Object* coO);
+
 
 	// Thuật toán SweptAABB
 	void SweptAABB(Object* obj, float deltaX, float deltaY, float &collisionTime, float &nx, float& ny);
@@ -46,7 +53,9 @@ public:
 	void CalcPotentialCollisions(vector<Object*> *objects, vector<CollisionEvent*> *coEvents);
 	void FilterCollision(vector<CollisionEvent*> *coEvents, vector<CollisionEvent*> *coEventsResult, float &minTx, float &minTy, float &nx, float &ny);
 
-	RECT GetBoundingBox();
+	virtual void GetBoundingBox(float &l, float &t, float &r, float &b) = 0;
+	
+	void RenderBoundingBox();
 
 	// Phải update thông tin của Object trước rồi mới render lên lại màn hình
 	virtual void Update(float deltaTime, std::vector<Object*> *objects = NULL);
@@ -81,30 +90,16 @@ public:
 	int GetDirection() { return this->direction; }
 };
 
-// Class này quản lý các vật có khả năng va chạm với Object đang xét
-// Thông số nx, ny này dùng để xác định đc phần nào va chạm trc rồi lùi cái frame lại cho nó khỏi bị chồng lên nhau (nếu trường hợp xét khi di chuyển)
-class CollisionEvent
+
+struct CollisionEvent
 {
-private:
 	Object* obj;
-	float collisionTime, nx, ny;
-public:
-	CollisionEvent(float collisionTime, float nx, float ny, Object* obj = NULL);
-	~CollisionEvent();
+	float t, nx, ny;
 
-	static bool Compare(const CollisionEvent* a, const CollisionEvent *b) {
-		return a->collisionTime < b->collisionTime;
-	}
+	CollisionEvent(float t, float nx, float ny, Object* obj = NULL) { this->t = t; this->nx = nx; this->ny = ny; this->obj = obj; }
 
-	float GetCollisionTime() {
-		return this->collisionTime;
-	}
-
-	float GetNx() {
-		return this->nx;
-	}
-
-	float GetNy() {
-		return this->ny;
+	static bool compare(const CollisionEvent* a, CollisionEvent *b)
+	{
+		return a->t < b->t;
 	}
 };

@@ -10,5 +10,7 @@ public:
 
 	void Update(float deltaTime, vector<Object*> *object = NULL);
 	void Render();
+
+	void GetBoundingBox(float &l, float &t, float &r, float &b);
 };
 

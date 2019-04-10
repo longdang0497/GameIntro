@@ -19,6 +19,8 @@ ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 	Texture *texture = Texture::GetInstance();
 	texture->Add(ID_TEXTURE_MAIN, PATH_TEXTURE_MAIN);
 	texture->Add(ID_TEXTURE_MAP_1, PATH_TEXTURE_MAP_1);
+	texture->Add(ID_BB, PATH_BB);
+
 
 	Grid* grid = Grid::GetInstance(1, 1, true);
 }

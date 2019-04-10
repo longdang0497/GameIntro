@@ -33,6 +33,8 @@ enum COLLISION_DIRECTION {
 #define PATH_MAIN_JUMP_SCROLL L"sprite\\main\\MAIN_JUMP_SCROLL.txt"
 #define PATH_MAIN_JUMP_SCROLL_KILL L"sprite\\main\\MAIN_JUMP_SCROLL_KILL.txt"
 
+#define PATH_MAIN_SWORD L"sprite\\main\\MAIN_SWORD.txt"
+
 #define PATH_SANDGLASS L"sprite\\item\\SANDGLASS.txt"
 #define PATH_SHURIKEN L"sprite\\item\\BIG_SHURIKEN.txt"
 #define PATH_BLUE_POCKET L"sprite\\item\\BLUE_POCKET.txt"
@@ -67,11 +69,15 @@ enum COLLISION_DIRECTION {
 #define PATH_ZOMBIES_WALK L"sprite\\enemies\\ZOMBIES_WALK.txt"
 #define PATH_ZOMBIES_SWORD L"sprite\\enemies\\ZOMBIES_SWORD.txt"
 
+
 #define ID_TEXTURE_MAP_1 100
 #define PATH_TEXTURE_MAP_1 L"sprite\\Stage1\\texture.png"
 #define PATH_POS_MAP_1 L"sprite\\Stage1\\map.txt"
 #define PATH_POS_GROUND_MAP_1 "sprite\\Stage1\\ground.txt"
 
+
+#define ID_BB 1
+#define PATH_BB L"sprite\\bb.png"
 
 
 #define MAIN_WALK_PACE 0.1f

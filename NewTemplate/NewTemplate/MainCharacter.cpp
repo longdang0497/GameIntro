@@ -31,6 +31,9 @@ MainCharacter::~MainCharacter()
 	if (this->runSprite != NULL) delete this->runSprite;
 	if (this->sitSprite != NULL) delete this->sitSprite;
 	if (this->jumpScrollSprite != NULL) delete this->jumpScrollSprite;
+	if (this->hitSprite != NULL) delete this->hitSprite;
+	if (this->jumpHitSprite != NULL) delete this->jumpHitSprite;
+	if (this->sitHitSprite != NULL) delete this->sitHitSprite;
 }
 
 MAIN_CHARACTER_STATE MainCharacter::GetState()
@@ -64,11 +67,24 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 		SetVx(MAIN_WALK_PACE*direction);
 		break;
 	case STATE_ATTACK:
+		Sword::GetInstance()->setIsActive(true);
+		Sword::GetInstance()->SetDirection(direction);
+		if(direction == 1)
+			Sword::GetInstance()->SetPosition(position.x +18 , position.y+3);
+		else
+			Sword::GetInstance()->SetPosition(position.x -25, position.y+3);
+		Sword::GetInstance()->CalCulatePosition();
 		SetVx(0);
 		currentSprite = hitSprite;
 		break;
 
 	case STATE_SIT_ATTACK:
+		Sword::GetInstance()->setIsActive(true);
+		Sword::GetInstance()->SetDirection(direction);
+		if (direction == 1)
+			Sword::GetInstance()->SetPosition(position.x + 18, position.y + 10);
+		else
+			Sword::GetInstance()->SetPosition(position.x - 26, position.y + 10);
 		SetVx(0);
 		currentSprite = sitHitSprite;
 		break;
@@ -110,7 +126,7 @@ void MainCharacter::Update(float t, vector<Object*>* object)
 	Object::Update(t);
 
 	// simple fall down
-	
+	Sword::GetInstance()->Update(t,object);
 
 	if (GetState() == STATE_ATTACK)
 	{
@@ -179,12 +195,15 @@ void MainCharacter::Update(float t, vector<Object*>* object)
 
 void MainCharacter::Render()
 {
+	//RenderBoundingBox();
 	this->position.z = 0;
 	if (direction == 1)
 		this->currentSprite->DrawSprite(this->position, true);
 	else
 		this->currentSprite->DrawSprite(this->position, false);
 	
+	Sword::GetInstance()->Render();
+
 }
 
 void MainCharacter::KeyBoardHandle()
@@ -280,5 +299,47 @@ void MainCharacter::KeyBoardHandle()
 			else
 				SetState( STATE_JUMP_ATTACK_TO);
 		}
+	}
+}
+
+void MainCharacter::GetBoundingBox(float &l, float &t, float &r, float &b)
+{
+	if (state == STATE_SIT)
+	{
+		l = position.x;
+		t = position.y + 7;
+		r = position.x + 17;
+		b = position.y + 31;
+	}
+	else if (state == STATE_JUMP || state == STATE_JUMP_TO)
+	{
+		if (currentSprite->GetIndex() % 2 == 0)
+		{
+			l = position.x;
+			t = position.y;
+			r = position.x + 17;
+			b = position.y + 31;
+		}
+		else
+		{
+			l = position.x;
+			t = position.y + 9;
+			r = position.x + 21;
+			b = position.y + 31;
+		}
+	}
+	else if (state == STATE_SIT_ATTACK)
+	{
+		l = position.x;
+		t = position.y + 8;
+		r = position.x + 17;
+		b = position.y + 31;
+	}
+	else
+	{
+		l = position.x;
+		t = position.y;
+		r = position.x + 17;
+		b = position.y + 31;
 	}
 }

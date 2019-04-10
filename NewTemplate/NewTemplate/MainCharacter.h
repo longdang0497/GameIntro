@@ -4,6 +4,7 @@
 #include "Texture.h"
 #include "Define.h"
 #include "KeyGame.h"
+#include "Sword.h"
 
 #define DEFAULT_MAIN_WIDTH 32
 #define DEFAULT_MAIN_HEIGHT 32
@@ -25,7 +26,6 @@ private:
 	Sprite* jumpHitSprite;
 	Sprite* sitHitSprite;
 
-	Sprite* currentSprite;
 
 public:
 	MainCharacter();
@@ -48,5 +48,7 @@ public:
 	}
 
 	void KeyBoardHandle();
+
+	void GetBoundingBox(float &l, float &t, float &r, float &b);
 };
 

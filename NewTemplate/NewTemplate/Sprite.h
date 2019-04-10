@@ -42,5 +42,7 @@ public:
 
 	bool getDone() { return this->isDone; }
 	void setDone(bool a) { this->isDone = a; }
+
+	int GetIndex() { return this->index; }
 };
 

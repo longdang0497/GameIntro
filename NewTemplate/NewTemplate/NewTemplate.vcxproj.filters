@@ -111,6 +111,9 @@
     <ClCompile Include="KeyGame.cpp">
       <Filter>Source Files\KeyBoard</Filter>
     </ClCompile>
+    <ClCompile Include="Sword.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="trace.h">
@@ -172,6 +175,9 @@
     </ClInclude>
     <ClInclude Include="KeyGame.h">
       <Filter>Header Files\KeyBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="Sword.h">
+      <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
