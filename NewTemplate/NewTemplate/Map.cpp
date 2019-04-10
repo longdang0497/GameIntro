@@ -48,16 +48,16 @@ void Map::drawMap()
 	D3DXVECTOR2 camposition = Camera::GetInstance()->getPosition();
 
 	int top, left, right, bottom;
-	for (int i = 0; i < 200 / 16; i++)
-		for (int j = 0; j < 640 / 16 + 1; j++)
+	for (int i = 0; i < 200 / tileHeight; i++)
+		for (int j = 0; j < 640 / tileWidth + 1; j++)
 		{
-			int a = i + camposition.y / 16;
-			int b = j + camposition.x / 16;
-			left = (list->at(a)->at(b) % numOfColumnTileSet)*16;
-			top = (list->at(a)->at(b) / numOfColumnTileSet)*16;
-			right = left + 16;
-			bottom = top + 16;
-			Game::GetInstance()->Draw(j*16 - (int)camposition.x % 16, i*16 - (int)camposition.y % 16, texture, left, top, right, bottom);
+			int a = i + camposition.y / tileWidth;
+			int b = j + camposition.x / tileHeight;
+			left = (list->at(a)->at(b) % numOfColumnTileSet)*tileWidth;
+			top = (list->at(a)->at(b) / numOfColumnTileSet)*tileHeight;
+			right = left + tileWidth;
+			bottom = top + tileHeight;
+			Game::GetInstance()->Draw(j*tileWidth - (int)camposition.x % tileWidth, i*tileHeight - (int)camposition.y % tileHeight, texture, left, top, right, bottom);
 		}
 
 	/*for (int i = 0; i < this->list->size(); i++) {

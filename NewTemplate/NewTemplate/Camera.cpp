@@ -5,6 +5,7 @@ Camera* Camera::_instance = NULL;
 Camera::Camera()
 {
 	cameraPosition = { 0,0 };
+	worldBoundary = 2000;
 }
 
 
@@ -33,6 +34,6 @@ void Camera::Update(D3DXVECTOR3 simonPosition)
 	cameraPosition = { simonPosition.x - 640 / 2,cameraPosition.y };
 	if (cameraPosition.x < 0)
 		cameraPosition = { 0 ,cameraPosition.y };
-	if (cameraPosition.x + 640 > 2048)
-		cameraPosition = { 2048 - 640,cameraPosition.y };
+	if (cameraPosition.x + 640 > worldBoundary)
+		cameraPosition = { worldBoundary - 640,cameraPosition.y };
 }

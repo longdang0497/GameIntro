@@ -10,6 +10,8 @@ class Camera
 	static Camera * _instance;
 
 	D3DXVECTOR2 cameraPosition;
+
+	float worldBoundary;
 public:
 	Camera();
 
@@ -25,5 +27,7 @@ public:
 		if (_instance == NULL) _instance = new Camera();
 		return _instance;
 	}
+
+	void setWorldBoundary(float a) { this->worldBoundary = a; }
 };
 
