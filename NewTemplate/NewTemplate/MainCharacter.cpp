@@ -197,10 +197,13 @@ void MainCharacter::Render()
 {
 	//RenderBoundingBox();
 	this->position.z = 0;
+
+	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
+
 	if (direction == 1)
-		this->currentSprite->DrawSprite(this->position, true);
+		this->currentSprite->DrawSprite(pos, true);
 	else
-		this->currentSprite->DrawSprite(this->position, false);
+		this->currentSprite->DrawSprite(pos, false);
 	
 	Sword::GetInstance()->Render();
 

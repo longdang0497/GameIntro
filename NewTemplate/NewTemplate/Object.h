@@ -5,6 +5,7 @@
 #include <algorithm>
 #include "Define.h"
 #include "Game.h"
+#include "Camera.h"
 
 using namespace std;
 

@@ -30,18 +30,18 @@ void Sword::Update(float t, vector<Object*> *object)
 void Sword::Render()
 {
 	//RenderBoundingBox();
+	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
+
 	if (isActive)
 	{
 
 		if (direction == 1)
 		{
-			currentSprite->DrawSprite(position, true); 
+			currentSprite->DrawSprite(pos, true); 
 		}
 		else
 		{
-			//if (currentSprite->GetIndex() == 2)
-			//	position.x += 2;
-			currentSprite->DrawSprite(position, false);
+			currentSprite->DrawSprite(pos, false);
 		}
 
 	}

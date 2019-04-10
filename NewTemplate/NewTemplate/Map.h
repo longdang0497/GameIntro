@@ -7,6 +7,9 @@
 #include "Texture.h"
 #include "Define.h"
 #include "Game.h"
+#include "Camera.h"
+
+
 class Map
 {
 private:

@@ -3,6 +3,7 @@
 #include "Define.h"
 #include "Map.h"
 #include "Brick.h"
+
 class Stage1 : public Stage
 {
 private:

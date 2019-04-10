@@ -9,6 +9,7 @@
 #include "MainCharacter.h"
 #include "Define.h"
 #include "Grid.h"
+#include "Camera.h"
 class Stage
 {
 protected:

@@ -4,6 +4,7 @@ Stage::Stage()
 {
 	this->objects = new vector<Object*>();
 	this->bricks = new vector<RECT>();
+
 }
 
 Stage::~Stage()
@@ -81,9 +82,9 @@ void Stage::Update(float deltaTime)
 		}
 
 		Grid::GetInstance()->UpdateGrid(this->objects->at(i));
-
-
 	}
+
+	Camera::GetInstance()->Update(MainCharacter::GetInstance()->GetPosition());
 }
 
 void Stage::Render()

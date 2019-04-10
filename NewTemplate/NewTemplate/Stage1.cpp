@@ -5,7 +5,10 @@ Stage1* Stage1::_instance = NULL;
 Stage1::Stage1()
 {
 	Grid::GetInstance()->ReSetGrid(STAGE1_HEIGHT, STAGE1_WIDTH, false);
+	
 	this->LoadResource();
+
+	Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
 }
 
 

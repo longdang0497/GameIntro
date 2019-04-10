@@ -7,15 +7,23 @@
 
 class Camera
 {
+	static Camera * _instance;
+
 	D3DXVECTOR2 cameraPosition;
 public:
 	Camera();
 
-	void Update(D3DXVECTOR2 simonPosition);
-	D3DXVECTOR2 transformObjectPosition(D3DXVECTOR2 objectPosition);
+	void Update(D3DXVECTOR3 simonPosition);
+	D3DXVECTOR3 transformObjectPosition(D3DXVECTOR3 objectPosition);
 
 	D3DXVECTOR2 getPosition() { return cameraPosition; }
+	void setPosition(D3DXVECTOR2 a) { this->cameraPosition = a; }
 
 	~Camera();
+
+	static Camera* GetInstance() {
+		if (_instance == NULL) _instance = new Camera();
+		return _instance;
+	}
 };
 
