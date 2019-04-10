@@ -33,7 +33,6 @@ protected:
 
 	int direction;
 
-
 	Sprite* currentSprite;
 
 public:

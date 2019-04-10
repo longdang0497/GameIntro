@@ -44,5 +44,7 @@ public:
 	void setDone(bool a) { this->isDone = a; }
 
 	int GetIndex() { return this->index; }
+
+	void GetBoundingBox(int &width, int &height) { width = this->width; height = this->height; }
 };
 

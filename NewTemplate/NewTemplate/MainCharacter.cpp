@@ -98,6 +98,11 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 
 	default:break;
 	}
+
+	int width, height;
+	this->currentSprite->GetBoundingBox(width, height);
+
+	this->SetBoundingBox(width, height);
 }
 
 void MainCharacter::ResetAllSprites()
@@ -125,7 +130,6 @@ void MainCharacter::Update(float t, vector<Object*>* object)
 	
 	Object::Update(t);
 
-	// simple fall down
 	Sword::GetInstance()->Update(t,object);
 
 	if (GetState() == STATE_ATTACK)
@@ -147,7 +151,6 @@ void MainCharacter::Update(float t, vector<Object*>* object)
 	this->veclocity.y += 0.0015f *t;
 	KeyBoardHandle();
 	currentSprite->UpdateSprite();
-
 
 	vector<CollisionEvent*> *coEvents = new vector<CollisionEvent*>();
 	vector<CollisionEvent*> *coEventsResult = new vector<CollisionEvent*>();
@@ -188,13 +191,13 @@ void MainCharacter::Update(float t, vector<Object*>* object)
 	delete coEvents;
 
 	delete coEventsResult;
-
-
-
 }
 
 void MainCharacter::Render()
 {
+
+	if (this->position.y < 32)
+		return;
 	//RenderBoundingBox();
 	this->position.z = 0;
 

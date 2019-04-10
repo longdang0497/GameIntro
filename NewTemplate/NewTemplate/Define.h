@@ -80,7 +80,7 @@ enum COLLISION_DIRECTION {
 #define PATH_BB L"sprite\\bb.png"
 
 
-#define MAIN_WALK_PACE 0.1f
+#define MAIN_WALK_PACE 0.15f
 #define MAIN_JUMP_SPEED_Y 0.45f
 
 // ========= OBJECT =========
