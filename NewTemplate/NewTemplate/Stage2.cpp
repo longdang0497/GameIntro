@@ -5,11 +5,8 @@ Stage2* Stage2::_instance = NULL;
 Stage2::Stage2()
 {
 	Grid::GetInstance()->ReSetGrid(STAGE2_HEIGHT, STAGE2_WIDTH, false);
-
+	MainCharacter::GetInstance()->SetPosition(988, 150);
 	this->LoadResource();
-
-	MainCharacter::GetInstance()->SetPosition(988, 0);
-
 	//Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
 
 	Camera::GetInstance()->setWorldBoundary(3072);

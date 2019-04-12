@@ -60,6 +60,7 @@ public:
 	// Phải update thông tin của Object trước rồi mới render lên lại màn hình
 	virtual void Update(float deltaTime, std::vector<Object*> *objects = NULL);
 	virtual void Render() = 0;
+	virtual void HandleCollision(vector<Object*> *objects) = 0;
 
 	D3DXVECTOR3 GetVeclocity() { return this->veclocity; }
 	void SetVeclocity(float vx, float vy) {this->veclocity.x = vx;this->veclocity.y = vy;}

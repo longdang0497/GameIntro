@@ -118,41 +118,28 @@ void KeyEventHandler::KeyState(BYTE * states)
 
 void KeyEventHandler::OnKeyDown(int KeyCode)
 {
-//	MainCharacter* mainCharacter = MainCharacter::GetInstance();
-//	MAIN_CHARACTER_STATE mainState = mainCharacter->GetState();
-//
-//	if (Game::GetInstance()->IsKeyDown(DIK_RIGHT)) {
-//		MainCharacter::GetInstance()->SetVeclocity(0.2f, 0);
-//		MainCharacter::GetInstance()->SetState(RUN_RIGHT);
-//	}
-//
-//	if (Game::GetInstance()->IsKeyDown(DIK_LEFT)) {
-//		MainCharacter::GetInstance()->SetVeclocity(-0.2f, 0);
-//		MainCharacter::GetInstance()->SetState(RUN_LEFT);
-//	}
-//
-//	if (Game::GetInstance()->IsKeyDown(DIK_DOWN)) {
-//		if (mainCharacter->GetState() == RUN_RIGHT || mainCharacter->GetState() == STAND_RIGHT) {
-//			mainCharacter->SetVeclocity(0, 0);
-//			mainCharacter->SetPosition(mainCharacter->GetPosition().x, mainCharacter->GetPosition().y + 10);
-//			mainCharacter->SetState(SIT_RIGHT);
-//		}
-//		else if (mainState == RUN_LEFT || mainState == STAND_LEFT) {
-//			mainCharacter->SetVeclocity(0, 0);
-//			mainCharacter->SetState(SIT_LEFT);
-//		}
-//	}
+	//MainCharacter* mainCharacter = MainCharacter::GetInstance();
+	//MAIN_CHARACTER_STATE mainState = mainCharacter->GetState();
+
+	//if (Game::GetInstance()->IsKeyDown(DIK_RIGHT)) {
+	//	MainCharacter::GetInstance()->SetVeclocity(0.2f, 0);
+	//	
+	//}
+
+	//if (Game::GetInstance()->IsKeyDown(DIK_LEFT)) {
+	//	MainCharacter::GetInstance()->SetVeclocity(-0.2f, 0);
+	//	
+	//}
+
 }
 
 void KeyEventHandler::OnKeyUp(int KeyCode)
 {
-	/*if (KeyCode == DIK_RIGHT) {
-		MainCharacter::GetInstance()->SetVeclocity(0, 0);
-		MainCharacter::GetInstance()->SetState(STAND_RIGHT);
-	}
+	//if (KeyCode == DIK_RIGHT) {
+	//	MainCharacter::GetInstance()->SetVeclocity(0, 0);
+	//}
 
-	if (KeyCode == DIK_LEFT) {
-		MainCharacter::GetInstance()->SetVeclocity(0, 0);
-		MainCharacter::GetInstance()->SetState(STAND_LEFT);
-	}*/
+	//if (KeyCode == DIK_LEFT) {
+	//	MainCharacter::GetInstance()->SetVeclocity(0, 0);
+	//}
 }

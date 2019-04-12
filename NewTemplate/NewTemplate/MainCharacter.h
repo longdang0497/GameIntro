@@ -6,7 +6,8 @@
 #include "KeyGame.h"
 #include "Sword.h"
 #include "Camera.h"
-
+#include "Brick.h"
+#include "Ladder.h"
 
 #define DEFAULT_MAIN_WIDTH 32
 #define DEFAULT_MAIN_HEIGHT 32
@@ -44,6 +45,7 @@ public:
 	void Reset(float  x, float y);
 	void Update(float t, vector<Object*> *object = NULL);
 	void Render();
+	void HandleCollision(vector<Object*> *objects);
 
 	static MainCharacter* GetInstance() {
 		if (_instance == NULL) _instance = new MainCharacter();
@@ -54,9 +56,9 @@ public:
 
 	void GetBoundingBox(float &l, float &t, float &r, float &b);
 
-	void CheckCollisionWithGround(vector<Object*>* object = NULL);
+	void CheckCollisionWithGround(Brick *brick);
 	void CheckCollisionWithOtherObject(vector<Object*>* object = NULL);
-	void CheckCollisionWithLadder(vector<Object*>* object = NULL);
+	void CheckCollisionWithLadder(Ladder *ladder);
 
 };
 

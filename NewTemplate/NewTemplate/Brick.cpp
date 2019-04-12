@@ -23,6 +23,10 @@ void Brick::Render()
 	//RenderBoundingBox();
 }
 
+void Brick::HandleCollision(vector<Object*>* objects)
+{
+}
+
 void Brick::GetBoundingBox(float &l, float &t, float &r, float &b)
 {
 	l = position.x;

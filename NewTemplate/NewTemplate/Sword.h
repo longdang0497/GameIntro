@@ -17,7 +17,7 @@ public:
 
 	void Update(float t, vector<Object*> *object = NULL);
 	void Render();
-
+	void HandleCollision(vector<Object*> *objects);
 	void CalCulatePosition();
 
 	static Sword* GetInstance() {

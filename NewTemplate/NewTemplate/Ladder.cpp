@@ -23,6 +23,10 @@ void Ladder::Render()
 	RenderBoundingBox();
 }
 
+void Ladder::HandleCollision(vector<Object*>* objects)
+{
+}
+
 void Ladder::GetBoundingBox(float &l, float &t, float &r, float &b)
 {
 	l = position.x;

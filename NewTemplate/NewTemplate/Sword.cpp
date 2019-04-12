@@ -48,6 +48,10 @@ void Sword::Render()
 	}
 }
 
+void Sword::HandleCollision(vector<Object*>* objects)
+{
+}
+
 void Sword::CalCulatePosition()
 {
 	

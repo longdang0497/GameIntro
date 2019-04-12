@@ -19,7 +19,7 @@ MainCharacter::MainCharacter()
 	this->objectWidth = 20;
 	this->objectHeight = 31;
 
-	this->SetPosition(10, 10);
+	this->SetPosition(10, 100);
 	this->SetVeclocity(0, 0);
 	this->SetDirection(1); //Right
 	this->isOnGround = false;
@@ -157,7 +157,7 @@ void MainCharacter::Update(float t, vector<Object*>* object)
 {
 
 	Object::Update(t);
-
+	
 	Sword::GetInstance()->Update(t, object);
 
 	if (GetState() == STATE_ATTACK)
@@ -188,26 +188,14 @@ void MainCharacter::Update(float t, vector<Object*>* object)
 	if (!isOnLadder)
 		this->veclocity.y += 0.0015f *t;
 
-
-	KeyBoardHandle();
+	
 
 	if(GetState()!=STATE_ON_LADDER)
 		currentSprite->UpdateSprite();
 
-	vector<Object*>*ground = new vector<Object*>;
-	vector<Object*>*ladder = new vector<Object*>;
-	vector<Object*>*other = new vector<Object*>;
+	KeyBoardHandle();
 
-	for (auto iter : *object)
-	{
-		if (iter->GetObjectType() == BRICK)
-			ground->push_back(iter);
-		else if (iter->GetObjectType() == LADDER)
-			ladder->push_back(iter);
-		else other->push_back(iter);
-	}
-	CheckCollisionWithGround(ground);
-	CheckCollisionWithLadder(ladder);
+	this->HandleCollision(object);
 }
 
 void MainCharacter::Render()
@@ -228,6 +216,8 @@ void MainCharacter::Render()
 	Sword::GetInstance()->Render();
 
 }
+
+
 
 void MainCharacter::KeyBoardHandle()
 {
@@ -394,55 +384,17 @@ void MainCharacter::GetBoundingBox(float &l, float &t, float &r, float &b)
 	}
 }
 
-void MainCharacter::CheckCollisionWithLadder(vector<Object*>* object)
+void MainCharacter::HandleCollision(vector<Object*> *objects)
 {
 	vector<CollisionEvent*> *coEvents = new vector<CollisionEvent*>();
 	vector<CollisionEvent*> *coEventsResult = new vector<CollisionEvent*>();
 
 	coEvents->clear();
 
-	this->CalcPotentialCollisions(object, coEvents);
-
-	if (coEvents->size() == 0) {
-		//if (GetState() == STATE_CLIMBING || GetState() == STATE_ON_LADDER)
-		//	SetState(STATE_IDLE);
-	}
-	else {
-
-		float minTx, minTy, nX = 0, nY;
-
-
-		this->FilterCollision(coEvents, coEventsResult, minTx, minTy, nX, nY);
-
-		this->PlusPosition(minTx*this->deltaX + nX * 0.1f, minTy*this->deltaY + nY * 0.1f);
-
-		if (nX != 0)
-		{
-			
-			this->veclocity.x = 0;
-			SetState(STATE_ON_LADDER);
-		}
-		if (nY != 0)
-		{
-			this->veclocity.y = 0;
-		}
-
-	}
-
-}
-
-void MainCharacter::CheckCollisionWithGround(vector<Object*>* object)
-{
-	vector<CollisionEvent*> *coEvents = new vector<CollisionEvent*>();
-	vector<CollisionEvent*> *coEventsResult = new vector<CollisionEvent*>();
-
-	coEvents->clear();
-
-	this->CalcPotentialCollisions(object, coEvents);
+	this->CalcPotentialCollisions(objects, coEvents);
 
 	if (coEvents->size() == 0) {
 		this->PlusPosition(this->deltaX, this->deltaY);
-		isOnGround = false;
 	}
 	else {
 
@@ -452,29 +404,41 @@ void MainCharacter::CheckCollisionWithGround(vector<Object*>* object)
 
 		this->PlusPosition(minTx*this->deltaX + nX * 0.1f, minTy*this->deltaY + nY * 0.1f);
 
-		if (nX != 0)
-		{
-			this->veclocity.x = 0;
+		if (nX != 0) this->veclocity.x = 0;
+		if (nY != 0) this->veclocity.y = 0;
 
-		}
-		if (nY != 0)
-		{
-			if (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING)
-			{
-				isOnLadder = false;
-				SetState(STATE_IDLE);
+		for (UINT i = 0; i < coEventsResult->size(); i++) {
+			CollisionEvent *e = coEventsResult->at(i);
+
+			if (dynamic_cast<Brick*> (e->obj)) {
+				Brick* brick = dynamic_cast<Brick*>(e->obj);
+				this->CheckCollisionWithGround(brick);
 			}
-			if (nY == -1)
-				isOnGround = true;
-			this->veclocity.y = 0;
-
-			if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_HURT)
-			{
-				SetState(STATE_IDLE);
+			else if (dynamic_cast<Ladder*>(e->obj)) {
+				Ladder* ladder = dynamic_cast<Ladder*>(e->obj);
+				this->CheckCollisionWithLadder(ladder);
 			}
 		}
 
 	}
+
+	for (int i = 0; i < coEvents->size(); i++) {
+		delete coEvents->at(i);
+	}
+
+	delete coEvents;
+	delete coEventsResult;
+}
+
+void MainCharacter::CheckCollisionWithLadder(Ladder* ladder)
+{
+	
+
+}
+
+void MainCharacter::CheckCollisionWithGround(Brick* brick)
+{
+	
 
 }
 
