@@ -21,6 +21,9 @@ enum COLLISION_DIRECTION {
 #define STAGE1_WIDTH 2408
 #define STAGE1_HEIGHT 176
 
+#define STAGE2_WIDTH 3072
+#define STAGE2_HEIGHT 176
+
 // =========== TEXTURE + SPRITE
 #define ID_TEXTURE_MAIN 0
 #define PATH_TEXTURE_MAIN L"sprite\\main_character_sprite.png"	//  <===== CÁC SPRITE BÊN DƯỚI SỬ DỤNG TEXTURE NÀY
@@ -75,13 +78,18 @@ enum COLLISION_DIRECTION {
 #define PATH_POS_MAP_1 L"sprite\\Stage1\\map.txt"
 #define PATH_POS_GROUND_MAP_1 "sprite\\Stage1\\ground.txt"
 
+#define ID_TEXTURE_MAP_2 200
+#define PATH_TEXTURE_MAP_2 L"sprite\\Stage2\\texture.png"
+#define PATH_POS_MAP_2 L"sprite\\Stage2\\map.txt"
+#define PATH_POS_GROUND_MAP_2 "sprite\\Stage2\\ground.txt"
+
 
 #define ID_BB 1
 #define PATH_BB L"sprite\\bb.png"
 
 
 #define MAIN_WALK_PACE 0.15f
-#define MAIN_JUMP_SPEED_Y 0.45f
+#define MAIN_JUMP_SPEED_Y 0.4f
 
 // ========= OBJECT =========
 enum OBJECT_TYPE {
@@ -108,7 +116,8 @@ enum OBJECT_TYPE {
 	ORANGE_POCKET,
 	ITEM_BLUE_DART,
 	ITEM_ORANGE_DART,
-	SANDGLASS
+	SANDGLASS,
+	LADDER
 };
 
 // ========== MAIN CHARACTER STATE ==========
@@ -123,8 +132,9 @@ enum MAIN_CHARACTER_STATE {
 	STATE_HURT,
 	STATE_DIE,
 	STATE_JUMP_ATTACK,
-	STATE_JUMP_ATTACK_TO
-
+	STATE_JUMP_ATTACK_TO,
+	STATE_ON_LADDER,
+	STATE_CLIMBING
 };
 
 // ========== ENEMIES STATE ==========

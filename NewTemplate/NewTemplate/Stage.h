@@ -10,11 +10,17 @@
 #include "Define.h"
 #include "Grid.h"
 #include "Camera.h"
+#include "Map.h"
+#include "Ladder.h"
+
+
 class Stage
 {
 protected:
 	vector<Object*> *objects;
 	vector<RECT> *bricks;
+
+	Map* map;
 public:
 	Stage();
 	~Stage();

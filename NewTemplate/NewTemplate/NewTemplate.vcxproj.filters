@@ -49,6 +49,12 @@
     <Filter Include="Header Files\KeyBoard">
       <UniqueIdentifier>{82a13663-67c7-4a8d-98bd-f1a66a3486a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Board">
+      <UniqueIdentifier>{0867b7d9-71c8-42ee-bd86-018d94094bba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Board">
+      <UniqueIdentifier>{510d239e-3820-4193-857b-336bb223cdab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -114,6 +120,15 @@
     <ClCompile Include="Sword.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Ladder.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2.cpp">
+      <Filter>Source Files\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Source Files\Board</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="trace.h">
@@ -178,6 +193,15 @@
     </ClInclude>
     <ClInclude Include="Sword.h">
       <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Ladder.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2.h">
+      <Filter>Header Files\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Header Files\Board</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

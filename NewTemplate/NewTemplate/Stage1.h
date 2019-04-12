@@ -8,7 +8,7 @@ class Stage1 : public Stage
 {
 private:
 	static Stage1 * _instance;
-	Map* map;
+
 public:
 	Stage1();
 	~Stage1();

@@ -65,7 +65,7 @@ void Stage::InitBrick1(RECT rect)
 
 void Stage::Update(float deltaTime)
 {
-	for (int i = 0; i < this->objects->size(); i++) {
+	/*for (int i = 0; i < this->objects->size(); i++) {
 		
 		if (this->objects->at(i)->GetObjectType() != BRICK) {
 			vector<Object*>* collisionsObject = Grid::GetInstance()->GetCollisionObjects(this->objects->at(i));
@@ -82,14 +82,19 @@ void Stage::Update(float deltaTime)
 		}
 
 		Grid::GetInstance()->UpdateGrid(this->objects->at(i));
-	}
+	}*/
+	MainCharacter::GetInstance()->Update(deltaTime, objects);
 
 	Camera::GetInstance()->Update(MainCharacter::GetInstance()->GetPosition());
 }
 
 void Stage::Render()
 {
+	map->drawMap();
 	for (int i = 0; i < this->objects->size(); i++) {
 		this->objects->at(i)->Render();
 	}
+
+
+
 }

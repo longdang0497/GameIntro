@@ -4,6 +4,7 @@
 class Brick : public Object
 {
 private:
+	
 public:
 	Brick(int left, int top, int right, int bottom);
 	~Brick();

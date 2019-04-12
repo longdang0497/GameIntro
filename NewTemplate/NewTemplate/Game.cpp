@@ -15,7 +15,7 @@ void Game::Init(HWND hWnd)
 {
 
 	// Khởi tạo Game stage
-	this->gameStage = STAGE1;
+	this->gameStage = STAGE2;
 
 	LPDIRECT3D9 d3d = Direct3DCreate9(D3D_SDK_VERSION);
 	this->hWnd = hWnd;
@@ -291,3 +291,7 @@ void Game::SweptAABB(
 
 }
 
+bool Game::IsIntersect(RECT rectA, RECT rectB)
+{
+	return rectA.left < rectB.right && rectA.right > rectB.left && rectA.top < rectB.bottom && rectA.bottom > rectB.top;
+}

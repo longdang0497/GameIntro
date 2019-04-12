@@ -166,21 +166,22 @@ void Object::FilterCollision(vector<CollisionEvent*>* coEvents, vector<Collision
 		}
 	}
 
-	if (min_ix >= 0) coEventsResult->push_back(coEvents->at(min_ix));
-	if (min_iy >= 0) coEventsResult->push_back(coEvents->at(min_iy));
+	if (min_ix >= 0) 
+		coEventsResult->push_back(coEvents->at(min_ix));
+	if (min_iy >= 0)
+		coEventsResult->push_back(coEvents->at(min_iy));
 }
 
 void Object::RenderBoundingBox()
 {
-
-
 	float left, top, right, bottom;
 	GetBoundingBox(left, top, right, bottom);
 
+	D3DXVECTOR3 pos1 (left, top, 0);
 
-	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
+	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(pos1);
 
-	Game::GetInstance()->Draw(left,top,Texture::GetInstance()->Get(ID_BB),left,top,right,bottom);
+	Game::GetInstance()->Draw(pos.x,pos.y,Texture::GetInstance()->Get(ID_BB),left,top,right,bottom);
 }
 
 void Object::Update(float deltaTime, std::vector<Object*>* objects)

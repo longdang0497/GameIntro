@@ -27,8 +27,9 @@ private:
 	Sprite* hitSprite;
 	Sprite* jumpHitSprite;
 	Sprite* sitHitSprite;
+	Sprite* climb;
 
-
+	bool isOnLadder;
 public:
 	MainCharacter();
 	~MainCharacter();
@@ -52,5 +53,10 @@ public:
 	void KeyBoardHandle();
 
 	void GetBoundingBox(float &l, float &t, float &r, float &b);
+
+	void CheckCollisionWithGround(vector<Object*>* object = NULL);
+	void CheckCollisionWithOtherObject(vector<Object*>* object = NULL);
+	void CheckCollisionWithLadder(vector<Object*>* object = NULL);
+
 };
 

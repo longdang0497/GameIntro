@@ -62,7 +62,6 @@ void Stage1::Update(float deltaTime)
 
 void Stage1::Render()
 {
-	this->map->drawMap();
 	Stage::Render();
 
 }

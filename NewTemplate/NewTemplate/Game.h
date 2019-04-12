@@ -75,5 +75,7 @@ public:
 		float &t,
 		float &nx,
 		float &ny);
+
+	static bool IsIntersect(RECT rectA, RECT rectB);
 };
 

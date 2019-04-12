@@ -5,7 +5,8 @@ Brick::Brick(int left, int top, int right, int bottom)
 {
 	this->SetPosition(left, top);
 	this->SetVeclocity(0, 0);
-	this->SetBoundingBox(right - left, bottom - top);
+	objectHeight = bottom - top;
+	objectWidth = right - left;
 	this->SetObjectType(BRICK);
 }
 
@@ -19,7 +20,7 @@ void Brick::Update(float deltaTime, vector<Object*>* object)
 
 void Brick::Render()
 {
-
+	//RenderBoundingBox();
 }
 
 void Brick::GetBoundingBox(float &l, float &t, float &r, float &b)
