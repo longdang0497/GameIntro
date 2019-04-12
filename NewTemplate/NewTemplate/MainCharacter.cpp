@@ -89,11 +89,23 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 		currentSprite = sitHitSprite;
 		break;
 	case STATE_JUMP_ATTACK:
-		currentSprite = jumpHitSprite;
+		currentSprite = hitSprite;
+		Sword::GetInstance()->setIsActive(true);
+		Sword::GetInstance()->SetDirection(direction);
+		if (direction == 1)
+			Sword::GetInstance()->SetPosition(position.x + 18, position.y + 3);
+		else
+			Sword::GetInstance()->SetPosition(position.x - 25, position.y + 3);
 		break;
 	case STATE_JUMP_ATTACK_TO:
-		SetVx(MAIN_WALK_PACE*direction);
-		currentSprite = jumpHitSprite;
+		SetVx(0.1*direction);
+		currentSprite = hitSprite;
+		Sword::GetInstance()->setIsActive(true);
+		Sword::GetInstance()->SetDirection(direction);
+		if (direction == 1)
+			Sword::GetInstance()->SetPosition(position.x + 18, position.y + 3);
+		else
+			Sword::GetInstance()->SetPosition(position.x - 25, position.y + 3);
 		break;
 
 	default:break;
@@ -148,6 +160,15 @@ void MainCharacter::Update(float t, vector<Object*>* object)
 			SetState(STATE_SIT);
 		}
 	}
+
+	if (GetState() == STATE_JUMP_ATTACK || GetState() == STATE_JUMP_ATTACK_TO)
+	{
+		if (direction == 1)
+			Sword::GetInstance()->SetPosition(position.x + 18, position.y + 3);
+		else
+			Sword::GetInstance()->SetPosition(position.x - 25, position.y + 3);
+	}
+
 	this->veclocity.y += 0.0015f *t;
 	KeyBoardHandle();
 	currentSprite->UpdateSprite();

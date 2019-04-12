@@ -180,7 +180,7 @@ void Object::RenderBoundingBox()
 
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
 
-	Game::GetInstance()->Draw(pos.x,pos.y,Texture::GetInstance()->Get(ID_BB),left,top,right,bottom);
+	Game::GetInstance()->Draw(left,top,Texture::GetInstance()->Get(ID_BB),left,top,right,bottom);
 }
 
 void Object::Update(float deltaTime, std::vector<Object*>* objects)

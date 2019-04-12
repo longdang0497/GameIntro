@@ -19,6 +19,7 @@ Sword::~Sword()
 
 void Sword::Update(float t, vector<Object*> *object)
 {
+	//position = MainCharacter::GetInstance()->GetPosition();
 	if(isActive)
 		currentSprite->UpdateSprite();
 	if (isActive && currentSprite->getDone())
@@ -73,7 +74,8 @@ void Sword::GetBoundingBox(float &l, float &t, float &r, float &b)
 		case 2:
 			if (direction == 1)
 				l = position.x;
-			else l = position.x + 18;
+			else
+				l = position.x+16;
 			t = position.y;
 			b = t + 5;
 			r = l + 9;

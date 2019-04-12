@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include "MainCharacter.h"
 
 
 class Sword: public Object
