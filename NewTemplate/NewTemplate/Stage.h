@@ -19,7 +19,6 @@ class Stage
 {
 protected:
 	vector<Object*> *objects;
-	vector<RECT> *bricks;
 
 	Map* map;
 public:
@@ -27,10 +26,10 @@ public:
 	~Stage();
 
 	// Dùng để cắt theo hàng ngang
-	void InitBrick(RECT rect);
+	void InitStaticObjects(RECT rect, vector<RECT> *staticObjects);
 
 	// Dùng để cắt theo hàng dọc
-	void InitBrick1(RECT rect);
+	void InitStaticObjects1(RECT rect, vector<RECT> *staticObjects);
 
 	virtual void LoadResource() = 0;
 	virtual void Update(float deltaTime);

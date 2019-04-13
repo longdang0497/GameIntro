@@ -30,6 +30,8 @@ void Stage1::LoadResource()
 
 	fs >> numberOfGround;
 
+	vector<RECT>* bricks = new vector<RECT>();
+
 	for (int i = 0; i < numberOfGround; i++) {
 		fs >> left >> top >> right >> bottom;
 
@@ -39,13 +41,13 @@ void Stage1::LoadResource()
 		rect.right = right;
 		rect.bottom = bottom;
 
-		this->InitBrick(rect);
+		this->InitStaticObjects(rect, bricks);
 	}
 
 	fs.close();
 
-	for (int i = 0; i < this->bricks->size(); i++) {
-		RECT rect = this->bricks->at(i);
+	for (int i = 0; i < bricks->size(); i++) {
+		RECT rect = bricks->at(i);
 		Brick * brick = new Brick(rect.left, rect.top, rect.right, rect.bottom);
 		this->objects->push_back(brick);
 	}
@@ -53,6 +55,8 @@ void Stage1::LoadResource()
 	for (int i = 0; i < this->objects->size(); i++) {
 		Grid::GetInstance()->Add(this->objects->at(i));
 	}
+
+	delete bricks;
 }
 
 void Stage1::Update(float deltaTime)

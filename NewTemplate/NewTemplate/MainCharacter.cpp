@@ -216,7 +216,6 @@ void MainCharacter::Render()
 		this->currentSprite->DrawSprite(pos, false);
 
 	Sword::GetInstance()->Render();
-
 }
 
 void MainCharacter::KeyBoardHandle()
@@ -436,8 +435,6 @@ void MainCharacter::HandleCollision(vector<Object*> *objects)
 
 void MainCharacter::CheckCollisionWithLadder(Ladder* ladder)
 {
-	
-
 }
 
 void MainCharacter::CheckCollisionWithGround(Brick* brick)

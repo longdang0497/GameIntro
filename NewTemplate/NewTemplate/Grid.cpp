@@ -178,33 +178,6 @@ vector<Object*>* Grid::GetCollisionObjects(Object * object)
 		}
 	}
 
-	//// Nếu đang đi qua trái
-	//if (object->GetVeclocity().x < 0) {
-	//	if (column > 0) this->PushObjectToVector(objects, this->cells[row][column - 1], object); // Bên trái
-
-	//	if (column > 0 && row > 0) this->PushObjectToVector(objects, this->cells[row - 1][column - 1], object); // Trái trên
-
-	//	if (column > 0 && row < this->numOfRow - 1) this->PushObjectToVector(objects, this->cells[row + 1][column - 1], object); //Trái dưới
-	//}
-
-	//// Nếu đang đi qua phải
-	//else {
-	//	if (column < this->numOfColumn - 1) this->PushObjectToVector(objects, this->cells[row][column + 1], object); //Bên phải
-
-	//	if (column < this->numOfColumn - 1 && row > 0) this->PushObjectToVector(objects, this->cells[row - 1][column + 1], object); // Phải trên
-
-	//	if (column < this->numOfColumn - 1 && row < this->numOfRow - 1) this->PushObjectToVector(objects, this->cells[row + 1][column + 1], object); // Phải dưới
-	//}
-
-	//// Nếu đang đi lên
-	//if (object->GetVeclocity().y < 0) {
-	//	if (row > 0) this->PushObjectToVector(objects, this->cells[row - 1][column], object);
-	//}
-	//// Nếu đang đi xuống
-	//else {
-	//	if (row < this->numOfRow - 1) this->PushObjectToVector(objects, this->cells[row + 1][column], object);
-	//}
-
 	return objects;
 }
 
