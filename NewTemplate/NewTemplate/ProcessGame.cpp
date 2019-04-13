@@ -20,9 +20,12 @@ ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 	texture->Add(ID_TEXTURE_MAIN, PATH_TEXTURE_MAIN);
 	texture->Add(ID_TEXTURE_MAP_1, PATH_TEXTURE_MAP_1);
 	texture->Add(ID_TEXTURE_MAP_2, PATH_TEXTURE_MAP_2);
+	texture->Add(ID_TEXTURE_MAP_2, PATH_TEXTURE_MAP_2);
 	texture->Add(ID_TEX_FONT, PATH_TEX_FONT);
 	texture->Add(ID_TEX_HUD_BG, PATH_TEX_HUD_BG);
 	texture->Add(ID_TEX_HEALTH, PATH_TEX_HEALTH);
+	texture->Add(ID_BB, PATH_BB);
+	
 
 
 	Grid* grid = Grid::GetInstance(1, 1, true);
