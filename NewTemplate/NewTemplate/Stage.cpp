@@ -5,6 +5,7 @@ Stage::Stage()
 	this->objects = new vector<Object*>();
 	this->bricks = new vector<RECT>();
 
+	HUD::GetInstance();
 }
 
 Stage::~Stage()
@@ -90,6 +91,7 @@ void Stage::Update(float deltaTime)
 
 void Stage::Render()
 {
+	HUD::GetInstance()->Draw(Camera::GetInstance()->getPosition());
 	map->drawMap();
 	for (int i = 0; i < this->objects->size(); i++) {
 		this->objects->at(i)->Render();

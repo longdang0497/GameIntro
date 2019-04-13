@@ -25,6 +25,8 @@ MainCharacter::MainCharacter()
 	this->isOnGround = false;
 	this->isOnLadder = false;
 
+	score = 0;
+
 }
 
 MainCharacter::~MainCharacter()
@@ -217,8 +219,6 @@ void MainCharacter::Render()
 
 }
 
-
-
 void MainCharacter::KeyBoardHandle()
 {
 	CKeyGame* k = CKeyGame::getInstance();
@@ -404,14 +404,18 @@ void MainCharacter::HandleCollision(vector<Object*> *objects)
 
 		this->PlusPosition(minTx*this->deltaX + nX * 0.1f, minTy*this->deltaY + nY * 0.1f);
 
-		if (nX != 0) this->veclocity.x = 0;
-		if (nY != 0) this->veclocity.y = 0;
+		if (nX != 0)
+			this->veclocity.x = 0;
+		if (nY != 0)
+			this->veclocity.y = 0;
 
 		for (UINT i = 0; i < coEventsResult->size(); i++) {
 			CollisionEvent *e = coEventsResult->at(i);
 
 			if (dynamic_cast<Brick*> (e->obj)) {
 				Brick* brick = dynamic_cast<Brick*>(e->obj);
+				if (nY == -1)
+					isOnGround = true;
 				this->CheckCollisionWithGround(brick);
 			}
 			else if (dynamic_cast<Ladder*>(e->obj)) {
@@ -438,7 +442,17 @@ void MainCharacter::CheckCollisionWithLadder(Ladder* ladder)
 
 void MainCharacter::CheckCollisionWithGround(Brick* brick)
 {
-	
+	if (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING)
+	{
+		isOnLadder = false;
+		SetState(STATE_IDLE);
+	}
+	this->veclocity.y = 0;
+
+	if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_HURT)
+	{
+		SetState(STATE_IDLE);
+	}
 
 }
 

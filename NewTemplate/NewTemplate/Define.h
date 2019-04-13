@@ -88,6 +88,15 @@ enum COLLISION_DIRECTION {
 #define PATH_BB L"sprite\\bb.png"
 
 
+#define ID_TEX_FONT		2000
+#define ID_TEX_HUD_BG	2001
+#define ID_TEX_HEALTH	2002
+
+#define PATH_TEX_FONT	L"sprite\\Board\\font.png"
+#define PATH_TEX_HUD_BG	L"sprite\\Board\\board.png"
+#define PATH_TEX_HEALTH	L"sprite\\Board\\health.png"
+
+
 #define MAIN_WALK_PACE 0.15f
 #define MAIN_JUMP_SPEED_Y 0.4f
 

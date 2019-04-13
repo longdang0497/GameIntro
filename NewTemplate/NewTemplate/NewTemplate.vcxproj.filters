@@ -126,7 +126,10 @@
     <ClCompile Include="Stage2.cpp">
       <Filter>Source Files\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="Font.cpp">
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\Board</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
       <Filter>Source Files\Board</Filter>
     </ClCompile>
   </ItemGroup>
@@ -200,7 +203,10 @@
     <ClInclude Include="Stage2.h">
       <Filter>Header Files\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="Font.h">
+    <ClInclude Include="Text.h">
+      <Filter>Header Files\Board</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
       <Filter>Header Files\Board</Filter>
     </ClInclude>
   </ItemGroup>

@@ -82,7 +82,7 @@ void Grid::InitGrid(int mapHeight, int mapWidth, bool isArray)
 	this->numOfRow += 2;
 
 	this->InitObjectForGrid();
-}
+} 
 
 void Grid::Add(Object * obj)
 {

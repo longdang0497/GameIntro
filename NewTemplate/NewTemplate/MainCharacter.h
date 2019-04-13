@@ -31,6 +31,8 @@ private:
 	Sprite* climb;
 
 	bool isOnLadder;
+
+	int score;
 public:
 	MainCharacter();
 	~MainCharacter();
@@ -60,5 +62,7 @@ public:
 	void CheckCollisionWithOtherObject(vector<Object*>* object = NULL);
 	void CheckCollisionWithLadder(Ladder *ladder);
 
+
+	int GetScore() { return this->score; }
 };
 
