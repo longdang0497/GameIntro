@@ -214,7 +214,6 @@ void MainCharacter::Render()
 		this->currentSprite->DrawSprite(pos, false);
 
 	Sword::GetInstance()->Render();
-
 }
 
 
@@ -412,6 +411,8 @@ void MainCharacter::HandleCollision(vector<Object*> *objects)
 
 			if (dynamic_cast<Brick*> (e->obj)) {
 				Brick* brick = dynamic_cast<Brick*>(e->obj);
+				if (nY == -1)
+					isOnGround = true;
 				this->CheckCollisionWithGround(brick);
 			}
 			else if (dynamic_cast<Ladder*>(e->obj)) {
@@ -432,13 +433,21 @@ void MainCharacter::HandleCollision(vector<Object*> *objects)
 
 void MainCharacter::CheckCollisionWithLadder(Ladder* ladder)
 {
-	
-
 }
 
 void MainCharacter::CheckCollisionWithGround(Brick* brick)
 {
-	
+	if (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING)
+	{
+		isOnLadder = false;
+		SetState(STATE_IDLE);
+	}
+	this->veclocity.y = 0;
+
+	if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_HURT)
+	{
+		SetState(STATE_IDLE);
+	}
 
 }
 

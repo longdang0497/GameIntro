@@ -31,6 +31,7 @@ void Stage2::LoadResource()
 
 	fs >> numberOfGround;
 
+	vector<RECT> *bricks = new vector<RECT>();
 	for (int i = 0; i < numberOfGround; i++) {
 		fs >> left >> top >> right >> bottom;
 
@@ -40,24 +41,28 @@ void Stage2::LoadResource()
 		rect.right = right;
 		rect.bottom = bottom;
 
-		this->InitBrick(rect);
+		this->InitStaticObjects(rect, bricks);
 	}
 
 	fs.close();
 
 
-	//RECT r;
-	//r.left = 1088;
-	//r.top = 112;
-	//r.right = 1103;
-	//r.bottom = 207;
-	//this->InitBrick(r);
+	vector<RECT> *ladders = new vector<RECT>();
+	RECT r;
+	r.left = 1088;
+	r.top = 112;
+	r.right = 1103;
+	r.bottom = 207;
+	this->InitStaticObjects(r, ladders);
 
-	Ladder* l = new Ladder(1088, 112, 1103, 179);
-	this->objects->push_back(l);
 
-	for (int i = 0; i < this->bricks->size(); i++) {
-		RECT rect = this->bricks->at(i);
+	for (auto l : *ladders) {
+		Ladder *ladder = new Ladder(l.left, l.top, l.right, l.bottom);
+		this->objects->push_back(ladder);
+	}
+
+	for (int i = 0; i < bricks->size(); i++) {
+		RECT rect = bricks->at(i);
 		Brick * brick = new Brick(rect.left, rect.top, rect.right, rect.bottom);
 		this->objects->push_back(brick);
 	}
@@ -67,6 +72,9 @@ void Stage2::LoadResource()
 	for (int i = 0; i < this->objects->size(); i++) {
 		Grid::GetInstance()->Add(this->objects->at(i));
 	}
+
+	delete bricks;
+	delete ladders;
 }
 
 void Stage2::Update(float deltaTime)

@@ -3,7 +3,6 @@
 Stage::Stage()
 {
 	this->objects = new vector<Object*>();
-	this->bricks = new vector<RECT>();
 
 }
 
@@ -11,12 +10,12 @@ Stage::~Stage()
 {
 }
 
-void Stage::InitBrick(RECT rect)
+void Stage::InitStaticObjects(RECT rect, vector<RECT> *staticObjects)
 {
 	int n = floor(rect.left / CELL_SIZE);
 	int tempRight = (n+1) * CELL_SIZE;
 	if (tempRight > rect.right) {
-		this->InitBrick1(rect);
+		this->InitStaticObjects1(rect, staticObjects);
 		return;
 	}
 	else {
@@ -25,7 +24,7 @@ void Stage::InitBrick(RECT rect)
 		rect1.left = rect.left;
 		rect1.right = tempRight;
 		rect1.bottom = rect.bottom;
-		this->InitBrick1(rect1);
+		this->InitStaticObjects1(rect1, staticObjects);
 
 		RECT rect2;
 		rect2.top = rect.top;
@@ -33,16 +32,16 @@ void Stage::InitBrick(RECT rect)
 		rect2.bottom = rect.bottom;
 		rect2.right = rect.right;
 
-		this->InitBrick(rect2);
+		this->InitStaticObjects(rect2, staticObjects);
 	}
 }
 
-void Stage::InitBrick1(RECT rect)
+void Stage::InitStaticObjects1(RECT rect, vector<RECT> *staticObjects)
 {
 	int n = floor(rect.top / CELL_SIZE);
 	int tempBottom = (n + 1) * CELL_SIZE;
 	if (tempBottom > rect.bottom) {
-		this->bricks->push_back(rect);
+		staticObjects->push_back(rect);
 		return;
 	}
 	else {
@@ -51,7 +50,7 @@ void Stage::InitBrick1(RECT rect)
 		rect1.left = rect.left;
 		rect1.right = rect.right;
 		rect1.bottom = tempBottom;
-		this->bricks->push_back(rect1);
+		staticObjects->push_back(rect1);
 
 		RECT rect2;
 		rect2.top = tempBottom;
@@ -59,7 +58,7 @@ void Stage::InitBrick1(RECT rect)
 		rect2.bottom = rect.bottom;
 		rect2.right = rect.right;
 
-		this->InitBrick1(rect2);
+		this->InitStaticObjects1(rect2, staticObjects);
 	}
 }
 
