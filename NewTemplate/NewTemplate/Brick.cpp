@@ -20,7 +20,7 @@ void Brick::Update(float deltaTime, vector<Object*>* object)
 
 void Brick::Render()
 {
-	RenderBoundingBox();
+	///RenderBoundingBox();
 }
 
 void Brick::HandleCollision(vector<Object*>* objects)

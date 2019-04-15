@@ -12,6 +12,7 @@
 #include "Camera.h"
 #include "Map.h"
 #include "Ladder.h"
+#include "Jaguar.h"
 #include "HUD.h"
 
 

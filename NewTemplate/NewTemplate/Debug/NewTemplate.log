@@ -1,44 +1,142 @@
-﻿Build started 4/13/2019 11:21:09 AM.
-     1>Project "C:\Users\tung\Desktop\NMPTGAME\NinjaGaiden\NewTemplate\NewTemplate\NewTemplate.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt ProcessGame.cpp
-         ProcessGame.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>c:\users\tung\desktop\nmptgame\ninjagaiden\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
-     1>c:\users\tung\desktop\nmptgame\ninjagaiden\newtemplate\newtemplate\object.h(96): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
-         c:\users\tung\desktop\nmptgame\ninjagaiden\newtemplate\newtemplate\object.h(95): note: see declaration of 'CollisionEvent'
-     1>c:\users\tung\desktop\nmptgame\ninjagaiden\newtemplate\newtemplate\processgame.cpp(80): warning C4244: 'argument': conversion from 'DWORD' to 'float', possible loss of data
-     1>c:\users\tung\desktop\nmptgame\ninjagaiden\newtemplate\newtemplate\processgame.cpp(83): warning C4244: 'argument': conversion from 'DWORD' to 'float', possible loss of data
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\tung\Desktop\NMPTGAME\NinjaGaiden\NewTemplate\Debug\NewTemplate.exe" /INCREMENTAL /NOLOGO d3dx9.lib d3d9.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib d3dcompiler.lib avrt.lib winmm.lib dinput8.lib dxguid.lib comctl32.lib dxerr.lib legacy_stdio_definitions.lib dsound.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"C:\Users\tung\Desktop\NMPTGAME\NinjaGaiden\NewTemplate\Debug\NewTemplate.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\tung\Desktop\NMPTGAME\NinjaGaiden\NewTemplate\Debug\NewTemplate.lib" /MACHINE:X86 Debug\Brick.obj
-         Debug\Camera.obj
-         Debug\Debug.obj
-         Debug\Game.obj
-         Debug\Graphics.obj
-         Debug\Grid.obj
-         Debug\HUD.obj
-         Debug\Input.obj
-         Debug\KeyBoard.obj
-         Debug\KeyGame.obj
-         Debug\Ladder.obj
-         Debug\Main.obj
-         Debug\MainCharacter.obj
-         Debug\Map.obj
-         Debug\Object.obj
-         Debug\ProcessGame.obj
-         Debug\Sprite.obj
-         Debug\Stage.obj
-         Debug\Stage1.obj
-         Debug\Stage2.obj
-         Debug\Sword.obj
-         Debug\Text.obj
-         Debug\Texture.obj
-         Debug\trace.obj
-         Debug\World.obj
-         NewTemplate.vcxproj -> C:\Users\tung\Desktop\NMPTGAME\NinjaGaiden\NewTemplate\Debug\NewTemplate.exe
-     1>Done Building Project "C:\Users\tung\Desktop\NMPTGAME\NinjaGaiden\NewTemplate\NewTemplate\NewTemplate.vcxproj" (Build target(s)).
-
-Build succeeded.
-
-Time Elapsed 00:00:01.80
+﻿  Brick.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(96): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
+  c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(95): note: see declaration of 'CollisionEvent'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\brick.cpp(6): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Game.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.cpp(77): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.cpp(85): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.cpp(251): warning C4305: '=': truncation from '__int64' to 'float'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.cpp(252): warning C4305: '=': truncation from '__int64' to 'float'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.cpp(262): warning C4305: '=': truncation from '__int64' to 'float'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.cpp(263): warning C4305: '=': truncation from '__int64' to 'float'
+  Grid.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(96): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
+  c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(95): note: see declaration of 'CollisionEvent'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\grid.cpp(94): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\grid.cpp(95): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\grid.cpp(187): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\grid.cpp(188): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\grid.cpp(193): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\grid.cpp(194): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  HUD.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(96): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
+  c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(95): note: see declaration of 'CollisionEvent'
+  Jaguar.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(96): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
+  c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(95): note: see declaration of 'CollisionEvent'
+  Ladder.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(96): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
+  c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(95): note: see declaration of 'CollisionEvent'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\ladder.cpp(6): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Main.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(96): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
+  c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(95): note: see declaration of 'CollisionEvent'
+  MainCharacter.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(96): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
+  c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(95): note: see declaration of 'CollisionEvent'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\maincharacter.cpp(109): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\maincharacter.cpp(293): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\maincharacter.cpp(300): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\maincharacter.cpp(428): warning C4018: '<': signed/unsigned mismatch
+  Map.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\map.cpp(54): warning C4244: 'initializing': conversion from 'FLOAT' to 'int', possible loss of data
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\map.cpp(55): warning C4244: 'initializing': conversion from 'FLOAT' to 'int', possible loss of data
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\map.cpp(60): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Object.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(96): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
+  c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(95): note: see declaration of 'CollisionEvent'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.cpp(184): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  ProcessGame.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(96): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
+  c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(95): note: see declaration of 'CollisionEvent'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\processgame.cpp(80): warning C4244: 'argument': conversion from 'DWORD' to 'float', possible loss of data
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\processgame.cpp(83): warning C4244: 'argument': conversion from 'DWORD' to 'float', possible loss of data
+  Sprite.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\sprite.cpp(21): warning C4018: '<': signed/unsigned mismatch
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\sprite.cpp(111): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+  Stage.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(96): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
+  c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(95): note: see declaration of 'CollisionEvent'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\stage.cpp(16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\stage.cpp(42): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\stage.cpp(68): warning C4018: '<': signed/unsigned mismatch
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\stage.cpp(75): warning C4018: '<': signed/unsigned mismatch
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\stage.cpp(95): warning C4018: '<': signed/unsigned mismatch
+  Stage1.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(96): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
+  c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(95): note: see declaration of 'CollisionEvent'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\stage1.cpp(51): warning C4018: '<': signed/unsigned mismatch
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\stage1.cpp(57): warning C4018: '<': signed/unsigned mismatch
+  Stage2.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(96): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
+  c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(95): note: see declaration of 'CollisionEvent'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\stage2.cpp(64): warning C4018: '<': signed/unsigned mismatch
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\stage2.cpp(72): warning C4018: '<': signed/unsigned mismatch
+  Sword.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(96): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
+  c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(95): note: see declaration of 'CollisionEvent'
+  Text.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\text.cpp(42): warning C4018: '<': signed/unsigned mismatch
+  Texture.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+  World.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(96): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
+  c:\users\long dang\documents\github\gameintro\newtemplate\newtemplate\object.h(95): note: see declaration of 'CollisionEvent'
+  Generating Code...
+  NewTemplate.vcxproj -> C:\Users\Long Dang\Documents\Github\GameIntro\NewTemplate\Debug\NewTemplate.exe

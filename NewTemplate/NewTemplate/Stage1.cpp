@@ -23,6 +23,8 @@ void Stage1::LoadResource()
 	this->objects->push_back(MainCharacter::GetInstance());
 
 	this->map = new Map(PATH_POS_MAP_1, PATH_TEXTURE_MAP_1, ID_TEXTURE_MAP_1);
+	Jaguar * jaguar = new Jaguar();
+	this->objects->push_back(jaguar);
 
 	fstream fs(PATH_POS_GROUND_MAP_1);
 

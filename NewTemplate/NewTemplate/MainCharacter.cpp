@@ -205,7 +205,7 @@ void MainCharacter::Render()
 
 	if (this->position.y < 32)
 		return;
-	RenderBoundingBox();
+	//RenderBoundingBox();
 	this->position.z = 0;
 
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);

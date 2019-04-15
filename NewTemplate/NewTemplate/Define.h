@@ -10,14 +10,6 @@ enum GAME_STAGE {
 	STAGE3
 };
 
-enum COLLISION_DIRECTION {
-	NONE,
-	LEFT,
-	RIGHT,
-	TOP,
-	BOTTOM
-};
-
 #define STAGE1_WIDTH 2408
 #define STAGE1_HEIGHT 176
 
@@ -52,7 +44,7 @@ enum COLLISION_DIRECTION {
 #define PATH_CROW L"sprite\\enemies\\CROW.txt"
 #define PATH_EXPLODE L"sprite\\enemies\\EXPLODE.txt"
 
-#define ID_TEXTURE_ENEMIES 1
+#define ID_TEXTURE_ENEMIES 3
 #define PATH_TEXTURE_ENEMIES L"sprite\\Enemies_Bosses.png"  //   <===== CÁC SPRITE BÊN DƯỚI SỬ DỤNG TEXTURE NÀY
 #define PATH_BOSS_BULLET L"sprite\\boss\\BOSS_BULLET.txt"
 #define PATH_BOSS L"sprite\\boss\\BOSS.txt"
@@ -168,6 +160,11 @@ enum GREEN_SOLDIER_STATE {
 	GREEN_SOLDIER_SHOOT_RIGHT,
 	GREEN_SOLDIER_BAZOOKA_LEFT,
 	GREEN_SOLDIER_BAZOOKA_RIGHT
+};
+
+enum JAGUARS_STATE {
+	JAGUARS_LEFT,
+	JAGUARS_RIGHT
 };
 
 // ========== BOSS ===============
