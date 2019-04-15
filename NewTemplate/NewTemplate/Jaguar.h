@@ -22,4 +22,9 @@ public:
 	void Render();
 	void HandleCollision(vector<Object*> *objects);
 	void GetBoundingBox(float &l, float &t, float &r, float &b);
+
+	static Jaguar* GetInstance() {
+		if (_instance == NULL) _instance = new Jaguar();
+		return _instance;
+	}
 };

@@ -2,17 +2,16 @@
 
 Jaguar* Jaguar::_instance = NULL;
 
-
 Jaguar::Jaguar()
 {
 	this->jaguar = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_JAGUAR);
 
-	this->SetPosition(100, 100);
+	this->SetPosition(200, 200);
 	this->SetVeclocity(0, 0);
 	this->SetObjectType(JAGUAR);
 	this->SetState(JAGUARS_LEFT);
 
-	this->direction = 1;
+	//this->direction = 1;
 	this->score = 0;
 }
 
@@ -33,7 +32,13 @@ void Jaguar::SetState(JAGUARS_STATE value)
 
 void Jaguar::Update(float deltaTime, vector<Object*>* object)
 {
+	this->SetVx(0.05f);
+	if (this->GetState() == JAGUARS_LEFT)
+		this->SetPosition((this->GetVeclocity().x * deltaTime) + this->GetPosition().x, this->GetPosition().y);
+	else if (this->GetState() == JAGUARS_RIGHT)
+		this->SetPosition((-this->GetVeclocity().x * deltaTime) + this->GetPosition().x, this->GetPosition().y);
 
+	this->jaguar->UpdateSprite();
 }
 
 void Jaguar::Render()
@@ -46,9 +51,9 @@ void Jaguar::Render()
 
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
 
-	if (direction == 1)
+	if (this->GetState() == JAGUARS_LEFT)
 		this->jaguar->DrawSprite(pos, true);
-	else
+	else if (this->GetState() == JAGUARS_RIGHT)
 		this->jaguar->DrawSprite(pos, false);
 }
 

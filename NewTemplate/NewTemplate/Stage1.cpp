@@ -23,8 +23,8 @@ void Stage1::LoadResource()
 	this->objects->push_back(MainCharacter::GetInstance());
 
 	this->map = new Map(PATH_POS_MAP_1, PATH_TEXTURE_MAP_1, ID_TEXTURE_MAP_1);
-	Jaguar * jaguar = new Jaguar();
-	this->objects->push_back(jaguar);
+	//Jaguar * jaguar = new Jaguar();
+	this->objects->push_back(Jaguar::GetInstance());
 
 	fstream fs(PATH_POS_GROUND_MAP_1);
 
@@ -64,6 +64,10 @@ void Stage1::LoadResource()
 void Stage1::Update(float deltaTime)
 {
 	Stage::Update(deltaTime);
+	if (MainCharacter::GetInstance()->GetVeclocity().x > 0)
+		Jaguar::GetInstance()->SetState(JAGUARS_LEFT);
+	else
+		Jaguar::GetInstance()->SetState(JAGUARS_RIGHT);
 }
 
 void Stage1::Render()
