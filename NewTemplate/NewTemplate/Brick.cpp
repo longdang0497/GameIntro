@@ -21,6 +21,7 @@ void Brick::Update(float deltaTime, vector<Object*>* object)
 void Brick::Render()
 {
 	RenderBoundingBox();
+	int i = 1;
 }
 
 void Brick::HandleCollision(vector<Object*>* objects)
