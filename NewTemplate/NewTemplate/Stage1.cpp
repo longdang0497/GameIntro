@@ -55,7 +55,13 @@ void Stage1::LoadResource()
 	}
 
 	for (int i = 0; i < this->objects->size(); i++) {
-		Grid::GetInstance()->Add(this->objects->at(i));
+		if (this->objects->at(i)->GetObjectType() == JAGUAR)
+		{
+			if (Jaguar::GetInstance()->GetIsActive() == true)
+				Grid::GetInstance()->Add(this->objects->at(i));
+		}
+		else
+			Grid::GetInstance()->Add(this->objects->at(i));
 	}
 
 	delete bricks;
@@ -64,10 +70,11 @@ void Stage1::LoadResource()
 void Stage1::Update(float deltaTime)
 {
 	Stage::Update(deltaTime);
-	if (MainCharacter::GetInstance()->GetVeclocity().x > 0)
-		Jaguar::GetInstance()->SetState(JAGUARS_LEFT);
-	else
-		Jaguar::GetInstance()->SetState(JAGUARS_RIGHT);
+
+	if (Camera::GetInstance()->getPosition().x >= 10 && Jaguar::GetInstance()->GetIsActive() == false)
+		Jaguar::GetInstance()->SetIsActive(true);
+	else if (Camera::GetInstance()->getPosition().x <= 10 && Jaguar::GetInstance()->GetIsActive() == false)
+		Jaguar::GetInstance()->SetIsActive(false);
 }
 
 void Stage1::Render()

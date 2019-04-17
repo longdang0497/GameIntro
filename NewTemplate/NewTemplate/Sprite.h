@@ -43,6 +43,11 @@ public:
 	bool getDone() { return this->isDone; }
 	void setDone(bool a) { this->isDone = a; }
 
+	int GetHeight() { return this->height; }
+	void SetHeight(int a) { this->height = a; }
+	int GetWidth() { return this->width; }
+	void SetWidth(int a) { this->width = a; }
+
 	int GetIndex() { return this->index; }
 
 	void GetBoundingBox(int &width, int &height) { width = this->width; height = this->height; }
