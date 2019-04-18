@@ -49,7 +49,7 @@ void Map::drawMap()
 
 	int top, left, right, bottom;
 	for (int i = 0; i < 176 / tileHeight; i++)
-		for (int j = 0; j < 640 / tileWidth + 1; j++)
+		for (int j = 0; j < 256 / tileWidth + 1; j++)
 		{
 			int a = i + camposition.y / tileWidth;
 			int b = j + camposition.x / tileHeight;
@@ -59,12 +59,5 @@ void Map::drawMap()
 			bottom = top + tileHeight;
 			Game::GetInstance()->Draw(j*tileWidth - (int)camposition.x % tileWidth, i*tileHeight - (int)camposition.y % tileHeight + 80, texture, left, top, right, bottom);
 		}
-
-	/*for (int i = 0; i < this->list->size(); i++) {
-		for (int j = 0; j < this->list->at(i)->size(); j++) {
-			int number = this->list->at(i)->at(j);
-			Game::GetInstance()->Draw(j*16, i*16, this->texture, number*16, 0, (number+1)*16, 16);
-		}
-	}*/
 
 }

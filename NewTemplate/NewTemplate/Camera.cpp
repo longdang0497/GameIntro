@@ -15,8 +15,6 @@ Camera::~Camera()
 
 D3DXVECTOR3 Camera::transformObjectPosition(D3DXVECTOR3 objectPosition)
 {
-	/*D3DXVECTOR3 value = { objectPosition.x - cameraPosition.x,objectPosition.y - cameraPosition.y,0 };
-	return value;*/
 
 	D3DXMATRIX mt;
 	D3DXMatrixIdentity(&mt);
@@ -31,9 +29,9 @@ D3DXVECTOR3 Camera::transformObjectPosition(D3DXVECTOR3 objectPosition)
 
 void Camera::Update(D3DXVECTOR3 simonPosition)
 {
-	cameraPosition = { simonPosition.x - 640 / 2,cameraPosition.y };
+	cameraPosition = { simonPosition.x - Graphic::GetInstance(NULL,NULL,L"",NULL)->GetWidth() / 2,cameraPosition.y };
 	if (cameraPosition.x < 0)
 		cameraPosition = { 0 ,cameraPosition.y };
-	if (cameraPosition.x + 640 > worldBoundary)
-		cameraPosition = { worldBoundary - 640,cameraPosition.y };
+	if (cameraPosition.x + Graphic::GetInstance(NULL, NULL, L"", NULL)->GetWidth() > worldBoundary)
+		cameraPosition = { worldBoundary - Graphic::GetInstance(NULL,NULL,L"",NULL)->GetWidth(),cameraPosition.y };
 }

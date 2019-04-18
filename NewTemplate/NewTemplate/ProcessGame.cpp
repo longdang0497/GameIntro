@@ -4,7 +4,7 @@ ProcessGame *ProcessGame::_instance = NULL;
 
 ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 {
-	Graphic *graphic = Graphic::GetInstance(hInstance, nShowCmd, GAME_TITLE, GAME_MODE_640_480);
+	Graphic *graphic = Graphic::GetInstance(hInstance, nShowCmd, GAME_TITLE, GAME_MODE_256_256);
 
 	Game *game = Game::GetInstance();
 

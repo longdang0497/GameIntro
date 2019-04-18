@@ -1,13 +1,15 @@
 #include "Brick.h"
 
 
-Brick::Brick(int left, int top, int right, int bottom)
+Brick::Brick(int left, int top, int right, int bottom, int canStick)
 {
 	this->SetPosition(left, top);
 	this->SetVeclocity(0, 0);
 	objectHeight = bottom - top;
 	objectWidth = right - left;
 	this->SetObjectType(BRICK);
+
+	this->canStick = canStick;
 }
 
 Brick::~Brick()
