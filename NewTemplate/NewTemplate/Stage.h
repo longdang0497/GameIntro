@@ -14,6 +14,7 @@
 #include "Ladder.h"
 #include "Jaguar.h"
 #include "HUD.h"
+#include "Soldier.h"
 
 
 class Stage
@@ -22,6 +23,8 @@ protected:
 	vector<Object*> *objects;
 
 	Map* map;
+
+	int top, left, right, bottom;
 public:
 	Stage();
 	~Stage();

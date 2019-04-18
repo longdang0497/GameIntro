@@ -20,12 +20,8 @@ void Brick::Update(float deltaTime, vector<Object*>* object)
 
 void Brick::Render()
 {
-<<<<<<< refs/remotes/origin/CreateJaguar
-	///RenderBoundingBox();
-=======
-	RenderBoundingBox();
-	int i = 1;
->>>>>>> qegsrhdgfh
+
+	//RenderBoundingBox();
 }
 
 void Brick::HandleCollision(vector<Object*>* objects)

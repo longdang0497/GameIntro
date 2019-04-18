@@ -27,6 +27,7 @@ enum GAME_STAGE {
 #define PATH_MAIN_CLIMB L"sprite\\main\\MAIN_CLIMB.txt"
 #define PATH_MAIN_JUMP_SCROLL L"sprite\\main\\MAIN_JUMP_SCROLL.txt"
 #define PATH_MAIN_JUMP_SCROLL_KILL L"sprite\\main\\MAIN_JUMP_SCROLL_KILL.txt"
+#define PATH_MAIN_HURT L"sprite\\main\\MAIN_HURT.txt"
 
 #define PATH_MAIN_SWORD L"sprite\\main\\MAIN_SWORD.txt"
 
@@ -52,6 +53,9 @@ enum GAME_STAGE {
 #define PATH_BOXER L"sprite\\enemies\\BOXER.txt"
 #define PATH_EAGLE L"sprite\\enemies\\EAGLE.txt"
 #define PATH_JAGUAR L"sprite\\enemies\\JAGUAR.txt"
+#define PATH_SOLDIER_WALK L"sprite\\enemies\\SOLDIERS_WALK.txt"
+#define PATH_SOLDIER_KILL L"sprite\\enemies\\SOLDIERS_KILL.txt"
+
 
 #define PATH_GREEN_SOLDIERS_BAZOOKA L"sprite\\enemies\\GREEN_SOLDIERS_BAZOOKA.txt"
 #define PATH_BAZOOKA_BULLET L"sprite\\enemies\\BAZOOKA_BULLET.txt"
@@ -118,7 +122,8 @@ enum OBJECT_TYPE {
 	ITEM_BLUE_DART,
 	ITEM_ORANGE_DART,
 	SANDGLASS,
-	LADDER
+	LADDER,
+	SWORD
 };
 
 // ========== MAIN CHARACTER STATE ==========
@@ -171,6 +176,11 @@ enum JAGUARS_STATE {
 enum BOSS_STATE {
 	BOSS_LEFT,
 	BOSS_RIGHT
+};
+
+enum Direction {
+	LEFT =  -1 ,
+	RIGHT = 1
 };
 
 // ========== GRID ===============

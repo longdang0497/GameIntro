@@ -34,7 +34,7 @@ public:
 	~Sprite();
 
 	void UpdateSprite();
-	void DrawSprite(D3DXVECTOR3 position, bool flagRight);	//draw multi sprites
+	void DrawSprite(D3DXVECTOR3 position, bool flagRight, int alpha = 255);	//draw multi sprites
 	RECT ReadCurrentSpritePosition();
 	void Reset();
 

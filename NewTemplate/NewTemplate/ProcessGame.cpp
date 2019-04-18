@@ -29,6 +29,8 @@ ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 
 
 	Grid* grid = Grid::GetInstance(1, 1, true);
+
+	StageManager::GetInstance()->SetStage(Stage1::GetInstance());
 }
 
 // Các xử lý update và hiển thị nhân vật
@@ -74,6 +76,7 @@ int ProcessGame::GameRun()
 
 void ProcessGame::Update(DWORD dt)
 {
+	/*
 	switch (Game::GetInstance()->GetGameStage())
 	{
 	case STAGE1:
@@ -84,7 +87,8 @@ void ProcessGame::Update(DWORD dt)
 		break;
 	default:
 		break;
-	}
+	}*/
+	StageManager::GetInstance()->Update(dt);
 }
 
 void ProcessGame::Render()
@@ -95,6 +99,7 @@ void ProcessGame::Render()
 		d3ddv->ColorFill(Game::GetInstance()->GetBackBuffer(), NULL, D3DCOLOR_XRGB(0, 0, 0));
 		Game::GetInstance()->GetSpriteHandler()->Begin(D3DXSPRITE_ALPHABLEND);
 		
+		/*
 		switch (Game::GetInstance()->GetGameStage())
 		{
 		case STAGE1:
@@ -105,8 +110,8 @@ void ProcessGame::Render()
 			break;
 		default:
 			break;
-		}
-
+		}*/
+		StageManager::GetInstance()->Render();
 		Game::GetInstance()->GetSpriteHandler()->End();
 		d3ddv->EndScene();
 	}

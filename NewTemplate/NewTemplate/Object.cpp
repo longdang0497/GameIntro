@@ -25,94 +25,7 @@ bool Object::checkAABB(Object * obj)
 
 void Object::SweptAABB(Object * obj, float dx, float dy, float & collisionTime, float & nx, float &ny)
 {
-	//float dxEntry, dxExit, txEntry, txExit;
-	//float dyEntry, dyExit, tyEntry, tyExit;
 
-	//float entryTime;
-	//float exitTime;
-
-	//RECT movingRect = this->GetBoundingBox();
-	//float movingTop = movingRect.top;
-	//float movingBottom = movingRect.bottom;
-	//float movingLeft = movingRect.left;
-	//float movingRight = movingRect.right;
-
-	//RECT staticRect = obj->GetBoundingBox();
-	//float staticTop = staticRect.top;
-	//float staticBottom = staticRect.bottom;
-	//float staticLeft = staticRect.left;
-	//float staticRight = staticRect.right;
-
-	//collisionTime = -1.0f; // Không có va chạm
-	//nx = ny = 0;
-
-	//// Broad-phase test
-	//float bl = dx > 0 ? movingLeft : movingLeft + dx;
-	//float bt = dy > 0 ? movingTop : movingTop + dy;
-	//float br = dx > 0 ? movingRight + dx : movingRight;
-	//float bb = dy > 0 ? movingBottom + dy : movingBottom;
-
-	//// Nếu không nằm trong vùng va chạm với nhau thì không cần xét
-	//if (br < staticLeft || bl >  staticRight
-	//	|| bb < staticTop || bt > staticBottom)
-	//	return;
-
-	//if (dx == 0 && dy == 0) return; // Không di chuyển cũng thoát ra
-
-	//// đi qua phải
-	//if (dx > 0) {
-	//	dxEntry = staticLeft - movingRight;
-	//	dxExit = staticRight - movingLeft;
-	//}
-	//else if (dx < 0) {
-	//	dxEntry = staticRight - movingLeft;
-	//	dxExit = staticLeft - movingRight;
-	//}
-
-	//// đi xuống
-	//if (dy > 0) {
-	//	dyEntry = staticTop - movingBottom;
-	//	dyExit = staticBottom - movingTop;
-	//}
-	//else if (dy < 0) {
-	//	dyEntry = staticBottom - movingTop;
-	//	dyExit = staticTop - movingBottom;
-	//}
-
-	//if (dx == 0) {
-	//	txEntry = -std::numeric_limits<float>::infinity();
-	//	txExit = std::numeric_limits<float>::infinity();
-	//}
-	//else {
-	//	txEntry = dxEntry / dx;
-	//	txExit = dxExit / dx;
-	//}
-
-	//if (dy == 0) {
-	//	tyEntry = -std::numeric_limits<float>::infinity();
-	//	tyExit = std::numeric_limits<float>::infinity();
-	//}
-	//else {
-	//	tyEntry = dyEntry / dy;
-	//	tyExit = dyExit / dy;
-	//}
-
-	//if ((txEntry < 0.0f && tyEntry < 0.0f) || txEntry > 1.0f || tyEntry > 1.0f) return;
-
-	//entryTime = max(txEntry, tyEntry);
-	//exitTime = min(txExit, tyExit);
-
-	//if (entryTime > exitTime) return;
-	//collisionTime = entryTime;
-
-	//if (txEntry > tyEntry) {
-	//	ny = 0.0f;
-	//	dx > 0 ? nx = -1.0f : nx = 1.0f;
-	//}
-	//else {
-	//	nx = 0.0f;
-	//	dy > 0 ? ny = -1.0f : ny = 1.0f;
-	//}
 }
 
 CollisionEvent * Object::GetCollsionObjectsBySweptAABB(Object * obj)
@@ -223,4 +136,7 @@ CollisionEvent* Object::SweptAABBEx(Object* coO)
 
 	CollisionEvent * e = new CollisionEvent(t, nx, ny, coO);
 	return e;
+
+
+	
 }

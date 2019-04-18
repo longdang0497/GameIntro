@@ -11,7 +11,7 @@ MainCharacter::MainCharacter()
 	this->hitSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_STAND_KILL);
 	this->jumpHitSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_JUMP_SCROLL_KILL);
 	this->sitHitSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_SIT_KILL);
-	this->climb = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_CLIMB);
+	this->hurt = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_HURT);
 
 	this->SetObjectType(MAIN_CHARACTER);
 	this->SetState(STATE_IDLE);
@@ -19,13 +19,14 @@ MainCharacter::MainCharacter()
 	this->objectWidth = 20;
 	this->objectHeight = 31;
 
-	this->SetPosition(10, 100);
-	this->SetVeclocity(0, 0);
-	this->SetDirection(1); //Right
-	this->isOnGround = false;
-	this->isOnLadder = false;
+	this->HP = 16;
 
-	score = 0;
+	this->SetPosition(10, 10);
+	this->SetVeclocity(0, 0);
+	this->SetDirection(RIGHT); //Right
+	this->isOnGround = false;
+
+	alpha = 255;
 
 }
 
@@ -38,7 +39,6 @@ MainCharacter::~MainCharacter()
 	if (this->hitSprite != NULL) delete this->hitSprite;
 	if (this->jumpHitSprite != NULL) delete this->jumpHitSprite;
 	if (this->sitHitSprite != NULL) delete this->sitHitSprite;
-	if (this->climb != NULL) delete this->climb;
 }
 
 MAIN_CHARACTER_STATE MainCharacter::GetState()
@@ -53,7 +53,6 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 	switch (this->state)
 	{
 	case STATE_IDLE:
-		Sword::GetInstance()->setIsActive(false);
 		SetVx(0);
 		currentSprite = standSprite;
 		break;
@@ -70,14 +69,12 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 		currentSprite = jumpScrollSprite;
 		break;
 	case STATE_JUMP_TO:
-		currentSprite = jumpScrollSprite;
 		SetVx(MAIN_WALK_PACE*direction);
-		SetVy(-MAIN_JUMP_SPEED_Y);
 		break;
 	case STATE_ATTACK:
 		Sword::GetInstance()->setIsActive(true);
 		Sword::GetInstance()->SetDirection(direction);
-		if (direction == 1)
+		if (direction == RIGHT)
 			Sword::GetInstance()->SetPosition(position.x + 18, position.y + 3);
 		else
 			Sword::GetInstance()->SetPosition(position.x - 25, position.y + 3);
@@ -89,7 +86,7 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 	case STATE_SIT_ATTACK:
 		Sword::GetInstance()->setIsActive(true);
 		Sword::GetInstance()->SetDirection(direction);
-		if (direction == 1)
+		if (direction == RIGHT)
 			Sword::GetInstance()->SetPosition(position.x + 18, position.y + 10);
 		else
 			Sword::GetInstance()->SetPosition(position.x - 26, position.y + 10);
@@ -100,7 +97,7 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 		currentSprite = hitSprite;
 		Sword::GetInstance()->setIsActive(true);
 		Sword::GetInstance()->SetDirection(direction);
-		if (direction == 1)
+		if (direction == RIGHT)
 			Sword::GetInstance()->SetPosition(position.x + 18, position.y + 3);
 		else
 			Sword::GetInstance()->SetPosition(position.x - 25, position.y + 3);
@@ -110,21 +107,17 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 		currentSprite = hitSprite;
 		Sword::GetInstance()->setIsActive(true);
 		Sword::GetInstance()->SetDirection(direction);
-		if (direction == 1)
+		if (direction == RIGHT)
 			Sword::GetInstance()->SetPosition(position.x + 18, position.y + 3);
 		else
 			Sword::GetInstance()->SetPosition(position.x - 25, position.y + 3);
 		break;
-	case STATE_ON_LADDER:
+	case STATE_HURT:
+		hurting = true;
+		currentSprite = hurt;
+		SetVy(-0.25);
+		SetVx(-0.15*direction);
 		isOnGround = false;
-		SetPosition(GetPosition().x, GetPosition().y);
-		currentSprite = climb;
-		SetVx(0);
-		SetVy(0);
-		isOnLadder = true;
-		break;
-	case STATE_CLIMBING:
-
 		break;
 	default:break;
 	}
@@ -157,9 +150,15 @@ void MainCharacter::Reset(float x, float y)
 
 void MainCharacter::Update(float t, vector<Object*>* object)
 {
-
+	if (HP == 0)
+		return;
 	Object::Update(t);
-	
+
+	alpha = 255;
+	if (hurting)
+		alpha = 128;
+
+
 	Sword::GetInstance()->Update(t, object);
 
 	if (GetState() == STATE_ATTACK)
@@ -181,28 +180,32 @@ void MainCharacter::Update(float t, vector<Object*>* object)
 
 	if (GetState() == STATE_JUMP_ATTACK || GetState() == STATE_JUMP_ATTACK_TO)
 	{
-		if (direction == 1)
+		if (direction == RIGHT)
 			Sword::GetInstance()->SetPosition(position.x + 18, position.y + 3);
 		else
 			Sword::GetInstance()->SetPosition(position.x - 25, position.y + 3);
 	}
 
-	if (!isOnLadder)
-		this->veclocity.y += 0.0015f *t;
-
-	
-
-	if(GetState()!=STATE_ON_LADDER)
-		currentSprite->UpdateSprite();
+	this->veclocity.y += 0.0015f *t;
 
 	KeyBoardHandle();
+	currentSprite->UpdateSprite();
 
-	this->HandleCollision(object);
+	DWORD now = GetTickCount();
+
+	if (now - startHurting > 1000 && hurting == true)
+	{
+		hurting = false;
+	}
+
+	HandleCollision(object);
+
 }
 
 void MainCharacter::Render()
 {
-
+	if (HP == 0)
+		return;
 	if (this->position.y < 32)
 		return;
 	//RenderBoundingBox();
@@ -210,12 +213,13 @@ void MainCharacter::Render()
 
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
 
-	if (direction == 1)
-		this->currentSprite->DrawSprite(pos, true);
+	if (direction == RIGHT)
+		this->currentSprite->DrawSprite(pos, true,alpha);
 	else
-		this->currentSprite->DrawSprite(pos, false);
+		this->currentSprite->DrawSprite(pos, false,alpha);
 
 	Sword::GetInstance()->Render();
+
 }
 
 void MainCharacter::KeyBoardHandle()
@@ -245,18 +249,18 @@ void MainCharacter::KeyBoardHandle()
 			SetState(STATE_SIT);
 
 			if (k->keyLeft)
-				direction = -1;
+				direction = LEFT;
 			else if (k->keyRight)
-				direction = 1;
+				direction = RIGHT;
 		}
 		else if (k->keyRight && GetState() != STATE_SIT && GetState() != STATE_SIT_ATTACK && GetState() != STATE_ATTACK && GetState() != STATE_HURT)
 		{
-			direction = 1;
+			direction = RIGHT;
 			SetState(STATE_WALK);
 		}
 		else if (k->keyLeft  && GetState() != STATE_SIT && GetState() != STATE_SIT_ATTACK && GetState() != STATE_ATTACK && GetState() != STATE_HURT)
 		{
-			direction = -1;
+			direction = LEFT;
 			SetState(STATE_WALK);
 		}
 		else if (k->keyAttack)
@@ -275,41 +279,14 @@ void MainCharacter::KeyBoardHandle()
 			SetState(STATE_SIT);
 
 			if (k->keyLeft)
-				direction = -1;
+				direction = LEFT;
 			else if (k->keyRight)
-				direction = 1;
+				direction = RIGHT;
 		}
-		else if (GetState() != STATE_ATTACK && GetState() != STATE_SIT_ATTACK || GetState() != STATE_ON_LADDER)
+		else if (GetState() != STATE_ATTACK && GetState() != STATE_SIT_ATTACK)
 		{
 			SetState(STATE_IDLE);
 			isOnGround = true;
-		}
-	}
-	else if (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING)
-	{
-		if (k->keyUp)
-		{
-			SetVx(0);
-			SetVy(-0.05);
-			SetState(STATE_CLIMBING);
-			currentSprite->UpdateSprite();
-		}
-		else if (k->keyDown)
-		{
-			SetVx(0);
-			SetVy(0.05);
-			SetState(STATE_CLIMBING);
-			currentSprite->UpdateSprite();
-		}
-		else if (k->keyJump)
-		{
-			isOnLadder = false;
-			direction *= -1;
-			SetState(STATE_JUMP_TO);
-		}
-		else
-		{
-			SetState(STATE_ON_LADDER);
 		}
 	}
 	else
@@ -324,7 +301,7 @@ void MainCharacter::KeyBoardHandle()
 
 		if (k->keyLeft && (GetState() == STATE_JUMP || GetState() == STATE_JUMP_ATTACK))
 		{
-			direction = -1;
+			direction = LEFT;
 			if (GetState() == STATE_JUMP)
 				SetState(STATE_JUMP_TO);
 			else
@@ -332,7 +309,7 @@ void MainCharacter::KeyBoardHandle()
 		}
 		else if (k->keyRight && (GetState() == STATE_JUMP || GetState() == STATE_JUMP_ATTACK))
 		{
-			direction = 1;
+			direction = RIGHT;
 			if (GetState() == STATE_JUMP)
 				SetState(STATE_JUMP_TO);
 			else
@@ -383,7 +360,28 @@ void MainCharacter::GetBoundingBox(float &l, float &t, float &r, float &b)
 	}
 }
 
-void MainCharacter::HandleCollision(vector<Object*> *objects)
+void  MainCharacter::HandleCollision(vector<Object*> *objects)
+{
+	vector<Object*> *staticObject = new vector<Object*>();
+	vector<Object*> *MovingObject = new vector<Object*>();
+	for (int i = 0; i < objects->size(); i++)
+	{
+		if (objects->at(i)->GetObjectType() == BRICK)
+		{
+			staticObject->push_back(objects->at(i));
+		}
+		else
+		{
+			MovingObject->push_back(objects->at(i));
+		}
+	}
+
+	CheckCollisionWithGround(staticObject);
+	if(!hurting) CheckCollisionWithOtherObject(MovingObject);
+
+}
+
+void MainCharacter::CheckCollisionWithGround(vector<Object*> *objects)
 {
 	vector<CollisionEvent*> *coEvents = new vector<CollisionEvent*>();
 	vector<CollisionEvent*> *coEventsResult = new vector<CollisionEvent*>();
@@ -394,67 +392,95 @@ void MainCharacter::HandleCollision(vector<Object*> *objects)
 
 	if (coEvents->size() == 0) {
 		this->PlusPosition(this->deltaX, this->deltaY);
+		isOnGround = false;
 	}
 	else {
-
 		float minTx, minTy, nX = 0, nY;
 
 		this->FilterCollision(coEvents, coEventsResult, minTx, minTy, nX, nY);
 
 		this->PlusPosition(minTx*this->deltaX + nX * 0.1f, minTy*this->deltaY + nY * 0.1f);
+		for (auto iter : *coEventsResult)
+		{
+			switch (iter->obj->GetObjectType())
+			{
+			case BRICK:
+				if (nX != 0)
+				{
+					this->veclocity.x = 0;
+				}
+				if (nY != 0)
+				{
+					
+					this->veclocity.y = 0;
 
-		if (nX != 0)
-			this->veclocity.x = 0;
-		if (nY != 0)
-			this->veclocity.y = 0;
+					if (nY == -1) isOnGround = true;
 
-		for (UINT i = 0; i < coEventsResult->size(); i++) {
-			CollisionEvent *e = coEventsResult->at(i);
-
-			if (dynamic_cast<Brick*> (e->obj)) {
-				Brick* brick = dynamic_cast<Brick*>(e->obj);
-				if (nY == -1)
-					isOnGround = true;
-				this->CheckCollisionWithGround(brick);
-			}
-			else if (dynamic_cast<Ladder*>(e->obj)) {
-				Ladder* ladder = dynamic_cast<Ladder*>(e->obj);
-				this->CheckCollisionWithLadder(ladder);
+					if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_HURT)
+					{
+						SetState(STATE_IDLE);
+					}
+				}
+				break;
+			default:
+				break;
 			}
 		}
-
 	}
-
-	for (int i = 0; i < coEvents->size(); i++) {
+	for (int i = 0; i < coEvents->size(); i++)
 		delete coEvents->at(i);
-	}
-
 	delete coEvents;
+
 	delete coEventsResult;
-}
-
-void MainCharacter::CheckCollisionWithLadder(Ladder* ladder)
-{
-}
-
-void MainCharacter::CheckCollisionWithGround(Brick* brick)
-{
-	if (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING)
-	{
-		isOnLadder = false;
-		SetState(STATE_IDLE);
-	}
-	this->veclocity.y = 0;
-
-	if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_HURT)
-	{
-		SetState(STATE_IDLE);
-	}
-
 }
 
 void MainCharacter::CheckCollisionWithOtherObject(vector<Object*>* object)
 {
+	for (auto iter : *object)
+	{
+		// normal intersect colision
+		switch (iter->GetObjectType())
+		{
+		case JAGUAR:
+		case SOLDIER:
+		{
+			float al, at, ar, ab, bl, bt, br, bb;
+			GetBoundingBox(al, at, ar, ab);
+			iter->GetBoundingBox(bl, bt, br, bb);
+			if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
+			{
+				startHurting = GetTickCount();
+				this->Hurt();
+				SetState(STATE_HURT);
+			}
+			break;
+		}
+		default:
+			break;
+		}
+	}
 
-	
+	// sweptAABB colision
+	vector<CollisionEvent*> *coEvents = new vector<CollisionEvent*>();
+	coEvents->clear();
+
+	CalcPotentialCollisions(object, coEvents);
+
+	for (auto iter : *coEvents)
+	{
+		switch (iter->obj->GetObjectType())
+		{
+		case JAGUAR:
+		case SOLDIER:
+			startHurting = GetTickCount();
+			this->Hurt();
+			SetState(STATE_HURT);
+			break;
+		default:
+			break;
+		}
+	}
+	for (auto iter : *coEvents) delete iter;
+	coEvents->clear();
 }
+void MainCharacter::CheckCollisionWithLadder(Ladder *ladder){}

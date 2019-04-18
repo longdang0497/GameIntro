@@ -14,7 +14,7 @@ Stage::~Stage()
 void Stage::InitStaticObjects(RECT rect, vector<RECT> *staticObjects)
 {
 	int n = floor(rect.left / CELL_SIZE);
-	int tempRight = (n+1) * CELL_SIZE;
+	int tempRight = (n + 1) * CELL_SIZE;
 	if (tempRight > rect.right) {
 		this->InitStaticObjects1(rect, staticObjects);
 		return;
@@ -65,6 +65,9 @@ void Stage::InitStaticObjects1(RECT rect, vector<RECT> *staticObjects)
 
 void Stage::Update(float deltaTime)
 {
+
+
+
 	for (int i = 0; i < this->objects->size(); i++) {
 		
 		if (this->objects->at(i)->GetObjectType() != BRICK) {
@@ -80,10 +83,8 @@ void Stage::Update(float deltaTime)
 		else {
 			this->objects->at(i)->Update(deltaTime, NULL);
 		}
-
 		Grid::GetInstance()->UpdateGrid(this->objects->at(i));
 	}
-	//MainCharacter::GetInstance()->Update(deltaTime, objects);
 
 	Camera::GetInstance()->Update(MainCharacter::GetInstance()->GetPosition());
 }

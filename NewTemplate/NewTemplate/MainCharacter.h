@@ -29,10 +29,15 @@ private:
 	Sprite* jumpHitSprite;
 	Sprite* sitHitSprite;
 	Sprite* climb;
+	Sprite* hurt;
 
 	bool isOnLadder;
+	bool hurting;
+	DWORD startHurting;
 
 	int score;
+
+	int alpha;
 public:
 	MainCharacter();
 	~MainCharacter();
@@ -58,7 +63,7 @@ public:
 
 	void GetBoundingBox(float &l, float &t, float &r, float &b);
 
-	void CheckCollisionWithGround(Brick *brick);
+	void CheckCollisionWithGround(vector<Object*> *objects);
 	void CheckCollisionWithOtherObject(vector<Object*>* object = NULL);
 	void CheckCollisionWithLadder(Ladder *ladder);
 

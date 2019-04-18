@@ -31,9 +31,12 @@ protected:
 	float deltaY;
 	float deltaTime;
 
-	int direction;
+	Direction direction;
+
 
 	Sprite* currentSprite;
+
+	int HP;
 
 public:
 	Object();
@@ -87,8 +90,12 @@ public:
 	void SetLastPos(D3DXVECTOR3 pos) { this->lastPos.x = pos.x; this->lastPos.y = pos.y; }
 	D3DXVECTOR3 GetLastPos() { return this->lastPos; }
 
-	void SetDirection(int a) { this->direction = a; }
-	int GetDirection() { return this->direction; }
+	void SetDirection(Direction d) { this->direction = d; }
+	Direction GetDirection() { return this->direction; }
+
+	void Hurt() { this->HP--; }
+	void SetHP(int a) { this->HP = a; }
+	int GetHP() { return this->HP; }
 };
 
 
@@ -97,7 +104,11 @@ struct CollisionEvent
 	Object* obj;
 	float t, nx, ny;
 
-	CollisionEvent(float t, float nx, float ny, Object* obj = NULL) { this->t = t; this->nx = nx; this->ny = ny; this->obj = obj; }
+	CollisionEvent(float t, float nx, float ny, Object* obj = NULL) 
+	{ this->t = t; 
+	this->nx = nx; 
+	this->ny = ny;
+	this->obj = obj; }
 
 	static bool compare(const CollisionEvent* a, CollisionEvent *b)
 	{

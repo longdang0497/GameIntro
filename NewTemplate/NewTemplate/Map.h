@@ -27,6 +27,8 @@ private:
 	int numOfColumnTileSet;
 	int numOfRowTileSet;
 
+
+
 public:
 	Map();
 	Map(LPCWSTR filePath, LPCWSTR tileset, int ID_MAP);

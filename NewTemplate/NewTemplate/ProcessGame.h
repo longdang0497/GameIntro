@@ -7,6 +7,7 @@
 #include "Stage1.h"
 #include "Stage2.h"
 #include "KeyGame.h"
+#include "StageManager.h"
 
 class KeyEventHandler : public Input {
 public:
