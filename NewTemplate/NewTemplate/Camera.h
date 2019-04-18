@@ -4,6 +4,7 @@
 #include <d3dx9.h>
 #include <vector>
 #include "Define.h"
+#include "Graphic.h"
 
 class Camera
 {

@@ -20,7 +20,6 @@ void Ladder::Update(float deltaTime, vector<Object*>* object)
 
 void Ladder::Render()
 {
-	RenderBoundingBox();
 }
 
 void Ladder::HandleCollision(vector<Object*>* objects)

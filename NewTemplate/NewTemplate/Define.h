@@ -3,6 +3,7 @@
 // ========= GAME
 #define GAME_MODE_320_240 0
 #define GAME_MODE_640_480 1
+#define GAME_MODE_256_256 2
 #define GAME_TITLE L"Ninja Gaiden"
 enum GAME_STAGE {
 	STAGE1,

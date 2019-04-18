@@ -27,13 +27,14 @@ void Stage2::LoadResource()
 
 	fstream fs(PATH_POS_GROUND_MAP_2);
 
-	int numberOfGround, left, top, right, bottom;
+	int numberOfGround, left, top, right, bottom, canStick;
 
 	fs >> numberOfGround;
 
 	vector<RECT> *bricks = new vector<RECT>();
 	for (int i = 0; i < numberOfGround; i++) {
-		fs >> left >> top >> right >> bottom;
+		bricks->clear();
+		fs >> left >> top >> right >> bottom >> canStick;
 
 		RECT rect;
 		rect.top = top;
@@ -42,6 +43,12 @@ void Stage2::LoadResource()
 		rect.bottom = bottom;
 
 		this->InitStaticObjects(rect, bricks);
+
+		for (int i = 0; i < bricks->size(); i++) {
+			RECT rect = bricks->at(i);
+			Brick * brick = new Brick(rect.left, rect.top, rect.right, rect.bottom, canStick);
+			this->objects->push_back(brick);
+		}
 	}
 
 	fs.close();
@@ -61,11 +68,7 @@ void Stage2::LoadResource()
 		this->objects->push_back(ladder);
 	}
 
-	for (int i = 0; i < bricks->size(); i++) {
-		RECT rect = bricks->at(i);
-		Brick * brick = new Brick(rect.left, rect.top, rect.right, rect.bottom);
-		this->objects->push_back(brick);
-	}
+
 
 
 

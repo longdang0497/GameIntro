@@ -4,9 +4,9 @@
 class Brick : public Object
 {
 private:
-	
+	bool canStick;
 public:
-	Brick(int left, int top, int right, int bottom);
+	Brick(int left, int top, int right, int bottom, int canStick);
 	~Brick();
 
 	void Update(float deltaTime, vector<Object*> *object = NULL);

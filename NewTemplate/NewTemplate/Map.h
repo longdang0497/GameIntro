@@ -8,8 +8,7 @@
 #include "Define.h"
 #include "Game.h"
 #include "Camera.h"
-
-
+#include "Graphic.h"
 class Map
 {
 private:

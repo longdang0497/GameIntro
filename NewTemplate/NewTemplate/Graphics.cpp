@@ -26,6 +26,10 @@ void Graphic::SetDimension(int mode) {
 		this->screenWidth = 640;
 		this->screenHeight = 480;
 		break;
+	case GAME_MODE_256_256:
+		this->screenWidth = 256;
+		this->screenHeight = 293;
+		break;
 	default:
 		this->screenWidth = 300;
 		this->screenHeight = 300;

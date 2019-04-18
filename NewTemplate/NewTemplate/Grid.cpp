@@ -69,13 +69,17 @@ void Grid::DeleteGrid()
 
 void Grid::InitGrid(int mapHeight, int mapWidth, bool isArray)
 {
+	Graphic* graphic = Graphic::GetInstance(NULL, NULL, L"", NULL);
+	int cellWidth = graphic->GetWidth() / 2;
+	int cellHeight = (graphic->GetHeight() - 80 - 37) / 2;
+
 	if (isArray) {
-		this->numOfRow = (int)ceil((float)mapHeight * BRICK_SIZE / CELL_SIZE);
-		this->numOfColumn = (int)ceil((float)mapWidth * BRICK_SIZE / CELL_SIZE);
+		this->numOfRow = (int)ceil((float)mapHeight * BRICK_SIZE / cellHeight);
+		this->numOfColumn = (int)ceil((float)mapWidth * BRICK_SIZE / cellWidth);
 	}
 	else {
-		this->numOfRow = (int)ceil((float)mapHeight / CELL_SIZE);
-		this->numOfColumn = (int)ceil((float)mapWidth / CELL_SIZE);
+		this->numOfRow = (int)ceil((float)mapHeight / cellHeight);
+		this->numOfColumn = (int)ceil((float)mapWidth / cellWidth);
 	}
 
 	this->numOfColumn += 2;
