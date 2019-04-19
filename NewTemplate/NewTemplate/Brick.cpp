@@ -8,7 +8,7 @@ Brick::Brick(int left, int top, int right, int bottom, int canStick)
 	objectHeight = bottom - top;
 	objectWidth = right - left;
 	this->SetObjectType(BRICK);
-
+	HP = 1;
 	this->canStick = canStick;
 }
 
@@ -22,6 +22,7 @@ void Brick::Update(float deltaTime, vector<Object*>* object)
 
 void Brick::Render()
 {
+	Object::Render();
 }
 
 void Brick::HandleCollision(vector<Object*>* objects)

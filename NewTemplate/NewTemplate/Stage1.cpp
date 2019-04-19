@@ -53,16 +53,50 @@ void Stage1::LoadResource()
 
 	fs.close();
 
+	Soldier *s1 = new Soldier(D3DXVECTOR3(300, 150, 0), LEFT, 200, 400);
+	Jaguar *s2 = new Jaguar(D3DXVECTOR3(0, 150, 0), RIGHT, 300, 500);
+	Zombie *s3 = new Zombie(D3DXVECTOR3(400, 150, 0), LEFT, 300, 450);
+	this->objects->push_back(s1);
+	this->objects->push_back(s2);
+	this->objects->push_back(s3);
+
+
+
 	for (int i = 0; i < this->objects->size(); i++) {
 		Grid::GetInstance()->Add(this->objects->at(i));
 	}
 
 	delete bricks;
+
+
+	MainCharacter::GetInstance()->SetPosition(1200, 0);
 }
 
 void Stage1::Update(float deltaTime)
 {
 	Stage::Update(deltaTime);
+
+	if (numOfJaguar <= 0)
+	{
+		if (MainCharacter::GetInstance()->GetPosition().x >= 300 && MainCharacter::GetInstance()->GetPosition().x <= 400)
+		{
+			Jaguar *a = new Jaguar(D3DXVECTOR3(0, 150, 0), RIGHT);
+			this->objects->push_back(a);
+			Grid::GetInstance()->Add(a);
+		}
+		else if (MainCharacter::GetInstance()->GetPosition().x >= 1000 && MainCharacter::GetInstance()->GetPosition().x <= 1300)
+		{
+			Jaguar *a = new Jaguar(D3DXVECTOR3(1500, 200, 0), LEFT);
+			this->objects->push_back(a);
+			Grid::GetInstance()->Add(a);
+		}
+	}
+
+	numOfJaguar = 0;
+	for (int i = 0; i < this->objects->size(); i++) {
+		if (this->objects->at(i)->GetObjectType() == JAGUAR && this->objects->at(i)->GetHP() != 0)
+			numOfJaguar++;
+	}
 }
 
 void Stage1::Render()

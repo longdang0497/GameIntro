@@ -12,7 +12,11 @@
 #include "Camera.h"
 #include "Map.h"
 #include "Ladder.h"
+#include "Jaguar.h"
 #include "HUD.h"
+#include "Soldier.h"
+#include "Butterfly.h"
+#include "Zombie.h"
 
 
 class Stage

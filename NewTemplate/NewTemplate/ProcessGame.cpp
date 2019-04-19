@@ -25,6 +25,8 @@ ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 	texture->Add(ID_TEX_HUD_BG, PATH_TEX_HUD_BG);
 	texture->Add(ID_TEX_HEALTH, PATH_TEX_HEALTH);
 	texture->Add(ID_BB, PATH_BB);
+
+	texture->Add(ID_TEXTURE_ENEMIES, PATH_TEXTURE_ENEMIES);
 	
 
 

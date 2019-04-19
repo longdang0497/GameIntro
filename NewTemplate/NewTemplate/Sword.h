@@ -3,7 +3,7 @@
 #include "MainCharacter.h"
 
 
-class Sword: public Object
+class Sword : public Object
 {
 private:
 	bool isActive;

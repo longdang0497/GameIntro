@@ -35,6 +35,9 @@ protected:
 
 	Sprite* currentSprite;
 
+	int HP;
+	bool isOnGround;
+
 public:
 	Object();
 	~Object();
@@ -59,7 +62,7 @@ public:
 
 	// Phải update thông tin của Object trước rồi mới render lên lại màn hình
 	virtual void Update(float deltaTime, std::vector<Object*> *objects = NULL);
-	virtual void Render() = 0;
+	virtual void Render();
 	virtual void HandleCollision(vector<Object*> *objects) = 0;
 
 	D3DXVECTOR3 GetVeclocity() { return this->veclocity; }
@@ -89,6 +92,11 @@ public:
 
 	void SetDirection(int a) { this->direction = a; }
 	int GetDirection() { return this->direction; }
+
+	void Hurt() { this->HP--; }
+
+	int GetHP() { return this->HP; }
+	void SetHP(int value) { this->HP = value; }
 };
 
 

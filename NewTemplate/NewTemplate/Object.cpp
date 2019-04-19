@@ -161,12 +161,12 @@ void Object::FilterCollision(vector<CollisionEvent*>* coEvents, vector<Collision
 			minTx = c->t; nx = c->nx; min_ix = i;
 		}
 
-		if (c->t <= minTy  && c->ny != 0) {
+		if (c->t <= minTy && c->ny != 0) {
 			minTy = c->t; ny = c->ny; min_iy = i;
 		}
 	}
 
-	if (min_ix >= 0) 
+	if (min_ix >= 0)
 		coEventsResult->push_back(coEvents->at(min_ix));
 	if (min_iy >= 0)
 		coEventsResult->push_back(coEvents->at(min_iy));
@@ -177,20 +177,24 @@ void Object::RenderBoundingBox()
 	float left, top, right, bottom;
 	GetBoundingBox(left, top, right, bottom);
 
-	D3DXVECTOR3 pos1 (left, top, 0);
+	D3DXVECTOR3 pos1(left, top, 0);
 
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(pos1);
 
-	Game::GetInstance()->Draw(pos.x,pos.y,Texture::GetInstance()->Get(ID_BB),left,top,right,bottom);
+	Game::GetInstance()->Draw(pos.x, pos.y, Texture::GetInstance()->Get(ID_BB), left, top, right, bottom);
 }
 
 void Object::Update(float deltaTime, std::vector<Object*>* objects)
 {
 	this->deltaTime = deltaTime;
 	this->deltaX = this->veclocity.x * deltaTime;
-	this->deltaY= this->veclocity.y * deltaTime;
+	this->deltaY = this->veclocity.y * deltaTime;
 }
 
+void Object::Render()
+{
+	RenderBoundingBox();
+}
 
 CollisionEvent* Object::SweptAABBEx(Object* coO)
 {
@@ -206,7 +210,7 @@ CollisionEvent* Object::SweptAABBEx(Object* coO)
 	sVel.y = coO->GetVeclocity().y;
 
 
-	D3DXVECTOR2 sdPos = sVel*deltaTime;
+	D3DXVECTOR2 sdPos = sVel * deltaTime;
 
 	D3DXVECTOR2 ndPos;
 	ndPos.x = this->deltaX - sdPos.x;
@@ -219,7 +223,7 @@ CollisionEvent* Object::SweptAABBEx(Object* coO)
 		ndPos.x, ndPos.y,
 		sl, st, sr, sb,
 		t, nx, ny
-		);
+	);
 
 	CollisionEvent * e = new CollisionEvent(t, nx, ny, coO);
 	return e;

@@ -34,7 +34,7 @@ public:
 	~Sprite();
 
 	void UpdateSprite();
-	void DrawSprite(D3DXVECTOR3 position, bool flagRight);	//draw multi sprites
+	void DrawSprite(D3DXVECTOR3 position, bool flagRight, int alpha = 255);	//draw multi sprites
 	RECT ReadCurrentSpritePosition();
 	void Reset();
 
@@ -42,6 +42,11 @@ public:
 
 	bool getDone() { return this->isDone; }
 	void setDone(bool a) { this->isDone = a; }
+
+	int GetHeight() { return this->height; }
+	void SetHeight(int a) { this->height = a; }
+	int GetWidth() { return this->width; }
+	void SetWidth(int a) { this->width = a; }
 
 	int GetIndex() { return this->index; }
 

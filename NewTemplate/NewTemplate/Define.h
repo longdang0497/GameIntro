@@ -36,6 +36,7 @@ enum COLLISION_DIRECTION {
 #define PATH_MAIN_CLIMB L"sprite\\main\\MAIN_CLIMB.txt"
 #define PATH_MAIN_JUMP_SCROLL L"sprite\\main\\MAIN_JUMP_SCROLL.txt"
 #define PATH_MAIN_JUMP_SCROLL_KILL L"sprite\\main\\MAIN_JUMP_SCROLL_KILL.txt"
+#define PATH_MAIN_HURT L"sprite\\main\\MAIN_HURT.txt"
 
 #define PATH_MAIN_SWORD L"sprite\\main\\MAIN_SWORD.txt"
 
@@ -53,7 +54,7 @@ enum COLLISION_DIRECTION {
 #define PATH_CROW L"sprite\\enemies\\CROW.txt"
 #define PATH_EXPLODE L"sprite\\enemies\\EXPLODE.txt"
 
-#define ID_TEXTURE_ENEMIES 1
+#define ID_TEXTURE_ENEMIES 3
 #define PATH_TEXTURE_ENEMIES L"sprite\\Enemies_Bosses.png"  //   <===== CÁC SPRITE BÊN DƯỚI SỬ DỤNG TEXTURE NÀY
 #define PATH_BOSS_BULLET L"sprite\\boss\\BOSS_BULLET.txt"
 #define PATH_BOSS L"sprite\\boss\\BOSS.txt"
@@ -180,3 +181,6 @@ enum BOSS_STATE {
 // ========== GRID ===============
 #define CELL_SIZE 128
 #define BRICK_SIZE 16
+
+#define LEFT -1
+#define	RIGHT 1

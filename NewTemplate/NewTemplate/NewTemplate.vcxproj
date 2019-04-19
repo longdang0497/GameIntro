@@ -122,6 +122,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="Butterfly.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -129,6 +130,7 @@
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Jaguar.cpp" />
     <ClCompile Include="KeyBoard.cpp" />
     <ClCompile Include="KeyGame.cpp" />
     <ClCompile Include="Ladder.cpp" />
@@ -137,6 +139,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ProcessGame.cpp" />
+    <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Stage1.cpp" />
@@ -146,9 +149,12 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="trace.cpp" />
     <ClCompile Include="World.cpp" />
+    <ClCompile Include="Zombie.cpp" />
+    <ClCompile Include="ZombieSword.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="Butterfly.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Define.h" />
@@ -157,6 +163,7 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Jaguar.h" />
     <ClInclude Include="KeyBoard.h" />
     <ClInclude Include="KeyGame.h" />
     <ClInclude Include="Ladder.h" />
@@ -164,6 +171,7 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ProcessGame.h" />
+    <ClInclude Include="Soldier.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Stage1.h" />
@@ -173,6 +181,8 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="trace.h" />
     <ClInclude Include="World.h" />
+    <ClInclude Include="Zombie.h" />
+    <ClInclude Include="ZombieSword.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

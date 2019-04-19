@@ -35,6 +35,8 @@ void Stage::InitStaticObjects(RECT rect, vector<RECT> *staticObjects)
 
 		this->InitStaticObjects(rect2, staticObjects);
 	}
+
+	
 }
 
 void Stage::InitStaticObjects1(RECT rect, vector<RECT> *staticObjects)
@@ -61,29 +63,39 @@ void Stage::InitStaticObjects1(RECT rect, vector<RECT> *staticObjects)
 
 		this->InitStaticObjects1(rect2, staticObjects);
 	}
+
 }
 
 void Stage::Update(float deltaTime)
 {
 	for (int i = 0; i < this->objects->size(); i++) {
-		
-		if (this->objects->at(i)->GetObjectType() != BRICK) {
-			vector<Object*>* collisionsObject = Grid::GetInstance()->GetCollisionObjects(this->objects->at(i));
 
-			this->objects->at(i)->Update(deltaTime, collisionsObject);
-
-			for (int j = 0; j < collisionsObject->size(); j++) {
-				Grid::GetInstance()->UpdateGrid(collisionsObject->at(j));
-			}
-
+		if (this->objects->at(i)->GetObjectType() != BRICK && this->objects->at(i)->GetPosition().y >= 350)
+		{
+			this->objects->at(i)->SetHP(0);
 		}
-		else {
-			this->objects->at(i)->Update(deltaTime, NULL);
-		}
-
-		Grid::GetInstance()->UpdateGrid(this->objects->at(i));
 	}
-	//MainCharacter::GetInstance()->Update(deltaTime, objects);
+	for (int i = 0; i < this->objects->size(); i++) {
+
+		if (this->objects->at(i)->GetHP() != 0)
+		{
+			if (this->objects->at(i)->GetObjectType() != BRICK) {
+				vector<Object*>* collisionsObject = Grid::GetInstance()->GetCollisionObjects(this->objects->at(i));
+
+				this->objects->at(i)->Update(deltaTime, collisionsObject);
+
+				for (int j = 0; j < collisionsObject->size(); j++) {
+					if (collisionsObject->at(j)->GetHP() != 0)
+						Grid::GetInstance()->UpdateGrid(collisionsObject->at(j));
+				}
+
+			}
+			else {
+				this->objects->at(i)->Update(deltaTime, NULL);
+			}
+			Grid::GetInstance()->UpdateGrid(this->objects->at(i));
+		}
+	}
 
 	Camera::GetInstance()->Update(MainCharacter::GetInstance()->GetPosition());
 }

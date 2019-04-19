@@ -5,7 +5,7 @@ Sword* Sword::_instance = NULL;
 Sword::Sword()
 {
 	isActive = false;
-	direction = 1;
+	direction = RIGHT;
 	swordSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_SWORD);
 
 	currentSprite = swordSprite;
@@ -20,25 +20,81 @@ Sword::~Sword()
 void Sword::Update(float t, vector<Object*> *object)
 {
 	//position = MainCharacter::GetInstance()->GetPosition();
-	if(isActive)
+	if (isActive)
 		currentSprite->UpdateSprite();
 	if (isActive && currentSprite->getDone())
 	{
 		isActive = false;
 		currentSprite->setDone(false);
 	}
+
+
+	if (!isActive) return;
+
+	for (auto iter : *object)
+	{
+		switch (iter->GetObjectType())
+		{
+
+		case JAGUAR:
+		case SOLDIER:
+		case BUTTERFLY:
+		case ZOMBIE:
+
+		{
+			float al, at, ar, ab, bl, bt, br, bb;
+			GetBoundingBox(al, at, ar, ab);
+			iter->GetBoundingBox(bl, bt, br, bb);
+			if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
+			{
+				iter->SetHP(0);
+			}
+
+			break;
+		}
+		default:
+			break;
+		}
+	}
+
+	// sweptAABB colision
+	vector<CollisionEvent*> *coEvents = new vector<CollisionEvent*>();
+	coEvents->clear();
+
+	CalcPotentialCollisions(object, coEvents);
+
+	for (auto iter : *coEvents)
+	{
+		switch (iter->obj->GetObjectType())
+		{
+		case JAGUAR:
+		case SOLDIER:
+		case BUTTERFLY:
+		case ZOMBIE:
+			iter->obj->SetHP(0);
+			break;
+		default:
+			break;
+		}
+	}
+	for (auto iter : *coEvents) delete iter;
+	coEvents->clear();
+
+
+
+
 }
 void Sword::Render()
 {
-	//RenderBoundingBox();
+	Object::Render();
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
 
 	if (isActive)
 	{
 
-		if (direction == 1)
+		if (direction == RIGHT)
 		{
-			currentSprite->DrawSprite(pos, true); 
+			currentSprite->DrawSprite(pos, true);
 		}
 		else
 		{
@@ -54,7 +110,7 @@ void Sword::HandleCollision(vector<Object*>* objects)
 
 void Sword::CalCulatePosition()
 {
-	
+
 }
 
 void Sword::GetBoundingBox(float &l, float &t, float &r, float &b)
@@ -76,10 +132,10 @@ void Sword::GetBoundingBox(float &l, float &t, float &r, float &b)
 			r = l + 27;
 			break;
 		case 2:
-			if (direction == 1)
+			if (direction == RIGHT)
 				l = position.x;
 			else
-				l = position.x+16;
+				l = position.x + 16;
 			t = position.y;
 			b = t + 5;
 			r = l + 9;

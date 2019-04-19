@@ -85,7 +85,7 @@ void Sprite::UpdateSprite()
 	
 }
 
-void Sprite::DrawSprite(D3DXVECTOR3 position, bool flagRight)
+void Sprite::DrawSprite(D3DXVECTOR3 position, bool flagRight, int alpha)
 {
 	if (this->texture == NULL)
 		return;
@@ -112,7 +112,7 @@ void Sprite::DrawSprite(D3DXVECTOR3 position, bool flagRight)
 
 	Game::GetInstance()->GetSpriteHandler()->SetTransform(&mat);
 
-	Game::GetInstance()->GetSpriteHandler()->Draw(this->texture, &rect, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+	Game::GetInstance()->GetSpriteHandler()->Draw(this->texture, &rect, NULL, NULL, D3DCOLOR_ARGB(alpha, 255, 255, 255));
 }
 
 RECT Sprite::ReadCurrentSpritePosition()
