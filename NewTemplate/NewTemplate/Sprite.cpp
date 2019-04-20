@@ -104,7 +104,6 @@ void Sprite::DrawSprite(D3DXVECTOR3 position, bool flagRight, int alpha)
 	if (!flagRight) {
 		tempTurnRight = -1.0f;
 	}
-
 	D3DXVECTOR3 scaling(tempTurnRight, 1.0f, 1.0f);
 
 	// out, scaling centre, scaling rotation, scaling, rotation centre, rotation, translation
@@ -112,6 +111,15 @@ void Sprite::DrawSprite(D3DXVECTOR3 position, bool flagRight, int alpha)
 
 	Game::GetInstance()->GetSpriteHandler()->SetTransform(&mat);
 
+
+	if (alpha == 128) {
+		int a = rand() % 2;
+		if(a == 0)
+			Game::GetInstance()->GetSpriteHandler()->Draw(this->texture, &rect, NULL, NULL, D3DCOLOR_ARGB(128, 255, 255, 255));
+		else Game::GetInstance()->GetSpriteHandler()->Draw(this->texture, &rect, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	}
+	else
 	Game::GetInstance()->GetSpriteHandler()->Draw(this->texture, &rect, NULL, NULL, D3DCOLOR_ARGB(alpha, 255, 255, 255));
 }
 

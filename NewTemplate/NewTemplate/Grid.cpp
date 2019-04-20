@@ -230,3 +230,5 @@ Grid * Grid::GetInstance(int mapHeight, int mapWidth, bool isArray)
 	if (_instance == NULL) _instance = new Grid(mapHeight, mapWidth, isArray);
 	return _instance;
 }
+
+

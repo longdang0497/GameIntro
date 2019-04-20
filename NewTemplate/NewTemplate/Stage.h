@@ -25,6 +25,7 @@ protected:
 	vector<Object*> *objects;
 
 	Map* map;
+
 public:
 	Stage();
 	~Stage();

@@ -12,6 +12,8 @@ private:
 
 	int spriteDirection;
 
+	DWORD changeSpriteDirectionTime;
+
 public:
 	ZombieSword();
 	ZombieSword(D3DXVECTOR3 pos, int direction);
@@ -24,5 +26,7 @@ public:
 
 	void GetBoundingBox(float &l, float &t, float &r, float &b);
 
+	void SetSpriteDirection(int a) { this->spriteDirection = a; }
+	int GetSpriteDirection() { return this->spriteDirection; }
 };
 

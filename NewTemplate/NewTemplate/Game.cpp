@@ -291,6 +291,7 @@ void Game::SweptAABB(
 
 }
 
+
 bool Game::IsIntersect(RECT rectA, RECT rectB)
 {
 	return rectA.left < rectB.right && rectA.right > rectB.left && rectA.top < rectB.bottom && rectA.bottom > rectB.top;

@@ -12,6 +12,8 @@ HUD::HUD()
 		listHealth.insert(pair<int, RECT>(i, { 5 * i, 0, 5 * (i + 1), 8 }));
 
 	enemyHealth = 16;
+	time = 150;
+	bufferTime = 0;
 }
 
 void HUD::DrawHealth(int id, D3DXVECTOR2 position)
@@ -35,49 +37,56 @@ char* IntToChar(int value, int len = 10)
 
 void HUD::Draw(D3DXVECTOR2 position)
 {
-	Game::GetInstance()->Draw(0, 0, texBackground, 0, 0, 512, 80);
 
 	// scores
 	text->DrawString("SCORE-", { 1,3 });
-	text->DrawString(IntToChar(MainCharacter::GetInstance()->GetScore(), 6), { 97, 3 }); //49
+	text->DrawString(IntToChar(MainCharacter::GetInstance()->GetScore(), 6), { 49, 3 }); //49
 
 	// time
-	text->DrawString("TIME", { 200,3 });
-	text->DrawString(IntToChar(0, 3), { 265, 3 });
+	text->DrawString("TIME", { 150,3 });
+	text->DrawString(IntToChar(time, 6), { 183, 3 });
 
 	// state
-	text->DrawString("STAGE", { 315,3 });
-	text->DrawString("03", { 400, 3 });
+	text->DrawString("STAGE - ", { 1,23 });
+	text->DrawString("03", { 50, 23 });
 
-	// player's heart
-	//text->DrawString(IntToChar(10, 2), { 205, 32 });
+
+	// state
+	text->DrawString("P -", { 97,23 });
+	text->DrawString("02", {122, 23 });
+
+
+	Game::GetInstance()->Draw(150, 23, texBackground, 0, 0, 62, 48);
+
 
 	// player's health
-	text->DrawString("PLAYER", { 1,3 + 20 });
-	for (int i = 0; i < 16; i++)
+	text->DrawString("PLAYER", { 1,43 });
+
+	int i = 0;
+	int player = MainCharacter::GetInstance()->GetHP();
+	for (i; i < player; i++)
 	{
-		//int tmpId = i < player->GetHealth() ? 0 : 1;
-		int tmpId = 0;
-		DrawHealth(tmpId, { float(55 + i * 5), 23 });
+		DrawHealth(0, { float(55 + i * 5), 43 });
 	}
 
-	//// enemy's health
-	text->DrawString("ENEMY", { 1,3 + 40 });
-	for (int i = 0; i < 16; i++)
+	for (i; i < 16; i++)
 	{
-		//int tmpId = i < enemyHealth ? 2 : 1;
-		int tmpId = 2;
-		DrawHealth(tmpId, { float(55 + i * 5), 44 });
+		DrawHealth(1, { float(55 + i * 5), 43 });
 	}
 
-	//// item
-	//GetItemSprite()->Draw(165, 31);
+	i = 0;
+	player = 14;
+	text->DrawString("ENEMY", { 1,63 });
+	for (i; i < player; i++)
+	{
+		DrawHealth(0, { float(55 + i * 5), 63 });
+	}
 
-	//// multi shoot
-	//GetMultiShootSprite()->Draw(230, 32);
+	for (i; i < 16; i++)
+	{
+		DrawHealth(2, { float(55 + i * 5), 63 });
+	}
 
-	//// player's life
-	//text->DrawString(IntToChar(player->GetLife(), 2), { 205, 25 });
 }
 
 HUD::~HUD()
@@ -103,4 +112,20 @@ Sprite* HUD::GetMultiShootSprite()
 void HUD::SetEnemyHealth(int health)
 {
 	enemyHealth = health;
+}
+
+void HUD::Update(float dt)
+{
+	bufferTime += dt;
+	if (bufferTime >= 1000)
+	{
+		this->time -= 1;
+		bufferTime -= 1000;
+	}
+}
+
+void HUD::ResetTime()
+{
+	this->time = 150;
+	bufferTime = 0;
 }
