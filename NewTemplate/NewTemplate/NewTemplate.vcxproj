@@ -125,8 +125,11 @@
     <ClCompile Include="Butterfly.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="Eagle.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="GreenSodier.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -158,8 +161,11 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="Eagle.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphic.h" />
+    <ClInclude Include="GreenSodier.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Input.h" />

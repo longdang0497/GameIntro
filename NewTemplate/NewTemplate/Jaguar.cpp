@@ -1,99 +1,79 @@
-#include "Jaguar.h"
+﻿#include "Jaguar.h"
 
-Jaguar::Jaguar()
+Jaguar::Jaguar(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2) : Enemy(pos, appearanceDirection, limitX1, limitX2)
 {
 	this->jaguar = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_JAGUAR);
-	this->SetObjectType(JAGUAR);
 	this->HP = 1;
-	this->objectWidth = jaguar->GetWidth();
-	this->objectHeight = jaguar->GetHeight();
-	MainPos1 = MainPos2 = 0;
-}
-
-Jaguar::~Jaguar()
-{
-	if (this->jaguar != NULL) delete this->jaguar;
-}
-
-Jaguar::Jaguar(D3DXVECTOR3 pos, int direction, int MainPos1, int MainPos2)
-{
-	this->jaguar = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_JAGUAR);
 	this->SetObjectType(JAGUAR);
-	this->HP = 0;
-	this->position = pos;
-	this->direction = direction;
-	this->defaultPosition = pos;
-	this->MainPos1 = MainPos1;
-	this->MainPos2 = MainPos2;
 }
 
-Jaguar::Jaguar(D3DXVECTOR3 pos, int direction)
+void Jaguar::Update(float deltaTime, std::vector<Object*>* objects)
 {
-	this->jaguar = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_JAGUAR);
-	this->SetObjectType(JAGUAR);
-	this->HP = 1;
-	this->position = pos;
-	
-	this->enemyAppearanceDirection = direction;
-
-	MainPos1 = MainPos2 = 0;
-}
-
-void Jaguar::Update(float deltaTime, vector<Object*>* object)
-{
-	if (HP <= 0 && MainPos1 == MainPos2)
+	if (this->HP <= 0 && limitX1 == limitX2) {
 		return;
+	}
+	
+	// Xét theo camera bên phải
+	if (this->enemyAppearanceDirection == 1) {
 
-	if (MainCharacter::GetInstance()->GetPosition().x >= MainPos1 &&
-		MainCharacter::GetInstance()->GetPosition().x <= MainPos2 &&
-		HP == 0)
-	{
-		HP = 1;
-		this->position = defaultPosition;
+	}
+	// Xét theo camera bên trái
+	else {
+		if (Camera::GetInstance()->getPosition().x - this->position.x <= 3.0 && Camera::GetInstance()->getPosition().x - this->position.x >= 0.0) {
+			this->flagAppear = true;
+			this->direction = 1;
+		}
 	}
 
+	if (!this->flagAppear) return;
 
-	Object::Update(deltaTime, object);
+	if (this->enemyAppearanceDirection == 0 && this->position.x < Camera::GetInstance()->getPosition().x - 3.0
+		|| this->position.x > Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", 1)->GetWidth()) {
+		this->Destroy();
+		return;
+	}
+
+	Object::Update(deltaTime, objects);
 
 	this->veclocity.y += 0.0015f*deltaTime;
-	if (isOnGround)
-	{
+
+	if (isOnGround) {
 		this->veclocity.x = 0.15*direction;
 		this->jaguar->UpdateSprite();
 	}
-	else
-		this->veclocity.x = 0;
 
 	vector<Object*> *ground = new vector<Object*>();
 	ground->clear();
 
-	for (auto iter : *object)
-	{
-		if (iter->GetObjectType() == BRICK)
+	for (auto iter : *objects) {
+		if (iter->GetObjectType() == BRICK) {
 			ground->push_back(iter);
+		}
 	}
 
-
-
 	this->HandleCollision(ground);
+
+	delete ground;
+
 }
 
 void Jaguar::Render()
 {
-	if (HP <= 0)
+
+	if (!this->flagAppear) {
 		return;
+	}
 
-	Object::Render();
-
-	//RenderBoundingBox();
 	this->position.z = 0;
 
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
 
-	if (direction == RIGHT)
+	if (direction == RIGHT) {
 		this->jaguar->DrawSprite(pos, true);
-	else
+	}
+	else {
 		this->jaguar->DrawSprite(pos, false);
+	}
 }
 
 void Jaguar::HandleCollision(vector<Object*>* objects)
@@ -132,13 +112,10 @@ void Jaguar::HandleCollision(vector<Object*>* objects)
 
 	delete coEvents;
 	delete coEventsResult;
-
-
 }
 
-void Jaguar::GetBoundingBox(float &l, float &t, float &r, float &b)
+void Jaguar::GetBoundingBox(float & l, float & t, float & r, float & b)
 {
-
 	if (HP > 0)
 	{
 		this->objectWidth = jaguar->GetWidth();
@@ -151,3 +128,9 @@ void Jaguar::GetBoundingBox(float &l, float &t, float &r, float &b)
 	else l = r = b = t = 0;
 }
 
+void Jaguar::Destroy()
+{
+	this->position = defaultPosition;
+	this->HP = 1;
+	this->flagAppear = false;
+}

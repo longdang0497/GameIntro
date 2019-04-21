@@ -125,11 +125,6 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 	default:
 		break;
 	}
-
-	//int width, height;
-	//this->currentSprite->GetBoundingBox(width, height);
-
-	//this->SetBoundingBox(width, height);
 }
 
 void MainCharacter::ResetAllSprites()

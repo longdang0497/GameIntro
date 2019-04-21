@@ -37,9 +37,8 @@ protected:
 
 	Sprite* currentSprite;
 
-	int HP;
 	bool isOnGround;
-
+	int HP;
 public:
 	Object();
 	~Object();

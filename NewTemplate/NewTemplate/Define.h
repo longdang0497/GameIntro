@@ -25,7 +25,7 @@ enum GAME_STAGE {
 #define BUTTERFLY_ID 2
 #define EAGLE_ID 3
 #define ZOMBIE_ID 4
-#define GREEN_SOLDIER 5
+#define GREEN_SOLDIER_ID 5
 
 // =========== TEXTURE + SPRITE
 #define ID_TEXTURE_MAIN 0
@@ -81,7 +81,7 @@ enum GAME_STAGE {
 #define PATH_TEXTURE_MAP_1 L"sprite\\Stage1\\texture.png"
 #define PATH_POS_MAP_1 L"sprite\\Stage1\\map.txt"
 #define PATH_POS_GROUND_MAP_1 "sprite\\Stage1\\ground.txt"
-#define PATH_POS_ENEMIES_MAP_1 "sprite\\Stage1\\enemies.txt"
+#define PATH_POS_ENEMIES_MAP_1 L"sprite\\Stage1\\enemies.txt"
 
 #define ID_TEXTURE_MAP_2 200
 #define PATH_TEXTURE_MAP_2 L"sprite\\Stage2\\texture.png"

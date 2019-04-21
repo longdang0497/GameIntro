@@ -1,29 +1,18 @@
 #pragma once
-#include "Object.h"
+#include "Enemy.h"
 #include "Define.h"
 #include "MainCharacter.h"
 
 
-class Jaguar : public Object
+class Jaguar : public Enemy
 {
 private:
-
 	Sprite * jaguar;
-
-	int MainPos1, MainPos2;
-	D3DXVECTOR3 defaultPosition;
-
 public:
-	Jaguar();
-	Jaguar(D3DXVECTOR3 pos, int direction);
-	Jaguar(D3DXVECTOR3 pos, int direction, int MainPos1, int MainPos2);
-	~Jaguar();
-
-
-	void Update(float deltaTime, vector<Object*> *object = NULL);
+	Jaguar(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2);
+	void Update(float deltaTime, std::vector<Object*> *objects = NULL);
 	void Render();
 	void HandleCollision(vector<Object*> *objects);
-
 	void GetBoundingBox(float &l, float &t, float &r, float &b);
-
+	void Destroy();
 };

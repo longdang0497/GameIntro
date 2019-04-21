@@ -8,7 +8,6 @@ Brick::Brick(int left, int top, int right, int bottom, int canStick)
 	objectHeight = bottom - top;
 	objectWidth = right - left;
 	this->SetObjectType(BRICK);
-	HP = 1;
 	this->canStick = canStick;
 }
 
@@ -19,7 +18,6 @@ Brick::Brick(int left, int top, int right, int bottom)
 	objectHeight = bottom - top;
 	objectWidth = right - left;
 	this->SetObjectType(BRICK);
-	HP = 1;
 }
 
 Brick::~Brick()

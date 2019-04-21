@@ -1,21 +1,16 @@
 #pragma once
-#include "Object.h"
+#include "Enemy.h"
 #include "Define.h"
 
-class Butterfly : public Object
+class Butterfly : public Enemy
 {
+private:
 	Sprite * fly;
-
 public:
-	Butterfly();
-	Butterfly(D3DXVECTOR3 pos, int direction);
-	~Butterfly();
-
-	void Update(float deltaTime, vector<Object*> *object = NULL);
+	Butterfly(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2);
+	void Update(float deltaTime, std::vector<Object*> *objects = NULL);
 	void Render();
 	void HandleCollision(vector<Object*> *objects);
-
 	void GetBoundingBox(float &l, float &t, float &r, float &b);
+	void Destroy();
 };
-
-
