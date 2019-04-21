@@ -35,6 +35,8 @@ public:
 	// Dùng để cắt theo hàng dọc
 	void InitStaticObjects1(RECT rect, vector<RECT> *staticObjects);
 
+	void InitEnemies(LPCWSTR filePath);
+
 	virtual void LoadResource() = 0;
 	virtual void Update(float deltaTime);
 	virtual void Render();

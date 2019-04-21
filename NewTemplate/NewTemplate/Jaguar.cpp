@@ -33,7 +33,9 @@ Jaguar::Jaguar(D3DXVECTOR3 pos, int direction)
 	this->SetObjectType(JAGUAR);
 	this->HP = 1;
 	this->position = pos;
-	this->direction = direction;
+	
+	this->enemyAppearanceDirection = direction;
+
 	MainPos1 = MainPos2 = 0;
 }
 

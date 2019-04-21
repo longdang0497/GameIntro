@@ -6,7 +6,7 @@
 
 using namespace std;
 
-#define TRANSPARENT_COLOR D3DCOLOR_XRGB(255, 255, 255)
+#define TRANSPARENT_COLOR D3DCOLOR_XRGB(255, 163, 177)
 
 class Texture
 {

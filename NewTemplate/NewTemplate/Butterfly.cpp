@@ -22,7 +22,8 @@ Butterfly::Butterfly(D3DXVECTOR3 pos, int direction)
 	this->HP = 1;
 	currentSprite = fly;
 	this->position = pos;
-	this->direction = direction;
+	
+	this->enemyAppearanceDirection = direction;
 
 }
 

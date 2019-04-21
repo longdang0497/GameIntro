@@ -26,7 +26,7 @@ Soldier::Soldier(D3DXVECTOR3 pos, int direction)
 	this->SetObjectType(SOLDIER);
 	this->HP = 1;
 	this->position = pos;
-	this->direction = direction;
+	this->enemyAppearanceDirection = direction;
 	currentSprite = SoldierWalk;
 	state = Walk;
 	LimitX1 = LimitX2 = 0;

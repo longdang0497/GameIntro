@@ -11,19 +11,21 @@ enum GAME_STAGE {
 	STAGE3
 };
 
-enum COLLISION_DIRECTION {
-	NONE,
-	LEFT,
-	RIGHT,
-	TOP,
-	BOTTOM
-};
+
 
 #define STAGE1_WIDTH 2408
 #define STAGE1_HEIGHT 176
 
 #define STAGE2_WIDTH 3072
 #define STAGE2_HEIGHT 176
+
+// =========== ENIMIES
+#define JAGUAR_ID 0
+#define SOLDIER_ID 1
+#define BUTTERFLY_ID 2
+#define EAGLE_ID 3
+#define ZOMBIE_ID 4
+#define GREEN_SOLDIER 5
 
 // =========== TEXTURE + SPRITE
 #define ID_TEXTURE_MAIN 0
@@ -79,6 +81,7 @@ enum COLLISION_DIRECTION {
 #define PATH_TEXTURE_MAP_1 L"sprite\\Stage1\\texture.png"
 #define PATH_POS_MAP_1 L"sprite\\Stage1\\map.txt"
 #define PATH_POS_GROUND_MAP_1 "sprite\\Stage1\\ground.txt"
+#define PATH_POS_ENEMIES_MAP_1 "sprite\\Stage1\\enemies.txt"
 
 #define ID_TEXTURE_MAP_2 200
 #define PATH_TEXTURE_MAP_2 L"sprite\\Stage2\\texture.png"
@@ -104,7 +107,7 @@ enum COLLISION_DIRECTION {
 
 // ========= OBJECT =========
 enum OBJECT_TYPE {
-	BRICK,
+	BRICK = 3,
 	MAIN_CHARACTER,
 	BOSS,
 	BOSS_EXPLODE,

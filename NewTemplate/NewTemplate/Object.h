@@ -33,6 +33,8 @@ protected:
 
 	int direction;
 
+	int enemyAppearanceDirection;
+
 	Sprite* currentSprite;
 
 	int HP;

@@ -66,6 +66,36 @@ void Stage::InitStaticObjects1(RECT rect, vector<RECT> *staticObjects)
 
 }
 
+void Stage::InitEnemies(LPCWSTR filePath)
+{
+	fstream fs(filePath);
+
+	int numOfObject, left, top, limit1, limit2, objectType, direction;
+
+	fs >> numOfObject;
+
+	for (int i = 0; i < numOfObject; i++) {
+		fs >> left >> top >> limit1 >> limit2 >> objectType >> direction;
+
+		switch (objectType) {
+		case JAGUAR_ID:
+			D3DXVECTOR3(left, top, 0);
+
+			break;
+		case SOLDIER_ID:
+			break;
+		case BUTTERFLY_ID:
+			break;
+		case ZOMBIE_ID:
+			break;
+		default:
+			break;
+		}
+	}
+
+	fs.close();
+}
+
 void Stage::Update(float deltaTime)
 {
 	for (int i = 0; i < this->objects->size(); i++) {

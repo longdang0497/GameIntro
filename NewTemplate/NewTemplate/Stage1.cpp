@@ -53,12 +53,12 @@ void Stage1::LoadResource()
 
 	fs.close();
 
-	Soldier *s1 = new Soldier(D3DXVECTOR3(300, 150, 0), LEFT, 200, 400);
-	Jaguar *s2 = new Jaguar(D3DXVECTOR3(0, 150, 0), RIGHT, 300, 500);
-	Zombie *s3 = new Zombie(D3DXVECTOR3(400, 150, 0), LEFT, 300, 450);
-	this->objects->push_back(s1);
-	this->objects->push_back(s2);
-	this->objects->push_back(s3);
+	//Soldier *s1 = new Soldier(D3DXVECTOR3(300, 150, 0), LEFT, 200, 400);
+	//Jaguar *s2 = new Jaguar(D3DXVECTOR3(0, 150, 0), RIGHT, 300, 500);
+	//Zombie *s3 = new Zombie(D3DXVECTOR3(400, 150, 0), LEFT, 300, 450);
+	//this->objects->push_back(s1);
+	//this->objects->push_back(s2);
+	//this->objects->push_back(s3);
 
 
 
@@ -69,7 +69,7 @@ void Stage1::LoadResource()
 	delete bricks;
 
 
-	MainCharacter::GetInstance()->SetPosition(1200, 0);
+	MainCharacter::GetInstance()->SetPosition(100, 50);
 }
 
 void Stage1::Update(float deltaTime)
