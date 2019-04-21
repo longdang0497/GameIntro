@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MyApplication">
+	<children>
+		<Label layoutX="54.0" layoutY="81.0" text="File path" />
+		<TextField id="txtFilePath" fx:id="txtFilePath" layoutX="127.0" layoutY="77.0" prefHeight="25.0" prefWidth="349.0" />
+		<Button id="btnOpenFilePath" layoutX="491.0" layoutY="77.0" mnemonicParsing="false" onAction="#getFilePath" prefHeight="25.0" prefWidth="66.0" text="Browse" />
+		<Button id="btnOutputPath" layoutX="492.0" layoutY="119.0" mnemonicParsing="false" onAction="#getOutputPath" prefHeight="25.0" prefWidth="66.0" text="Browse" />
+		<TextField id="txtOutputPath" fx:id="txtOutputPath" layoutX="128.0" layoutY="119.0" prefHeight="25.0" prefWidth="349.0" />
+		<Label layoutX="55.0" layoutY="123.0" text="Output" />
+		<Label layoutX="54.0" layoutY="169.0" text="Width" />
+		<TextField id="txtWidth" fx:id="txtWidth" layoutX="93.0" layoutY="165.0" prefHeight="25.0" prefWidth="66.0" />
+		<Text layoutX="169.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="px" />
+		<Text layoutX="331.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="px" />
+		<TextField id="txtHeight" fx:id="txtHeight" layoutX="255.0" layoutY="165.0" prefHeight="25.0" prefWidth="66.0" />
+		<Label layoutX="216.0" layoutY="169.0" text="height" />
+		<Button id="btnExport" layoutX="438.0" layoutY="219.0" mnemonicParsing="false" onAction="#exportImage" prefHeight="68.0" prefWidth="134.0" text="Export" />
+      <Label fx:id="lbProgress" layoutX="54.0" layoutY="236.0" text="Choose image" />
+      <ProgressBar fx:id="pgbProgress" layoutX="54.0" layoutY="261.0" prefHeight="18.0" prefWidth="368.0" progress="0.0" />
+	</children>
+</AnchorPane>
