@@ -13,6 +13,7 @@ Stage::~Stage()
 
 void Stage::InitStaticObjects(RECT rect, vector<RECT> *staticObjects)
 {
+
 	int n = floor(rect.left / CELL_SIZE);
 	int tempRight = (n+1) * CELL_SIZE;
 	if (tempRight > rect.right) {
@@ -63,7 +64,6 @@ void Stage::InitStaticObjects1(RECT rect, vector<RECT> *staticObjects)
 
 		this->InitStaticObjects1(rect2, staticObjects);
 	}
-
 }
 
 void Stage::InitEnemies(LPCWSTR filePath)
@@ -98,6 +98,7 @@ void Stage::InitEnemies(LPCWSTR filePath)
 
 void Stage::Update(float deltaTime)
 {
+	HUD::GetInstance()->Update(deltaTime);
 	for (int i = 0; i < this->objects->size(); i++) {
 
 		if (this->objects->at(i)->GetObjectType() != BRICK && this->objects->at(i)->GetPosition().y >= 350)

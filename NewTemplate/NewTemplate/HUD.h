@@ -24,12 +24,21 @@ class HUD
 
 	Sprite* GetItemSprite();
 	Sprite* GetMultiShootSprite();
+	
+	DWORD time;
+
+	DWORD bufferTime;
+
 
 public:
 	~HUD();
 
 	void Draw(D3DXVECTOR2 position);
 	static HUD* GetInstance();
+
+	void Update(float dt);
+
+	void ResetTime();
 
 	void SetEnemyHealth(int health);
 };

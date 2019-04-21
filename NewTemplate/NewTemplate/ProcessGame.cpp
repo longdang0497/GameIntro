@@ -125,28 +125,11 @@ void KeyEventHandler::KeyState(BYTE * states)
 
 void KeyEventHandler::OnKeyDown(int KeyCode)
 {
-	//MainCharacter* mainCharacter = MainCharacter::GetInstance();
-	//MAIN_CHARACTER_STATE mainState = mainCharacter->GetState();
 
-	//if (Game::GetInstance()->IsKeyDown(DIK_RIGHT)) {
-	//	MainCharacter::GetInstance()->SetVeclocity(0.2f, 0);
-	//	
-	//}
-
-	//if (Game::GetInstance()->IsKeyDown(DIK_LEFT)) {
-	//	MainCharacter::GetInstance()->SetVeclocity(-0.2f, 0);
-	//	
-	//}
 
 }
 
 void KeyEventHandler::OnKeyUp(int KeyCode)
 {
-	//if (KeyCode == DIK_RIGHT) {
-	//	MainCharacter::GetInstance()->SetVeclocity(0, 0);
-	//}
 
-	//if (KeyCode == DIK_LEFT) {
-	//	MainCharacter::GetInstance()->SetVeclocity(0, 0);
-	//}
 }

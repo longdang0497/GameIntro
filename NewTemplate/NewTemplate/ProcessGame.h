@@ -22,6 +22,8 @@ private:
 	static ProcessGame* _instance;
 	KeyEventHandler* keyHandler;
 
+
+
 public:
 	ProcessGame(HINSTANCE hInstance, int nShowCmd);
 	// Dùng để chạy và update nhân vật

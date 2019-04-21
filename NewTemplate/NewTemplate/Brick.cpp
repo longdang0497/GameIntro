@@ -12,6 +12,16 @@ Brick::Brick(int left, int top, int right, int bottom, int canStick)
 	this->canStick = canStick;
 }
 
+Brick::Brick(int left, int top, int right, int bottom)
+{
+	this->SetPosition(left, top);
+	this->SetVeclocity(0, 0);
+	objectHeight = bottom - top;
+	objectWidth = right - left;
+	this->SetObjectType(BRICK);
+	HP = 1;
+}
+
 Brick::~Brick()
 {
 }

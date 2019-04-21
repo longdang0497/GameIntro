@@ -48,6 +48,7 @@ void Sword::Update(float t, vector<Object*> *object)
 			if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
 			{
 				iter->SetHP(0);
+				MainCharacter::GetInstance()->Score();
 			}
 
 			break;
@@ -72,6 +73,7 @@ void Sword::Update(float t, vector<Object*> *object)
 		case BUTTERFLY:
 		case ZOMBIE:
 			iter->obj->SetHP(0);
+			MainCharacter::GetInstance()->Score();
 			break;
 		default:
 			break;

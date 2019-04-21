@@ -36,3 +36,5 @@ public:
 	static Grid* GetInstance(int mapHeight, int mapWidth, bool isArray = true);
 };
 
+
+

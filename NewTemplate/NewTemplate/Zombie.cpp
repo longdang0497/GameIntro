@@ -11,6 +11,7 @@ Zombie::Zombie()
 	currentSprite = WalkSprite;
 	state = ZombieWalk;
 	LimitX1 = LimitX2 = 0;
+	Sword = new ZombieSword();
 }
 
 Zombie::~Zombie()
@@ -32,7 +33,7 @@ Zombie::Zombie(D3DXVECTOR3 pos, int direction)
 	this->position = pos;
 	this->direction = direction;
 	this->spriteDirection = direction;
-
+	Sword = new ZombieSword();
 }
 
 Zombie::Zombie(D3DXVECTOR3 pos, int direction, int LimitX1, int LimitX2)
@@ -41,7 +42,6 @@ Zombie::Zombie(D3DXVECTOR3 pos, int direction, int LimitX1, int LimitX2)
 	this->KillSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_ZOMBIES_KILL);
 	this->SetObjectType(ZOMBIE);
 	this->HP = 1;
-	direction = LEFT;
 	currentSprite = WalkSprite;
 	state = ZombieWalk;
 	this->position = pos;
@@ -49,6 +49,8 @@ Zombie::Zombie(D3DXVECTOR3 pos, int direction, int LimitX1, int LimitX2)
 	this->LimitX1 = LimitX1;
 	this->LimitX2 = LimitX2;
 	this->spriteDirection = direction;
+	Sword = new ZombieSword();
+	Sword->SetHP(0);
 }
 
 void Zombie::Update(float deltaTime, vector<Object*>* object)
@@ -63,29 +65,28 @@ void Zombie::Update(float deltaTime, vector<Object*>* object)
 			direction = RIGHT;
 
 		}
-		else if (LimitX2 <= this->GetPosition().x && direction == RIGHT) {
+		else if (LimitX2 <= (this->GetPosition().x + currentSprite->GetWidth()) && direction == RIGHT) {
 			direction = LEFT;
 		}
 	}
 
 	this->veclocity.y += 0.0015f*deltaTime;
+	this->veclocity.x = 0.1*direction;
 
-	if (isOnGround)
-	{
-		this->veclocity.x = 0.15*direction;
 
-	}
+	if (Sword->GetSpriteDirection() == LEFT)
+		Sword->SetSpriteDirection(RIGHT);
 	else
-		this->veclocity.x = 0;
+		Sword->SetSpriteDirection(LEFT);
 
-
-	if (abs(MainCharacter::GetInstance()->GetPosition().x - this->position.x) <= 100)
+	if (abs(MainCharacter::GetInstance()->GetPosition().x - this->position.x) <= 100 && Sword->GetHP()==0 && isOnGround)
 	{
-		if (state != ZombieKill)
-		{
-			state = ZombieKill;
-			currentSprite = KillSprite;
-		}
+
+		state = ZombieKill;
+		currentSprite = KillSprite;
+		veclocity.x = 0;
+		Sword->SetHP(1);
+		Sword->SetPosition(this->position.x,this->position.y);
 	}
 	else
 	{
@@ -94,6 +95,8 @@ void Zombie::Update(float deltaTime, vector<Object*>* object)
 	}
 
 	this->currentSprite->UpdateSprite();
+
+	Sword->Update(deltaTime,object);
 
 	vector<Object*> *ground = new vector<Object*>();
 	ground->clear();
@@ -114,6 +117,8 @@ void Zombie::Render()
 
 	Object::Render();
 	this->position.z = 0;
+
+	Sword->Render();
 
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
 

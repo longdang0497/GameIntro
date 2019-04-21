@@ -67,14 +67,14 @@ void Soldier::Update(float deltaTime, vector<Object*>* object)
 
 	if (isOnGround)
 	{
-		this->veclocity.x = 0.15*direction;
+		this->veclocity.x = 0.05*direction;
 
 	}
 	else
 		this->veclocity.x = 0;
 
 
-	if (abs(MainCharacter::GetInstance()->GetPosition().x - this->position.x) <= 100)
+	if (abs(MainCharacter::GetInstance()->GetPosition().x - this->position.x) <= 50)
 	{
 		if (state != Kill)
 		{
@@ -168,12 +168,12 @@ void Soldier::GetBoundingBox(float &l, float &t, float &r, float &b)
 		switch (state)
 		{
 		case Walk:
-			l = position.x;
-			t = position.y;
+			l = position.x ;
+			t = position.y +8;
 			break;
 		case Kill:
 			l = position.x;
-			t = position.y;
+			t = position.y + 8;
 
 			break;
 		default:
@@ -181,7 +181,7 @@ void Soldier::GetBoundingBox(float &l, float &t, float &r, float &b)
 		}
 
 		r = l + currentSprite->GetWidth();
-		b = t + 40;
+		b = t + 32;
 	}
 	else l = r = b = t = 0;
 }

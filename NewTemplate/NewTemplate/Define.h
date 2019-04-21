@@ -103,7 +103,7 @@ enum GAME_STAGE {
 
 
 #define MAIN_WALK_PACE 0.15f
-#define MAIN_JUMP_SPEED_Y 0.4f
+#define MAIN_JUMP_SPEED_Y 0.35f
 
 // ========= OBJECT =========
 enum OBJECT_TYPE {

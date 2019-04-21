@@ -23,6 +23,8 @@ private:
 
 	int LimitX1, LimitX2;
 
+
+	ZombieSword* Sword;
 public:
 	Zombie();
 	Zombie(D3DXVECTOR3 pos, int direction);

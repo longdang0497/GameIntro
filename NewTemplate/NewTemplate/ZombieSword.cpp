@@ -6,7 +6,7 @@ ZombieSword::ZombieSword()
 	this->SetObjectType(ZOMBIE_SWORD);
 	this->HP = 1;
 	direction = LEFT;
-	spriteDirection = LEFT;
+	spriteDirection = RIGHT;
 	currentSprite = sprite;
 }
 
@@ -25,8 +25,8 @@ ZombieSword::ZombieSword(D3DXVECTOR3 pos, int direction)
 
 	this->position = pos;
 	this->direction = direction;
-	spriteDirection = direction;
-
+	spriteDirection = LEFT;
+	changeSpriteDirectionTime = GetTickCount();
 }
 
 
@@ -35,15 +35,24 @@ void ZombieSword::Update(float deltaTime, vector<Object*>* object)
 	if (HP <= 0)
 		return;
 	Object::Update(deltaTime, object);
+	
+	//if (changeSpriteDirectionTime - GetTickCount() >= 1000)
+	//{
+	//	if (spriteDirection == LEFT)
+	//		spriteDirection = RIGHT;
+	//	else
+	//		spriteDirection = LEFT;
 
-	spriteDirection *= -1;
+	//	changeSpriteDirectionTime = GetTickCount();
+	//}
 
-	this->veclocity.y += 0.0015f*deltaTime;
+	this->veclocity.y += 0;// 0.00005f*deltaTime;
 
-	this->veclocity.x = 0.1f*direction;
+	this->veclocity.x = 0*direction;
 
 	this->currentSprite->UpdateSprite();
 
+	this->PlusPosition(this->deltaX, this->deltaY);
 }
 
 void ZombieSword::Render()
@@ -56,10 +65,10 @@ void ZombieSword::Render()
 
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
 
-	if (this->spriteDirection == RIGHT)
-		this->currentSprite->DrawSprite(pos, true);
-	else
+	if (spriteDirection == LEFT)
 		this->currentSprite->DrawSprite(pos, false);
+	else
+		this->currentSprite->DrawSprite(pos, true);
 }
 
 void ZombieSword::HandleCollision(vector<Object*>* objects)

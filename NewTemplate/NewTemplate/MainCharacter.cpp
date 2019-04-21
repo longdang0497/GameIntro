@@ -26,6 +26,8 @@ MainCharacter::MainCharacter()
 	this->isOnGround = false;
 	this->HP = 16;
 
+	this->allowJump = false;
+
 }
 
 MainCharacter::~MainCharacter()
@@ -52,6 +54,7 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 	switch (this->state)
 	{
 	case STATE_IDLE:
+		
 		SetVx(0);
 		currentSprite = standSprite;
 		break;
@@ -68,7 +71,7 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 		currentSprite = jumpScrollSprite;
 		break;
 	case STATE_JUMP_TO:
-		SetVx(MAIN_WALK_PACE*direction);
+		SetVx(0.1*direction);
 		break;
 	case STATE_ATTACK:
 		Sword::GetInstance()->setIsActive(true);
@@ -114,7 +117,7 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 	case STATE_HURT:
 		currentSprite = hurtSprite;
 		this->Hurt();
-		SetVeclocity(-0.15*direction, -MAIN_JUMP_SPEED_Y);
+		SetVeclocity(-0.15*direction, -0.2);
 		isOnGround = false;
 		startHurting = GetTickCount();
 		isHurting = true;
@@ -155,8 +158,11 @@ void MainCharacter::Update(float t, vector<Object*>* object)
 		return;
 
 	alpha = 255;
+
 	if (isHurting)
+	{
 		alpha = 128;
+	}
 
 	Object::Update(t);
 
@@ -187,7 +193,13 @@ void MainCharacter::Update(float t, vector<Object*>* object)
 			Sword::GetInstance()->SetPosition(position.x - 25, position.y + 3);
 	}
 
-	this->veclocity.y += 0.0015f *t;
+	if (GetTickCount() - startStanding >= 300 && isOnGround)
+	{
+		allowJump = true;
+	}
+
+
+	this->veclocity.y += 0.001f *t;
 	KeyBoardHandle();
 	currentSprite->UpdateSprite();
 
@@ -223,8 +235,9 @@ void MainCharacter::KeyBoardHandle()
 
 	if (isOnGround)
 	{
-		if (k->keyJump && (GetState() != STATE_JUMP || GetState() != STATE_JUMP_TO))
+		if (k->keyJump && allowJump) //(GetState() != STATE_JUMP || GetState() != STATE_JUMP_TO))
 		{
+			allowJump = false;
 			SetState(STATE_JUMP);
 			isOnGround = false;
 		}
@@ -294,21 +307,42 @@ void MainCharacter::KeyBoardHandle()
 				SetState(STATE_JUMP_ATTACK_TO);
 		}
 
-		if (k->keyLeft && (GetState() == STATE_JUMP || GetState() == STATE_JUMP_ATTACK))
+		if (k->keyLeft && (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_JUMP_ATTACK))
 		{
+			/*direction = LEFT;
+			if (GetState() == STATE_JUMP)
+				SetState(STATE_JUMP_TO);
+			else if (GetState() == STATE_JUMP_ATTACK)
+				SetState(STATE_JUMP_ATTACK_TO);*/
+
 			direction = LEFT;
 			if (GetState() == STATE_JUMP)
 				SetState(STATE_JUMP_TO);
-			else
+			else if (GetState() == STATE_JUMP_ATTACK)
 				SetState(STATE_JUMP_ATTACK_TO);
+			else if (GetState() == STATE_JUMP_ATTACK_TO)
+				SetState(STATE_JUMP_ATTACK_TO);
+			else if (GetState() == STATE_JUMP_TO)
+				SetState(STATE_JUMP_TO);
+
 		}
-		else if (k->keyRight && (GetState() == STATE_JUMP || GetState() == STATE_JUMP_ATTACK))
+		if (k->keyRight && (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_JUMP_ATTACK))
 		{
+			/*direction = RIGHT;
+			if (GetState() == STATE_JUMP)
+				SetState(STATE_JUMP_TO);
+			else if (GetState() == STATE_JUMP_ATTACK)
+				SetState(STATE_JUMP_ATTACK_TO);*/
+
 			direction = RIGHT;
 			if (GetState() == STATE_JUMP)
 				SetState(STATE_JUMP_TO);
-			else
+			else if (GetState() == STATE_JUMP_ATTACK)
 				SetState(STATE_JUMP_ATTACK_TO);
+			else if (GetState() == STATE_JUMP_ATTACK_TO)
+				SetState(STATE_JUMP_ATTACK_TO);
+			else if (GetState() == STATE_JUMP_TO)
+				SetState(STATE_JUMP_TO);
 		}
 	}
 }
@@ -361,13 +395,20 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> *objects)
 		if (nY != 0)
 		{
 			this->veclocity.y = 0;
-
 			if (nY == -1)
-				isOnGround = true;
-
-			if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_HURT)
 			{
-				SetState(STATE_IDLE);
+				if (!isOnGround)
+				{
+					
+				}
+				isOnGround = true;
+				if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_HURT)
+				{
+					position.y -= 10;
+					startStanding = GetTickCount();
+					SetState(STATE_IDLE);
+				}
+				
 			}
 		}
 	}
@@ -388,8 +429,6 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> *objects)
 		case JAGUAR:
 		case SOLDIER:
 		case BUTTERFLY:
-		case ZOMBIE:
-		case ZOMBIE_SWORD:
 		{
 			float al, at, ar, ab, bl, bt, br, bb;
 			GetBoundingBox(al, at, ar, ab);
@@ -418,9 +457,6 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> *objects)
 		{
 		case JAGUAR:
 		case SOLDIER:
-		case BUTTERFLY:
-		case ZOMBIE:
-		case ZOMBIE_SWORD:
 			SetState(STATE_HURT);
 			break;
 		default:
@@ -442,20 +478,10 @@ void MainCharacter::GetBoundingBox(float &l, float &t, float &r, float &b)
 	}
 	else if (state == STATE_JUMP || state == STATE_JUMP_TO)
 	{
-		if (currentSprite->GetIndex() % 2 == 0)
-		{
 			l = position.x;
-			t = position.y;
-			r = position.x + 17;
-			b = position.y + 31;
-		}
-		else
-		{
-			l = position.x;
-			t = position.y + 9;
+			t = position.y ;
 			r = position.x + 21;
-			b = position.y + 31;
-		}
+			b = position.y + 21;
 	}
 	else if (state == STATE_SIT_ATTACK)
 	{
