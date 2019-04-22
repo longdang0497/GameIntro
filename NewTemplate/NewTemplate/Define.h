@@ -27,6 +27,19 @@ enum GAME_STAGE {
 #define ZOMBIE_ID 4
 #define GREEN_SOLDIER_ID 5
 
+// =========== ITEMS
+#define BLUE_R_ID 0
+#define ORANGE_R_ID 1
+#define SANDGLASS_ID 2
+#define BLUE_DART_ID 3
+#define ORANGE_DART_ID 4
+#define BLUE_POCKET_ID 5
+#define ORANGE_POCKET_ID 6
+#define BIG_SHURIKEN_ID 7
+#define ITEM_FIRE_ID 8
+#define ORANGE_JAR_ID 9
+#define BLUE_JAR_ID 10
+
 // =========== TEXTURE + SPRITE
 #define ID_TEXTURE_MAIN 0
 #define PATH_TEXTURE_MAIN L"sprite\\main_character_sprite.png"	//  <===== CÁC SPRITE BÊN DƯỚI SỬ DỤNG TEXTURE NÀY
@@ -50,6 +63,7 @@ enum GAME_STAGE {
 #define PATH_ORANGE_DART L"sprite\\item\\ITEM_ORANGE_DART.txt"
 #define PATH_BLUE_R L"sprite\\item\\ITEM_R_BLUE.txt"
 #define PATH_ORANGE_R L"sprite\\item\\ITEM_R_ORANGE.txt"
+#define PATH_ITEM_FIRE L"sprite\\item\\ITEM_FIRE.txt"
 
 #define PATH_BOSS_EXPLODE L"sprite\\boss\\BOSS_EXPLODE.txt"
 #define PATH_BUTTERFLY L"sprite\\enemies\\BUTTERFLY.txt"
