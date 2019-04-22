@@ -19,6 +19,7 @@
 #include "Zombie.h"
 #include "Eagle.h"
 #include "GreenSodier.h"
+#include "Item.h"
 
 class Stage
 {
@@ -38,6 +39,7 @@ public:
 	void InitStaticObjects1(RECT rect, vector<RECT> *staticObjects);
 
 	void InitEnemies(LPCWSTR filePath);
+	void InitItems(LPCWSTR filePath);
 
 	virtual void LoadResource() = 0;
 	virtual void Update(float deltaTime);

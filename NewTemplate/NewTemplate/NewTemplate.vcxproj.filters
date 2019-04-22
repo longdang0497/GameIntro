@@ -156,6 +156,9 @@
     <ClCompile Include="GreenSodier.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="trace.h">
@@ -255,6 +258,9 @@
       <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="GreenSodier.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>

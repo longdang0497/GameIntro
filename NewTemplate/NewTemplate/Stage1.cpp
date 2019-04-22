@@ -55,7 +55,7 @@ void Stage1::LoadResource()
 	fs.close();
 
 	this->InitEnemies(PATH_POS_ENEMIES_MAP_1);
-
+	this->InitItems(PATH_POS_ITEMS_MAP_1);
 
 
 	for (int i = 0; i < this->objects->size(); i++) {
