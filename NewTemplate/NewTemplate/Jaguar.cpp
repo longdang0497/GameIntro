@@ -5,6 +5,7 @@ Jaguar::Jaguar(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX
 	this->jaguar = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_JAGUAR);
 	this->HP = 1;
 	this->SetObjectType(JAGUAR);
+	this->isActive = false;
 }
 
 void Jaguar::Update(float deltaTime, std::vector<Object*>* objects)
@@ -13,6 +14,11 @@ void Jaguar::Update(float deltaTime, std::vector<Object*>* objects)
 		return;
 	}
 	
+	if (this->position.y >= Graphic::GetInstance(NULL, NULL, L"", 1)->GetHeight()) {
+		this->Destroy();
+		return;
+	}
+
 	// Xét theo camera bên phải
 	if (this->enemyAppearanceDirection == 1) {
 
@@ -20,12 +26,12 @@ void Jaguar::Update(float deltaTime, std::vector<Object*>* objects)
 	// Xét theo camera bên trái
 	else {
 		if (Camera::GetInstance()->getPosition().x - this->position.x <= 3.0 && Camera::GetInstance()->getPosition().x - this->position.x >= 0.0) {
-			this->flagAppear = true;
+			this->isActive = true;
 			this->direction = 1;
 		}
 	}
 
-	if (!this->flagAppear) return;
+	if (!this->isActive) return;
 
 	if (this->enemyAppearanceDirection == 0 && this->position.x < Camera::GetInstance()->getPosition().x - 3.0
 		|| this->position.x > Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", 1)->GetWidth()) {
@@ -60,7 +66,7 @@ void Jaguar::Update(float deltaTime, std::vector<Object*>* objects)
 void Jaguar::Render()
 {
 
-	if (!this->flagAppear) {
+	if (!this->isActive) {
 		return;
 	}
 
@@ -131,6 +137,7 @@ void Jaguar::GetBoundingBox(float & l, float & t, float & r, float & b)
 void Jaguar::Destroy()
 {
 	this->position = defaultPosition;
+	this->position.y -= 2;
 	this->HP = 1;
-	this->flagAppear = false;
+	this->isActive = false;
 }

@@ -56,6 +56,8 @@ void Stage1::LoadResource()
 
 	this->InitEnemies(PATH_POS_ENEMIES_MAP_1);
 
+	 //Enemy* e = new Bat({ 100, 100,0 }, 0, 0, 0);
+	 //this->objects->push_back(e);
 
 
 	for (int i = 0; i < this->objects->size(); i++) {
@@ -70,28 +72,6 @@ void Stage1::LoadResource()
 void Stage1::Update(float deltaTime)
 {
 	Stage::Update(deltaTime);
-
-	//if (numOfJaguar <= 0)
-	//{
-	//	if (MainCharacter::GetInstance()->GetPosition().x >= 300 && MainCharacter::GetInstance()->GetPosition().x <= 400)
-	//	{
-	//		Jaguar *a = new Jaguar(D3DXVECTOR3(0, 150, 0), RIGHT);
-	//		this->objects->push_back(a);
-	//		Grid::GetInstance()->Add(a);
-	//	}
-	//	else if (MainCharacter::GetInstance()->GetPosition().x >= 1000 && MainCharacter::GetInstance()->GetPosition().x <= 1300)
-	//	{
-	//		Jaguar *a = new Jaguar(D3DXVECTOR3(1500, 200, 0), LEFT);
-	//		this->objects->push_back(a);
-	//		Grid::GetInstance()->Add(a);
-	//	}
-	//}
-
-	//numOfJaguar = 0;
-	//for (int i = 0; i < this->objects->size(); i++) {
-	//	if (this->objects->at(i)->GetObjectType() == JAGUAR && this->objects->at(i)->GetHP() != 0)
-	//		numOfJaguar++;
-	//}
 }
 
 void Stage1::Render()

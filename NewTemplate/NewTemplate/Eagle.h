@@ -2,11 +2,27 @@
 #include "Enemy.h"
 #include "Define.h"
 #include "MainCharacter.h"
+#include <ctime>
+#include <cstdlib>
+
+#define FREEZE_TIME 190
+#define DEFAULT_AMPLITUDE 40
 
 class Eagle : public Enemy
 {
 private:
-//	Sprite* sprite;
+	Sprite* sprite;
+	D3DXVECTOR3 currentPosition;
+	D3DXVECTOR3 lastPosition;
+	bool flyingToRight;
+	bool flyingToBottom;
+	int count;
+
+	int amplitude = DEFAULT_AMPLITUDE;
+
+	bool canAppearAgain = true;
+	DWORD lastReachTime = GetTickCount();
+
 public:
 	~Eagle();
 

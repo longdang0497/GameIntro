@@ -24,3 +24,14 @@ void Enemy::Update(float deltaTime, std::vector<Object*>* objects)
 void Enemy::Render()
 {
 }
+
+bool Enemy::IsInCamera(float x, float y)
+{
+
+	if (x >= MainCharacter::GetInstance()->GetPosition().x - 128 && x <= x >= MainCharacter::GetInstance()->GetPosition().x - 128
+		&& y >= 0 && y <= Graphic::GetInstance(NULL, NULL, L"", 1)->GetHeight()) {
+		return true;
+	}
+
+	return false;
+}

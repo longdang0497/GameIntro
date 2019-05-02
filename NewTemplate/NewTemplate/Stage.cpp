@@ -76,6 +76,7 @@ void Stage::InitEnemies(LPCWSTR filePath)
 
 	for (int i = 0; i < numOfObject; i++) {
 		fs >> left >> top >> limit1 >> limit2 >> objectType >> direction;
+		top += 80;
 		D3DXVECTOR3 pos(left, top, 0);
 
 		switch (objectType) {
@@ -97,6 +98,9 @@ void Stage::InitEnemies(LPCWSTR filePath)
 		case GREEN_SOLDIER_ID:
 			this->objects->push_back(new GreenSodier(pos, direction, limit1, limit2));
 			break;
+		case BAT_ID:
+			this->objects->push_back(new Bat(pos, direction, limit1, limit2));
+			break;
 		default:
 			break;
 		}
@@ -108,33 +112,30 @@ void Stage::InitEnemies(LPCWSTR filePath)
 void Stage::Update(float deltaTime)
 {
 	HUD::GetInstance()->Update(deltaTime);
-	//for (int i = 0; i < this->objects->size(); i++) {
-
-	//	if (this->objects->at(i)->GetObjectType() != BRICK && this->objects->at(i)->GetPosition().y >= 350)
-	//	{
-	//		this->objects->at(i)->SetHP(0);
-	//	}
-	//}
 	for (int i = 0; i < this->objects->size(); i++) {
 
-		//if (this->objects->at(i)->GetHP() != 0)
-		//{
-			if (this->objects->at(i)->GetObjectType() != BRICK) {
-				vector<Object*>* collisionsObject = Grid::GetInstance()->GetCollisionObjects(this->objects->at(i));
+		float x, y;
+		x = this->objects->at(i)->GetPosition().x;
+		y = this->objects->at(i)->GetPosition().y;
 
-				this->objects->at(i)->Update(deltaTime, collisionsObject);
 
-				for (int j = 0; j < collisionsObject->size(); j++) {
-					//if (collisionsObject->at(j)->GetHP() != 0)
-						Grid::GetInstance()->UpdateGrid(collisionsObject->at(j));
-				}
+		if (this->objects->at(i)->GetObjectType() != BRICK && this->objects->at(i)->GetPosition().x >= MainCharacter::GetInstance()->GetPosition().x - 130
+			&& this->objects->at(i)->GetPosition().x <= MainCharacter::GetInstance()->GetPosition().x + 130) {
 
+			vector<Object*>* collisionsObject = Grid::GetInstance()->GetCollisionObjects(this->objects->at(i));
+
+			this->objects->at(i)->Update(deltaTime, collisionsObject);
+
+			for (int j = 0; j < collisionsObject->size(); j++) {
+				Grid::GetInstance()->UpdateGrid(collisionsObject->at(j));
 			}
-			//else {
-			//	this->objects->at(i)->Update(deltaTime, NULL);
-			//}
+
+
 			Grid::GetInstance()->UpdateGrid(this->objects->at(i));
-		//}
+
+
+
+		}
 	}
 
 	Camera::GetInstance()->Update(MainCharacter::GetInstance()->GetPosition());

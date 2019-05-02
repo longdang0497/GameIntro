@@ -19,6 +19,7 @@
 #include "Zombie.h"
 #include "Eagle.h"
 #include "GreenSodier.h"
+#include "Bat.h"
 
 class Stage
 {

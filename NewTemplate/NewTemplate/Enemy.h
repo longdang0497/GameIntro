@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
 #include "Camera.h"
+#include "MainCharacter.h"
 
 class Enemy : public Object
 {
@@ -20,5 +21,7 @@ public:
 	virtual void HandleCollision(vector<Object*> *objects) = 0;
 	virtual void GetBoundingBox(float &l, float &t, float &r, float &b) = 0;
 	virtual void Destroy() = 0;
+	
+	bool IsInCamera(float x, float y);
 };
 

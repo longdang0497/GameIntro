@@ -71,7 +71,7 @@ void Grid::InitGrid(int mapHeight, int mapWidth, bool isArray)
 {
 	Graphic* graphic = Graphic::GetInstance(NULL, NULL, L"", NULL);
 	int cellWidth = graphic->GetWidth() / 2;
-	int cellHeight = (graphic->GetHeight() - 80 - 37) / 2;
+	int cellHeight = (graphic->GetHeight() - 37) / 2;
 
 	if (isArray) {
 		this->numOfRow = (int)ceil((float)mapHeight * BRICK_SIZE / cellHeight);
@@ -121,7 +121,7 @@ vector<Object*>* Grid::GetCollisionObjects(Object * object)
 {
 	vector<Object*> *objects = new std::vector<Object*>();
 
-	if (object == nullptr || object->GetObjectType() == BRICK)
+	if (object == nullptr || object->GetObjectType() == BRICK || !object->GetIsActive())
 		return objects;
 
 	int row = (int)floor(object->GetPosition().y / CELL_SIZE);

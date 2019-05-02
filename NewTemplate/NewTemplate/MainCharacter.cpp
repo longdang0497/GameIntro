@@ -419,24 +419,27 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> *objects)
 {
 	for (auto iter : *objects)
 	{
-		switch (iter->GetObjectType())
-		{
-		case JAGUAR:
-		case SOLDIER:
-		case BUTTERFLY:
-		{
-			float al, at, ar, ab, bl, bt, br, bb;
-			GetBoundingBox(al, at, ar, ab);
-			iter->GetBoundingBox(bl, bt, br, bb);
-			if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
-			{
-				SetState(STATE_HURT);
-			}
 
-			break;
-		}
-		default:
-			break;
+		if (iter->GetIsActive()) {
+			switch (iter->GetObjectType())
+			{
+			case JAGUAR:
+			case SOLDIER:
+			case BUTTERFLY:
+			{
+				float al, at, ar, ab, bl, bt, br, bb;
+				GetBoundingBox(al, at, ar, ab);
+				iter->GetBoundingBox(bl, bt, br, bb);
+				if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
+				{
+					SetState(STATE_HURT);
+				}
+
+				break;
+			}
+			default:
+				break;
+			}
 		}
 	}
 
@@ -448,14 +451,16 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> *objects)
 
 	for (auto iter : *coEvents)
 	{
-		switch (iter->obj->GetObjectType())
-		{
-		case JAGUAR:
-		case SOLDIER:
-			SetState(STATE_HURT);
-			break;
-		default:
-			break;
+		if (iter->obj->GetIsActive()) {
+			switch (iter->obj->GetObjectType())
+			{
+			case JAGUAR:
+			case SOLDIER:
+				SetState(STATE_HURT);
+				break;
+			default:
+				break;
+			}
 		}
 	}
 	for (auto iter : *coEvents) delete iter;

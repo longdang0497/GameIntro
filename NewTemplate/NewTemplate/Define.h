@@ -26,6 +26,7 @@ enum GAME_STAGE {
 #define EAGLE_ID 3
 #define ZOMBIE_ID 4
 #define GREEN_SOLDIER_ID 5
+#define BAT_ID 6
 
 // =========== ITEMS
 #define BLUE_R_ID 0
@@ -78,6 +79,7 @@ enum GAME_STAGE {
 #define PATH_BOXER L"sprite\\enemies\\BOXER.txt"
 #define PATH_EAGLE L"sprite\\enemies\\EAGLE.txt"
 #define PATH_JAGUAR L"sprite\\enemies\\JAGUAR.txt"
+#define PATH_BAT L"sprite\\enemies\\BAT.txt"
 
 #define PATH_GREEN_SOLDIERS_BAZOOKA L"sprite\\enemies\\GREEN_SOLDIERS_BAZOOKA.txt"
 #define PATH_BAZOOKA_BULLET L"sprite\\enemies\\BAZOOKA_BULLET.txt"
@@ -145,7 +147,8 @@ enum OBJECT_TYPE {
 	ITEM_BLUE_DART,
 	ITEM_ORANGE_DART,
 	SANDGLASS,
-	LADDER
+	LADDER,
+	BAT
 };
 
 // ========== MAIN CHARACTER STATE ==========

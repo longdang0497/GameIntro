@@ -30,5 +30,6 @@ public:
 	}
 
 	void setWorldBoundary(float a) { this->worldBoundary = a; }
+
 };
 

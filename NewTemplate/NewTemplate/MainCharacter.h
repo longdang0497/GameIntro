@@ -6,6 +6,7 @@
 #include "KeyGame.h"
 #include "Sword.h"
 #include "Camera.h"
+#include "Enemy.h"
 
 
 #define DEFAULT_MAIN_WIDTH 32
