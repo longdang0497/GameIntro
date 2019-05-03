@@ -5,8 +5,9 @@
 class Item : public Object
 {
 protected:
+	static Item* _instance;
 	int strength;
-	D3DXVECTOR3 defaultPosition;
+	//D3DXVECTOR3 defaultPosition;
 	int flagAppear = false;	
 	int objectID;
 
@@ -21,18 +22,25 @@ protected:
 	Sprite * bigShuriken;
 	Sprite * itemFire;
 	Sprite * sandglass;
-
 public:
+	Item();
 	Item(D3DXVECTOR3 pos, int objectID);
 	~Item();
 
-	void InitItemSprite(int objID);
+	void InitItemSprite();
 
 	int GetObjID() { return this->objectID; }
 	void SetObjID(int value);
 
 	int GetStrength() { return this->strength; }
 	void SetStrength(int value) { this->strength = value; }
+
+	/*D3DXVECTOR3 GetPosition() { return this->defaultPosition; }
+	void SetPo(D3DXVECTOR3 value) { this->strength = value; }*/
+	static Item* GetInstance() {
+		if (_instance == NULL) _instance = new Item();
+		return _instance;
+	}
 
 	void Update(float deltaTime, std::vector<Object*> *objects = NULL);
 	void Render();

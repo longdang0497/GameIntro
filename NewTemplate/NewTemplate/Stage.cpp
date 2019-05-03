@@ -9,6 +9,7 @@ Stage::Stage()
 
 Stage::~Stage()
 {
+	//if (item != nullptr) delete item;
 }
 
 void Stage::InitStaticObjects(RECT rect, vector<RECT> *staticObjects)
@@ -70,9 +71,9 @@ void Stage::InitEnemies(LPCWSTR filePath)
 {
 	fstream fs(filePath);
 
-	int numOfObject, left, top, limit1, limit2, objectType, direction;
+	int numOfObject, left, top, limit1, limit2, objectType, direction, itemId;
 
-	fs >> numOfObject;
+	fs >> numOfObject;	
 
 	for (int i = 0; i < numOfObject; i++) {
 		fs >> left >> top >> limit1 >> limit2 >> objectType >> direction;
@@ -86,8 +87,12 @@ void Stage::InitEnemies(LPCWSTR filePath)
 			this->objects->push_back(new Soldier(pos, direction, limit1, limit2));
 			break;
 		case BUTTERFLY_ID:
-			this->objects->push_back(new Butterfly(pos, direction, limit1, limit2));
+		{
+			fs >> itemId;			
+			this->objects->push_back(new Butterfly(pos, direction, limit1, limit2, itemId));			
+			InitItems(pos, itemId);
 			break;
+		}
 		case EAGLE_ID:
 			this->objects->push_back(new Eagle(pos, direction, limit1, limit2));
 			break;
@@ -100,14 +105,13 @@ void Stage::InitEnemies(LPCWSTR filePath)
 		default:
 			break;
 		}
-	}
-
+	}	
 	fs.close();
 }
 
-void Stage::InitItems(LPCWSTR filePath)
+void Stage::InitItems(D3DXVECTOR3 pos, int objectID)
 {
-	fstream fs(filePath);
+	/*fstream fs(filePath);
 
 	int numOfObject, left, top, objectType;
 
@@ -116,8 +120,8 @@ void Stage::InitItems(LPCWSTR filePath)
 	for (int i = 0; i < numOfObject; i++) {
 		fs >> left >> top >> objectType;
 		D3DXVECTOR3 pos(left, top - 50, 0);
-
-		switch (objectType) {
+*/
+		switch (objectID) {
 		case BLUE_R_ID:
 			this->objects->push_back(new Item(pos, BLUE_R_ID));
 			break;
@@ -154,9 +158,9 @@ void Stage::InitItems(LPCWSTR filePath)
 		default:
 			break;
 		}
-	}
+	/*}
 
-	fs.close();
+	fs.close();*/
 }
 
 void Stage::Update(float deltaTime)

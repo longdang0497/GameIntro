@@ -55,7 +55,6 @@ void Stage1::LoadResource()
 	fs.close();
 
 	this->InitEnemies(PATH_POS_ENEMIES_MAP_1);
-	this->InitItems(PATH_POS_ITEMS_MAP_1);
 
 
 	for (int i = 0; i < this->objects->size(); i++) {
@@ -92,6 +91,21 @@ void Stage1::Update(float deltaTime)
 	//	if (this->objects->at(i)->GetObjectType() == JAGUAR && this->objects->at(i)->GetHP() != 0)
 	//		numOfJaguar++;
 	//}
+
+	for (int i = 0; i < this->objects->size(); i++)
+	{
+		if (this->objects->at(i)->GetObjectType() == BUTTERFLY)
+		{
+			if (this->objects->at(i)->GetHP() <= 0)
+			{
+				if (this->objects->at(i+1)->GetObjectType() == ITEM && this->objects->at(i+1)->GetActive() == false &&
+					this->objects->at(i+1)->GetPosition() == this->objects->at(i)->GetPosition())
+				{
+					this->objects->at(i+1)->SetActive(true);
+				}
+			}
+		}
+	}
 }
 
 void Stage1::Render()

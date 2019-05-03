@@ -98,6 +98,9 @@ public:
 
 	int GetHP() { return this->HP; }
 	void SetHP(int value) { this->HP = value; }
+
+	bool GetActive() { return this->isActive; }
+	void SetActive(bool value) { this->isActive = value; }
 };
 
 
