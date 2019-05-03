@@ -11,6 +11,7 @@ Item::Item()
 	this->isActive = false;
 	this->SetObjectType(ITEM);
 	this->SetHP(1);
+	this->isOnGround = false;
 }
 
 Item::Item(D3DXVECTOR3 pos, int objectID)
@@ -23,6 +24,7 @@ Item::Item(D3DXVECTOR3 pos, int objectID)
 	this->isActive = false;
 	this->SetHP(1);
 	this->InitItemSprite();
+	this->isOnGround = false;
 }
 
 Item::~Item()
@@ -136,11 +138,16 @@ void Item::Update(float deltaTime, std::vector<Object*>* objects)
 	{
 		if (HP <= 0)
 			return;
+		
+		//float gravity = 0.8f;
 
 		Object::Update(deltaTime, objects);
 
-		this->veclocity.y = 0;
+		//this->veclocity.y = gravity;
+		this->veclocity.y += 0.0015f*deltaTime;
 		this->veclocity.x = 0;
+
+		this->PlusPosition(this->veclocity.x, this->veclocity.y);
 
 		switch (this->objectID) {
 		case BLUE_R_ID: // SPIRITUAL STRENGTH 5 POINTS
@@ -177,6 +184,21 @@ void Item::Update(float deltaTime, std::vector<Object*>* objects)
 			this->sandglass->UpdateSprite();
 			break;
 		}
+
+		//HandleCollision(objects);				
+
+		vector<Object*> *ground = new vector<Object*>();
+		ground->clear();
+
+		for (auto iter : *objects) {
+			if (iter->GetObjectType() == BRICK) {
+				ground->push_back(iter);
+			}
+		}
+
+		this->HandleCollision(ground);
+
+		delete ground;
 	}
 }
 
@@ -232,6 +254,40 @@ void Item::Render()
 
 void Item::HandleCollision(vector<Object*>* objects)
 {
+	vector<CollisionEvent*> *coEvents = new vector<CollisionEvent*>();
+	vector<CollisionEvent*> *coEventsResult = new vector<CollisionEvent*>();
+
+	coEvents->clear();
+
+	this->CalcPotentialCollisions(objects, coEvents);
+
+	if (coEvents->size() == 0) {
+		this->PlusPosition(this->deltaX, this->deltaY);
+		isOnGround = false;
+	}
+	else {
+
+		float minTx, minTy, nX = 0, nY;
+
+		this->FilterCollision(coEvents, coEventsResult, minTx, minTy, nX, nY);
+
+		this->PlusPosition(minTx*this->deltaX + nX * 0.1f, minTy*this->deltaY + nY * 0.1f);
+
+		if (nX != 0)
+			this->veclocity.x = 0;
+		if (nY != 0)
+			this->veclocity.y = 0;
+		if (nY == -1)
+			isOnGround = true;
+
+	}
+
+	for (int i = 0; i < coEvents->size(); i++) {
+		delete coEvents->at(i);
+	}
+
+	delete coEvents;
+	delete coEventsResult;
 }
 
 void Item::GetBoundingBox(float & l, float & t, float & r, float & b)
