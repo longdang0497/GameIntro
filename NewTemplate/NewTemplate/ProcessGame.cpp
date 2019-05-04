@@ -20,7 +20,7 @@ ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 	texture->Add(ID_TEXTURE_MAIN, PATH_TEXTURE_MAIN);
 	texture->Add(ID_TEXTURE_MAP_1, PATH_TEXTURE_MAP_1);
 	texture->Add(ID_TEXTURE_MAP_2, PATH_TEXTURE_MAP_2);
-	texture->Add(ID_TEXTURE_MAP_2, PATH_TEXTURE_MAP_2);
+	texture->Add(ID_TEXTURE_MAP_3, PATH_TEXTURE_MAP_3);
 	texture->Add(ID_TEX_FONT, PATH_TEX_FONT);
 	texture->Add(ID_TEX_HUD_BG, PATH_TEX_HUD_BG);
 	texture->Add(ID_TEX_HEALTH, PATH_TEX_HEALTH);
@@ -84,6 +84,9 @@ void ProcessGame::Update(DWORD dt)
 	case STAGE2:
 		Stage2::GetInstance()->Update(dt);
 		break;
+	case STAGE3:
+		Stage3::GetInstance()->Update(dt);
+		break;
 	default:
 		break;
 	}
@@ -104,6 +107,9 @@ void ProcessGame::Render()
 			break;
 		case STAGE2:
 			Stage2::GetInstance()->Render();
+			break;
+		case STAGE3:
+			Stage3::GetInstance()->Render();
 			break;
 		default:
 			break;

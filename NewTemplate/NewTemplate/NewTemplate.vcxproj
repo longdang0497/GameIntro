@@ -122,6 +122,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bat.cpp" />
+    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="BossBullet.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Butterfly.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -148,6 +150,7 @@
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Stage1.cpp" />
     <ClCompile Include="Stage2.cpp" />
+    <ClCompile Include="Stage3.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -158,6 +161,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bat.h" />
+    <ClInclude Include="Boss.h" />
+    <ClInclude Include="BossBullet.h" />
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Butterfly.h" />
     <ClInclude Include="Camera.h" />
@@ -184,6 +189,7 @@
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Stage1.h" />
     <ClInclude Include="Stage2.h" />
+    <ClInclude Include="Stage3.h" />
     <ClInclude Include="Sword.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Texture.h" />

@@ -8,7 +8,7 @@ Stage1::Stage1()
 	
 	this->LoadResource();
 
-	Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
+	//Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
 
 	Camera::GetInstance()->setWorldBoundary(2048);
 

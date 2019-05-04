@@ -19,6 +19,9 @@ enum GAME_STAGE {
 #define STAGE2_WIDTH 3072
 #define STAGE2_HEIGHT 176
 
+#define STAGE3_WIDTH 256
+#define STAGE3_HEIGHT 176
+
 // =========== ENIMIES
 #define JAGUAR_ID 0
 #define SOLDIER_ID 1
@@ -75,6 +78,7 @@ enum GAME_STAGE {
 #define PATH_TEXTURE_ENEMIES L"sprite\\Enemies_Bosses.png"  //   <===== CÁC SPRITE BÊN DƯỚI SỬ DỤNG TEXTURE NÀY
 #define PATH_BOSS_BULLET L"sprite\\boss\\BOSS_BULLET.txt"
 #define PATH_BOSS L"sprite\\boss\\BOSS.txt"
+#define PATH_BOSS_JUMP L"sprite\\boss\\BOSS_JUMP.txt"
 
 #define PATH_BOXER L"sprite\\enemies\\BOXER.txt"
 #define PATH_EAGLE L"sprite\\enemies\\EAGLE.txt"
@@ -94,8 +98,8 @@ enum GAME_STAGE {
 
 
 #define ID_TEXTURE_MAP_1 100
-#define PATH_TEXTURE_MAP_1 L"sprite\\Stage1\\texture.png"
-#define PATH_POS_MAP_1 L"sprite\\Stage1\\map.txt"
+#define PATH_TEXTURE_MAP_1 L"sprite\\Stage1\\result.png"
+#define PATH_POS_MAP_1 L"sprite\\Stage1\\result.txt"
 #define PATH_POS_GROUND_MAP_1 "sprite\\Stage1\\ground.txt"
 #define PATH_POS_ENEMIES_MAP_1 L"sprite\\Stage1\\enemies.txt"
 
@@ -103,6 +107,11 @@ enum GAME_STAGE {
 #define PATH_TEXTURE_MAP_2 L"sprite\\Stage2\\texture.png"
 #define PATH_POS_MAP_2 L"sprite\\Stage2\\map.txt"
 #define PATH_POS_GROUND_MAP_2 "sprite\\Stage2\\ground.txt"
+
+#define ID_TEXTURE_MAP_3 300
+#define PATH_TEXTURE_MAP_3 L"sprite\\Stage3\\result.png"
+#define PATH_POS_MAP_3 L"sprite\\Stage3\\result.txt"
+#define PATH_POS_GROUND_MAP_3 "sprite\\Stage3\\ground.txt"
 
 
 #define ID_BB 1
@@ -127,6 +136,7 @@ enum OBJECT_TYPE {
 	MAIN_CHARACTER,
 	BOSS,
 	BOSS_EXPLODE,
+	BOSS_BULLET,
 	CROW,
 	EAGLE,
 	BUTTERFLY,
@@ -194,8 +204,8 @@ enum GREEN_SOLDIER_STATE {
 
 // ========== BOSS ===============
 enum BOSS_STATE {
-	BOSS_LEFT,
-	BOSS_RIGHT
+	BOSS_STAND,
+	BOSS_JUMP
 };
 
 // ========== GRID ===============

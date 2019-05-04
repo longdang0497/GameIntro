@@ -118,8 +118,11 @@ void Stage::Update(float deltaTime)
 		x = this->objects->at(i)->GetPosition().x;
 		y = this->objects->at(i)->GetPosition().y;
 
+		if (this->objects->at(i)->GetObjectType() == BOSS || this->objects->at(i)->GetObjectType() == BOSS_BULLET) {
+			this->objects->at(i)->Update(deltaTime, new vector<Object*>);
+			Grid::GetInstance()->UpdateGrid(this->objects->at(i));
 
-		if (this->objects->at(i)->GetObjectType() != BRICK && this->objects->at(i)->GetPosition().x >= MainCharacter::GetInstance()->GetPosition().x - 130
+		}else if (this->objects->at(i)->GetObjectType() != BRICK && this->objects->at(i)->GetPosition().x >= MainCharacter::GetInstance()->GetPosition().x - 130
 			&& this->objects->at(i)->GetPosition().x <= MainCharacter::GetInstance()->GetPosition().x + 130) {
 
 			vector<Object*>* collisionsObject = Grid::GetInstance()->GetCollisionObjects(this->objects->at(i));
@@ -145,10 +148,13 @@ void Stage::Render()
 {
 	HUD::GetInstance()->Draw(Camera::GetInstance()->getPosition());
 	map->drawMap();
+
+
+
 	for (int i = 0; i < this->objects->size(); i++) {
-		this->objects->at(i)->Render();
+		if (this->objects->at(i)->GetObjectType() != BOSS_BULLET) {
+			this->objects->at(i)->Render();
+		}
+		
 	}
-
-
-
 }

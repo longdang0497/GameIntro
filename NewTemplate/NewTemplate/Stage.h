@@ -20,6 +20,8 @@
 #include "Eagle.h"
 #include "GreenSodier.h"
 #include "Bat.h"
+#include "Brick.h"
+#include "Boss.h"
 
 class Stage
 {
