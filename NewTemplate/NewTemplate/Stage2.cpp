@@ -52,22 +52,33 @@ void Stage2::LoadResource()
 	fs.close();
 
 
+	fstream fs1(PATH_POS_LADDER_SATGE_2);
+
+	fs1 >> numberOfGround;
+
 	vector<RECT> *ladders = new vector<RECT>();
-	RECT r;
-	r.left = 1088;
-	r.top = 112;
-	r.right = 1103;
-	r.bottom = 207;
-	this->InitStaticObjects(r, ladders);
+	for (int i = 0; i < numberOfGround; i++) {
+		ladders->clear();
+		fs1 >> left >> top >> right >> bottom;
 
+		RECT rect;
+		rect.top = top;
+		rect.left = left;
+		rect.right = right;
+		rect.bottom = bottom;
 
-	for (auto l : *ladders) {
-		Ladder *ladder = new Ladder(l.left, l.top, l.right, l.bottom);
-		this->objects->push_back(ladder);
+		this->InitStaticObjects(rect, ladders);
+
+		for (int i = 0; i < ladders->size(); i++) {
+			RECT rect = ladders->at(i);
+			Ladder * brick = new Ladder(rect.left, rect.top, rect.right, rect.bottom);
+			this->objects->push_back(brick);
+		}
 	}
 
+	fs1.close();
 
-
+	
 
 
 	for (int i = 0; i < this->objects->size(); i++) {

@@ -29,6 +29,8 @@ private:
 	Sprite* jumpHitSprite;
 	Sprite* sitHitSprite;
 	Sprite* hurtSprite;
+	Sprite* onLadder;
+	Sprite* climbing;
 
 	int score = 0;
 

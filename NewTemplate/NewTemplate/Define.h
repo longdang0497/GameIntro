@@ -53,6 +53,7 @@ enum GAME_STAGE {
 #define PATH_MAIN_SIT L"sprite\\main\\MAIN_SIT.txt"
 #define PATH_MAIN_SIT_KILL L"sprite\\main\\MAIN_SIT_KILL.txt"
 #define PATH_MAIN_CLIMB L"sprite\\main\\MAIN_CLIMB.txt"
+#define PATH_MAIN_ON_LADDER L"sprite\\main\\MAIN_ON_LADDER.txt"
 #define PATH_MAIN_JUMP_SCROLL L"sprite\\main\\MAIN_JUMP_SCROLL.txt"
 #define PATH_MAIN_JUMP_SCROLL_KILL L"sprite\\main\\MAIN_JUMP_SCROLL_KILL.txt"
 #define PATH_MAIN_HURT L"sprite\\main\\MAIN_HURT.txt"
@@ -107,6 +108,7 @@ enum GAME_STAGE {
 #define PATH_TEXTURE_MAP_2 L"sprite\\Stage2\\texture.png"
 #define PATH_POS_MAP_2 L"sprite\\Stage2\\map.txt"
 #define PATH_POS_GROUND_MAP_2 "sprite\\Stage2\\ground.txt"
+#define PATH_POS_LADDER_SATGE_2  "sprite\\Stage2\\ladder.txt"
 
 #define ID_TEXTURE_MAP_3 300
 #define PATH_TEXTURE_MAP_3 L"sprite\\Stage3\\result.png"

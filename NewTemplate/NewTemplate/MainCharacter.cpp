@@ -13,6 +13,8 @@ MainCharacter::MainCharacter()
 	this->jumpHitSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_JUMP_SCROLL_KILL);
 	this->sitHitSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_SIT_KILL);
 	this->hurtSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_HURT);
+	this->onLadder = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_ON_LADDER);
+	this->climbing = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_CLIMB);
 
 	this->SetObjectType(MAIN_CHARACTER);
 	this->SetState(STATE_IDLE);
@@ -40,6 +42,8 @@ MainCharacter::~MainCharacter()
 	if (this->jumpHitSprite != NULL) delete this->jumpHitSprite;
 	if (this->sitHitSprite != NULL) delete this->sitHitSprite;
 	if (this->hurtSprite != NULL) delete this->hurtSprite;
+	if (this->onLadder != NULL) delete this->sitHitSprite;
+	if (this->climbing != NULL) delete this->hurtSprite;
 }
 
 MAIN_CHARACTER_STATE MainCharacter::GetState()
@@ -54,7 +58,6 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 	switch (this->state)
 	{
 	case STATE_IDLE:
-		
 		SetVx(0);
 		currentSprite = standSprite;
 		break;
@@ -121,6 +124,12 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 		isOnGround = false;
 		startHurting = GetTickCount();
 		isHurting = true;
+		break;
+	case STATE_ON_LADDER:
+		currentSprite = onLadder;
+		break;
+	case STATE_CLIMBING:
+		currentSprite = climbing;
 		break;
 	default:
 		break;
@@ -352,7 +361,7 @@ void MainCharacter::HandleCollision(vector<Object*> *objects)
 
 	for (auto iter : *objects)
 	{
-		if (iter->GetObjectType() == BRICK)
+		if (iter->GetObjectType() == BRICK || iter->GetObjectType() == LADDER)
 			staticObject->push_back(iter);
 		else
 			movingObject->push_back(iter);
@@ -377,35 +386,52 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> *objects)
 		isOnGround = false;
 	}
 	else {
-		float minTx, minTy, nX = 0, nY;
+		float minTx, minTy, nX =0, nY;
 
 		this->FilterCollision(coEvents, coEventsResult, minTx, minTy, nX, nY);
 
-		this->PlusPosition(minTx*this->deltaX + nX * 0.1f, minTy*this->deltaY + nY * 0.1f);
+		this->PlusPosition(minTx*this->deltaX + nX * 0.4f, minTy*this->deltaY + nY * 0.1f);
 
-		if (nX != 0)
+
+		for ( auto iter : *coEventsResult) 
 		{
-			this->veclocity.x = 0;
-		}
-		if (nY != 0)
-		{
-			this->veclocity.y = 0;
-			if (nY == -1)
+			if (iter->obj->GetObjectType() == BRICK)
 			{
-				if (!isOnGround)
+				if (nX != 0)
 				{
-					
+					this->veclocity.x = 0;
 				}
-				isOnGround = true;
-				if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_HURT)
+				if (nY != 0)
 				{
-					position.y -= 10;
-					startStanding = GetTickCount();
-					SetState(STATE_IDLE);
+					this->veclocity.y = 0;
+
+					if (nY == -1)
+					{
+						isOnGround = true;
+						if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_HURT)
+						{
+							position.y -= 10;
+							startStanding = GetTickCount();
+							SetState(STATE_IDLE);
+						}
+
+					}
 				}
-				
+
+			}
+			else
+			{
+				if (nX != 0)
+				{
+					this->veclocity.x = 0;
+				}
+				if (nY != 0)
+				{
+					this->veclocity.y = 0;
+				}
 			}
 		}
+		
 	}
 
 	for (int i = 0; i < coEvents->size(); i++)
@@ -437,6 +463,8 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> *objects)
 
 				break;
 			}
+
+
 			default:
 				break;
 			}

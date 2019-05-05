@@ -65,12 +65,16 @@ void Object::FilterCollision(vector<CollisionEvent*>* coEvents, vector<Collision
 	{
 		CollisionEvent* c = coEvents->at(i);
 
-		if (c->t <= minTx && c->nx != 0) {
-			minTx = c->t; nx = c->nx; min_ix = i;
+		if (c->t < minTx && c->nx != 0) {
+			minTx = c->t; 
+			nx = c->nx; 
+			min_ix = i;
 		}
 
-		if (c->t <= minTy && c->ny != 0) {
-			minTy = c->t; ny = c->ny; min_iy = i;
+		if (c->t < minTy && c->ny != 0) {
+			minTy = c->t; 
+			ny = c->ny; 
+			min_iy = i;
 		}
 	}
 
@@ -101,7 +105,7 @@ void Object::Update(float deltaTime, std::vector<Object*>* objects)
 
 void Object::Render()
 {
-	//RenderBoundingBox();
+	RenderBoundingBox();
 }
 
 CollisionEvent* Object::SweptAABBEx(Object* coO)

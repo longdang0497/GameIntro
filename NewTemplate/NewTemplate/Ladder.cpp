@@ -7,6 +7,7 @@ Ladder::Ladder(int left, int top, int right, int bottom)
 	this->SetVeclocity(0, 0);
 	objectHeight = bottom - top;
 	objectWidth = right - left;
+	this->isActive = true;
 	this->SetObjectType(LADDER);
 }
 
@@ -20,6 +21,7 @@ void Ladder::Update(float deltaTime, vector<Object*>* object)
 
 void Ladder::Render()
 {
+	Object::Render();
 }
 
 void Ladder::HandleCollision(vector<Object*>* objects)
