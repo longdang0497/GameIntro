@@ -1,4 +1,4 @@
-#include "Sword.h"
+﻿#include "Sword.h"
 
 Sword* Sword::_instance = NULL;
 
@@ -51,6 +51,13 @@ void Sword::Update(float t, vector<Object*> *object)
 				MainCharacter::GetInstance()->Score();
 			}
 
+			break;
+		}
+		case BOSS_BULLET:
+		{
+			BossBullet *bossBullet = dynamic_cast<BossBullet*>(iter);
+			bossBullet->Destroy();
+			OutputDebugString(L"Chạm đạn \n");
 			break;
 		}
 		default:

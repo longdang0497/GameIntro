@@ -23,6 +23,7 @@
 #include "Brick.h"
 #include "Boss.h"
 #include  "HideObject.h"
+#include "Explode.h"
 
 class Stage
 {

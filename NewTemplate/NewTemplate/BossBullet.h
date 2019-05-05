@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Object.h"
+#include "Explode.h"
 #define TIME_TO_MOVE 500
 
 class BossBullet : public Object
@@ -8,6 +9,7 @@ private:
 	Sprite* sprite;
 	DWORD freezeTime;
 	bool start;
+	Explode *explode;
 public:
 	BossBullet();
 	~BossBullet();

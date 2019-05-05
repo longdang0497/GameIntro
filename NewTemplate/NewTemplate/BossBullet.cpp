@@ -12,6 +12,7 @@ BossBullet::BossBullet()
 	this->SetPosition(0, 0);
 	this->SetVeclocity(0, 0);
 	this->start = true;
+	this->explode = new Explode();
 }
 
 
@@ -24,6 +25,7 @@ BossBullet::~BossBullet()
 
 void BossBullet::Update(float deltaTime, std::vector<Object*>* objects)
 {
+	this->explode->Update(deltaTime, objects);
 	if (this->HP < 0 || !this->isActive) {
 		return;
 	}
@@ -35,11 +37,12 @@ void BossBullet::Update(float deltaTime, std::vector<Object*>* objects)
 	}
 
 	this->position.x += this->veclocity.x*deltaTime;
-
+	
 }
 
 void BossBullet::Render()
 {
+	this->explode->Render();
 	if (!this->isActive) {
 		return;
 	}
@@ -73,6 +76,11 @@ void BossBullet::Destroy() {
 	this->HP = 0;
 	this->isActive = false;
 	this->start = false;
+	float x, y;
+	x = this->position.x - 15;
+	y = this->position.y - 19;
+	this->explode->SetActive(D3DXVECTOR3(x, y, 0));
+	this->SetPosition(0, 0);
 }
 
 void BossBullet::SetStart(D3DXVECTOR3 pos, D3DXVECTOR3 vec) {

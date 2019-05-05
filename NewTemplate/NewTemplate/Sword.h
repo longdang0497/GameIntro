@@ -1,7 +1,7 @@
 #pragma once
 #include "Object.h"
 #include "MainCharacter.h"
-
+#include "BossBullet.h"
 
 class Sword : public Object
 {

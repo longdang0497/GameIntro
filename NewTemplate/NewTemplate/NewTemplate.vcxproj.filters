@@ -169,7 +169,10 @@
       <Filter>Source Files\Object</Filter>
     </ClCompile>
     <ClCompile Include="HideObject.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Explode.cpp">
+      <Filter>Source Files\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -285,7 +288,10 @@
       <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="HideObject.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Explode.h">
+      <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

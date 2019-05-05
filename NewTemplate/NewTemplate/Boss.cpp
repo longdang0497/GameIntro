@@ -10,7 +10,7 @@ Boss::Boss(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2) :
 	this->direction = LEFT;
 	this->objectWidth = BOSS_WIDTH;
 	this->objectHeight = BOSS_HEIGHT;
-	this->veclocity.x = 0.1;
+	this->veclocity.x = 0.15;
 	this->freezeTime = GetTickCount();
 	this->bossState = BOSS_STAND;
 	this->countToShoot = 3;
@@ -23,6 +23,7 @@ Boss::Boss(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2) :
 	this->bullets->push_back(bullet1);
 	this->bullets->push_back(bullet2);
 	this->bullets->push_back(bullet3);
+
 }
 
 // 513 y = 4 x2 - 868 x + 111178
@@ -48,12 +49,12 @@ void Boss::Update(float deltaTime, std::vector<Object*>* objects)
 		this->bossState = BOSS_STAND;
 		this->direction = RIGHT;
 		if (this->countToShoot % 3 == 0) {
-			int y = 188;
+			int y = 174;
 			int x = 46;
 
 			for (auto it : *this->bullets) {
-				it->SetStart(D3DXVECTOR3(x, y, 0), D3DXVECTOR3(0.1, 0, 0));
-				y += 15;
+				it->SetStart(D3DXVECTOR3(x, y, 0), D3DXVECTOR3(0.13, 0, 0));
+				y += 20;
 				x -= 10;
 			}
 		}
@@ -65,12 +66,12 @@ void Boss::Update(float deltaTime, std::vector<Object*>* objects)
 		this->bossState = BOSS_STAND;
 		this->direction = LEFT;
 		if (this->countToShoot % 3 == 0) {
-			int y = 188;
+			int y = 168;
 			int x = 194;
 
 			for (auto it : *this->bullets) {
-				it->SetStart(D3DXVECTOR3(x, y, 0), D3DXVECTOR3(-0.1, 0, 0));
-				y += 15;
+				it->SetStart(D3DXVECTOR3(x, y, 0), D3DXVECTOR3(-0.13, 0, 0));
+				y += 20;
 				x += 10;
 			}
 		}
