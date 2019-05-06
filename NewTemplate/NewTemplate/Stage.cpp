@@ -111,6 +111,14 @@ void Stage::InitEnemies(LPCWSTR filePath)
 
 void Stage::Update(float deltaTime)
 {
+	CKeyGame* k = CKeyGame::getInstance();
+
+	if (k->keyChangeScene)
+	{
+		MoveNextPoint();
+	}
+
+
 	HUD::GetInstance()->Update(deltaTime);
 	for (int i = 0; i < this->objects->size(); i++) {
 
@@ -157,4 +165,31 @@ void Stage::Render()
 		}
 		
 	}
+}
+
+int Stage::Nextpoint()
+{
+	if (SpecialPoint.size() == 0)
+		return -1;
+	else
+	{
+		for (int i = 0; i < SpecialPoint.size() - 1; i++)
+		{
+			if (MainCharacter::GetInstance()->GetPosition().x >= SpecialPoint.at(i)
+				&& MainCharacter::GetInstance()->GetPosition().x <= SpecialPoint.at(i + 1))
+				return SpecialPoint.at(i + 1);
+		}
+		return -1;
+	}
+
+}
+
+
+
+void Stage::MoveNextPoint()
+{
+	int nextpoint = Nextpoint();
+	if (nextpoint != -1)
+		MainCharacter::GetInstance()->SetPosition(nextpoint, 0);
+
 }

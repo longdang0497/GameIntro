@@ -1,0 +1,15 @@
+﻿  Stage2.cpp
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\16521\Desktop\GameIntro\NewTemplate\NewTemplate\Game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+C:\Users\16521\Desktop\GameIntro\NewTemplate\NewTemplate\Object.h(108): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
+  C:\Users\16521\Desktop\GameIntro\NewTemplate\NewTemplate\Object.h(107): note: see declaration of 'CollisionEvent'
+C:\Users\16521\Desktop\GameIntro\NewTemplate\NewTemplate\Boss.h(7): warning C4005: 'FREEZE_TIME': macro redefinition
+  C:\Users\16521\Desktop\GameIntro\NewTemplate\NewTemplate\Eagle.h(8): note: see previous definition of 'FREEZE_TIME'
+C:\Users\16521\Desktop\GameIntro\NewTemplate\NewTemplate\Stage2.cpp(48): warning C4018: '<': signed/unsigned mismatch
+C:\Users\16521\Desktop\GameIntro\NewTemplate\NewTemplate\Stage2.cpp(75): warning C4018: '<': signed/unsigned mismatch
+C:\Users\16521\Desktop\GameIntro\NewTemplate\NewTemplate\Stage2.cpp(106): warning C4018: '<': signed/unsigned mismatch
+C:\Users\16521\Desktop\GameIntro\NewTemplate\NewTemplate\Stage2.cpp(113): warning C4018: '<': signed/unsigned mismatch
+C:\Users\16521\Desktop\GameIntro\NewTemplate\NewTemplate\Stage2.cpp(120): warning C4018: '<': signed/unsigned mismatch
+C:\Users\16521\Desktop\GameIntro\NewTemplate\NewTemplate\Stage2.cpp(136): warning C4018: '<': signed/unsigned mismatch
+  NewTemplate.vcxproj -> C:\Users\16521\Desktop\GameIntro\NewTemplate\Debug\NewTemplate.exe

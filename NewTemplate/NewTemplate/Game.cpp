@@ -15,7 +15,7 @@ void Game::Init(HWND hWnd)
 {
 
 	// Khởi tạo Game stage
-	this->gameStage = STAGE3;
+	
 
 	LPDIRECT3D9 d3d = Direct3DCreate9(D3D_SDK_VERSION);
 	this->hWnd = hWnd;
@@ -86,7 +86,12 @@ void Game::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top,
 
 	Game::GetInstance()->GetSpriteHandler()->SetTransform(&mat);
 
-	Game::GetInstance()->GetSpriteHandler()->Draw(texture, &rect, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+	if (alpha == 0)
+	{
+		Game::GetInstance()->GetSpriteHandler()->Draw(texture, &rect, NULL, NULL, D3DCOLOR_ARGB(rand() % 255, rand() % 255, rand() % 255, rand() % 255));
+	}
+	else
+		Game::GetInstance()->GetSpriteHandler()->Draw(texture, &rect, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
 }
 
 // Các xử lý sự kiện bàn phím

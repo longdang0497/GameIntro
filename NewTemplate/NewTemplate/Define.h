@@ -6,6 +6,7 @@
 #define GAME_MODE_256_256 2
 #define GAME_TITLE L"Ninja Gaiden"
 enum GAME_STAGE {
+	Intro,
 	STAGE1,
 	STAGE2,
 	STAGE3
@@ -103,6 +104,7 @@ enum GAME_STAGE {
 #define PATH_POS_MAP_1 L"sprite\\Stage1\\result.txt"
 #define PATH_POS_GROUND_MAP_1 "sprite\\Stage1\\ground.txt"
 #define PATH_POS_ENEMIES_MAP_1 L"sprite\\Stage1\\enemies.txt"
+#define PATH_POS_HIDE_SATGE_1  "sprite\\Stage1\\HideObject.txt"
 
 #define ID_TEXTURE_MAP_2 200
 #define PATH_TEXTURE_MAP_2 L"sprite\\Stage2\\texture.png"
