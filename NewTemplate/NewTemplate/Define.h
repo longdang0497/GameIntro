@@ -109,6 +109,9 @@ enum GAME_STAGE {
 #define PATH_POS_MAP_2 L"sprite\\Stage2\\map.txt"
 #define PATH_POS_GROUND_MAP_2 "sprite\\Stage2\\ground.txt"
 #define PATH_POS_LADDER_SATGE_2  "sprite\\Stage2\\ladder.txt"
+#define PATH_POS_HIDE_SATGE_2  "sprite\\Stage2\\HideObject.txt"
+
+
 
 #define ID_TEXTURE_MAP_3 300
 #define PATH_TEXTURE_MAP_3 L"sprite\\Stage3\\result.png"
@@ -160,7 +163,15 @@ enum OBJECT_TYPE {
 	ITEM_ORANGE_DART,
 	SANDGLASS,
 	LADDER,
-	BAT
+	BAT,
+	HIDE_OBJECT
+};
+
+enum HIDE_OBJECT_TYPE {
+	TOP_LADDER,
+	BOTTOM_LADDER,
+	END_MAP,
+START_MAP
 };
 
 // ========== MAIN CHARACTER STATE ==========
@@ -177,7 +188,8 @@ enum MAIN_CHARACTER_STATE {
 	STATE_JUMP_ATTACK,
 	STATE_JUMP_ATTACK_TO,
 	STATE_ON_LADDER,
-	STATE_CLIMBING
+	STATE_CLIMBING,
+	STATE_FALL
 };
 
 // ========== ENEMIES STATE ==========
@@ -216,3 +228,5 @@ enum BOSS_STATE {
 
 #define LEFT -1
 #define	RIGHT 1
+#define UP 1
+#define DOWN -1

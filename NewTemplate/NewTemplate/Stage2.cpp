@@ -78,8 +78,49 @@ void Stage2::LoadResource()
 
 	fs1.close();
 
-	
+	fstream fs2(PATH_POS_HIDE_SATGE_2);
 
+	fs2 >> numberOfGround;
+	int type;
+
+	vector<RECT>* hides = new vector<RECT>();
+	for (int i = 0; i < numberOfGround; i++) {
+		hides->clear();
+		fs2 >> type;
+		fs2 >> left >> top >> right >> bottom;
+
+		RECT rect;
+		rect.top = top;
+		rect.left = left;
+		rect.right = right;
+		rect.bottom = bottom;
+
+		this->InitStaticObjects(rect, hides);
+
+		switch (type)
+		{
+		case 0:
+			for (int i = 0; i < hides->size(); i++) {
+				RECT rect = hides->at(i);
+				HideObject* brick = new HideObject(rect.left, rect.top, rect.right, rect.bottom,TOP_LADDER);
+				this->objects->push_back(brick);
+			}
+			break;
+		case 1:
+			for (int i = 0; i < hides->size(); i++) {
+				RECT rect = hides->at(i);
+				HideObject* brick = new HideObject(rect.left, rect.top, rect.right, rect.bottom, BOTTOM_LADDER);
+				this->objects->push_back(brick);
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	fs2.close();
+
+	
 
 	for (int i = 0; i < this->objects->size(); i++) {
 		Grid::GetInstance()->Add(this->objects->at(i));

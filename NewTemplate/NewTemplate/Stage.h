@@ -22,6 +22,7 @@
 #include "Bat.h"
 #include "Brick.h"
 #include "Boss.h"
+#include  "HideObject.h"
 
 class Stage
 {

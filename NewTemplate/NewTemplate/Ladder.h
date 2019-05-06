@@ -3,6 +3,7 @@
 #include "Define.h"
 
 
+
 class Ladder : public Object
 {
 private:

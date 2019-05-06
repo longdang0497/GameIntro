@@ -168,6 +168,9 @@
     <ClCompile Include="BossBullet.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
+    <ClCompile Include="HideObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="trace.h">
@@ -280,6 +283,9 @@
     </ClInclude>
     <ClInclude Include="BossBullet.h">
       <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="HideObject.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

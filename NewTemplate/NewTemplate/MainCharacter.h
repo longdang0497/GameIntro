@@ -7,6 +7,8 @@
 #include "Sword.h"
 #include "Camera.h"
 #include "Enemy.h"
+#include "HideObject.h"
+
 
 
 #define DEFAULT_MAIN_WIDTH 32
@@ -73,5 +75,7 @@ public:
 
 	int GetScore() { return this->score; }
 	void Score() { this->score += 10; }
+
+
 };
 
