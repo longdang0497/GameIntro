@@ -1,6 +1,7 @@
 #pragma once
 #include "Stage.h"
 #include "Define.h"
+#include "ProcessGame.h"
 #include "Map.h"
 
 class Stage1 : public Stage

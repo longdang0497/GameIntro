@@ -32,6 +32,8 @@ protected:
 
 	Map* map;
 
+	vector<int> SpecialPoint; //use for demo cho thay coi
+
 public:
 	Stage();
 	~Stage();
@@ -47,4 +49,8 @@ public:
 	virtual void LoadResource() = 0;
 	virtual void Update(float deltaTime);
 	virtual void Render();
+
+	int Nextpoint();
+
+	void MoveNextPoint();
 };

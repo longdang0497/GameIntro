@@ -12,7 +12,7 @@ ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 
 	CKeyBoard::Create(hInstance, graphic->GetHWnd());
 	
-	
+	this->gameStage = STAGE1;
 	/*this->keyHandler = new KeyEventHandler();
 	game->InitKeyboard(this->keyHandler);*/
 
@@ -31,7 +31,10 @@ ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 
 
 	Grid* grid = Grid::GetInstance(1, 1, true);
+
+
 }
+
 
 // Các xử lý update và hiển thị nhân vật
 int ProcessGame::GameRun()
@@ -76,8 +79,11 @@ int ProcessGame::GameRun()
 
 void ProcessGame::Update(DWORD dt)
 {
-	switch (Game::GetInstance()->GetGameStage())
+	switch (this->gameStage)
 	{
+	case Intro:
+		IntroStage::GetInstance()->Update(dt);
+		break;
 	case STAGE1:
 		Stage1::GetInstance()->Update(dt);
 		break;
@@ -100,8 +106,11 @@ void ProcessGame::Render()
 		d3ddv->ColorFill(Game::GetInstance()->GetBackBuffer(), NULL, D3DCOLOR_XRGB(0, 0, 0));
 		Game::GetInstance()->GetSpriteHandler()->Begin(D3DXSPRITE_ALPHABLEND);
 		
-		switch (Game::GetInstance()->GetGameStage())
+		switch (this->gameStage)
 		{
+		case Intro:
+			IntroStage::GetInstance()->Render();
+			break;
 		case STAGE1:
 			Stage1::GetInstance()->Render();
 			break;
@@ -120,22 +129,4 @@ void ProcessGame::Render()
 	}
 
 	d3ddv->Present(NULL, NULL, NULL, NULL);
-}
-
-
-// Xử lý sự kiện input
-void KeyEventHandler::KeyState(BYTE * states)
-{
-
-}
-
-void KeyEventHandler::OnKeyDown(int KeyCode)
-{
-
-
-}
-
-void KeyEventHandler::OnKeyUp(int KeyCode)
-{
-
 }
