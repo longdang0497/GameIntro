@@ -28,6 +28,9 @@ MainCharacter::MainCharacter()
 	this->isOnGround = false;
 	this->HP = 16;
 
+	this->preObj = NULL;
+	this->nextObj = NULL;
+
 	this->allowJump = false;
 
 }
