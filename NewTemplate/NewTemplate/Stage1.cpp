@@ -98,10 +98,14 @@ void Stage1::Update(float deltaTime)
 		{
 			if (this->objects->at(i)->GetHP() <= 0)
 			{
-				if (this->objects->at(i+1)->GetObjectType() == ITEM && this->objects->at(i+1)->GetActive() == false &&
-					this->objects->at(i+1)->GetPosition() == this->objects->at(i)->GetPosition())
+				if (this->objects->at(i + 1)->GetObjectType() == ITEM && this->objects->at(i + 1)->GetActive() == false &&
+					this->objects->at(i + 1)->GetPosition() == this->objects->at(i)->GetPosition())
 				{
-					this->objects->at(i+1)->SetActive(true);
+					this->objects->at(i + 1)->SetActive(true);
+					/*Item * item = dynamic_cast<Item*>(this->objects->at(i + 1));
+					item->SetTimeAppear();
+					delete item;
+					item = NULL;*/
 				}
 			}
 		}

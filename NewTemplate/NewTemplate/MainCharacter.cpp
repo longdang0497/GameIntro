@@ -352,7 +352,7 @@ void MainCharacter::HandleCollision(vector<Object*> *objects)
 
 	for (auto iter : *objects)
 	{
-		if (iter->GetObjectType() == BRICK)
+		if (iter->GetObjectType() == BRICK || iter->GetObjectType() == ITEM)
 			staticObject->push_back(iter);
 		else
 			movingObject->push_back(iter);
@@ -383,29 +383,46 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> *objects)
 
 		this->PlusPosition(minTx*this->deltaX + nX * 0.1f, minTy*this->deltaY + nY * 0.1f);
 
-		if (nX != 0)
+		for (auto iter : *objects)
 		{
-			this->veclocity.x = 0;
-		}
-		if (nY != 0)
-		{
-			this->veclocity.y = 0;
-			if (nY == -1)
+			switch (iter->GetObjectType()) {
+			case BRICK:
 			{
-				if (!isOnGround)
+				if (nX != 0)
 				{
-					
+					this->veclocity.x = 0;
 				}
-				isOnGround = true;
-				if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_HURT)
+				if (nY != 0)
 				{
-					position.y -= 10;
-					startStanding = GetTickCount();
-					SetState(STATE_IDLE);
+					this->veclocity.y = 0;
+					if (nY == -1)
+					{
+						if (!isOnGround)
+						{
+
+						}
+						isOnGround = true;
+						if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_HURT)
+						{
+							position.y -= 10;
+							startStanding = GetTickCount();
+							SetState(STATE_IDLE);
+						}
+
+					}
 				}
-				
+				break;
 			}
-		}
+			case ITEM:
+			{
+				if (nX != 0)
+					iter->SetActive(false);
+				if (nY != 0 && this->isOnGround == true)
+					iter->SetActive(false);
+				break;
+			}
+			}
+		}		
 	}
 
 	for (int i = 0; i < coEvents->size(); i++)
@@ -423,7 +440,6 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> *objects)
 		{
 		case JAGUAR:
 		case SOLDIER:
-		case BUTTERFLY:
 		{
 			float al, at, ar, ab, bl, bt, br, bb;
 			GetBoundingBox(al, at, ar, ab);

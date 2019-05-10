@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Object.h"
 #include "Camera.h"
 
@@ -7,9 +7,11 @@ class Item : public Object
 protected:
 	static Item* _instance;
 	int strength;
+	int alpha = 255;	// Sử dụng khi item hết thời gian hiển thị
 	//D3DXVECTOR3 defaultPosition;
 	int flagAppear = false;	
 	int objectID;
+	float timeAppear = 0;
 
 	Sprite * blueR;
 	Sprite * orangeR;
@@ -41,6 +43,8 @@ public:
 		if (_instance == NULL) _instance = new Item();
 		return _instance;
 	}
+
+	//void SetTimeAppear() { this->startAppear = GetTickCount(); }
 
 	void Update(float deltaTime, std::vector<Object*> *objects = NULL);
 	void Render();

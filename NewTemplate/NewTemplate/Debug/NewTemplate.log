@@ -10,7 +10,7 @@ c:\users\long dang\documents\gameintro\newtemplate\newtemplate\game.h(12): warni
   c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
 c:\users\long dang\documents\gameintro\newtemplate\newtemplate\object.h(108): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
   c:\users\long dang\documents\gameintro\newtemplate\newtemplate\object.h(107): note: see declaration of 'CollisionEvent'
-c:\users\long dang\documents\gameintro\newtemplate\newtemplate\item.cpp(285): warning C4018: '<': signed/unsigned mismatch
+c:\users\long dang\documents\gameintro\newtemplate\newtemplate\item.cpp(303): warning C4018: '<': signed/unsigned mismatch
   Main.cpp
   c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
 c:\users\long dang\documents\gameintro\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition

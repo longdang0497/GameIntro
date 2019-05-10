@@ -1,4 +1,4 @@
-#include "Item.h"
+﻿#include "Item.h"
 
 Item* Item::_instance = NULL;
 
@@ -12,19 +12,21 @@ Item::Item()
 	this->SetObjectType(ITEM);
 	this->SetHP(1);
 	this->isOnGround = false;
+	this->timeAppear = 5000;
 }
 
 Item::Item(D3DXVECTOR3 pos, int objectID)
 {
 	this->objectID = objectID;
 	//this->defaultPosition = pos;
-	this->position = pos;
+	this->SetPosition(pos.x + 10, pos.y + 40);
 	this->SetObjectType(ITEM);
 	this->veclocity = { 0,0,0 };
 	this->isActive = false;
 	this->SetHP(1);
 	this->InitItemSprite();
 	this->isOnGround = false;
+	this->timeAppear = 5000;
 }
 
 Item::~Item()
@@ -133,25 +135,23 @@ void Item::SetObjID(int value)
 }
 
 void Item::Update(float deltaTime, std::vector<Object*>* objects)
-{
+{	
 	if (this->isActive == true)
 	{
 		if (HP <= 0)
 			return;
-		
-		//float gravity = 0.8f;
+		alpha = 255;
 
 		Object::Update(deltaTime, objects);
 
-		//this->veclocity.y = gravity;
 		this->veclocity.y += 0.0015f*deltaTime;
 		this->veclocity.x = 0;
 
 		this->PlusPosition(this->veclocity.x, this->veclocity.y);
-
+		
 		switch (this->objectID) {
 		case BLUE_R_ID: // SPIRITUAL STRENGTH 5 POINTS
-			this->blueR->UpdateSprite();
+			this->blueR->UpdateSprite();			
 			break;
 		case ORANGE_R_ID: // SPIRITUAL STRENGTH 10 POINTS
 			this->orangeR->UpdateSprite();
@@ -183,20 +183,26 @@ void Item::Update(float deltaTime, std::vector<Object*>* objects)
 		case SANDGLASS_ID: // TIME FREEZE
 			this->sandglass->UpdateSprite();
 			break;
-		}
-
-		//HandleCollision(objects);				
+		}				
 
 		vector<Object*> *ground = new vector<Object*>();
 		ground->clear();
 
 		for (auto iter : *objects) {
-			if (iter->GetObjectType() == BRICK) {
+			if (iter->GetObjectType() == BRICK || iter->GetObjectType() == MAIN_CHARACTER) {
 				ground->push_back(iter);
 			}
 		}
 
-		this->HandleCollision(ground);
+		this->HandleCollision(ground);		
+
+		// Tính thời gian hiển thị
+		timeAppear -= deltaTime;
+		// Nếu hết thời gian thì nổ
+		if (timeAppear > 0 && timeAppear <= 800) 
+			this->alpha = 128;
+		if (timeAppear <= 0)
+			this->isActive = false;
 
 		delete ground;
 	}
@@ -216,37 +222,37 @@ void Item::Render()
 
 		switch (this->objectID) {
 		case BLUE_R_ID: // SPIRITUAL STRENGTH 5 POINTS
-			this->blueR->DrawSprite(pos, false);
+			this->blueR->DrawSprite(pos, false, alpha);
 			break;
 		case ORANGE_R_ID: // SPIRITUAL STRENGTH 10 POINTS
-			this->orangeR->DrawSprite(pos, false);
+			this->orangeR->DrawSprite(pos, false, alpha);
 			break;
 		case BLUE_DART_ID: // THROWING STAR
-			this->blueDart->DrawSprite(pos, false);
+			this->blueDart->DrawSprite(pos, false, alpha);
 			break;
 		case ORANGE_DART_ID: // WINDMILL THROWING STAR
-			this->orangeDart->DrawSprite(pos, false);
+			this->orangeDart->DrawSprite(pos, false, alpha);
 			break;
 		case BLUE_JAR_ID:
-			/*this->blueJar->DrawSprite(pos, false);*/
+			/*this->blueJar->DrawSprite(pos, false, alpha);*/
 			break;
 		case ORANGE_JAR_ID:	// RESTORE PHYSICAL STRENGTH
-			this->orangeJar->DrawSprite(pos, false);
+			this->orangeJar->DrawSprite(pos, false, alpha);
 			break;
 		case BLUE_POCKET_ID:	// BONUS 500 POINTS
-			this->bluePocket->DrawSprite(pos, false);
+			this->bluePocket->DrawSprite(pos, false, alpha);
 			break;
 		case ORANGE_POCKET_ID:	 // BONUS 1000 POINTS
-			this->orangePocket->DrawSprite(pos, false);
+			this->orangePocket->DrawSprite(pos, false, alpha);
 			break;
 		case BIG_SHURIKEN_ID:
-			this->bigShuriken->DrawSprite(pos, false);
+			this->bigShuriken->DrawSprite(pos, false, alpha);
 			break;
 		case ITEM_FIRE_ID:	//THE ART OF THE FIRE WHEEL
-			this->itemFire->DrawSprite(pos, false);
+			this->itemFire->DrawSprite(pos, false, alpha);
 			break;
 		case SANDGLASS_ID: // TIME FREEZE
-			this->sandglass->DrawSprite(pos, false);
+			this->sandglass->DrawSprite(pos, false, alpha);
 			break;
 		}
 	}
@@ -273,12 +279,24 @@ void Item::HandleCollision(vector<Object*>* objects)
 
 		this->PlusPosition(minTx*this->deltaX + nX * 0.1f, minTy*this->deltaY + nY * 0.1f);
 
-		if (nX != 0)
-			this->veclocity.x = 0;
-		if (nY != 0)
-			this->veclocity.y = 0;
-		if (nY == -1)
-			isOnGround = true;
+		for (auto iter : *objects)
+		{
+			if (iter->GetObjectType() == MAIN_CHARACTER)
+			{
+				if (nY != 0)
+					this->veclocity.y = 0;
+				if (nX != 0) 
+					this->isActive = false;
+			}
+			else {
+				if (nX != 0)
+					this->veclocity.x = 0;
+				if (nY != 0)
+					this->veclocity.y = 0;
+				if (nY == -1)
+					isOnGround = true;
+			}
+		}
 
 	}
 

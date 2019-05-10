@@ -5,7 +5,7 @@ Butterfly::Butterfly(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int 
 {
 	this->fly = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_BUTTERFLY);
 	this->SetObjectType(BUTTERFLY);
-	this->SetPosition(pos.x, pos.y);
+	this->SetPosition(pos.x + 10, pos.y + 40);
 	this->HP = 1;
 	//this->item = item;	
 }
