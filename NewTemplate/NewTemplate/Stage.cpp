@@ -9,6 +9,7 @@ Stage::Stage()
 
 Stage::~Stage()
 {
+	//if (item != nullptr) delete item;
 }
 
 void Stage::InitStaticObjects(RECT rect, vector<RECT> *staticObjects)
@@ -70,9 +71,9 @@ void Stage::InitEnemies(LPCWSTR filePath)
 {
 	fstream fs(filePath);
 
-	int numOfObject, left, top, limit1, limit2, objectType, direction;
+	int numOfObject, left, top, limit1, limit2, objectType, direction, itemId;
 
-	fs >> numOfObject;
+	fs >> numOfObject;	
 
 	for (int i = 0; i < numOfObject; i++) {
 		fs >> left >> top >> limit1 >> limit2 >> objectType >> direction;
@@ -87,8 +88,12 @@ void Stage::InitEnemies(LPCWSTR filePath)
 			this->objects->push_back(new Soldier(pos, direction, limit1, limit2));
 			break;
 		case BUTTERFLY_ID:
-			this->objects->push_back(new Butterfly(pos, direction, limit1, limit2));
+		{
+			fs >> itemId;			
+			this->objects->push_back(new Butterfly(pos, direction, limit1, limit2, itemId));			
+			InitItems(pos, itemId);
 			break;
+		}
 		case EAGLE_ID:
 			this->objects->push_back(new Eagle(pos, direction, limit1, limit2));
 			break;
@@ -104,9 +109,62 @@ void Stage::InitEnemies(LPCWSTR filePath)
 		default:
 			break;
 		}
-	}
-
+	}	
 	fs.close();
+}
+
+void Stage::InitItems(D3DXVECTOR3 pos, int objectID)
+{
+	/*fstream fs(filePath);
+
+	int numOfObject, left, top, objectType;
+
+	fs >> numOfObject;
+
+	for (int i = 0; i < numOfObject; i++) {
+		fs >> left >> top >> objectType;
+		D3DXVECTOR3 pos(left, top - 50, 0);
+*/
+		switch (objectID) {
+		case BLUE_R_ID:
+			this->objects->push_back(new Item(pos, BLUE_R_ID));
+			break;
+		case ORANGE_R_ID:
+			this->objects->push_back(new Item(pos, ORANGE_R_ID));
+			break;
+		case BLUE_DART_ID:
+			this->objects->push_back(new Item(pos, BLUE_DART_ID));
+			break;
+		case ORANGE_DART_ID:
+			this->objects->push_back(new Item(pos, ORANGE_DART_ID));
+			break;
+		case BLUE_POCKET_ID:
+			this->objects->push_back(new Item(pos, BLUE_POCKET_ID));
+			break;
+		case ORANGE_POCKET_ID:
+			this->objects->push_back(new Item(pos, ORANGE_POCKET_ID));
+			break;
+		case BLUE_JAR_ID:
+			this->objects->push_back(new Item(pos, BLUE_JAR_ID));
+			break;
+		case ORANGE_JAR_ID:
+			this->objects->push_back(new Item(pos, ORANGE_JAR_ID));
+			break;
+		case BIG_SHURIKEN_ID:
+			this->objects->push_back(new Item(pos, BIG_SHURIKEN_ID));
+			break;
+		case SANDGLASS_ID:
+			this->objects->push_back(new Item(pos, SANDGLASS_ID));
+			break;
+		case ITEM_FIRE_ID:
+			this->objects->push_back(new Item(pos, ITEM_FIRE_ID));
+			break;
+		default:
+			break;
+		}
+	/*}
+
+	fs.close();*/
 }
 
 void Stage::Update(float deltaTime)

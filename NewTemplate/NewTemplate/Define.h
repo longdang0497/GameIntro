@@ -70,6 +70,8 @@ enum GAME_STAGE {
 #define PATH_BLUE_R L"sprite\\item\\ITEM_R_BLUE.txt"
 #define PATH_ORANGE_R L"sprite\\item\\ITEM_R_ORANGE.txt"
 #define PATH_ITEM_FIRE L"sprite\\item\\ITEM_FIRE.txt"
+#define PATH_ORANGE_JAR L"sprite\\item\\ORANGE_JAR.txt"
+#define PATH_BLUE_JAR L"sprite\\item\\BLUE_JAR.txt"
 
 #define PATH_BOSS_EXPLODE L"sprite\\boss\\BOSS_EXPLODE.txt"
 #define PATH_BUTTERFLY L"sprite\\enemies\\BUTTERFLY.txt"
@@ -105,6 +107,7 @@ enum GAME_STAGE {
 #define PATH_POS_GROUND_MAP_1 "sprite\\Stage1\\ground.txt"
 #define PATH_POS_ENEMIES_MAP_1 L"sprite\\Stage1\\enemies.txt"
 #define PATH_POS_HIDE_SATGE_1  "sprite\\Stage1\\HideObject.txt"
+#define PATH_POS_ITEMS_MAP_1 L"sprite\\Stage1\\items.txt"
 
 #define ID_TEXTURE_MAP_2 200
 #define PATH_TEXTURE_MAP_2 L"sprite\\Stage2\\texture.png"
@@ -156,14 +159,7 @@ enum OBJECT_TYPE {
 	JAGUAR,
 	ZOMBIE,
 	ZOMBIE_SWORD,
-	BIG_SHURIKEN,
-	ITEM_R_BLUE,
-	ITEM_R_ORANGE,
-	BLUE_POCKET,
-	ORANGE_POCKET,
-	ITEM_BLUE_DART,
-	ITEM_ORANGE_DART,
-	SANDGLASS,
+	ITEM,
 	LADDER,
 	BAT,
 	HIDE_OBJECT

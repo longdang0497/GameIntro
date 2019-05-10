@@ -116,7 +116,6 @@ void Stage1::LoadResource()
 	 //Enemy* e = new Bat({ 100, 100,0 }, 0, 0, 0);
 	 //this->objects->push_back(e);
 
-
 	for (int i = 0; i < this->objects->size(); i++) {
 		Grid::GetInstance()->Add(this->objects->at(i));
 	}
@@ -134,6 +133,25 @@ void Stage1::Update(float deltaTime)
 
 	if (MainCharacter::GetInstance()->GetIsInTheEndOfMap())
 		ProcessGame::GetInstance(NULL,0)->SetGameStage(STAGE2);
+
+	for (int i = 0; i < this->objects->size(); i++)
+	{
+		if (this->objects->at(i)->GetObjectType() == BUTTERFLY)
+		{
+			if (this->objects->at(i)->GetHP() <= 0)
+			{
+				if (this->objects->at(i + 1)->GetObjectType() == ITEM && this->objects->at(i + 1)->GetActive() == false &&
+					this->objects->at(i + 1)->GetPosition() == this->objects->at(i)->GetPosition())
+				{
+					this->objects->at(i + 1)->SetActive(true);
+					/*Item * item = dynamic_cast<Item*>(this->objects->at(i + 1));
+					item->SetTimeAppear();
+					delete item;
+					item = NULL;*/
+				}
+			}
+		}
+	}
 }
 
 void Stage1::Render()
