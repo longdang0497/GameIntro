@@ -103,7 +103,7 @@ void Grid::Add(Object * obj)
 
 	// Thêm object vào đầu dslk
 	obj->SetPreObj(NULL);
-	obj->SetNextObj(this->cells[row][column]);
+	 obj->SetNextObj(this->cells[row][column]);
 	this->cells[row][column] = obj;
 
 	if (obj->GetNextObj() != NULL) {

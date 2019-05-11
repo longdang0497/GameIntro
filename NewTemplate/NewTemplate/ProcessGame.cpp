@@ -12,7 +12,7 @@ ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 
 	CKeyBoard::Create(hInstance, graphic->GetHWnd());
 	
-	this->gameStage = STAGE1;
+	this->gameStage = Intro;
 	/*this->keyHandler = new KeyEventHandler();
 	game->InitKeyboard(this->keyHandler);*/
 
@@ -25,6 +25,7 @@ ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 	texture->Add(ID_TEX_HUD_BG, PATH_TEX_HUD_BG);
 	texture->Add(ID_TEX_HEALTH, PATH_TEX_HEALTH);
 	texture->Add(ID_BB, PATH_BB);
+	texture->Add(ID_TEXTURE_BLACK, PATH_TEXTURE_BLACK);
 
 	texture->Add(ID_TEXTURE_ENEMIES, PATH_TEXTURE_ENEMIES);
 	
@@ -32,6 +33,8 @@ ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 
 	Grid* grid = Grid::GetInstance(1, 1, true);
 
+	Time = GetTickCount();
+	alpha = 255;
 
 }
 

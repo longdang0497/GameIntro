@@ -4,14 +4,21 @@ Stage2* Stage2::_instance = NULL;
 
 Stage2::Stage2()
 {
-	int u = 1;
+	MainCharacter::GetInstance()->SetIsInTheEndOfMap(false);
 	Grid::GetInstance()->ReSetGrid(STAGE2_HEIGHT, STAGE2_WIDTH, false);
-	MainCharacter::GetInstance()->SetPosition(150, 0);
+	//MainCharacter::GetInstance()->SetPosition(50, 120);
 	this->LoadResource();
 	Camera::GetInstance()->setWorldBoundary(3072);
+	//Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
 
 	SpecialPoint.empty();
+
+	alpha = 255;
+	fadeIn = true;
+	fadeOut = false;
+	TimeToFade = GetTickCount();
 }
+
 
 
 Stage2::~Stage2()
@@ -149,5 +156,47 @@ void Stage2::Update(float deltaTime)
 void Stage2::Render()
 {
 	Stage::Render();
+	if (fadeIn)
+	{
+		FadeInEffect();
+	}
+	if (fadeOut)
+		FadeOutEffect();
 
+}
+
+void Stage2::FadeInEffect()
+{
+	if (alpha >= 200)
+	{
+		if (GetTickCount() - TimeToFade > 20)
+		{
+			Game::GetInstance()->Draw(0, 80, Texture::GetInstance()->Get(ID_TEXTURE_BLACK), 0, 80, 256, 320, alpha);
+			TimeToFade = GetTickCount();
+			alpha -= 1;
+		}
+	}
+	else
+	{
+		fadeIn = false;
+		TimeToFade = GetTickCount();
+	}
+}
+
+void Stage2::FadeOutEffect()
+{
+	if (alpha < 255)
+	{
+		if (GetTickCount() - TimeToFade > 20)
+		{
+			Game::GetInstance()->Draw(0, 80, Texture::GetInstance()->Get(ID_TEXTURE_BLACK), 1792, 80, 2048, 300, alpha);
+			TimeToFade = GetTickCount();
+			alpha += 1;
+		}
+	}
+	else
+	{
+		fadeOut = false;
+		ProcessGame::GetInstance(NULL, 0)->SetGameStage(STAGE2);
+	}
 }

@@ -169,9 +169,14 @@ void Stage::InitItems(D3DXVECTOR3 pos, int objectID)
 
 void Stage::Update(float deltaTime)
 {
+
+	if (fadeIn || fadeOut)
+		return;
+		
+
 	CKeyGame* k = CKeyGame::getInstance();
 
-	if (k->keyChangeScene)
+	if (k->keyMoveNextPoint)
 	{
 		MoveNextPoint();
 	}
@@ -213,9 +218,8 @@ void Stage::Update(float deltaTime)
 void Stage::Render()
 {
 	HUD::GetInstance()->Draw(Camera::GetInstance()->getPosition());
+
 	map->drawMap();
-
-
 
 	for (int i = 0; i < this->objects->size(); i++) {
 		if (this->objects->at(i)->GetObjectType() != BOSS_BULLET) {
@@ -242,12 +246,20 @@ int Stage::Nextpoint()
 
 }
 
+void Stage::FadeInEffect()
+{
 
+}
+
+void Stage::FadeOutEffect()
+{
+
+}
 
 void Stage::MoveNextPoint()
 {
 	int nextpoint = Nextpoint();
 	if (nextpoint != -1)
-		MainCharacter::GetInstance()->SetPosition(nextpoint, 0);
+		MainCharacter::GetInstance()->SetPosition(nextpoint, 150);
 
 }

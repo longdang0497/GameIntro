@@ -22,7 +22,7 @@ MainCharacter::MainCharacter()
 	this->objectWidth = 20;
 	this->objectHeight = 31;
 
-	this->SetPosition(10, 10);
+	this->SetPosition(100, 120);
 	this->SetVeclocity(0, 0);
 	this->SetDirection(RIGHT); //Right
 	this->isOnGround = false;
@@ -170,6 +170,9 @@ void MainCharacter::Update(float t, vector<Object*> * object)
 	if (HP == 0)
 		return;
 
+	if (isInTheEndOfMap)
+		return;
+
 	alpha = 255;
 
 	if (isHurting)
@@ -231,7 +234,12 @@ void MainCharacter::Render()
 
 	this->position.z = 0;
 
+
+
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
+
+	if (position.x > 1000)
+		int r = 1;
 
 	if (direction == RIGHT)
 		this->currentSprite->DrawSprite(pos, true, alpha);

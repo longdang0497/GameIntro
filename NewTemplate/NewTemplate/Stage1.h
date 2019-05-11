@@ -22,5 +22,8 @@ public:
 		if (_instance == NULL) _instance = new Stage1();
 		return _instance;
 	}
+
+	void FadeInEffect();
+	void FadeOutEffect();
 };
 

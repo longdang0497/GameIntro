@@ -59,6 +59,9 @@ enum GAME_STAGE {
 #define PATH_MAIN_JUMP_SCROLL_KILL L"sprite\\main\\MAIN_JUMP_SCROLL_KILL.txt"
 #define PATH_MAIN_HURT L"sprite\\main\\MAIN_HURT.txt"
 
+#define ID_TEXTURE_BLACK 1090
+#define PATH_TEXTURE_BLACK L"sprite\\black.jpg"	//  <===== CÁC SPRITE BÊN DƯỚI SỬ DỤNG TEXTURE NÀY
+
 #define PATH_MAIN_SWORD L"sprite\\main\\MAIN_SWORD.txt"
 
 #define PATH_SANDGLASS L"sprite\\item\\SANDGLASS.txt"
