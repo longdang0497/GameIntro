@@ -1,6 +1,7 @@
 #pragma once
 #include "Stage.h"
 #include "Define.h"
+#include "ProcessGame.h"
 #include "Map.h"
 
 class Stage1 : public Stage
@@ -21,8 +22,5 @@ public:
 		if (_instance == NULL) _instance = new Stage1();
 		return _instance;
 	}
-
-	void FadeInEffect();
-	void FadeOutEffect();
 };
 

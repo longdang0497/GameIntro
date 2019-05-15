@@ -101,9 +101,6 @@ public:
 
 	bool GetIsActive() { return this->isActive; }
 	void SetIsActive(bool isActive) { this->isActive = isActive; }
-
-	bool GetActive() { return this->isActive; }
-	void SetActive(bool value) { this->isActive = value; }
 };
 
 

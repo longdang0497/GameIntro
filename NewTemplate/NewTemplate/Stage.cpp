@@ -9,7 +9,6 @@ Stage::Stage()
 
 Stage::~Stage()
 {
-	//if (item != nullptr) delete item;
 }
 
 void Stage::InitStaticObjects(RECT rect, vector<RECT> *staticObjects)
@@ -71,9 +70,9 @@ void Stage::InitEnemies(LPCWSTR filePath)
 {
 	fstream fs(filePath);
 
-	int numOfObject, left, top, limit1, limit2, objectType, direction, itemId;
+	int numOfObject, left, top, limit1, limit2, objectType, direction;
 
-	fs >> numOfObject;	
+	fs >> numOfObject;
 
 	for (int i = 0; i < numOfObject; i++) {
 		fs >> left >> top >> limit1 >> limit2 >> objectType >> direction;
@@ -88,12 +87,8 @@ void Stage::InitEnemies(LPCWSTR filePath)
 			this->objects->push_back(new Soldier(pos, direction, limit1, limit2));
 			break;
 		case BUTTERFLY_ID:
-		{
-			fs >> itemId;			
-			this->objects->push_back(new Butterfly(pos, direction, limit1, limit2, itemId));			
-			InitItems(pos, itemId);
+			this->objects->push_back(new Butterfly(pos, direction, limit1, limit2));
 			break;
-		}
 		case EAGLE_ID:
 			this->objects->push_back(new Eagle(pos, direction, limit1, limit2));
 			break;
@@ -109,12 +104,21 @@ void Stage::InitEnemies(LPCWSTR filePath)
 		default:
 			break;
 		}
-	}	
+	}
+
 	fs.close();
 }
 
-void Stage::InitItems(D3DXVECTOR3 pos, int objectID)
+void Stage::Update(float deltaTime)
 {
+	CKeyGame* k = CKeyGame::getInstance();
+
+	if (k->keyChangeScene)
+	{
+		MoveNextPoint();
+	}
+
+
 	HUD::GetInstance()->Update(deltaTime);
 	for (int i = 0; i < this->objects->size(); i++) {
 
@@ -151,8 +155,9 @@ void Stage::InitItems(D3DXVECTOR3 pos, int objectID)
 void Stage::Render()
 {
 	HUD::GetInstance()->Draw(Camera::GetInstance()->getPosition());
-
 	map->drawMap();
+
+
 
 	for (int i = 0; i < this->objects->size(); i++) {
 		if (this->objects->at(i)->GetObjectType() != BOSS_BULLET) {
@@ -160,4 +165,31 @@ void Stage::Render()
 		}
 		
 	}
+}
+
+int Stage::Nextpoint()
+{
+	if (SpecialPoint.size() == 0)
+		return -1;
+	else
+	{
+		for (int i = 0; i < SpecialPoint.size() - 1; i++)
+		{
+			if (MainCharacter::GetInstance()->GetPosition().x >= SpecialPoint.at(i)
+				&& MainCharacter::GetInstance()->GetPosition().x <= SpecialPoint.at(i + 1))
+				return SpecialPoint.at(i + 1);
+		}
+		return -1;
+	}
+
+}
+
+
+
+void Stage::MoveNextPoint()
+{
+	int nextpoint = Nextpoint();
+	if (nextpoint != -1)
+		MainCharacter::GetInstance()->SetPosition(nextpoint, 0);
+
 }

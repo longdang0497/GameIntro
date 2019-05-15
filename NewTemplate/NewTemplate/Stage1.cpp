@@ -12,6 +12,11 @@ Stage1::Stage1()
 
 	Camera::GetInstance()->setWorldBoundary(2048);
 
+
+
+	SpecialPoint.push_back(0);
+	SpecialPoint.push_back(250);
+	SpecialPoint.push_back(1880);
 }
 
 Stage1::~Stage1()
@@ -54,10 +59,63 @@ void Stage1::LoadResource()
 
 	fs.close();
 
+	fstream fs2(PATH_POS_HIDE_SATGE_1);
+
+	fs2 >> numberOfGround;
+	int type;
+
+	vector<RECT>* hides = new vector<RECT>();
+	for (int i = 0; i < numberOfGround; i++) {
+		hides->clear();
+		fs2 >> type;
+		fs2 >> left >> top >> right >> bottom;
+
+		RECT rect;
+		rect.top = top;
+		rect.left = left;
+		rect.right = right;
+		rect.bottom = bottom;
+
+		this->InitStaticObjects(rect, hides);
+
+		switch (type)
+		{
+		case 0:
+			for (int i = 0; i < hides->size(); i++) {
+				RECT rect = hides->at(i);
+				HideObject* brick = new HideObject(rect.left, rect.top, rect.right, rect.bottom, TOP_LADDER);
+				this->objects->push_back(brick);
+			}
+			break;
+		case 1:
+			for (int i = 0; i < hides->size(); i++) {
+				RECT rect = hides->at(i);
+				HideObject* brick = new HideObject(rect.left, rect.top, rect.right, rect.bottom, BOTTOM_LADDER);
+				this->objects->push_back(brick);
+			}
+			break;
+			case 2:
+				for (int i = 0; i < hides->size(); i++) {
+					RECT rect = hides->at(i);
+					HideObject* brick = new HideObject(rect.left, rect.top, rect.right, rect.bottom, END_MAP);
+					this->objects->push_back(brick);
+				}
+				break;
+		default:
+			break;
+		}
+	}
+
+	fs2.close();
+
+
+
+
 	this->InitEnemies(PATH_POS_ENEMIES_MAP_1);
 
 	 //Enemy* e = new Bat({ 100, 100,0 }, 0, 0, 0);
 	 //this->objects->push_back(e);
+
 
 	for (int i = 0; i < this->objects->size(); i++) {
 		Grid::GetInstance()->Add(this->objects->at(i));
@@ -66,56 +124,20 @@ void Stage1::LoadResource()
 	delete bricks;
 	MainCharacter::GetInstance()->SetPosition(100, 50);
 
+
+
 }
 
 void Stage1::Update(float deltaTime)
 {
 	Stage::Update(deltaTime);
+
+	if (MainCharacter::GetInstance()->GetIsInTheEndOfMap())
+		ProcessGame::GetInstance(NULL,0)->SetGameStage(STAGE2);
 }
 
 void Stage1::Render()
 {
 	Stage::Render();
-	if (fadeIn)
-		FadeInEffect();
-	if(fadeOut)
-		FadeOutEffect();
-}
 
-void Stage1::FadeInEffect()
-{
-	if (alpha >= 200)
-	{
-		if (GetTickCount() - TimeToFade > 20)
-		{
-			Game::GetInstance()->Draw(0, 80, Texture::GetInstance()->Get(ID_TEXTURE_BLACK), 0, 80, 256, 320, alpha);
-			TimeToFade = GetTickCount();
-			alpha -= 1;
-		}
-	}
-	else
-	{
-		fadeIn = false;
-		TimeToFade = GetTickCount();
-	}
-}
-
-void Stage1::FadeOutEffect()
-{
-	if (alpha < 255)
-	{
-		if (GetTickCount() - TimeToFade > 20)
-		{
-			Game::GetInstance()->Draw(0, 80, Texture::GetInstance()->Get(ID_TEXTURE_BLACK), 1792, 80, 2048, 300, alpha);
-			TimeToFade = GetTickCount();
-			alpha += 1;
-		}
-	}
-	else
-	{
-		fadeOut = false;
-		MainCharacter::GetInstance()->SetPosition(50, 120);
-		Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
-		ProcessGame::GetInstance(NULL, 0)->SetGameStage(STAGE2);
-	}
 }

@@ -93,12 +93,11 @@ void Object::RenderBoundingBox()
 
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(pos1);
 
-	Game::GetInstance()->Draw(pos.x, pos.y, Texture::GetInstance()->Get(ID_BB), left, top, right, bottom,1);
+	Game::GetInstance()->Draw(pos.x, pos.y, Texture::GetInstance()->Get(ID_BB), left, top, right, bottom);
 }
 
 void Object::Update(float deltaTime, std::vector<Object*>* objects)
 {
-
 	this->deltaTime = deltaTime;
 	this->deltaX = this->veclocity.x * deltaTime;
 	this->deltaY = this->veclocity.y * deltaTime;
@@ -106,7 +105,7 @@ void Object::Update(float deltaTime, std::vector<Object*>* objects)
 
 void Object::Render()
 {
-	RenderBoundingBox();
+//	RenderBoundingBox();
 }
 
 CollisionEvent* Object::SweptAABBEx(Object* coO)

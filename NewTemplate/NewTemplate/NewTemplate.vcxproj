@@ -142,6 +142,7 @@
     <ClCompile Include="HideObject.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="IntroStage.cpp" />
     <ClCompile Include="Jaguar.cpp" />
     <ClCompile Include="KeyBoard.cpp" />
     <ClCompile Include="KeyGame.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="HideObject.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="IntroStage.h" />
     <ClInclude Include="Jaguar.h" />
     <ClInclude Include="KeyBoard.h" />
     <ClInclude Include="KeyGame.h" />

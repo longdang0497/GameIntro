@@ -7,24 +7,16 @@
 #include "Stage1.h"
 #include "Stage2.h"
 #include "Stage3.h"
+#include "IntroStage.h"
 #include "KeyGame.h"
 
-class KeyEventHandler : public Input {
-public:
-	virtual void KeyState(BYTE *states);
-	virtual void OnKeyDown(int KeyCode);
-	virtual void OnKeyUp(int KeyCode);
-};
 
 
 class ProcessGame
 {
 private:
 	static ProcessGame* _instance;
-	KeyEventHandler* keyHandler;
-
-
-
+	GAME_STAGE gameStage;
 public:
 	ProcessGame(HINSTANCE hInstance, int nShowCmd);
 	// Dùng để chạy và update nhân vật
@@ -35,5 +27,10 @@ public:
 		if (_instance == NULL) _instance = new ProcessGame(hInstance, nShowCmd);
 		return _instance;
 	}
+
+	GAME_STAGE GetGameStage() { return this->gameStage; }
+	void SetGameStage(GAME_STAGE gameStage) { this->gameStage = gameStage; }
+
+
 };
 

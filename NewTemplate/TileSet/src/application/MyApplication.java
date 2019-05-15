@@ -31,7 +31,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 public class MyApplication implements Initializable {
 
 	public static final String OUTPUT_FILE_NAME = "\\result.txt";
-	public static final String OUTPUT_IMAGE_NAME = "\\result.jpg";
+	public static final String OUTPUT_IMAGE_NAME = "\\result.png";
 	public static final int TOTAL_HEIGT = 0;
 
 	@FXML
@@ -95,6 +95,7 @@ public class MyApplication implements Initializable {
 
 		int[][] matrix = new int[img.getHeight() / tileHeight][img.getWidth() / tileWidth];
 		
+		
 		for (int i = 0; i < img.getHeight(); i += tileHeight) {
 			for (int j = 0; j < img.getWidth(); j += tileWidth) {
 				BufferedImage subImage = img.getSubimage(j, i, tileWidth, tileHeight);
@@ -104,7 +105,6 @@ public class MyApplication implements Initializable {
 				if (resultImages.isEmpty()) {
 					resultImages.add(subImage);
 					matrix[i / tileHeight][j / tileWidth] = 0;
-
 				} else {
 
 					boolean flag = false;
@@ -149,7 +149,6 @@ public class MyApplication implements Initializable {
 					if (!flag) {
 						resultImages.add(subImage);
 						matrix[i / tileHeight][j / tileWidth] = resultImages.size() - 1;
-
 					}
 
 				}
@@ -160,11 +159,11 @@ public class MyApplication implements Initializable {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(txtOutputPath.getText() + OUTPUT_FILE_NAME));
 
 		writer.write(
-				img.getHeight() / tileHeight + " " + img.getWidth() / tileWidth + " " + tileHeight + " " + tileWidth);
+				 img.getWidth() / tileWidth + "\t" + img.getHeight() / tileHeight + "\t" + tileHeight + "\t" + tileWidth + "\t" + (resultImages.size()) + "\t" + 1);
 		writer.write(System.getProperty("line.separator"));
 		for (int i = 0; i < img.getHeight() / tileHeight; i++) {
 			for (int j = 0; j < img.getWidth() / tileWidth; j++) {
-				writer.write(matrix[i][j] + 1 + " ");
+				writer.write(matrix[i][j] + "\t");
 			}
 
 			writer.write(System.getProperty("line.separator"));
@@ -181,7 +180,7 @@ public class MyApplication implements Initializable {
 		}
 		g.dispose();
 
-		ImageIO.write(concatImage, "jpg", new File(txtOutputPath.getText() + OUTPUT_IMAGE_NAME));
+		ImageIO.write(concatImage, "png", new File(txtOutputPath.getText() + OUTPUT_IMAGE_NAME));
 
 		new Alert(AlertType.INFORMATION, "Xong rồi <3 ", ButtonType.OK).show();
 

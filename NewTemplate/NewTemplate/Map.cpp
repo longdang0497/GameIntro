@@ -50,7 +50,7 @@ void Map::drawMap()
 	int top, left, right, bottom;
 
 	for (int i = 0; i < 176 / tileHeight; i++)
-		for (int j = 0; j < 256 / tileWidth + 1; j++)
+		for (int j = 0; j < 240 / tileWidth + 1; j++)
 		{
 			int a = i + camposition.y / tileWidth;
 			int b = j + camposition.x / tileHeight;

@@ -4,12 +4,14 @@ Stage2* Stage2::_instance = NULL;
 
 Stage2::Stage2()
 {
+	int u = 1;
 	Grid::GetInstance()->ReSetGrid(STAGE2_HEIGHT, STAGE2_WIDTH, false);
-	MainCharacter::GetInstance()->SetPosition(988, 150);
+	MainCharacter::GetInstance()->SetPosition(150, 0);
 	this->LoadResource();
 	Camera::GetInstance()->setWorldBoundary(3072);
-}
 
+	SpecialPoint.empty();
+}
 
 
 Stage2::~Stage2()
@@ -114,6 +116,14 @@ void Stage2::LoadResource()
 				this->objects->push_back(brick);
 			}
 			break;
+		case 2:
+			for (int i = 0; i < hides->size(); i++) {
+				RECT rect = hides->at(i);
+				HideObject* brick = new HideObject(rect.left, rect.top, rect.right, rect.bottom, END_MAP);
+				this->objects->push_back(brick);
+			}
+			break;
+
 		default:
 			break;
 		}
@@ -139,47 +149,5 @@ void Stage2::Update(float deltaTime)
 void Stage2::Render()
 {
 	Stage::Render();
-	if (fadeIn)
-	{
-		FadeInEffect();
-	}
-	if (fadeOut)
-		FadeOutEffect();
 
-}
-
-void Stage2::FadeInEffect()
-{
-	if (alpha >= 200)
-	{
-		if (GetTickCount() - TimeToFade > 20)
-		{
-			Game::GetInstance()->Draw(0, 80, Texture::GetInstance()->Get(ID_TEXTURE_BLACK), 0, 80, 256, 320, alpha);
-			TimeToFade = GetTickCount();
-			alpha -= 1;
-		}
-	}
-	else
-	{
-		fadeIn = false;
-		TimeToFade = GetTickCount();
-	}
-}
-
-void Stage2::FadeOutEffect()
-{
-	if (alpha < 255)
-	{
-		if (GetTickCount() - TimeToFade > 20)
-		{
-			Game::GetInstance()->Draw(0, 80, Texture::GetInstance()->Get(ID_TEXTURE_BLACK), 1792, 80, 2048, 300, alpha);
-			TimeToFade = GetTickCount();
-			alpha += 1;
-		}
-	}
-	else
-	{
-		fadeOut = false;
-		ProcessGame::GetInstance(NULL, 0)->SetGameStage(STAGE2);
-	}
 }

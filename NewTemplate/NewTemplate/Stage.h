@@ -24,7 +24,6 @@
 #include "Boss.h"
 #include  "HideObject.h"
 #include "Explode.h"
-#include "Item.h"
 
 class Stage
 {
@@ -32,6 +31,8 @@ protected:
 	vector<Object*> *objects;
 
 	Map* map;
+
+	vector<int> SpecialPoint; //use for demo cho thay coi
 
 public:
 	Stage();
@@ -44,9 +45,12 @@ public:
 	void InitStaticObjects1(RECT rect, vector<RECT> *staticObjects);
 
 	void InitEnemies(LPCWSTR filePath);
-	void InitItems(D3DXVECTOR3 pos, int objectID);
 
 	virtual void LoadResource() = 0;
 	virtual void Update(float deltaTime);
 	virtual void Render();
+
+	int Nextpoint();
+
+	void MoveNextPoint();
 };

@@ -3,7 +3,6 @@
 #include "Define.h"
 #include "Map.h"
 #include "Brick.h"
-#include "ProcessGame.h"
 
 class Stage2: public Stage
 {
@@ -22,8 +21,5 @@ public:
 		if (_instance == NULL) _instance = new Stage2();
 		return _instance;
 	}
-
-	void FadeInEffect();
-	void FadeOutEffect();
 };
 

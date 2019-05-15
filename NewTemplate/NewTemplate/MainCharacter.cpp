@@ -22,7 +22,7 @@ MainCharacter::MainCharacter()
 	this->objectWidth = 20;
 	this->objectHeight = 31;
 
-	this->SetPosition(100, 120);
+	this->SetPosition(10, 10);
 	this->SetVeclocity(0, 0);
 	this->SetDirection(RIGHT); //Right
 	this->isOnGround = false;
@@ -170,9 +170,6 @@ void MainCharacter::Update(float t, vector<Object*> * object)
 	if (HP == 0)
 		return;
 
-	if (isInTheEndOfMap)
-		return;
-
 	alpha = 255;
 
 	if (isHurting)
@@ -234,12 +231,7 @@ void MainCharacter::Render()
 
 	this->position.z = 0;
 
-
-
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
-
-	if (position.x > 1000)
-		int r = 1;
 
 	if (direction == RIGHT)
 		this->currentSprite->DrawSprite(pos, true, alpha);
@@ -401,7 +393,7 @@ void MainCharacter::HandleCollision(vector<Object*> * objects)
 
 	for (auto iter : *objects)
 	{
-		if (iter->GetObjectType() == BRICK || iter->GetObjectType() == LADDER || iter->GetObjectType() == ITEM)
+		if (iter->GetObjectType() == BRICK || iter->GetObjectType() == LADDER)
 			staticObject->push_back(iter);
 		else
 			movingObject->push_back(iter);
@@ -437,10 +429,10 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
 		else
 			this->PlusPosition(minTx * this->deltaX + nX * 0.1f, minTy * this->deltaY + nY * 0.1f);
 
+
 		for (auto iter : *coEventsResult)
 		{
-			switch (iter->obj->GetObjectType()) {
-			case BRICK:
+			if (iter->obj->GetObjectType() == BRICK)
 			{
 				if (nX != 0)
 				{
@@ -461,21 +453,15 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
 
 					}
 				}
-				break;			
+
 			}
-			case LADDER:
-				SetState(STATE_ON_LADDER);
-				break;
-			case ITEM:
+			else if (iter->obj->GetObjectType() == LADDER)
 			{
-				if (nX != 0)
-					iter->obj->SetActive(false);
-				if (nY != 0 && this->isOnGround == true)
-					iter->obj->SetActive(false);
-				break;
-			}
+				SetState(STATE_ON_LADDER);
+
 			}
 		}
+
 	}
 
 	for (int i = 0; i < coEvents->size(); i++)
@@ -489,26 +475,25 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 {
 	for (auto iter : *objects)
 	{
+
 		if (iter->GetIsActive()) {
 			switch (iter->GetObjectType())
 			{
 			case JAGUAR:
 			case SOLDIER:
+			case BUTTERFLY:
 			{
 				float al, at, ar, ab, bl, bt, br, bb;
 				GetBoundingBox(al, at, ar, ab);
 				iter->GetBoundingBox(bl, bt, br, bb);
 				if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
 				{
-					{
-						SetState(STATE_HURT);
-					}
-
-					break;
+					SetState(STATE_HURT);
 				}
+
+				break;
 			}
 			case HIDE_OBJECT:
-			{
 				float al, at, ar, ab, bl, bt, br, bb;
 				GetBoundingBox(al, at, ar, ab);
 				iter->GetBoundingBox(bl, bt, br, bb);
@@ -519,10 +504,13 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					{
 						SetState(STATE_FALL);
 					}
+					else if (h->getType() == END_MAP)
+					{
+						isInTheEndOfMap = true;
+					}
 				}
 
 				break;
-			}
 			}
 		}
 	}
@@ -547,6 +535,10 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 				if ((h->getType() == TOP_LADDER || h->getType() == BOTTOM_LADDER) && (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING))
 				{
 					SetState(STATE_FALL);
+				}
+				else if (h->getType() == END_MAP)
+				{
+					isInTheEndOfMap = true;
 				}
 				break;
 			}
