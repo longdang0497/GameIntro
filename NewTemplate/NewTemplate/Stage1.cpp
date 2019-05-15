@@ -12,11 +12,16 @@ Stage1::Stage1()
 
 	Camera::GetInstance()->setWorldBoundary(2048);
 
-
-
 	SpecialPoint.push_back(0);
 	SpecialPoint.push_back(250);
 	SpecialPoint.push_back(1880);
+
+	alpha = 255;
+	fadeIn = true;
+	fadeOut = false;
+	TimeToFade = GetTickCount();
+
+	D3DXVECTOR3 a = MainCharacter::GetInstance()->GetPosition();
 }
 
 Stage1::~Stage1()
@@ -116,13 +121,12 @@ void Stage1::LoadResource()
 	 //Enemy* e = new Bat({ 100, 100,0 }, 0, 0, 0);
 	 //this->objects->push_back(e);
 
-
 	for (int i = 0; i < this->objects->size(); i++) {
 		Grid::GetInstance()->Add(this->objects->at(i));
 	}
 
 	delete bricks;
-	MainCharacter::GetInstance()->SetPosition(100, 50);
+	//MainCharacter::GetInstance()->SetPosition(50, 130);
 
 
 
@@ -133,11 +137,74 @@ void Stage1::Update(float deltaTime)
 	Stage::Update(deltaTime);
 
 	if (MainCharacter::GetInstance()->GetIsInTheEndOfMap())
-		ProcessGame::GetInstance(NULL,0)->SetGameStage(STAGE2);
+	{
+		MainCharacter::GetInstance()->SetState(STATE_IDLE);
+		fadeOut = true;
+	}
+	else
+	for (int i = 0; i < this->objects->size(); i++)
+	{
+		if (this->objects->at(i)->GetObjectType() == BUTTERFLY)
+		{
+			if (this->objects->at(i)->GetHP() <= 0)
+			{
+				if (this->objects->at(i + 1)->GetObjectType() == ITEM && this->objects->at(i + 1)->GetActive() == false &&
+					this->objects->at(i + 1)->GetPosition() == this->objects->at(i)->GetPosition())
+				{
+					this->objects->at(i + 1)->SetActive(true);
+					/*Item * item = dynamic_cast<Item*>(this->objects->at(i + 1));
+					item->SetTimeAppear();
+					delete item;
+					item = NULL;*/
+				}
+			}
+		}
+	}
 }
 
 void Stage1::Render()
 {
 	Stage::Render();
+	if (fadeIn)
+		FadeInEffect();
+	if(fadeOut)
+		FadeOutEffect();
+}
 
+void Stage1::FadeInEffect()
+{
+	if (alpha >= 200)
+	{
+		if (GetTickCount() - TimeToFade > 20)
+		{
+			Game::GetInstance()->Draw(0, 80, Texture::GetInstance()->Get(ID_TEXTURE_BLACK), 0, 80, 256, 320, alpha);
+			TimeToFade = GetTickCount();
+			alpha -= 1;
+		}
+	}
+	else
+	{
+		fadeIn = false;
+		TimeToFade = GetTickCount();
+	}
+}
+
+void Stage1::FadeOutEffect()
+{
+	if (alpha < 255)
+	{
+		if (GetTickCount() - TimeToFade > 20)
+		{
+			Game::GetInstance()->Draw(0, 80, Texture::GetInstance()->Get(ID_TEXTURE_BLACK), 1792, 80, 2048, 300, alpha);
+			TimeToFade = GetTickCount();
+			alpha += 1;
+		}
+	}
+	else
+	{
+		fadeOut = false;
+		MainCharacter::GetInstance()->SetPosition(50, 120);
+		Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
+		ProcessGame::GetInstance(NULL, 0)->SetGameStage(STAGE2);
+	}
 }

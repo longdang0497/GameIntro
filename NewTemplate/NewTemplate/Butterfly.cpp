@@ -1,16 +1,42 @@
 #include "Butterfly.h"
 
-Butterfly::Butterfly(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2) : Enemy(pos, appearanceDirection, limitX1, limitX2)
+Butterfly::Butterfly(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2, int itemId) : Enemy(pos, appearanceDirection, limitX1, limitX2)
+//Butterfly::Butterfly(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2, Item * item) : Enemy(pos, appearanceDirection, limitX1, limitX2)
 {
 	this->fly = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_BUTTERFLY);
 	this->SetObjectType(BUTTERFLY);
+	this->SetPosition(pos.x, pos.y);
 	this->HP = 1;
+	//this->item = item;	
+}
+
+Butterfly::~Butterfly()
+{
+	if (this->item != nullptr && this->GetHP() <= 0) {
+		delete item;
+		item = NULL;
+	}
+
+	if (this->fly != nullptr) {
+		delete(fly); 
+		fly = NULL;
+	}
 }
 
 void Butterfly::Update(float deltaTime, std::vector<Object*>* objects)
 {
 	if (HP <= 0)
+	{		
+		/*if (firstCreate == false)
+		{
+			this->ActivateItem();
+			firstCreate = true;
+			this->item->SetActive(true);
+			this->item->Update(deltaTime);
+		}	*/	
 		return;
+	}
+
 	Object::Update(deltaTime, objects);
 
 
@@ -23,7 +49,10 @@ void Butterfly::Update(float deltaTime, std::vector<Object*>* objects)
 void Butterfly::Render()
 {
 	if (HP <= 0)
+	{
+		//this->item->Render();
 		return;
+	}
 
 	Object::Render();
 	this->position.z = 0;
@@ -54,4 +83,14 @@ void Butterfly::GetBoundingBox(float & l, float & t, float & r, float & b)
 
 void Butterfly::Destroy()
 {
+}
+
+void Butterfly::ActivateItem()
+{
+	//this->item = new Item(this->GetPosition(), this->itemId);
+	////this->item->InitItemSprite();
+	//this->item->InitItemSprite();
+	//this->item->SetPosition(this->GetPosition().x, this->GetPosition().y);
+	//this->item->SetObjID(this->itemId);
+	//this->item->SetActive(true);
 }

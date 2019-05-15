@@ -177,6 +177,9 @@
     <ClCompile Include="IntroStage.cpp">
       <Filter>Source Files\Stage</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="trace.h">
@@ -298,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="IntroStage.h">
       <Filter>Header Files\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -24,6 +24,7 @@
 #include "Boss.h"
 #include  "HideObject.h"
 #include "Explode.h"
+#include "Item.h"
 
 class Stage
 {
@@ -31,8 +32,15 @@ protected:
 	vector<Object*> *objects;
 
 	Map* map;
+	//Item * item;
 
 	vector<int> SpecialPoint; //use for demo cho thay coi
+
+	bool fadeIn;
+	bool fadeOut;
+
+	DWORD TimeToFade;
+	int alpha = 255;
 
 public:
 	Stage();
@@ -45,10 +53,14 @@ public:
 	void InitStaticObjects1(RECT rect, vector<RECT> *staticObjects);
 
 	void InitEnemies(LPCWSTR filePath);
+	void InitItems(D3DXVECTOR3 pos, int objectID);
 
 	virtual void LoadResource() = 0;
 	virtual void Update(float deltaTime);
 	virtual void Render();
+
+	void FadeInEffect();
+	void FadeOutEffect();
 
 	int Nextpoint();
 

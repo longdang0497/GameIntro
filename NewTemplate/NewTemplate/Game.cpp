@@ -89,7 +89,7 @@ void Game::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top,
 		Game::GetInstance()->GetSpriteHandler()->Draw(texture, &rect, NULL, NULL, D3DCOLOR_ARGB(rand() % 255, rand() % 255, rand() % 255, rand() % 255));
 	}
 	else
-		Game::GetInstance()->GetSpriteHandler()->Draw(texture, &rect, NULL, NULL, D3DCOLOR_ARGB(255, 255, 255, 255));
+		Game::GetInstance()->GetSpriteHandler()->Draw(texture, &rect, NULL, NULL, D3DCOLOR_ARGB(alpha, 255, 255, 255));
 }
 
 // Các xử lý sự kiện bàn phím

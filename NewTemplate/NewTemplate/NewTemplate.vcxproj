@@ -143,6 +143,7 @@
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="IntroStage.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Jaguar.cpp" />
     <ClCompile Include="KeyBoard.cpp" />
     <ClCompile Include="KeyGame.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="IntroStage.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Jaguar.h" />
     <ClInclude Include="KeyBoard.h" />
     <ClInclude Include="KeyGame.h" />
