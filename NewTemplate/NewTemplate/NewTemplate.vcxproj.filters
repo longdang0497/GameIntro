@@ -293,11 +293,5 @@
     <ClInclude Include="Explode.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
-    <ClInclude Include="IntroStage.h">
-      <Filter>Header Files\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Header Files\Object</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

@@ -169,16 +169,6 @@ void Stage::InitItems(D3DXVECTOR3 pos, int objectID)
 
 void Stage::Update(float deltaTime)
 {
-	if (fadeIn || fadeOut)
-		return;
-		
-
-	CKeyGame* k = CKeyGame::getInstance();
-
-	if (k->keyMoveNextPoint)
-	{
-		MoveNextPoint();
-	}
 	HUD::GetInstance()->Update(deltaTime);
 	for (int i = 0; i < this->objects->size(); i++) {
 

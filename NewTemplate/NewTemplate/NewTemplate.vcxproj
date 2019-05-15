@@ -142,8 +142,6 @@
     <ClCompile Include="HideObject.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Input.cpp" />
-    <ClCompile Include="IntroStage.cpp" />
-    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Jaguar.cpp" />
     <ClCompile Include="KeyBoard.cpp" />
     <ClCompile Include="KeyGame.cpp" />

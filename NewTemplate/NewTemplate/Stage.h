@@ -32,7 +32,6 @@ protected:
 	vector<Object*> *objects;
 
 	Map* map;
-	//Item * item;
 
 public:
 	Stage();
