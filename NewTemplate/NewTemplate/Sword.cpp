@@ -31,9 +31,11 @@ void Sword::Update(float t, vector<Object*> *object)
 
 	if (!isActive) return;
 
-	for (auto iter : *object)
+	vector<Object*> *tempObjs = object;
+
+	for (int i = 0; i < tempObjs->size(); i++)
 	{
-		switch (iter->GetObjectType())
+		switch (tempObjs->at(i)->GetObjectType())
 		{
 
 		case JAGUAR:
@@ -44,20 +46,29 @@ void Sword::Update(float t, vector<Object*> *object)
 		{
 			float al, at, ar, ab, bl, bt, br, bb;
 			GetBoundingBox(al, at, ar, ab);
-			iter->GetBoundingBox(bl, bt, br, bb);
+			tempObjs->at(i)->GetBoundingBox(bl, bt, br, bb);
 			if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
 			{
-				iter->SetHP(0);
+				tempObjs->at(i)->SetHP(0);
 				MainCharacter::GetInstance()->Score();
+				tempObjs->erase(tempObjs->begin() + i);
 			}
 
 			break;
 		}
 		case BOSS_BULLET:
 		{
-			BossBullet *bossBullet = dynamic_cast<BossBullet*>(iter);
-			bossBullet->Destroy();
-			OutputDebugString(L"Chạm đạn \n");
+			float al, at, ar, ab, bl, bt, br, bb;
+			GetBoundingBox(al, at, ar, ab);
+			BossBullet *bossBullet = dynamic_cast<BossBullet*>(tempObjs->at(i));
+			bossBullet->GetBoundingBox(bl, bt, br, bb);
+
+			if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
+			{
+				bossBullet->Destroy();
+				tempObjs->erase(tempObjs->begin() + i);
+			}
+
 			break;
 		}
 		default:
@@ -69,7 +80,7 @@ void Sword::Update(float t, vector<Object*> *object)
 	vector<CollisionEvent*> *coEvents = new vector<CollisionEvent*>();
 	coEvents->clear();
 
-	CalcPotentialCollisions(object, coEvents);
+	CalcPotentialCollisions(tempObjs, coEvents);
 
 	for (auto iter : *coEvents)
 	{
@@ -89,9 +100,7 @@ void Sword::Update(float t, vector<Object*> *object)
 	for (auto iter : *coEvents) delete iter;
 	coEvents->clear();
 
-
-
-
+	delete tempObjs;
 }
 void Sword::Render()
 {
