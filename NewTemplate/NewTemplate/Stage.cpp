@@ -170,6 +170,7 @@ void Stage::InitItems(D3DXVECTOR3 pos, int objectID)
 void Stage::Update(float deltaTime)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	if (fadeIn || fadeOut)
 		return;
@@ -183,6 +184,8 @@ void Stage::Update(float deltaTime)
 	}
 
 
+=======
+>>>>>>> parent of 3e7cd07... merge Tùng vào master
 =======
 >>>>>>> parent of 3e7cd07... merge Tùng vào master
 	HUD::GetInstance()->Update(deltaTime);
