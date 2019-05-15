@@ -142,14 +142,8 @@
     <ClCompile Include="HideObject.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Input.cpp" />
-<<<<<<< HEAD
-<<<<<<< HEAD
     <ClCompile Include="IntroStage.cpp" />
     <ClCompile Include="Item.cpp" />
-=======
->>>>>>> parent of 3e7cd07... merge Tùng vào master
-=======
->>>>>>> parent of 3e7cd07... merge Tùng vào master
     <ClCompile Include="Jaguar.cpp" />
     <ClCompile Include="KeyBoard.cpp" />
     <ClCompile Include="KeyGame.cpp" />

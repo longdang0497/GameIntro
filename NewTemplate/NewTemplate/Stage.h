@@ -32,10 +32,7 @@ protected:
 	vector<Object*> *objects;
 
 	Map* map;
-<<<<<<< HEAD
 	//Item * item;
-=======
->>>>>>> parent of 3e7cd07... merge Tùng vào master
 
 public:
 	Stage();
