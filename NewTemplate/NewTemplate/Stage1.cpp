@@ -64,58 +64,6 @@ void Stage1::LoadResource()
 
 	fs.close();
 
-	fstream fs2(PATH_POS_HIDE_SATGE_1);
-
-	fs2 >> numberOfGround;
-	int type;
-
-	vector<RECT>* hides = new vector<RECT>();
-	for (int i = 0; i < numberOfGround; i++) {
-		hides->clear();
-		fs2 >> type;
-		fs2 >> left >> top >> right >> bottom;
-
-		RECT rect;
-		rect.top = top;
-		rect.left = left;
-		rect.right = right;
-		rect.bottom = bottom;
-
-		this->InitStaticObjects(rect, hides);
-
-		switch (type)
-		{
-		case 0:
-			for (int i = 0; i < hides->size(); i++) {
-				RECT rect = hides->at(i);
-				HideObject* brick = new HideObject(rect.left, rect.top, rect.right, rect.bottom, TOP_LADDER);
-				this->objects->push_back(brick);
-			}
-			break;
-		case 1:
-			for (int i = 0; i < hides->size(); i++) {
-				RECT rect = hides->at(i);
-				HideObject* brick = new HideObject(rect.left, rect.top, rect.right, rect.bottom, BOTTOM_LADDER);
-				this->objects->push_back(brick);
-			}
-			break;
-			case 2:
-				for (int i = 0; i < hides->size(); i++) {
-					RECT rect = hides->at(i);
-					HideObject* brick = new HideObject(rect.left, rect.top, rect.right, rect.bottom, END_MAP);
-					this->objects->push_back(brick);
-				}
-				break;
-		default:
-			break;
-		}
-	}
-
-	fs2.close();
-
-
-
-
 	this->InitEnemies(PATH_POS_ENEMIES_MAP_1);
 
 	 //Enemy* e = new Bat({ 100, 100,0 }, 0, 0, 0);
@@ -128,38 +76,11 @@ void Stage1::LoadResource()
 	delete bricks;
 	//MainCharacter::GetInstance()->SetPosition(50, 130);
 
-
-
 }
 
 void Stage1::Update(float deltaTime)
 {
 	Stage::Update(deltaTime);
-
-	if (MainCharacter::GetInstance()->GetIsInTheEndOfMap())
-	{
-		MainCharacter::GetInstance()->SetState(STATE_IDLE);
-		fadeOut = true;
-	}
-	else
-	for (int i = 0; i < this->objects->size(); i++)
-	{
-		if (this->objects->at(i)->GetObjectType() == BUTTERFLY)
-		{
-			if (this->objects->at(i)->GetHP() <= 0)
-			{
-				if (this->objects->at(i + 1)->GetObjectType() == ITEM && this->objects->at(i + 1)->GetActive() == false &&
-					this->objects->at(i + 1)->GetPosition() == this->objects->at(i)->GetPosition())
-				{
-					this->objects->at(i + 1)->SetActive(true);
-					/*Item * item = dynamic_cast<Item*>(this->objects->at(i + 1));
-					item->SetTimeAppear();
-					delete item;
-					item = NULL;*/
-				}
-			}
-		}
-	}
 }
 
 void Stage1::Render()

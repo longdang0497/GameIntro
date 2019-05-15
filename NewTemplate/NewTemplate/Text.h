@@ -20,13 +20,11 @@ class Text
 	Text();
 
 	void DrawChar(char c, D3DXVECTOR2 position);
-	void DrawChar(char c, D3DXVECTOR2 position, int alpha);
 public:
 	~Text();
 
 	static Text* GetInstance();
 
 	void DrawString(char* s, D3DXVECTOR2 position);
-	void DrawString(char* s, D3DXVECTOR2 position, int alpha);
 };
 

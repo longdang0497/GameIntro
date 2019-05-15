@@ -49,7 +49,7 @@ void Grid::DeleteGrid()
 			while (this->cells[row][column] != NULL) {
 				Object* temp = this->cells[row][column];
 				this->cells[row][column] = this->cells[row][column]->GetNextObj();
-				temp->SetPreObj(NULL);
+				this->cells[row][column]->SetPreObj(NULL);
 
 				temp->SetNextObj(NULL);
 

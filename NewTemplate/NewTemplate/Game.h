@@ -33,7 +33,7 @@ private:
 	DIDEVICEOBJECTDATA keyEvents[KEYBOARD_BUFFER_SIZE];		// Buffered keyboard data
 
 	Input * keyHandler;
-	
+	GAME_STAGE gameStage;
 
 public:
 	void Init(HWND hWnd);
@@ -49,7 +49,8 @@ public:
 	LPDIRECT3DSURFACE9 GetBackBuffer() { return backBuffer; }
 	LPD3DXSPRITE GetSpriteHandler() { return this->spriteHandler; }
 
-	
+	GAME_STAGE GetGameStage() { return this->gameStage; }
+	void SetGameStage(GAME_STAGE gameStage) { this->gameStage = gameStage; }
 
 	static Game * GetInstance() {
 		if (_instance == NULL) _instance = new Game();

@@ -6,7 +6,6 @@
 #define GAME_MODE_256_256 2
 #define GAME_TITLE L"Ninja Gaiden"
 enum GAME_STAGE {
-	Intro,
 	STAGE1,
 	STAGE2,
 	STAGE3

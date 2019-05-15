@@ -299,11 +299,14 @@
     <ClInclude Include="Explode.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="IntroStage.h">
       <Filter>Header Files\Stage</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
+=======
+>>>>>>> parent of 3e7cd07... merge Tùng vào master
   </ItemGroup>
 </Project>

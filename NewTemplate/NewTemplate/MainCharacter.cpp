@@ -519,10 +519,6 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					{
 						SetState(STATE_FALL);
 					}
-					else if (h->getType() == END_MAP)
-					{
-						isInTheEndOfMap = true;
-					}
 				}
 
 				break;
@@ -551,10 +547,6 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 				if ((h->getType() == TOP_LADDER || h->getType() == BOTTOM_LADDER) && (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING))
 				{
 					SetState(STATE_FALL);
-				}
-				else if (h->getType() == END_MAP)
-				{
-					isInTheEndOfMap = true;
 				}
 				break;
 			}

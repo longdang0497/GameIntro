@@ -7,9 +7,14 @@
 #include "Stage1.h"
 #include "Stage2.h"
 #include "Stage3.h"
-#include "IntroStage.h"
 #include "KeyGame.h"
 
+class KeyEventHandler : public Input {
+public:
+	virtual void KeyState(BYTE *states);
+	virtual void OnKeyDown(int KeyCode);
+	virtual void OnKeyUp(int KeyCode);
+};
 
 
 class ProcessGame

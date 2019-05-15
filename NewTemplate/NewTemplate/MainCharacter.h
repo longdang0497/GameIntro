@@ -34,7 +34,6 @@ private:
 	Sprite* onLadder;
 	Sprite* climbing;
 
-	bool isInTheEndOfMap  = false;
 	int score = 0;
 
 	bool isHurting = false;
@@ -77,10 +76,6 @@ public:
 	int GetScore() { return this->score; }
 	void Score() { this->score += 10; }
 
-	bool GetIsInTheEndOfMap() {
-		return isInTheEndOfMap;
-	}
 
-	void SetIsInTheEndOfMap(bool value) { this->isInTheEndOfMap = value; }
 };
 
