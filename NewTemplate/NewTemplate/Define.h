@@ -31,6 +31,7 @@ enum GAME_STAGE {
 #define ZOMBIE_ID 4
 #define GREEN_SOLDIER_ID 5
 #define BAT_ID 6
+#define CROW_ID 7
 
 // =========== ITEMS
 #define BLUE_R_ID 0
@@ -118,7 +119,7 @@ enum GAME_STAGE {
 #define PATH_POS_GROUND_MAP_2 "sprite\\Stage2\\ground.txt"
 #define PATH_POS_LADDER_SATGE_2  "sprite\\Stage2\\ladder.txt"
 #define PATH_POS_HIDE_SATGE_2  "sprite\\Stage2\\HideObject.txt"
-
+#define PATH_POS_ENEMIES_MAP_2 L"sprite\\Stage2\\enemies.txt"
 
 
 #define ID_TEXTURE_MAP_3 300
@@ -140,8 +141,8 @@ enum GAME_STAGE {
 #define PATH_TEX_HEALTH	L"sprite\\Board\\health.png"
 
 
-#define MAIN_WALK_PACE 0.15f
-#define MAIN_JUMP_SPEED_Y 0.35f
+#define MAIN_WALK_PACE 0.1f
+#define MAIN_JUMP_SPEED_Y 0.3f
 
 // ========= OBJECT =========
 enum OBJECT_TYPE {

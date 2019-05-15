@@ -94,6 +94,13 @@ void Stage::InitEnemies(LPCWSTR filePath)
 			InitItems(pos, itemId);
 			break;
 		}
+		case CROW_ID:
+		{
+			fs >> itemId;
+			this->objects->push_back(new Crow(pos, direction, limit1, limit2));
+			InitItems(pos, itemId);
+			break;
+		}
 		//case EAGLE_ID:
 		//	this->objects->push_back(new Eagle(pos, direction, limit1, limit2));
 		//	break;
@@ -193,8 +200,8 @@ void Stage::Update(float deltaTime)
 			this->objects->at(i)->Update(deltaTime, new vector<Object*>);
 			Grid::GetInstance()->UpdateGrid(this->objects->at(i));
 
-		}else if (this->objects->at(i)->GetObjectType() != BRICK && this->objects->at(i)->GetPosition().x >= MainCharacter::GetInstance()->GetPosition().x - 130
-			&& this->objects->at(i)->GetPosition().x <= MainCharacter::GetInstance()->GetPosition().x + 130) {
+		}else if (this->objects->at(i)->GetObjectType() != BRICK && this->objects->at(i)->GetPosition().x >= MainCharacter::GetInstance()->GetPosition().x - 200
+			&& this->objects->at(i)->GetPosition().x <= MainCharacter::GetInstance()->GetPosition().x + 150) {
 
 			vector<Object*>* collisionsObject = Grid::GetInstance()->GetCollisionObjects(this->objects->at(i));
 

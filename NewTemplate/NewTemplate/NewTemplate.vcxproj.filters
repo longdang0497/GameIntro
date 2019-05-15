@@ -180,6 +180,9 @@
     <ClCompile Include="Item.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Crow.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="trace.h">
@@ -303,6 +306,9 @@
       <Filter>Header Files\Stage</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Crow.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>

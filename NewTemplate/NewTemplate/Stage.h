@@ -25,6 +25,7 @@
 #include  "HideObject.h"
 #include "Explode.h"
 #include "Item.h"
+#include "Crow.h"
 
 class Stage
 {

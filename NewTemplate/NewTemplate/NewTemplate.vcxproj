@@ -131,6 +131,7 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Butterfly.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Crow.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Eagle.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Butterfly.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Crow.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Eagle.h" />
