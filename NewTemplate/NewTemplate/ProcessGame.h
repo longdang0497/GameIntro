@@ -21,11 +21,10 @@ class ProcessGame
 {
 private:
 	static ProcessGame* _instance;
-	GAME_STAGE gameStage;
+	KeyEventHandler* keyHandler;
 
 
-	DWORD Time; //dung cho chuyen canh
-	int alpha;
+
 public:
 	ProcessGame(HINSTANCE hInstance, int nShowCmd);
 	// Dùng để chạy và update nhân vật
@@ -36,16 +35,5 @@ public:
 		if (_instance == NULL) _instance = new ProcessGame(hInstance, nShowCmd);
 		return _instance;
 	}
-
-	GAME_STAGE GetGameStage() { return this->gameStage; }
-
-
-	void SetGameStage(GAME_STAGE gameStage)
-	{ 
-		this->gameStage = gameStage; 
-
-	}
-
-
 };
 

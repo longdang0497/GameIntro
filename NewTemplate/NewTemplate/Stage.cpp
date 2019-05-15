@@ -169,6 +169,7 @@ void Stage::InitItems(D3DXVECTOR3 pos, int objectID)
 
 void Stage::Update(float deltaTime)
 {
+<<<<<<< HEAD
 
 	if (fadeIn || fadeOut)
 		return;
@@ -182,6 +183,8 @@ void Stage::Update(float deltaTime)
 	}
 
 
+=======
+>>>>>>> parent of 3e7cd07... merge Tùng vào master
 	HUD::GetInstance()->Update(deltaTime);
 	for (int i = 0; i < this->objects->size(); i++) {
 
@@ -227,39 +230,4 @@ void Stage::Render()
 		}
 		
 	}
-}
-
-int Stage::Nextpoint()
-{
-	if (SpecialPoint.size() == 0)
-		return -1;
-	else
-	{
-		for (int i = 0; i < SpecialPoint.size() - 1; i++)
-		{
-			if (MainCharacter::GetInstance()->GetPosition().x >= SpecialPoint.at(i)
-				&& MainCharacter::GetInstance()->GetPosition().x <= SpecialPoint.at(i + 1))
-				return SpecialPoint.at(i + 1);
-		}
-		return -1;
-	}
-
-}
-
-void Stage::FadeInEffect()
-{
-
-}
-
-void Stage::FadeOutEffect()
-{
-
-}
-
-void Stage::MoveNextPoint()
-{
-	int nextpoint = Nextpoint();
-	if (nextpoint != -1)
-		MainCharacter::GetInstance()->SetPosition(nextpoint, 150);
-
 }

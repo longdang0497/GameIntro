@@ -32,10 +32,6 @@ ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 
 
 	Grid* grid = Grid::GetInstance(1, 1, true);
-
-	Time = GetTickCount();
-	alpha = 255;
-
 }
 
 // Các xử lý update và hiển thị nhân vật

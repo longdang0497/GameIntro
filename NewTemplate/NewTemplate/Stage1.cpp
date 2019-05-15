@@ -12,16 +12,6 @@ Stage1::Stage1()
 
 	Camera::GetInstance()->setWorldBoundary(2048);
 
-	SpecialPoint.push_back(0);
-	SpecialPoint.push_back(250);
-	SpecialPoint.push_back(1880);
-
-	alpha = 255;
-	fadeIn = true;
-	fadeOut = false;
-	TimeToFade = GetTickCount();
-
-	D3DXVECTOR3 a = MainCharacter::GetInstance()->GetPosition();
 }
 
 Stage1::~Stage1()
@@ -74,7 +64,7 @@ void Stage1::LoadResource()
 	}
 
 	delete bricks;
-	//MainCharacter::GetInstance()->SetPosition(50, 130);
+	MainCharacter::GetInstance()->SetPosition(100, 50);
 
 }
 

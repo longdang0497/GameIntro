@@ -34,14 +34,6 @@ protected:
 	Map* map;
 	//Item * item;
 
-	vector<int> SpecialPoint; //use for demo cho thay coi
-
-	bool fadeIn;
-	bool fadeOut;
-
-	DWORD TimeToFade;
-	int alpha = 255;
-
 public:
 	Stage();
 	~Stage();
@@ -58,11 +50,4 @@ public:
 	virtual void LoadResource() = 0;
 	virtual void Update(float deltaTime);
 	virtual void Render();
-
-	void FadeInEffect();
-	void FadeOutEffect();
-
-	int Nextpoint();
-
-	void MoveNextPoint();
 };
