@@ -138,8 +138,6 @@ void Stage2::LoadResource()
 
 	fs2.close();
 
-	
-
 	for (int i = 0; i < this->objects->size(); i++) {
 		Grid::GetInstance()->Add(this->objects->at(i));
 	}

@@ -193,8 +193,8 @@ void Stage::Update(float deltaTime)
 			this->objects->at(i)->Update(deltaTime, new vector<Object*>);
 			Grid::GetInstance()->UpdateGrid(this->objects->at(i));
 
-		}else if (this->objects->at(i)->GetObjectType() != BRICK && this->objects->at(i)->GetPosition().x >= MainCharacter::GetInstance()->GetPosition().x - 130
-			&& this->objects->at(i)->GetPosition().x <= MainCharacter::GetInstance()->GetPosition().x + 130) {
+		}else if (this->objects->at(i)->GetObjectType() != BRICK && this->objects->at(i)->GetPosition().x >= MainCharacter::GetInstance()->GetPosition().x - 200
+			&& this->objects->at(i)->GetPosition().x <= MainCharacter::GetInstance()->GetPosition().x + 170) {
 
 			vector<Object*>* collisionsObject = Grid::GetInstance()->GetCollisionObjects(this->objects->at(i));
 
