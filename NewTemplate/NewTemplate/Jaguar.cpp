@@ -21,7 +21,11 @@ void Jaguar::Update(float deltaTime, std::vector<Object*>* objects)
 
 	// Xét theo camera bên phải
 	if (this->enemyAppearanceDirection == 1) {
-
+		/*int temp = Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", 1)->GetWidth();
+		if (temp - this->position.x <= 3.0 && temp - this->position.x >= 0.0) {
+			this->isActive = true;
+			this->direction = 0;
+		}*/
 	}
 	// Xét theo camera bên trái
 	else {
@@ -44,7 +48,10 @@ void Jaguar::Update(float deltaTime, std::vector<Object*>* objects)
 	this->veclocity.y += 0.0015f*deltaTime;
 
 	if (isOnGround) {
-		this->veclocity.x = 0.18*direction;
+		if (this->direction == 1)
+			this->veclocity.x = 0.18*direction;
+		else
+			this->veclocity.x = -0.18*direction;
 		this->jaguar->UpdateSprite();
 	}
 

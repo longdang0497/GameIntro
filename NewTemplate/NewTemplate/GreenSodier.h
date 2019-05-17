@@ -6,10 +6,12 @@
 class GreenSodier : public Enemy
 {
 private:
-//	Sprite* sprite;
+	Sprite* currentSprite;
+	
+	int state;
 public:
 	~GreenSodier();
-	GreenSodier(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2);
+	GreenSodier(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2, int state);
 	void Update(float deltaTime, std::vector<Object*> *objects = NULL);
 	void Render();
 	void HandleCollision(vector<Object*> *objects);

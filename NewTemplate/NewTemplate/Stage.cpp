@@ -71,7 +71,7 @@ void Stage::InitEnemies(LPCWSTR filePath)
 {
 	fstream fs(filePath);
 
-	int numOfObject, left, top, limit1, limit2, objectType, direction, itemId;
+	int numOfObject, left, top, limit1, limit2, objectType, direction, itemId, stateSoldiers;
 
 	fs >> numOfObject;	
 
@@ -108,8 +108,11 @@ void Stage::InitEnemies(LPCWSTR filePath)
 			this->objects->push_back(new Zombie(pos, direction, limit1, limit2));
 			break;
 		case GREEN_SOLDIER_ID:
-			this->objects->push_back(new GreenSodier(pos, direction, limit1, limit2));
+		{
+			fs >> stateSoldiers;
+			this->objects->push_back(new GreenSodier(pos, direction, limit1, limit2, stateSoldiers));
 			break;
+		}
 		case BAT_ID:
 			this->objects->push_back(new Bat(pos, direction, limit1, limit2));
 			break;
