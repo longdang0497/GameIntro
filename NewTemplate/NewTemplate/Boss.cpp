@@ -1,10 +1,13 @@
 ﻿#include "Boss.h"
 
-Boss::Boss(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2) : Enemy(pos, appearanceDirection, limitX1, limitX2)
+Boss* Boss::_instance = NULL;
+
+Boss::Boss()
 {
-	this->HP = 10;
+	this->HP = 14;
 	this->boss = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_BOSS);
 	this->bossJump = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_BOSS_JUMP);
+	this->bossExplode = new BossExplode();
 	this->SetObjectType(BOSS);
 	this->isActive = true;
 	this->direction = LEFT;
@@ -14,6 +17,7 @@ Boss::Boss(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2) :
 	this->freezeTime = GetTickCount();
 	this->bossState = BOSS_STAND;
 	this->countToShoot = 3;
+	this->SetPosition(191, 178);
 
 	this->bullets = new vector<BossBullet*>();
 	BossBullet *bullet1 = new BossBullet();
@@ -23,18 +27,19 @@ Boss::Boss(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2) :
 	this->bullets->push_back(bullet1);
 	this->bullets->push_back(bullet2);
 	this->bullets->push_back(bullet3);
-
+	this->hurtTime = GetTickCount();
 }
 
 // 513 y = 4 x2 - 868 x + 111178
 void Boss::Update(float deltaTime, std::vector<Object*>* objects)
 {
-	if (this->HP <= 0) {
-		this->Destroy();
+	this->bossExplode->Update(deltaTime, new vector<Object*>());
+	if (!this->isActive || GetTickCount() - this->freezeTime < FREEZE_TIME) {
 		return;
 	}
 
-	if (!this->isActive || GetTickCount() - this->freezeTime < FREEZE_TIME) {
+	if (this->HP <= 0) {
+		this->Destroy();
 		return;
 	}
 
@@ -49,12 +54,12 @@ void Boss::Update(float deltaTime, std::vector<Object*>* objects)
 		this->bossState = BOSS_STAND;
 		this->direction = RIGHT;
 		if (this->countToShoot % 3 == 0) {
-			int y = 174;
+			int y = 193;
 			int x = 46;
 
 			for (auto it : *this->bullets) {
 				it->SetStart(D3DXVECTOR3(x, y, 0), D3DXVECTOR3(0.13, 0, 0));
-				y += 20;
+				y += 10;
 				x -= 10;
 			}
 		}
@@ -66,12 +71,12 @@ void Boss::Update(float deltaTime, std::vector<Object*>* objects)
 		this->bossState = BOSS_STAND;
 		this->direction = LEFT;
 		if (this->countToShoot % 3 == 0) {
-			int y = 168;
+			int y = 193;
 			int x = 194;
 
 			for (auto it : *this->bullets) {
 				it->SetStart(D3DXVECTOR3(x, y, 0), D3DXVECTOR3(-0.13, 0, 0));
-				y += 20;
+				y += 10;
 				x += 10;
 			}
 		}
@@ -138,11 +143,12 @@ void Boss::Render()
 		break;
 	}
 
-
+	this->bossExplode->Render();
 }
 
 void Boss::HandleCollision(vector<Object*>* objects)
 {
+
 }
 
 void Boss::GetBoundingBox(float & l, float & t, float & r, float & b)
@@ -159,6 +165,14 @@ void Boss::GetBoundingBox(float & l, float & t, float & r, float & b)
 
 void Boss::Destroy()
 {
+	this->bossExplode->SetActive(this->position);
+}
+
+void Boss::Hurt() {
+	if (GetTickCount() - this->hurtTime >= HURT_TIME) {
+		this->HP--;
+		this->hurtTime = GetTickCount();
+	}
 }
 
 vector<BossBullet*>* Boss::GetBullets()

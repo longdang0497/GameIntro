@@ -493,7 +493,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			switch (iter->GetObjectType())
 			{
 			case JAGUAR:
-			case SOLDIER:
+			case SOLDIER: case BOSS:
 			{
 				float al, at, ar, ab, bl, bt, br, bb;
 				GetBoundingBox(al, at, ar, ab);
@@ -543,7 +543,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			switch (iter->obj->GetObjectType())
 			{
 			case JAGUAR:
-			case SOLDIER:
+			case SOLDIER: case BOSS: case BOSS_BULLET:
 				SetState(STATE_HURT);
 				break;
 			case HIDE_OBJECT:
@@ -562,6 +562,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 	}
 	for (auto iter : *coEvents) delete iter;
 	coEvents->clear();
+	delete coEvents;
 }
 
 void MainCharacter::GetBoundingBox(float& l, float& t, float& r, float& b)

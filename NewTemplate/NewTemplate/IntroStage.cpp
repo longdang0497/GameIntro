@@ -40,5 +40,5 @@ void IntroStage::Render()
 void IntroStage::NextStage()
 {
 	//StageController::GetInstance()->ChangeStage(Stage1::GetInstance());
-	ProcessGame::GetInstance(NULL,0)->SetGameStage(STAGE1);
+	ProcessGame::GetInstance(NULL,0)->SetGameStage(STAGE3);
 }

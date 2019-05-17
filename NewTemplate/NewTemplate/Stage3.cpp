@@ -53,21 +53,19 @@ void Stage3::LoadResource()
 	fs.close();
 	MainCharacter::GetInstance()->SetPosition(50, 120);
 
-	Boss* boss = new Boss(D3DXVECTOR3(191, 178, 0), 1, 0, 0);
-	this->objects->push_back(boss);
+	this->objects->push_back(Boss::GetInstance());
 
 	for (auto obj : *objects) {
 		Grid::GetInstance()->Add(obj);
 	}
 	
-	vector<BossBullet*> *bullets = boss->GetBullets();
+	vector<BossBullet*> *bullets = Boss::GetInstance()->GetBullets();
 
 	for (int i = 0; i < bullets->size(); i++) {
 		this->objects->push_back(bullets->at(i));
 	}
 
 	delete bricks;
-	
 }
 
 void Stage3::Update(float deltaTime)

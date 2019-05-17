@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "MainCharacter.h"
 #include "BossBullet.h"
+#include "Boss.h"
 
 class Sword : public Object
 {

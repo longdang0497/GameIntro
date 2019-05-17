@@ -40,7 +40,6 @@ void Sword::Update(float t, vector<Object*> *object)
 		case SOLDIER:
 		case BUTTERFLY:
 		case ZOMBIE:
-
 		{
 			float al, at, ar, ab, bl, bt, br, bb;
 			GetBoundingBox(al, at, ar, ab);
@@ -55,39 +54,61 @@ void Sword::Update(float t, vector<Object*> *object)
 		}
 		case BOSS_BULLET:
 		{
+			float al, at, ar, ab, bl, bt, br, bb;
+			GetBoundingBox(al, at, ar, ab);
+			
 			BossBullet *bossBullet = dynamic_cast<BossBullet*>(iter);
-			bossBullet->Destroy();
-			OutputDebugString(L"Chạm đạn \n");
+			bossBullet->GetBoundingBox(bl, bt, br, bb);
+			if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
+			{
+				bossBullet->Destroy();
+			}
+			
+			
 			break;
 		}
-		default:
-			break;
-		}
-	}
-
-	// sweptAABB colision
-	vector<CollisionEvent*> *coEvents = new vector<CollisionEvent*>();
-	coEvents->clear();
-
-	CalcPotentialCollisions(object, coEvents);
-
-	for (auto iter : *coEvents)
-	{
-		switch (iter->obj->GetObjectType())
+		case BOSS:
 		{
-		case JAGUAR:
-		case SOLDIER:
-		case BUTTERFLY:
-		case ZOMBIE:
-			iter->obj->SetHP(0);
-			MainCharacter::GetInstance()->Score();
+			float al, at, ar, ab, bl, bt, br, bb;
+			GetBoundingBox(al, at, ar, ab);
+
+			Boss* boss = Boss::GetInstance();
+			boss->GetBoundingBox(bl, bt, br, bb);
+			if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
+			{
+				boss->Hurt();
+			}
+
 			break;
+		}
 		default:
 			break;
 		}
 	}
-	for (auto iter : *coEvents) delete iter;
-	coEvents->clear();
+
+	//// sweptAABB colision
+	//vector<CollisionEvent*> *coEvents = new vector<CollisionEvent*>();
+	//coEvents->clear();
+
+	//CalcPotentialCollisions(object, coEvents);
+
+	//for (auto iter : *coEvents)
+	//{
+	//	switch (iter->obj->GetObjectType())
+	//	{
+	//	case JAGUAR:
+	//	case SOLDIER:
+	//	case BUTTERFLY:
+	//	case ZOMBIE:
+	//		iter->obj->SetHP(0);
+	//		MainCharacter::GetInstance()->Score();
+	//		break;
+	//	default:
+	//		break;
+	//	}
+	//}
+	//for (auto iter : *coEvents) delete iter;
+	//coEvents->clear();
 
 
 
