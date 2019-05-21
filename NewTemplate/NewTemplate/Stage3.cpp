@@ -5,11 +5,14 @@ Stage3* Stage3::_instance = NULL;
 Stage3::Stage3()
 {
 	Grid::GetInstance()->ReSetGrid(STAGE3_WIDTH, STAGE3_HEIGHT, false);
-
+	MainCharacter::GetInstance()->SetIsInTheEndOfMap(false);
 	this->LoadResource();
 
 	Camera::GetInstance()->setWorldBoundary(STAGE3_WIDTH);
-
+	alpha = 255;
+	fadeIn = true;
+	fadeOut = false;
+	TimeToFade = GetTickCount();
 }
 
 
@@ -71,9 +74,55 @@ void Stage3::LoadResource()
 void Stage3::Update(float deltaTime)
 {
 	Stage::Update(deltaTime);
+
 }
 
 void Stage3::Render()
 {
 	Stage::Render();
+	if (fadeIn)
+	{
+		FadeInEffect();
+	}
+	if (fadeOut)
+		FadeOutEffect();
+}
+
+void Stage3::FadeInEffect()
+{
+	if (alpha >= 200)
+	{
+		if (GetTickCount() - TimeToFade > 20)
+		{
+			Game::GetInstance()->Draw(0, 80, Texture::GetInstance()->Get(ID_TEXTURE_BLACK), 0, 80, 256, 320, alpha);
+			TimeToFade = GetTickCount();
+			alpha -= 1;
+		}
+	}
+	else
+	{
+		fadeIn = false;
+		TimeToFade = GetTickCount();
+	}
+}
+
+void Stage3::FadeOutEffect()
+{
+
+	if (alpha < 255)
+	{
+		if (GetTickCount() - TimeToFade > 20)
+		{
+			Game::GetInstance()->Draw(0, 80, Texture::GetInstance()->Get(ID_TEXTURE_BLACK), 1792, 80, 2048, 300, alpha);
+			TimeToFade = GetTickCount();
+			alpha += 1;
+		}
+	}
+	else
+	{
+		fadeOut = false;
+		MainCharacter::GetInstance()->SetPosition(50, 120);
+		Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
+		ProcessGame::GetInstance(NULL, 0)->SetGameStage(STAGE3);
+	}
 }

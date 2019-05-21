@@ -351,7 +351,7 @@ void MainCharacter::KeyBoardHandle()
 				SetState(STATE_JUMP_ATTACK_TO);
 		}
 
-		if (k->keyLeft && (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_JUMP_ATTACK))
+		if ((GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_JUMP_ATTACK))
 		{
 			/*direction = LEFT;
 			if (GetState() == STATE_JUMP)
@@ -359,35 +359,56 @@ void MainCharacter::KeyBoardHandle()
 			else if (GetState() == STATE_JUMP_ATTACK)
 				SetState(STATE_JUMP_ATTACK_TO);*/
 
-			direction = LEFT;
-			if (GetState() == STATE_JUMP)
-				SetState(STATE_JUMP_TO);
-			else if (GetState() == STATE_JUMP_ATTACK)
-				SetState(STATE_JUMP_ATTACK_TO);
-			else if (GetState() == STATE_JUMP_ATTACK_TO)
-				SetState(STATE_JUMP_ATTACK_TO);
-			else if (GetState() == STATE_JUMP_TO)
-				SetState(STATE_JUMP_TO);
+
+			if (k->keyLeft)
+			{
+				direction = LEFT;
+				if (GetState() == STATE_JUMP)
+					SetState(STATE_JUMP_TO);
+				else if (GetState() == STATE_JUMP_ATTACK)
+					SetState(STATE_JUMP_ATTACK_TO);
+				else if (GetState() == STATE_JUMP_ATTACK_TO)
+					SetState(STATE_JUMP_ATTACK_TO);
+				else if (GetState() == STATE_JUMP_TO)
+					SetState(STATE_JUMP_TO);
+			}
+			else if (k->keyRight)
+			{
+				direction = RIGHT;
+				if (GetState() == STATE_JUMP)
+					SetState(STATE_JUMP_TO);
+				else if (GetState() == STATE_JUMP_ATTACK)
+					SetState(STATE_JUMP_ATTACK_TO);
+				else if (GetState() == STATE_JUMP_ATTACK_TO)
+					SetState(STATE_JUMP_ATTACK_TO);
+				else if (GetState() == STATE_JUMP_TO)
+					SetState(STATE_JUMP_TO);
+			}
+			else
+			{
+				SetVx(0);
+			}
+
 
 		}
-		if (k->keyRight && (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_JUMP_ATTACK))
-		{
-			/*direction = RIGHT;
-			if (GetState() == STATE_JUMP)
-				SetState(STATE_JUMP_TO);
-			else if (GetState() == STATE_JUMP_ATTACK)
-				SetState(STATE_JUMP_ATTACK_TO);*/
+		//if (k->keyRight && (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_JUMP_ATTACK))
+		//{
+		//	/*direction = RIGHT;
+		//	if (GetState() == STATE_JUMP)
+		//		SetState(STATE_JUMP_TO);
+		//	else if (GetState() == STATE_JUMP_ATTACK)
+		//		SetState(STATE_JUMP_ATTACK_TO);*/
 
-			direction = RIGHT;
-			if (GetState() == STATE_JUMP)
-				SetState(STATE_JUMP_TO);
-			else if (GetState() == STATE_JUMP_ATTACK)
-				SetState(STATE_JUMP_ATTACK_TO);
-			else if (GetState() == STATE_JUMP_ATTACK_TO)
-				SetState(STATE_JUMP_ATTACK_TO);
-			else if (GetState() == STATE_JUMP_TO)
-				SetState(STATE_JUMP_TO);
-		}
+		//	direction = RIGHT;
+		//	if (GetState() == STATE_JUMP)
+		//		SetState(STATE_JUMP_TO);
+		//	else if (GetState() == STATE_JUMP_ATTACK)
+		//		SetState(STATE_JUMP_ATTACK_TO);
+		//	else if (GetState() == STATE_JUMP_ATTACK_TO)
+		//		SetState(STATE_JUMP_ATTACK_TO);
+		//	else if (GetState() == STATE_JUMP_TO)
+		//		SetState(STATE_JUMP_TO);
+		//}
 	}
 }
 
@@ -452,9 +473,14 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
 					{
 						this->veclocity.y = 0;
 						isOnGround = true;
-						if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_HURT)
+						if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_HURT)
 						{
 							position.y -= 10;
+							startStanding = GetTickCount();
+							SetState(STATE_IDLE);
+						}
+						else if (GetState() == STATE_JUMP_ATTACK)
+						{
 							startStanding = GetTickCount();
 							SetState(STATE_IDLE);
 						}
@@ -493,7 +519,8 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			switch (iter->GetObjectType())
 			{
 			case JAGUAR:
-			case SOLDIER: case BOSS:
+			case SOLDIER: 
+			case BOSS:
 			{
 				float al, at, ar, ab, bl, bt, br, bb;
 				GetBoundingBox(al, at, ar, ab);

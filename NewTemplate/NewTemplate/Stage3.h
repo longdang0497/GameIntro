@@ -1,5 +1,7 @@
 #pragma once
 #include "Stage.h"
+#include "ProcessGame.h"
+
 
 class Stage3 : public Stage
 {
@@ -17,5 +19,8 @@ public:
 		if (_instance == NULL) _instance = new Stage3();
 		return _instance;
 	}
+
+	void FadeInEffect();
+	void FadeOutEffect();
 };
 

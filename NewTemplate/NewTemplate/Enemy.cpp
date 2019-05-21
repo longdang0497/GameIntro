@@ -7,7 +7,7 @@ Enemy::Enemy(D3DXVECTOR3 pos, int enemyAppearanceDirection, int LimitX1, int Lim
 {
 	this->enemyAppearanceDirection = enemyAppearanceDirection;
 	this->limitX1 = LimitX1;
-	this->limitX2 = limitX2;
+	this->limitX2 = LimitX2;
 	this->defaultPosition = pos;
 	this->position = pos;
 	this->veclocity = { 0,0,0 };

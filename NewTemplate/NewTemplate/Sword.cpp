@@ -158,7 +158,7 @@ void Sword::GetBoundingBox(float &l, float &t, float &r, float &b)
 		case 1:
 			l = position.x;
 			t = position.y + 5;
-			b = t + 10;
+			b = t + 20;
 			r = l + 27;
 			break;
 		case 2:
@@ -167,7 +167,7 @@ void Sword::GetBoundingBox(float &l, float &t, float &r, float &b)
 			else
 				l = position.x + 16;
 			t = position.y;
-			b = t + 5;
+			b = t + 15;
 			r = l + 9;
 			break;
 		}

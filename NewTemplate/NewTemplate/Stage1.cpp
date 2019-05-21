@@ -203,7 +203,6 @@ void Stage1::FadeOutEffect()
 	else
 	{
 		fadeOut = false;
-		MainCharacter::GetInstance()->SetPosition(50, 120);
 		Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
 		ProcessGame::GetInstance(NULL, 0)->SetGameStage(STAGE2);
 	}

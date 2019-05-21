@@ -8,6 +8,8 @@ class Jaguar : public Enemy
 {
 private:
 	Sprite * jaguar;
+
+	DWORD WaitTime;
 public:
 	Jaguar(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2);
 	void Update(float deltaTime, std::vector<Object*> *objects = NULL);
