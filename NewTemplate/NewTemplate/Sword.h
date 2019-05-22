@@ -3,6 +3,7 @@
 #include "MainCharacter.h"
 #include "BossBullet.h"
 #include "Boss.h"
+#include "Explode.h"
 
 class Sword : public Object
 {
@@ -12,6 +13,8 @@ private:
 	static Sword* _instance;
 
 	Sprite* swordSprite;
+
+	Explode *explode;
 public:
 	Sword();
 	~Sword();

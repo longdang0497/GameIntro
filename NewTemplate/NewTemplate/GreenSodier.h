@@ -6,7 +6,8 @@
 class GreenSodier : public Enemy
 {
 private:
-//	Sprite* sprite;
+	/*Sprite* GreenSoldierWalkingSprite;
+	Sprite* GreenSoldierShootingSprite;*/
 public:
 	~GreenSodier();
 	GreenSodier(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2);

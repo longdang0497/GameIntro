@@ -22,8 +22,17 @@ void Explode::Update(float deltaTime, std::vector<Object*>* objects)
 		return;
 	}
 
-	if (GetTickCount() - this->activeTime >= TIME_ACTIVE) {
+	sprite->UpdateSprite();
+
+	//if (GetTickCount() - this->activeTime >= TIME_ACTIVE) {
+	//	this->isActive = false;
+	//	return;
+	//}
+
+	if (sprite->getDone())
+	{
 		this->isActive = false;
+		sprite->setDone(false);
 		return;
 	}
 }
@@ -38,7 +47,7 @@ void Explode::Render()
 
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
 	 
-	this->sprite->DrawSprite(pos, true, 128);
+	this->sprite->DrawSprite(pos, false);
 }
 
 void Explode::HandleCollision(vector<Object*>* objects)

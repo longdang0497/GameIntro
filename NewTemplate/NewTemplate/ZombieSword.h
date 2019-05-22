@@ -1,7 +1,7 @@
 #pragma once
 #include "Object.h"
 #include "Define.h"
-#include "MainCharacter.h"
+
 
 
 class ZombieSword : public Object

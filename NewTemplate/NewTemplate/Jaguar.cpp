@@ -16,6 +16,9 @@ Jaguar::Jaguar(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX
 void Jaguar::Update(float deltaTime, std::vector<Object*>* objects)
 {
 
+	if (HP <= 0)
+		return;
+
 	int t = MainCharacter::GetInstance()->GetPosition().x;
 
 	if (t >= limitX1 &&
@@ -25,12 +28,10 @@ void Jaguar::Update(float deltaTime, std::vector<Object*>* objects)
 	{
 		isActive = true;
 		position = defaultPosition;
-		if (HP <= 0)
-			HP = 1;
 	}
 
 
-	if (this->HP <= 0 || position.y >=260) {
+	if (position.y >=260) {
 		isActive = false;
 	}
 
@@ -66,10 +67,10 @@ void Jaguar::Update(float deltaTime, std::vector<Object*>* objects)
 void Jaguar::Render()
 {
 
-	if (!this->isActive) {
+	if (!this->isActive || this->HP<=0) {
 		return;
 	}
-
+	Object::Render();
 	this->position.z = 0;
 
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);

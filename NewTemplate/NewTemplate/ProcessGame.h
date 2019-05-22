@@ -21,6 +21,10 @@ private:
 
 	DWORD Time; //dung cho chuyen canh
 	int alpha;
+
+
+
+
 public:
 	ProcessGame(HINSTANCE hInstance, int nShowCmd);
 	// Dùng để chạy và update nhân vật
@@ -34,6 +38,8 @@ public:
 
 	GAME_STAGE GetGameStage() { return this->gameStage; }
 
+	//Stage* GetCurrentStage() { return this->CurrentStage; }
+
 
 	void SetGameStage(GAME_STAGE gameStage)
 	{ 
@@ -43,4 +49,5 @@ public:
 
 
 };
+
 

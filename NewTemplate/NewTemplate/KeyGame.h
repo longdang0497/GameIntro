@@ -23,6 +23,9 @@ public:
 	bool keyChangeScene;
 	bool keyChangeScenePress, isKeyChangeSceneDownPrevious;
 
+	bool keyChangeGameMode;
+	bool keyChangeGameModePress, isKeyChangeGameModeDownPrevious;
+
 	bool keyMoveNextPoint;
 	bool keyMoveNextPointPress, iskeyMoveNextPointDownPrevious;
 

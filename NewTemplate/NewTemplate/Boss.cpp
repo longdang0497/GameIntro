@@ -34,6 +34,7 @@ Boss::Boss()
 void Boss::Update(float deltaTime, std::vector<Object*>* objects)
 {
 	this->bossExplode->Update(deltaTime, new vector<Object*>());
+
 	if (!this->isActive || GetTickCount() - this->freezeTime < FREEZE_TIME) {
 		return;
 	}
@@ -48,7 +49,8 @@ void Boss::Update(float deltaTime, std::vector<Object*>* objects)
 	//std::wstring ws = s.str();
 	//OutputDebugString(ws.c_str());
 
-	if (this->position.x <= 26) {
+	if (this->position.x <= 26) 
+	{
 		this->veclocity.x = 0.1;
 		this->freezeTime = GetTickCount();
 		this->bossState = BOSS_STAND;

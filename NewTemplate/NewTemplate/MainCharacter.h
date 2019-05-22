@@ -44,6 +44,8 @@ private:
 	DWORD startStanding;
 
 	int alpha = 255; // dùng để vẽ nhân vật khi bị làm tổn thương
+
+
 public:
 	MainCharacter();
 	~MainCharacter();
@@ -82,5 +84,7 @@ public:
 	}
 
 	void SetIsInTheEndOfMap(bool value) { this->isInTheEndOfMap = value; }
+
+
 };
 

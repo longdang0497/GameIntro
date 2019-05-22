@@ -17,12 +17,13 @@
 #include "Soldier.h"
 #include "Butterfly.h"
 #include "Zombie.h"
+#include "ZombieSword.h"
 #include "Eagle.h"
 #include "GreenSodier.h"
 #include "Bat.h"
 #include "Brick.h"
 #include "Boss.h"
-#include  "HideObject.h"
+#include "HideObject.h"
 #include "Explode.h"
 #include "Item.h"
 #include "Crow.h"
@@ -66,4 +67,6 @@ public:
 	int Nextpoint();
 
 	void MoveNextPoint();
+
+	void AddZombieSword(ZombieSword *Zw);
 };

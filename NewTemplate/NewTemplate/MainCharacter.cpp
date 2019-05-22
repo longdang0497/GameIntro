@@ -30,6 +30,7 @@ MainCharacter::MainCharacter()
 
 	this->allowJump = false;
 
+
 }
 
 MainCharacter::~MainCharacter()
@@ -430,8 +431,8 @@ void MainCharacter::HandleCollision(vector<Object*> * objects)
 
 	if (GetState() != STATE_ON_LADDER && GetState() != STATE_CLIMBING)
 		this->HandleCollisionWithStaticObject(staticObject);
-	if (!isHurting)
-		this->HandleCollisionWithMovingObject(movingObject);
+	/*if (!isHurting)
+		this->HandleCollisionWithMovingObject(movingObject);*/
 }
 
 void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
@@ -456,7 +457,7 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
 		if (nY == 1)
 			this->PlusPosition(minTx * this->deltaX + nX * 0.1f, this->deltaY);
 		else
-			this->PlusPosition(minTx * this->deltaX + nX * 0.1f, minTy * this->deltaY + nY * 0.1f);
+			this->PlusPosition(minTx * this->deltaX + nX * 0.1f, minTy * this->deltaY + nY * 0.225f);
 
 		for (auto iter : *coEventsResult)
 		{
@@ -521,6 +522,9 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			case JAGUAR:
 			case SOLDIER: 
 			case BOSS:
+			case BUTTERFLY:
+			case ZOMBIE:
+			case ZOMBIE_SWORD:
 			{
 				float al, at, ar, ab, bl, bt, br, bb;
 				GetBoundingBox(al, at, ar, ab);
@@ -570,7 +574,12 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			switch (iter->obj->GetObjectType())
 			{
 			case JAGUAR:
-			case SOLDIER: case BOSS: case BOSS_BULLET:
+			case SOLDIER: 
+			case BOSS: 
+			case BOSS_BULLET:
+			case BUTTERFLY:
+			case ZOMBIE:
+			case ZOMBIE_SWORD:
 				SetState(STATE_HURT);
 				break;
 			case HIDE_OBJECT:

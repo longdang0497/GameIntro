@@ -71,6 +71,9 @@ void Stage::InitEnemies(LPCWSTR filePath)
 {
 	fstream fs(filePath);
 
+	vector<ZombieSword*>* S = new vector<ZombieSword*>();
+	Zombie *z;
+
 	int numOfObject, left, top, limit1, limit2, objectType, direction, itemId;
 
 	fs >> numOfObject;	
@@ -101,11 +104,17 @@ void Stage::InitEnemies(LPCWSTR filePath)
 			InitItems(pos, itemId);
 			break;
 		}
-		//case EAGLE_ID:
-		//	this->objects->push_back(new Eagle(pos, direction, limit1, limit2));
-		//	break;
+		case EAGLE_ID:
+			//this->objects->push_back(new Eagle(pos, direction, limit1, limit2));
+			break;
 		case ZOMBIE_ID:
-			this->objects->push_back(new Zombie(pos, direction, limit1, limit2));
+			z = new Zombie(pos, direction, limit1, limit2);
+			this->objects->push_back(z);
+			S = z->GetSwords();
+			for (auto iter : *S)
+			{
+				this->objects->push_back(iter);
+			}
 			break;
 		case GREEN_SOLDIER_ID:
 			this->objects->push_back(new GreenSodier(pos, direction, limit1, limit2));
@@ -195,6 +204,7 @@ void Stage::Update(float deltaTime)
 	}
 
 
+
 	HUD::GetInstance()->Update(deltaTime);
 
 
@@ -215,10 +225,11 @@ void Stage::Update(float deltaTime)
 
 		}
 		else if( (this->objects->at(i)->GetObjectType() != BRICK 
+			
 			/*&& this->objects->at(i)->GetPosition().x >= MainCharacter::GetInstance()->GetPosition().x - 200
 			&& this->objects->at(i)->GetPosition().x <= MainCharacter::GetInstance()->GetPosition().x + 150*/
 			&& this->objects->at(i)->GetPosition().x >= Camera::GetInstance()->getPosition().x - 100
-			&& this->objects->at(i)->GetPosition().x <= Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", NULL)->GetWidth() + 100
+			&& this->objects->at(i)->GetPosition().x <= Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", NULL)->GetWidth()
 			|| (this->objects->at(i)->GetObjectType() == JAGUAR)
 			))
 		{
@@ -286,4 +297,10 @@ void Stage::MoveNextPoint()
 	if (nextpoint != -1)
 		MainCharacter::GetInstance()->SetPosition(nextpoint, 80);
 
+}
+
+
+void Stage::AddZombieSword(ZombieSword *Zw)
+{
+	this->objects->push_back(Zw);
 }

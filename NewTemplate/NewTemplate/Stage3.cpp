@@ -64,7 +64,8 @@ void Stage3::LoadResource()
 	
 	vector<BossBullet*> *bullets = Boss::GetInstance()->GetBullets();
 
-	for (int i = 0; i < bullets->size(); i++) {
+	for (int i = 0; i < bullets->size(); i++) 
+	{
 		this->objects->push_back(bullets->at(i));
 	}
 

@@ -24,6 +24,10 @@ void CKeyGame::update()
 	keyChangeScenePress = keyChangeScene && !isKeyChangeSceneDownPrevious;
 	isKeyChangeSceneDownPrevious = keyChangeScene;
 
+	keyChangeGameMode = key->IsKeyDown(DIK_Q);
+	keyChangeGameModePress = keyChangeGameMode && !isKeyChangeGameModeDownPrevious;
+	isKeyChangeGameModeDownPrevious = keyChangeGameMode;
+
 	keyMoveNextPoint = key->IsKeyDown(DIK_TAB);
 	keyMoveNextPointPress = keyMoveNextPoint && !iskeyMoveNextPointDownPrevious;
 	iskeyMoveNextPointDownPrevious = keyMoveNextPoint;

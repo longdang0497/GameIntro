@@ -33,6 +33,7 @@ enum GAME_STAGE {
 #define BAT_ID 6
 #define CROW_ID 7
 
+
 // =========== ITEMS
 #define BLUE_R_ID 0
 #define ORANGE_R_ID 1

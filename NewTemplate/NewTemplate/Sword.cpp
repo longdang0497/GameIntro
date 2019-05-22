@@ -9,6 +9,8 @@ Sword::Sword()
 	swordSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_SWORD);
 
 	currentSprite = swordSprite;
+
+	this->explode = new Explode();
 }
 
 
@@ -19,6 +21,7 @@ Sword::~Sword()
 
 void Sword::Update(float t, vector<Object*> *object)
 {
+	this->explode->Update(deltaTime, object);
 	//position = MainCharacter::GetInstance()->GetPosition();
 	if (isActive)
 		currentSprite->UpdateSprite();
@@ -40,6 +43,8 @@ void Sword::Update(float t, vector<Object*> *object)
 		case SOLDIER:
 		case BUTTERFLY:
 		case ZOMBIE:
+		case ZOMBIE_SWORD:
+
 		{
 			float al, at, ar, ab, bl, bt, br, bb;
 			GetBoundingBox(al, at, ar, ab);
@@ -48,6 +53,7 @@ void Sword::Update(float t, vector<Object*> *object)
 			{
 				iter->SetHP(0);
 				MainCharacter::GetInstance()->Score();
+				this->explode->SetActive(D3DXVECTOR3(this->position.x, this->position.y, 0));
 			}
 
 			break;
@@ -118,7 +124,7 @@ void Sword::Render()
 {
 	Object::Render();
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
-
+	this->explode->Render();
 	if (isActive)
 	{
 
