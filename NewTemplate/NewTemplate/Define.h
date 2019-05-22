@@ -98,6 +98,7 @@ enum GAME_STAGE {
 #define PATH_GREEN_SOLDIERS_WALK L"sprite\\enemies\\GREEN_SOLDIERS_WALK.txt"
 #define PATH_GREEN_SOLDIERS_SHOOT L"sprite\\enemies\\GREEN_SOLDIERS_SHOOT.txt"
 #define PATH_GREEN_SOLDIERS_BULLET L"sprite\\enemies\\GREEN_SOLDIERS_BULLET.txt"
+#define PATH_GREEN_PLAYER L"sprite\\enemies\\GREEN_PLAYER.txt"
 #define PATH_SOLDIERS_WALK L"sprite\\enemies\\SOLDIERS_WALK.txt"
 #define PATH_SOLDIERS_KILL L"sprite\\enemies\\SOLDIERS_KILL.txt"
 #define PATH_ZOMBIES_KILL L"sprite\\enemies\\ZOMBIES_KILL.txt"
@@ -142,7 +143,7 @@ enum GAME_STAGE {
 
 
 #define MAIN_WALK_PACE 0.1f
-#define MAIN_JUMP_SPEED_Y 0.3f
+#define MAIN_JUMP_SPEED_Y 0.35f
 
 // ========= OBJECT =========
 enum OBJECT_TYPE {

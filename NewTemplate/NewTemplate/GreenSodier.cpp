@@ -10,6 +10,8 @@ GreenSodier::GreenSodier(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, 
 		this->currentSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_GREEN_SOLDIERS_WALK);
 	else if (this->state == 1) // GREEN SOLDIER BẮN
 		this->currentSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_GREEN_SOLDIERS_SHOOT);
+	else if (this->state == 2) // GREEN PLAYER CHẠY
+		this->currentSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_GREEN_PLAYER);
 }
 
 GreenSodier::~GreenSodier()
@@ -48,12 +50,21 @@ void GreenSodier::Update(float deltaTime, std::vector<Object*>* objects)
 
 	if (!this->isActive) return;
 
+	if (this->enemyAppearanceDirection == 0 && this->position.x < Camera::GetInstance()->getPosition().x - 3.0
+		|| this->position.x > Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", 1)->GetWidth()) {
+		this->Destroy();
+		return;
+	}
+
 	Object::Update(deltaTime, objects);
 
 	this->veclocity.y += 0.0018f * deltaTime;
 
 	if (isOnGround) {
-		this->veclocity.x = 0.05 * direction;
+		if (this->state == 0 || this->state == 2)
+			this->veclocity.x = 0.08 * direction;
+		else
+			this->veclocity.x = 0;
 		this->currentSprite->UpdateSprite();
 	}
 
@@ -150,7 +161,7 @@ void GreenSodier::GetBoundingBox(float & l, float & t, float & r, float & b)
 void GreenSodier::Destroy()
 {
 	this->position = defaultPosition;
-	this->position.y -= 2;
+	//this->position.y -= 2;
 	this->HP = 1;
 	this->isActive = false;
 }
