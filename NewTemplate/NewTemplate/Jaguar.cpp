@@ -5,53 +5,47 @@ Jaguar::Jaguar(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX
 	this->jaguar = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_JAGUAR);
 	this->HP = 1;
 	this->SetObjectType(JAGUAR);
+	if(appearanceDirection == 0)
+		direction = LEFT;
+	else
+		direction = RIGHT;
 	this->isActive = false;
+	WaitTime = GetTickCount();
 }
 
 void Jaguar::Update(float deltaTime, std::vector<Object*>* objects)
 {
-	if (this->HP <= 0 && limitX1 == limitX2) {
+
+	if (HP <= 0)
 		return;
+
+	int t = MainCharacter::GetInstance()->GetPosition().x;
+
+	if (t >= limitX1 &&
+		t <= limitX2 &&
+		isActive == false
+		)
+	{
+		isActive = true;
+		position = defaultPosition;
 	}
+
+
+	if (position.y >=260) {
+		isActive = false;
+	}
+
 	
-	if (this->position.y >= Graphic::GetInstance(NULL, NULL, L"", 1)->GetHeight()) {
-		this->Destroy();
+
+	if (!this->isActive)
 		return;
-	}
-
-	// Xét theo camera bên phải
-	if (this->enemyAppearanceDirection == 1) {
-		/*int temp = Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", 1)->GetWidth();
-		if (temp - this->position.x <= 3.0 && temp - this->position.x >= 0.0) {
-			this->isActive = true;
-			this->direction = 0;
-		}*/
-	}
-	// Xét theo camera bên trái
-	else {
-		if (Camera::GetInstance()->getPosition().x - this->position.x <= 3.0 && Camera::GetInstance()->getPosition().x - this->position.x >= 0.0) {
-			this->isActive = true;
-			this->direction = 1;
-		}
-	}
-
-	if (!this->isActive) return;
-
-	if (this->enemyAppearanceDirection == 0 && this->position.x < Camera::GetInstance()->getPosition().x - 3.0
-		|| this->position.x > Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", 1)->GetWidth()) {
-		this->Destroy();
-		return;
-	}
 
 	Object::Update(deltaTime, objects);
 
 	this->veclocity.y += 0.0015f*deltaTime;
 
 	if (isOnGround) {
-		if (this->direction == 1)
-			this->veclocity.x = 0.18*direction;
-		else
-			this->veclocity.x = -0.18*direction;
+		this->veclocity.x = 0.2*direction;
 		this->jaguar->UpdateSprite();
 	}
 
@@ -73,10 +67,10 @@ void Jaguar::Update(float deltaTime, std::vector<Object*>* objects)
 void Jaguar::Render()
 {
 
-	if (!this->isActive) {
+	if (!this->isActive || this->HP<=0) {
 		return;
 	}
-
+	Object::Render();
 	this->position.z = 0;
 
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);

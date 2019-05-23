@@ -147,7 +147,7 @@ void Item::Update(float deltaTime, std::vector<Object*>* objects)
 		this->veclocity.y += 0.0015f*deltaTime;
 		this->veclocity.x = 0;
 
-		this->PlusPosition(this->veclocity.x, this->veclocity.y);
+		//this->PlusPosition(this->veclocity.x, this->veclocity.y);
 		
 		switch (this->objectID) {
 		case BLUE_R_ID: // SPIRITUAL STRENGTH 5 POINTS
@@ -279,14 +279,12 @@ void Item::HandleCollision(vector<Object*>* objects)
 
 		this->PlusPosition(minTx*this->deltaX + nX * 0.1f, minTy*this->deltaY + nY * 0.1f);
 
-		for (auto iter : *objects)
+		for (auto iter : *coEventsResult)
 		{
-			if (iter->GetObjectType() == MAIN_CHARACTER)
+			if (iter->obj->GetObjectType() == MAIN_CHARACTER)
 			{
-				if (nY != 0)
-					this->veclocity.y = 0;
-				if (nX != 0) 
-					this->isActive = false;
+				this->veclocity.y = 0;
+				this->isActive = false;
 			}
 			else {
 				if (nX != 0)

@@ -183,6 +183,9 @@
     <ClCompile Include="Crow.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
+    <ClCompile Include="BossExplode.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="trace.h">
@@ -309,6 +312,9 @@
       <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="Crow.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BossExplode.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>

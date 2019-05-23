@@ -13,7 +13,7 @@ Stage1::Stage1()
 	Camera::GetInstance()->setWorldBoundary(2048);
 
 	SpecialPoint.push_back(0);
-	SpecialPoint.push_back(250);
+	SpecialPoint.push_back(750);
 	SpecialPoint.push_back(1880);
 
 	alpha = 255;
@@ -126,7 +126,7 @@ void Stage1::LoadResource()
 	}
 
 	delete bricks;
-	//MainCharacter::GetInstance()->SetPosition(50, 130);
+	//MainCharacter::GetInstance()->SetPosition(1270, 0);
 
 
 
@@ -198,7 +198,6 @@ void Stage1::FadeOutEffect()
 	else
 	{
 		fadeOut = false;
-		MainCharacter::GetInstance()->SetPosition(50, 120);
 		Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
 		ProcessGame::GetInstance(NULL, 0)->SetGameStage(STAGE2);
 	}

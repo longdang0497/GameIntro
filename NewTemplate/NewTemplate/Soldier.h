@@ -4,15 +4,16 @@
 #include "MainCharacter.h"
 
 enum Soldier_State {
-	Walk,
-	Kill
+	Sodier_Walk,
+	Sodier_Kill
 };
 
 class Soldier : public Enemy
 {
 private:
-//	Sprite * SoldierWalk;
-	//Sprite * SoldierKill;
+	Sprite * SoldierWalk;
+	Sprite * SoldierKill;
+
 
 	Soldier_State state;
 

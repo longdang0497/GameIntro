@@ -9,6 +9,8 @@ Sword::Sword()
 	swordSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_SWORD);
 
 	currentSprite = swordSprite;
+
+	this->explode = new Explode();
 }
 
 
@@ -19,6 +21,7 @@ Sword::~Sword()
 
 void Sword::Update(float t, vector<Object*> *object)
 {
+	this->explode->Update(deltaTime, object);
 	//position = MainCharacter::GetInstance()->GetPosition();
 	if (isActive)
 		currentSprite->UpdateSprite();
@@ -40,6 +43,7 @@ void Sword::Update(float t, vector<Object*> *object)
 		case SOLDIER: case GREEN_SOLDIER:
 		case BUTTERFLY: case CROW:
 		case ZOMBIE:
+		case ZOMBIE_SWORD:
 
 		{
 			float al, at, ar, ab, bl, bt, br, bb;
@@ -49,45 +53,68 @@ void Sword::Update(float t, vector<Object*> *object)
 			{
 				iter->SetHP(0);
 				MainCharacter::GetInstance()->Score();
+				this->explode->SetActive(D3DXVECTOR3(this->position.x, this->position.y, 0));
 			}
 
 			break;
 		}
 		case BOSS_BULLET:
 		{
+			float al, at, ar, ab, bl, bt, br, bb;
+			GetBoundingBox(al, at, ar, ab);
+			
 			BossBullet *bossBullet = dynamic_cast<BossBullet*>(iter);
-			bossBullet->Destroy();
-			OutputDebugString(L"Chạm đạn \n");
+			bossBullet->GetBoundingBox(bl, bt, br, bb);
+			if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
+			{
+				bossBullet->Destroy();
+			}
+			
+			
 			break;
 		}
-		default:
-			break;
-		}
-	}
-
-	// sweptAABB colision
-	vector<CollisionEvent*> *coEvents = new vector<CollisionEvent*>();
-	coEvents->clear();
-
-	CalcPotentialCollisions(object, coEvents);
-
-	for (auto iter : *coEvents)
-	{
-		switch (iter->obj->GetObjectType())
+		case BOSS:
 		{
-		case JAGUAR:
-		case SOLDIER:
-		case BUTTERFLY:
-		case ZOMBIE:
-			iter->obj->SetHP(0);
-			MainCharacter::GetInstance()->Score();
+			float al, at, ar, ab, bl, bt, br, bb;
+			GetBoundingBox(al, at, ar, ab);
+
+			Boss* boss = Boss::GetInstance();
+			boss->GetBoundingBox(bl, bt, br, bb);
+			if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
+			{
+				boss->Hurt();
+			}
+
 			break;
+		}
 		default:
 			break;
 		}
 	}
-	for (auto iter : *coEvents) delete iter;
-	coEvents->clear();
+
+	//// sweptAABB colision
+	//vector<CollisionEvent*> *coEvents = new vector<CollisionEvent*>();
+	//coEvents->clear();
+
+	//CalcPotentialCollisions(object, coEvents);
+
+	//for (auto iter : *coEvents)
+	//{
+	//	switch (iter->obj->GetObjectType())
+	//	{
+	//	case JAGUAR:
+	//	case SOLDIER:
+	//	case BUTTERFLY:
+	//	case ZOMBIE:
+	//		iter->obj->SetHP(0);
+	//		MainCharacter::GetInstance()->Score();
+	//		break;
+	//	default:
+	//		break;
+	//	}
+	//}
+	//for (auto iter : *coEvents) delete iter;
+	//coEvents->clear();
 
 
 
@@ -97,7 +124,7 @@ void Sword::Render()
 {
 	Object::Render();
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
-
+	this->explode->Render();
 	if (isActive)
 	{
 
@@ -137,7 +164,7 @@ void Sword::GetBoundingBox(float &l, float &t, float &r, float &b)
 		case 1:
 			l = position.x;
 			t = position.y + 5;
-			b = t + 10;
+			b = t + 20;
 			r = l + 27;
 			break;
 		case 2:
@@ -146,7 +173,7 @@ void Sword::GetBoundingBox(float &l, float &t, float &r, float &b)
 			else
 				l = position.x + 16;
 			t = position.y;
-			b = t + 5;
+			b = t + 15;
 			r = l + 9;
 			break;
 		}

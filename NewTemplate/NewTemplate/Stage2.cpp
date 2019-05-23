@@ -11,8 +11,11 @@ Stage2::Stage2()
 	Camera::GetInstance()->setWorldBoundary(3072);
 	//Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
 
-	SpecialPoint.empty();
-
+	SpecialPoint.push_back(0);
+	SpecialPoint.push_back(1000);
+	SpecialPoint.push_back(1245);
+	SpecialPoint.push_back(2779);
+	MainCharacter::GetInstance()->SetPosition(50, 120);
 	alpha = 255;
 	fadeIn = true;
 	fadeOut = false;
@@ -30,7 +33,7 @@ void Stage2::LoadResource()
 	objects->clear();
 
 	this->objects->push_back(MainCharacter::GetInstance());
-	MainCharacter::GetInstance()->SetPosition(50, 120);
+	
 
 	this->map = new Map(PATH_POS_MAP_2, PATH_TEXTURE_MAP_2, ID_TEXTURE_MAP_2);
 
@@ -138,7 +141,7 @@ void Stage2::LoadResource()
 	}
 
 	fs2.close();
-	this->InitEnemies(PATH_POS_ENEMIES_MAP_2);
+	//this->InitEnemies(PATH_POS_ENEMIES_MAP_2);
 	
 
 	for (int i = 0; i < this->objects->size(); i++) {
@@ -151,6 +154,7 @@ void Stage2::LoadResource()
 
 void Stage2::Update(float deltaTime)
 {
+
 	Stage::Update(deltaTime);
 
 	if (MainCharacter::GetInstance()->GetIsInTheEndOfMap())
@@ -206,6 +210,7 @@ void Stage2::FadeInEffect()
 
 void Stage2::FadeOutEffect()
 {
+
 	if (alpha < 255)
 	{
 		if (GetTickCount() - TimeToFade > 20)

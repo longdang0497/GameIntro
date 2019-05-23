@@ -4,6 +4,7 @@
 #include "Texture.h"
 #include "Text.h"
 #include "MainCharacter.h"
+#include "Boss.h"
 #include "Sprite.h"
 #include "define.h"
 

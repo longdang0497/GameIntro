@@ -72,6 +72,8 @@ void Stage::InitEnemies(LPCWSTR filePath)
 	fstream fs(filePath);
 
 	int numOfObject, left, top, limit1, limit2, objectType, direction, itemId, stateSoldiers;
+	vector<ZombieSword*>* S = new vector<ZombieSword*>();
+	Zombie *z;
 
 	fs >> numOfObject;	
 
@@ -102,11 +104,17 @@ void Stage::InitEnemies(LPCWSTR filePath)
 			InitItems(pos, itemId);
 			break;
 		}
-		//case EAGLE_ID:
-		//	this->objects->push_back(new Eagle(pos, direction, limit1, limit2));
-		//	break;
+		case EAGLE_ID:
+			//this->objects->push_back(new Eagle(pos, direction, limit1, limit2));
+			break;
 		case ZOMBIE_ID:
-			this->objects->push_back(new Zombie(pos, direction, limit1, limit2));
+			z = new Zombie(pos, direction, limit1, limit2);
+			this->objects->push_back(z);
+			S = z->GetSwords();
+			for (auto iter : *S)
+			{
+				this->objects->push_back(iter);
+			}
 			break;
 		case GREEN_SOLDIER_ID:
 		{
@@ -170,7 +178,13 @@ void Stage::Update(float deltaTime)
 
 	if (fadeIn || fadeOut)
 		return;
-		
+
+	if (MainCharacter::GetInstance()->GetPosition().y >= 270)
+	{
+		//chuyen toi man ket thuc ma chua viet code
+		return;
+	}
+
 
 	CKeyGame* k = CKeyGame::getInstance();
 
@@ -180,20 +194,35 @@ void Stage::Update(float deltaTime)
 	}
 
 
+
 	HUD::GetInstance()->Update(deltaTime);
+
+
 	for (int i = 0; i < this->objects->size(); i++) {
 
 		float x, y;
 		x = this->objects->at(i)->GetPosition().x;
 		y = this->objects->at(i)->GetPosition().y;
 
-		if (this->objects->at(i)->GetObjectType() == BOSS || this->objects->at(i)->GetObjectType() == BOSS_BULLET) {
+		if (y >= 270 && this->objects->at(i)->GetObjectType()!=JAGUAR)
+		{
+				this->objects->at(i)->SetVeclocity(0, 0);
+		}
+		else if (this->objects->at(i)->GetObjectType() == BOSS || this->objects->at(i)->GetObjectType() == BOSS_BULLET) 
+		{
 			this->objects->at(i)->Update(deltaTime, new vector<Object*>);
 			Grid::GetInstance()->UpdateGrid(this->objects->at(i));
 
-		}else if (this->objects->at(i)->GetObjectType() != BRICK && this->objects->at(i)->GetPosition().x >= MainCharacter::GetInstance()->GetPosition().x - 200
-			&& this->objects->at(i)->GetPosition().x <= MainCharacter::GetInstance()->GetPosition().x + 150) {
-
+		}
+		else if( (this->objects->at(i)->GetObjectType() != BRICK 
+			
+			/*&& this->objects->at(i)->GetPosition().x >= MainCharacter::GetInstance()->GetPosition().x - 200
+			&& this->objects->at(i)->GetPosition().x <= MainCharacter::GetInstance()->GetPosition().x + 150*/
+			&& this->objects->at(i)->GetPosition().x >= Camera::GetInstance()->getPosition().x - 100
+			&& this->objects->at(i)->GetPosition().x <= Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", NULL)->GetWidth()
+			|| (this->objects->at(i)->GetObjectType() == JAGUAR)
+			))
+		{
 			vector<Object*>* collisionsObject = Grid::GetInstance()->GetCollisionObjects(this->objects->at(i));
 
 			this->objects->at(i)->Update(deltaTime, collisionsObject);
@@ -204,8 +233,6 @@ void Stage::Update(float deltaTime)
 
 
 			Grid::GetInstance()->UpdateGrid(this->objects->at(i));
-
-
 
 		}
 	}
@@ -258,6 +285,12 @@ void Stage::MoveNextPoint()
 {
 	int nextpoint = Nextpoint();
 	if (nextpoint != -1)
-		MainCharacter::GetInstance()->SetPosition(nextpoint, 150);
+		MainCharacter::GetInstance()->SetPosition(nextpoint, 80);
 
+}
+
+
+void Stage::AddZombieSword(ZombieSword *Zw)
+{
+	this->objects->push_back(Zw);
 }

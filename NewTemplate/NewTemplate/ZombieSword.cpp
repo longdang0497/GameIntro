@@ -5,9 +5,12 @@ ZombieSword::ZombieSword()
 	this->sprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_ZOMBIES_SWORD);
 	this->SetObjectType(ZOMBIE_SWORD);
 	this->HP = 1;
+
 	direction = LEFT;
 	spriteDirection = RIGHT;
 	currentSprite = sprite;
+	isActive = false;
+	changeSpriteDirectionTime = GetTickCount();
 }
 
 ZombieSword::~ZombieSword()
@@ -25,7 +28,7 @@ ZombieSword::ZombieSword(D3DXVECTOR3 pos, int direction)
 
 	this->position = pos;
 	this->direction = direction;
-	spriteDirection = LEFT;
+	spriteDirection = direction;
 	changeSpriteDirectionTime = GetTickCount();
 }
 
@@ -34,30 +37,36 @@ void ZombieSword::Update(float deltaTime, vector<Object*>* object)
 {
 	if (HP <= 0)
 		return;
-	Object::Update(deltaTime, object);
-	
-	//if (changeSpriteDirectionTime - GetTickCount() >= 1000)
-	//{
-	//	if (spriteDirection == LEFT)
-	//		spriteDirection = RIGHT;
-	//	else
-	//		spriteDirection = LEFT;
 
-	//	changeSpriteDirectionTime = GetTickCount();
-	//}
+	if (position.y > 270)
+		isActive = false;
 
-	this->veclocity.y += 0;// 0.00005f*deltaTime;
+	if (!isActive)
+		return;
 
-	this->veclocity.x = 0*direction;
+
+	if (GetTickCount() - changeSpriteDirectionTime >= 50)
+	{
+		if (spriteDirection == LEFT)
+			spriteDirection = RIGHT;
+		else
+			spriteDirection = LEFT;
+
+		changeSpriteDirectionTime = GetTickCount();
+	}
+	this->veclocity.x = 0.015f*direction;
+	this->veclocity.y += 0.0015f;
+
+	Object::Update(deltaTime);
+	this->PlusPosition(deltaX, deltaY);
 
 	this->currentSprite->UpdateSprite();
-
-	this->PlusPosition(this->deltaX, this->deltaY);
 }
 
 void ZombieSword::Render()
 {
-	if (HP <= 0)
+
+	if (isActive == false || HP<=0)
 		return;
 
 	Object::Render();

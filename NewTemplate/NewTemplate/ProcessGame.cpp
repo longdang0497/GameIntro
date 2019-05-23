@@ -13,6 +13,7 @@ ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 	CKeyBoard::Create(hInstance, graphic->GetHWnd());
 	
 	this->gameStage = Intro;
+	
 	/*this->keyHandler = new KeyEventHandler();
 	game->InitKeyboard(this->keyHandler);*/
 
@@ -35,7 +36,7 @@ ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 
 	Time = GetTickCount();
 	alpha = 255;
-
+	//CurrentStage = IntroStage::GetInstance();
 }
 
 
@@ -99,6 +100,12 @@ void ProcessGame::Update(DWORD dt)
 	default:
 		break;
 	}
+
+	//CurrentStage->Update(dt);
+
+	CKeyGame* k = CKeyGame::getInstance();
+
+
 }
 
 void ProcessGame::Render()
@@ -126,6 +133,8 @@ void ProcessGame::Render()
 		default:
 			break;
 		}
+		
+		//CurrentStage->Render();
 
 		Game::GetInstance()->GetSpriteHandler()->End();
 		d3ddv->EndScene();

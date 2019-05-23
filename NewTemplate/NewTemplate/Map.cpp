@@ -58,7 +58,7 @@ void Map::drawMap()
 			top = (list->at(a)->at(b) / numOfColumnTileSet)*tileHeight;
 			right = left + tileWidth;
 			bottom = top + tileHeight;
-			Game::GetInstance()->Draw(j*tileWidth - (int)camposition.x % tileWidth, i*tileHeight - (int)camposition.y % tileHeight + 80, texture, left, top, right, bottom);
+			Game::GetInstance()->Draw(j*tileWidth - (int)camposition.x % tileWidth, i*tileHeight - (int)camposition.y % tileHeight + 80, texture, left, top, right, bottom,130);
 		}
 
 

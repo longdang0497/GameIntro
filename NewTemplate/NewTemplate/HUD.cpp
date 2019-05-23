@@ -75,9 +75,9 @@ void HUD::Draw(D3DXVECTOR2 position)
 	}
 
 	i = 0;
-	player = 14;
+	int boss = Boss::GetInstance()->GetHP();
 	text->DrawString("ENEMY", { 1,63 });
-	for (i; i < player; i++)
+	for (i; i < boss; i++)
 	{
 		DrawHealth(0, { float(55 + i * 5), 63 });
 	}
