@@ -431,8 +431,8 @@ void MainCharacter::HandleCollision(vector<Object*> * objects)
 
 	if (GetState() != STATE_ON_LADDER && GetState() != STATE_CLIMBING)
 		this->HandleCollisionWithStaticObject(staticObject);
-	/*if (!isHurting)
-		this->HandleCollisionWithMovingObject(movingObject);*/
+	if (!isHurting)
+		this->HandleCollisionWithMovingObject(movingObject);
 }
 
 void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)

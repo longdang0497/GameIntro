@@ -141,7 +141,7 @@ void Stage2::LoadResource()
 	}
 
 	fs2.close();
-	//this->InitEnemies(PATH_POS_ENEMIES_MAP_2);
+	this->InitEnemies(PATH_POS_ENEMIES_MAP_2);
 	
 
 	for (int i = 0; i < this->objects->size(); i++) {
