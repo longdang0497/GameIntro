@@ -43,7 +43,7 @@ void GreenSodier::Update(float deltaTime, std::vector<Object*>* objects)
 	}
 	// Xét theo camera bên trái
 	else {
-		if (Camera::GetInstance()->getPosition().x - this->position.x <= 100.0 && Camera::GetInstance()->getPosition().x - this->position.x >= 0.0) {
+		if (Camera::GetInstance()->getPosition().x - this->position.x <= 5.0 && Camera::GetInstance()->getPosition().x - this->position.x >= 0.0) {
 			this->isActive = true;
 			this->direction = 1;
 		}

@@ -494,6 +494,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			{
 			case JAGUAR:
 			case SOLDIER:
+			case GREEN_SOLDIER:
 			{
 				float al, at, ar, ab, bl, bt, br, bb;
 				GetBoundingBox(al, at, ar, ab);
