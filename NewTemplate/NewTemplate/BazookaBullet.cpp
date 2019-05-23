@@ -39,7 +39,7 @@ void BazookaBullet::Update(float deltaTime, vector<Object*>* object)
 		if (HP <= 0)
 			return;
 
-		Object::Update(deltaTime);
+		Object::Update(deltaTime, object);
 
 		if (GetTickCount() - changeSpriteDirectionTime >= 50)
 		{
@@ -82,7 +82,6 @@ void BazookaBullet::HandleCollision(vector<Object*>* objects)
 
 void BazookaBullet::GetBoundingBox(float &l, float &t, float &r, float &b)
 {
-
 	if (HP > 0)
 	{
 		l = position.x;

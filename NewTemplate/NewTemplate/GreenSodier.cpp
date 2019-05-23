@@ -218,8 +218,8 @@ void GreenSodier::Shoot()
 	{
 		if (GetTickCount() - WaitNext >= 400)
 		{
-			bullets->at(count)->SetPosition(this->position.x, this->position.y);
-			bullets->at(count)->SetVeclocity(0.25*this->direction, 0);
+			bullets->at(count)->SetPosition(this->position.x - 8, this->position.y);
+			bullets->at(count)->SetVeclocity(0.1*this->direction, 0);
 			bullets->at(count)->SetHP(1);
 			bullets->at(count)->SetIsActive(true);
 			bullets->at(count)->SetDirection(this->direction);

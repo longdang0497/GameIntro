@@ -75,6 +75,9 @@ void Stage::InitEnemies(LPCWSTR filePath)
 	vector<ZombieSword*>* S = new vector<ZombieSword*>();
 	Zombie *z;
 
+	vector<BazookaBullet*>* bullets = new vector<BazookaBullet*>();
+	GreenSodier *grSoldier;
+
 	fs >> numOfObject;	
 
 	for (int i = 0; i < numOfObject; i++) {
@@ -119,7 +122,16 @@ void Stage::InitEnemies(LPCWSTR filePath)
 		case GREEN_SOLDIER_ID:
 		{
 			fs >> stateSoldiers;
-			this->objects->push_back(new GreenSodier(pos, direction, limit1, limit2, stateSoldiers));
+			grSoldier = new GreenSodier(pos, direction, limit1, limit2, stateSoldiers);
+			this->objects->push_back(grSoldier);
+			if (stateSoldiers == 1)
+			{
+				bullets = grSoldier->GetBullets();
+				for (auto iter : *bullets)
+				{
+					this->objects->push_back(iter);
+				}
+			}
 			break;
 		}
 		case BAT_ID:
@@ -293,4 +305,9 @@ void Stage::MoveNextPoint()
 void Stage::AddZombieSword(ZombieSword *Zw)
 {
 	this->objects->push_back(Zw);
+}
+
+void Stage::AddBazookaBullet(BazookaBullet * bullet)
+{
+	this->objects->push_back(bullet);
 }

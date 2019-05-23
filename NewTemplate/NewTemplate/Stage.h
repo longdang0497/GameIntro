@@ -27,6 +27,7 @@
 #include "Explode.h"
 #include "Item.h"
 #include "Crow.h"
+#include "BazookaBullet.h"
 
 class Stage
 {
@@ -69,4 +70,5 @@ public:
 	void MoveNextPoint();
 
 	void AddZombieSword(ZombieSword *Zw);
+	void AddBazookaBullet(BazookaBullet *bullet);
 };

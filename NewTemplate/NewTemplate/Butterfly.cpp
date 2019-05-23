@@ -26,14 +26,7 @@ Butterfly::~Butterfly()
 void Butterfly::Update(float deltaTime, std::vector<Object*>* objects)
 {
 	if (HP <= 0)
-	{		
-		/*if (firstCreate == false)
-		{
-			this->ActivateItem();
-			firstCreate = true;
-			this->item->SetActive(true);
-			this->item->Update(deltaTime);
-		}	*/	
+	{	
 		return;
 	}
 
