@@ -4,6 +4,7 @@ Sword* Sword::_instance = NULL;
 
 Sword::Sword()
 {
+	
 	isActive = false;
 	direction = RIGHT;
 	swordSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_MAIN_SWORD);
@@ -38,10 +39,13 @@ void Sword::Update(float t, vector<Object*> *object)
 	{
 		switch (iter->GetObjectType())
 		{
-
+		case GREEN_SOLDIER:
+		
 		case JAGUAR:
-		case SOLDIER: case GREEN_SOLDIER:
-		case BUTTERFLY: case CROW:
+		case SOLDIER: 
+		
+		case BUTTERFLY: 
+		case CROW:
 		case ZOMBIE:
 		case ZOMBIE_SWORD:
 

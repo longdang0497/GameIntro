@@ -26,6 +26,8 @@ void Eagle::Update(float deltaTime, std::vector<Object*>* objects)
 		return;
 	}
 
+	if (MainCharacter::GetInstance()->IsStopWatch())
+		return;
 
 	this->sprite->UpdateSprite();
 

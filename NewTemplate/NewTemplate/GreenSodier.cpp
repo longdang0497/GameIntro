@@ -40,9 +40,12 @@ GreenSodier::~GreenSodier()
 
 void GreenSodier::Update(float deltaTime, std::vector<Object*>* objects)
 {
-	if (this->HP <= 0 && limitX1 == limitX2) 
+	if (this->HP <= 0 ) 
 		return;
 	
+	if (MainCharacter::GetInstance()->IsStopWatch())
+		return;
+
 	for (auto iter : *bullets)
 	{
 		iter->Update(deltaTime, objects);
@@ -167,19 +170,19 @@ void GreenSodier::HandleCollision(vector<Object*>* objects)
 
 		this->FilterCollision(coEvents, coEventsResult, minTx, minTy, nX, nY);
 
-		if (nY == 1)
-			this->PlusPosition(minTx * this->deltaX + nX * 0.1f, this->deltaY);
-		else
-			this->PlusPosition(minTx * this->deltaX + nX * 0.1f, minTy * this->deltaY + nY * 0.1f);
+		this->PlusPosition(minTx*this->deltaX + nX * 0.1f, minTy*this->deltaY + nY * 0.1f);
 
-		if (nX != 0)
-			this->veclocity.x = 0;
-		if (nY != 0)
-		{
-			if (nY == -1)
+		for (auto iter : *coEventsResult) {
+			if (iter->obj->GetObjectType() == BRICK)
 			{
-				this->veclocity.y = 0;
-				isOnGround = true;
+				if (nX != 0)
+				{
+					veclocity.x = 0;
+				}
+				if (nY != 0)
+					this->veclocity.y = 0;
+				if (nY == -1)
+					isOnGround = true;
 			}
 		}
 	}

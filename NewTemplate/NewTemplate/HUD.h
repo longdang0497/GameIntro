@@ -13,6 +13,7 @@ class HUD
 	static HUD* __instance;
 
 	LPDIRECT3DTEXTURE9 texBackground;
+	LPDIRECT3DTEXTURE9 ShurikenSprite;
 	LPDIRECT3DTEXTURE9 texHealth;
 	unordered_map<int, RECT> listHealth;
 

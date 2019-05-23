@@ -18,7 +18,8 @@ void Soldier::Update(float deltaTime, std::vector<Object*>* objects)
 {
 	if (HP <= 0)
 		return;
-
+	if (MainCharacter::GetInstance()->IsStopWatch())
+		return;
 	
 
 	if (limitX1 != 0  && limitX2!=0)

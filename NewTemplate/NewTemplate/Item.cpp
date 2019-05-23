@@ -189,7 +189,7 @@ void Item::Update(float deltaTime, std::vector<Object*>* objects)
 		ground->clear();
 
 		for (auto iter : *objects) {
-			if (iter->GetObjectType() == BRICK || iter->GetObjectType() == MAIN_CHARACTER) {
+			if (iter->GetObjectType() == BRICK ) {
 				ground->push_back(iter);
 			}
 		}
@@ -278,25 +278,15 @@ void Item::HandleCollision(vector<Object*>* objects)
 		this->FilterCollision(coEvents, coEventsResult, minTx, minTy, nX, nY);
 
 		this->PlusPosition(minTx*this->deltaX + nX * 0.1f, minTy*this->deltaY + nY * 0.1f);
-
-		for (auto iter : *coEventsResult)
-		{
-			if (iter->obj->GetObjectType() == MAIN_CHARACTER)
-			{
+		if (nX != 0)
+				this->veclocity.x = 0;
+		if (nY != 0)
 				this->veclocity.y = 0;
-				this->isActive = false;
-			}
-			else {
-				if (nX != 0)
-					this->veclocity.x = 0;
-				if (nY != 0)
-					this->veclocity.y = 0;
-				if (nY == -1)
-					isOnGround = true;
-			}
+		if (nY == -1)
+			isOnGround = true;
 		}
 
-	}
+	
 
 	for (int i = 0; i < coEvents->size(); i++) {
 		delete coEvents->at(i);

@@ -189,6 +189,9 @@
     <ClCompile Include="BazookaBullet.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Shuriken.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="trace.h">
@@ -293,9 +296,6 @@
     <ClInclude Include="Bat.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Stage3.h">
-      <Filter>Header Files\Stage</Filter>
-    </ClInclude>
     <ClInclude Include="Boss.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
@@ -321,6 +321,12 @@
       <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="BazookaBullet.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage3.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Shuriken.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>

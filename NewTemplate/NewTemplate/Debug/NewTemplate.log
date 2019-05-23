@@ -1,0 +1,8 @@
+﻿  HUD.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\16521\desktop\nmgame\newtemplate\newtemplate\game.h(12): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
+c:\users\16521\desktop\nmgame\newtemplate\newtemplate\object.h(111): warning C4099: 'CollisionEvent': type name first seen using 'class' now seen using 'struct'
+  c:\users\16521\desktop\nmgame\newtemplate\newtemplate\object.h(110): note: see declaration of 'CollisionEvent'
+c:\users\16521\desktop\nmgame\newtemplate\newtemplate\hud.cpp(125): warning C4244: '+=': conversion from 'float' to 'DWORD', possible loss of data
+  NewTemplate.vcxproj -> C:\Users\16521\Desktop\NMGame\NewTemplate\Debug\NewTemplate.exe

@@ -7,7 +7,9 @@
 #include "Sword.h"
 #include "Camera.h"
 #include "Enemy.h"
+#include "Item.h"
 #include "HideObject.h"
+#include "Shuriken.h"
 
 
 
@@ -45,6 +47,12 @@ private:
 
 	int alpha = 255; // dùng để vẽ nhân vật khi bị làm tổn thương
 
+
+	bool StopWatch;
+	DWORD StartStopWatch;
+
+	bool HasShuriken;
+	DWORD StartHasShuriken;
 
 public:
 	MainCharacter();
@@ -85,6 +93,9 @@ public:
 
 	void SetIsInTheEndOfMap(bool value) { this->isInTheEndOfMap = value; }
 
+	bool IsStopWatch() { return this->StopWatch; }
+
+	bool GetHasShuriken() { return this->HasShuriken; }
 
 };
 

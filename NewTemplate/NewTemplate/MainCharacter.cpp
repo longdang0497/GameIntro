@@ -30,6 +30,11 @@ MainCharacter::MainCharacter()
 
 	this->allowJump = false;
 
+	StartStopWatch = GetTickCount();
+	StartHasShuriken = GetTickCount();
+
+	HasShuriken = false;
+
 
 }
 
@@ -174,6 +179,17 @@ void MainCharacter::Update(float t, vector<Object*> * object)
 	if (isInTheEndOfMap)
 		return;
 
+	if (StopWatch && GetTickCount() - StartStopWatch >= 6000)
+	{
+		StopWatch = false;
+	}
+
+	if (HasShuriken && GetTickCount() - StartHasShuriken >= 6000)
+	{
+		HasShuriken = false;
+	}
+
+
 	alpha = 255;
 
 	if (isHurting)
@@ -184,6 +200,8 @@ void MainCharacter::Update(float t, vector<Object*> * object)
 	Object::Update(t);
 
 	Sword::GetInstance()->Update(t, object);
+
+	Shuriken::GetInstance()->Update(t, object);
 
 	if (GetState() == STATE_ATTACK)
 	{
@@ -248,6 +266,7 @@ void MainCharacter::Render()
 		this->currentSprite->DrawSprite(pos, false, alpha);
 
 	Sword::GetInstance()->Render();
+	Shuriken::GetInstance()->Render();
 
 }
 
@@ -280,6 +299,16 @@ void MainCharacter::KeyBoardHandle()
 	}
 	else if (isOnGround)
 	{
+		if (HasShuriken && k->keyChangeGameMode && Shuriken::GetInstance()->GetIsActive() == false)
+		{
+
+			Shuriken::GetInstance()->SetPosition(this->position.x, this->position.y);
+			Shuriken::GetInstance()->SetDirection(this->direction);
+			Shuriken::GetInstance()->Reset();
+			Shuriken::GetInstance()->SetIsActive(true);
+			
+		}
+
 		if (k->keyJump && allowJump) //(GetState() != STATE_JUMP || GetState() != STATE_JUMP_TO))
 		{
 			allowJump = false;
@@ -411,6 +440,9 @@ void MainCharacter::KeyBoardHandle()
 		//		SetState(STATE_JUMP_TO);
 		//}
 	}
+
+
+
 }
 
 void MainCharacter::HandleCollision(vector<Object*> * objects)
@@ -423,16 +455,18 @@ void MainCharacter::HandleCollision(vector<Object*> * objects)
 
 	for (auto iter : *objects)
 	{
-		if (iter->GetObjectType() == BRICK || iter->GetObjectType() == LADDER || iter->GetObjectType() == ITEM)
+		if (iter->GetObjectType() == BRICK)
 			staticObject->push_back(iter);
-		else
+		else if (iter->GetHP() >= 0 || iter->GetActive() == true || iter->GetObjectType() == ITEM)
 			movingObject->push_back(iter);
 	}
 
-	if (GetState() != STATE_ON_LADDER && GetState() != STATE_CLIMBING)
-		this->HandleCollisionWithStaticObject(staticObject);
-	if (!isHurting)
+	//if (GetState() != STATE_ON_LADDER && GetState() != STATE_CLIMBING)
+	this->HandleCollisionWithStaticObject(staticObject);
+	if (!isHurting || ((StopWatch && !isHurting)))
 		this->HandleCollisionWithMovingObject(movingObject);
+
+
 }
 
 void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
@@ -445,6 +479,7 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
 	this->CalcPotentialCollisions(objects, coEvents);
 
 	if (coEvents->size() == 0) {
+
 		this->PlusPosition(this->deltaX, this->deltaY);
 		isOnGround = false;
 
@@ -476,7 +511,7 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
 						isOnGround = true;
 						if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_HURT)
 						{
-							position.y -= 10;
+							//position.y -= 10;
 							startStanding = GetTickCount();
 							SetState(STATE_IDLE);
 						}
@@ -488,19 +523,9 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
 
 					}
 				}
-				break;			
-			}
-			case LADDER:
-				SetState(STATE_ON_LADDER);
-				break;
-			case ITEM:
-			{
-				if (nX != 0)
-					iter->obj->SetActive(false);
-				if (nY != 0 && this->isOnGround == true)
-					iter->obj->SetActive(false);
 				break;
 			}
+
 			}
 		}
 	}
@@ -522,7 +547,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			case JAGUAR:
 			case GREEN_SOLDIER:
 			case BAZOOKA_BULLET:
-			case SOLDIER: 
+			case SOLDIER:
 			case BOSS:
 			case ZOMBIE:
 			case ZOMBIE_SWORD:
@@ -559,6 +584,24 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 
 				break;
 			}
+			case LADDER:
+			{
+				SetState(STATE_ON_LADDER);
+				break;
+			}
+			case ITEM:
+			{
+				/*iter->SetActive(false);
+				Item* it = dynamic_cast<Item*>(iter);
+				if (it->GetObjID() == 2)
+				{
+					this->StopWatch = true;
+					this->StartStopWatch = GetTickCount();
+				}
+				break;*/
+			}
+			default:
+				break;
 			}
 		}
 	}
@@ -575,15 +618,17 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			switch (iter->obj->GetObjectType())
 			{
 			case JAGUAR:
-			case SOLDIER: 
-			case BOSS: 
+			case SOLDIER:
+			case BOSS:
 			case BOSS_BULLET:
 			case BUTTERFLY:
 			case ZOMBIE:
 			case ZOMBIE_SWORD:
-				SetState(STATE_HURT);
-				break;
+			{	SetState(STATE_HURT);
+			break;
+			}
 			case HIDE_OBJECT:
+			{
 				HideObject* h = dynamic_cast<HideObject*> (iter->obj);
 				if ((h->getType() == TOP_LADDER || h->getType() == BOTTOM_LADDER) && (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING))
 				{
@@ -594,6 +639,38 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					isInTheEndOfMap = true;
 				}
 				break;
+			}
+			case LADDER:
+			{
+
+				SetState(STATE_ON_LADDER);
+				break;
+			}
+			case ITEM:
+			{		
+				iter->obj->SetActive(false);
+				iter->obj->SetActive(false);
+				Item* it = dynamic_cast<Item*>(iter->obj);
+				switch (it->GetObjID())
+				{
+				case 2:
+					this->StopWatch = true;
+					this->StartStopWatch = GetTickCount();
+					break;
+				case 3:
+				case 0:
+				case 1:
+					this->HasShuriken = true;
+					this->StartHasShuriken = GetTickCount();
+					break;
+				default:
+					break;
+				}			
+			break; 
+			}
+			default:
+				break;
+
 			}
 		}
 	}
@@ -606,33 +683,36 @@ void MainCharacter::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
 	l = position.x;
 	r = l + 22;
+	t = position.y;
+	b = t + 31;
 
-	if (state == STATE_SIT)
-	{
-		//l = position.x;
-		t = position.y + 7;
-		//r = position.x + 17;
-		b = position.y + 31;
-	}
-	else if (state == STATE_JUMP || state == STATE_JUMP_TO)
-	{
-		//l = position.x;
-		t = position.y;
-		//r = position.x + 21;
-		b = position.y + 21;
-	}
-	else if (state == STATE_SIT_ATTACK)
-	{
-		//l = position.x;
-		t = position.y + 8;
-		//r = position.x + 17;
-		b = position.y + 31;
-	}
-	else
-	{
-		//l = position.x;
-		t = position.y;
-		//r = position.x + 17;
-		b = position.y + 31;
-	}
+
+	//if (state == STATE_SIT)
+	//{
+	//	//l = position.x;
+	//	t = position.y + 7;
+	//	//r = position.x + 17;
+	//	b = position.y + 31;
+	//}
+	//else if (state == STATE_JUMP || state == STATE_JUMP_TO)
+	//{
+	//	//l = position.x;
+	//	t = position.y;
+	//	//r = position.x + 21;
+	//	b = position.y + 21;
+	//}
+	//else if (state == STATE_SIT_ATTACK)
+	//{
+	//	//l = position.x;
+	//	t = position.y + 8;
+	//	//r = position.x + 17;
+	//	b = position.y + 31;
+	//}
+	//else
+	//{
+	//	//l = position.x;
+	//	t = position.y;
+	//	//r = position.x + 17;
+	//	b = position.y + 31;
+	//}
 }

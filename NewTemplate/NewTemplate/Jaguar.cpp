@@ -19,6 +19,9 @@ void Jaguar::Update(float deltaTime, std::vector<Object*>* objects)
 	if (HP <= 0)
 		return;
 
+	if (MainCharacter::GetInstance()->IsStopWatch())
+		return;
+
 	int t = MainCharacter::GetInstance()->GetPosition().x;
 
 	if (t >= limitX1 &&

@@ -12,9 +12,13 @@ Bat::Bat(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2) : E
 
 void Bat::Update(float deltaTime, std::vector<Object*>* objects)
 {
-	if (this->HP <= 0) {
+	if (this->HP <= 0 ) {
 		return;
 	}
+
+	if (MainCharacter::GetInstance()->IsStopWatch())
+		return;
+
 
 	//Xuát hiện bên phải
 	if (this->enemyAppearanceDirection == 1) {

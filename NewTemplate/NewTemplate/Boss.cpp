@@ -39,6 +39,7 @@ void Boss::Update(float deltaTime, std::vector<Object*>* objects)
 		return;
 	}
 
+
 	if (this->HP <= 0) {
 		this->Destroy();
 		return;

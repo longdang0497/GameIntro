@@ -6,6 +6,7 @@ HUD::HUD()
 {
 	//player = CSimon::GetInstance();
 	this->texBackground = Texture::GetInstance()->Get(ID_TEX_HUD_BG);
+	this->ShurikenSprite = Texture::GetInstance()->Get(ID_TEXTURE_MAIN);
 	this->texHealth = Texture::GetInstance()->Get(ID_TEX_HEALTH);
 	text = Text::GetInstance();
 	for (int i = 0; i < 3; i++)
@@ -57,6 +58,11 @@ void HUD::Draw(D3DXVECTOR2 position)
 
 
 	Game::GetInstance()->Draw(150, 23, texBackground, 0, 0, 62, 48);
+
+	if (MainCharacter::GetInstance()->GetHasShuriken() == true)
+	{
+		Game::GetInstance()->Draw(151, 24, ShurikenSprite , 278,88, 295, 105);
+	}
 
 
 	// player's health

@@ -1,4 +1,5 @@
 #include "BazookaBullet.h"
+#include "MainCharacter.h"
 
 BazookaBullet::BazookaBullet()
 {
@@ -37,6 +38,9 @@ void BazookaBullet::Update(float deltaTime, vector<Object*>* object)
 	if (this->isActive == true)
 	{
 		if (HP <= 0)
+			return;
+
+		if (MainCharacter::GetInstance()->IsStopWatch())
 			return;
 
 		Object::Update(deltaTime, object);

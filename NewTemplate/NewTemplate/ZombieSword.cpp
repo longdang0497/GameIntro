@@ -1,4 +1,5 @@
 #include "ZombieSword.h"
+#include "MainCharacter.h"
 
 ZombieSword::ZombieSword()
 {
@@ -36,6 +37,9 @@ ZombieSword::ZombieSword(D3DXVECTOR3 pos, int direction)
 void ZombieSword::Update(float deltaTime, vector<Object*>* object)
 {
 	if (HP <= 0)
+		return;
+
+	if (MainCharacter::GetInstance()->IsStopWatch())
 		return;
 
 	if (position.y > 270)

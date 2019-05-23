@@ -32,6 +32,9 @@ void Zombie::Update(float deltaTime, std::vector<Object*>* objects)
 	if (HP <= 0)
 		return;
 
+	if (MainCharacter::GetInstance()->IsStopWatch())
+		return;
+
 	for (auto iter : *Swords)
 	{
 		iter->Update(deltaTime,objects);
