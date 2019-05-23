@@ -521,9 +521,9 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			{
 			case JAGUAR:
 			case GREEN_SOLDIER:
+			case BAZOOKA_BULLET:
 			case SOLDIER: 
 			case BOSS:
-			case BUTTERFLY:
 			case ZOMBIE:
 			case ZOMBIE_SWORD:
 			{

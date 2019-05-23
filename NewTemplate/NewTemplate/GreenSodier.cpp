@@ -13,6 +13,15 @@ GreenSodier::GreenSodier(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, 
 		this->currentSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_GREEN_SOLDIERS_BAZOOKA);
 	else if (this->state == 2) // GREEN PLAYER CHẠY
 		this->currentSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_GREEN_PLAYER);
+
+	this->bullets = new vector<BazookaBullet*>();
+	BazookaBullet *S1 = new BazookaBullet();
+
+	bullets->push_back(S1);
+
+	WaitTime = GetTickCount();
+	isShooting = false;
+	count = 0;
 }
 
 GreenSodier::~GreenSodier()
@@ -21,6 +30,12 @@ GreenSodier::~GreenSodier()
 		delete(currentSprite);
 		currentSprite = NULL;
 	}
+
+	for (auto iter : *bullets)
+	{
+		delete(iter);
+		iter = NULL;
+	}
 }
 
 void GreenSodier::Update(float deltaTime, std::vector<Object*>* objects)
@@ -28,6 +43,11 @@ void GreenSodier::Update(float deltaTime, std::vector<Object*>* objects)
 	if (this->HP <= 0 && limitX1 == limitX2) 
 		return;
 	
+	for (auto iter : *bullets)
+	{
+		iter->Update(deltaTime, objects);
+	}
+
 	if (this->position.y >= Graphic::GetInstance(NULL, NULL, L"", 1)->GetHeight()) {
 		this->Destroy();
 		return;
@@ -56,6 +76,23 @@ void GreenSodier::Update(float deltaTime, std::vector<Object*>* objects)
 		this->Destroy();
 		return;
 	}
+
+	if (position.x >= limitX2 && direction == RIGHT)
+		direction = LEFT;
+
+	if (position.x <= limitX1 && direction == LEFT)
+		direction = RIGHT;
+
+	if (GetTickCount() - WaitTime > 1200 && !isShooting && state == 1)
+	{
+		count = 0;
+		isShooting = true;
+		WaitNext = GetTickCount();
+		Shoot();
+	}
+
+	if (isShooting)
+		Shoot();
 
 	Object::Update(deltaTime, objects);
 
@@ -91,10 +128,16 @@ void GreenSodier::Render()
 			return;
 		}
 
-		Object::Render();
+		Object::Render();	
+				
 		this->position.z = 0;
 
 		D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
+
+		for (auto iter : *bullets)
+		{
+			iter->Render();
+		}
 
 		if (direction == RIGHT) {
 			this->currentSprite->DrawSprite(pos, true);
@@ -167,4 +210,32 @@ void GreenSodier::Destroy()
 	//this->position.y -= 2;
 	this->HP = 1;
 	this->isActive = false;
+}
+
+void GreenSodier::Shoot()
+{
+	if (count != this->bullets->size())
+	{
+		if (GetTickCount() - WaitNext >= 400)
+		{
+			bullets->at(count)->SetPosition(this->position.x, this->position.y);
+			bullets->at(count)->SetVeclocity(0.25*this->direction, 0);
+			bullets->at(count)->SetHP(1);
+			bullets->at(count)->SetIsActive(true);
+			bullets->at(count)->SetDirection(this->direction);
+			count++;
+			WaitNext = GetTickCount();
+		}
+	}
+	else
+	{
+		isShooting = false;
+		WaitTime = GetTickCount();
+		count = 0;
+	}
+}
+
+vector<BazookaBullet*>* GreenSodier::GetBullets()
+{
+	return this->bullets;
 }

@@ -186,6 +186,9 @@
     <ClCompile Include="BossExplode.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
+    <ClCompile Include="BazookaBullet.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="trace.h">
@@ -315,6 +318,9 @@
       <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="BossExplode.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BazookaBullet.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>

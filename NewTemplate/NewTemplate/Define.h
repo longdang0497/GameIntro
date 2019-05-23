@@ -96,6 +96,7 @@ enum GAME_STAGE {
 
 #define PATH_GREEN_SOLDIERS_BAZOOKA L"sprite\\enemies\\GREEN_SOLDIERS_BAZOOKA.txt"
 #define PATH_BAZOOKA_BULLET L"sprite\\enemies\\BAZOOKA_BULLET.txt"
+#define PATH_BAZOOKA_EFFECT L"sprite\\enemies\\BAZOOKA_EFFECT.txt"
 #define PATH_GREEN_SOLDIERS_WALK L"sprite\\enemies\\GREEN_SOLDIERS_WALK.txt"
 #define PATH_GREEN_SOLDIERS_SHOOT L"sprite\\enemies\\GREEN_SOLDIERS_SHOOT.txt"
 #define PATH_GREEN_SOLDIERS_BULLET L"sprite\\enemies\\GREEN_SOLDIERS_BULLET.txt"
