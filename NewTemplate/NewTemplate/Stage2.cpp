@@ -162,6 +162,20 @@ void Stage2::Update(float deltaTime)
 		MainCharacter::GetInstance()->SetState(STATE_IDLE);
 		fadeOut = true;
 	}
+	for (int i = 0; i < this->objects->size(); i++)
+	{
+		if (this->objects->at(i)->GetObjectType() == CROW)
+		{
+			if (this->objects->at(i)->GetHP() <= 0)
+			{
+				if (this->objects->at(i + 1)->GetObjectType() == ITEM && this->objects->at(i + 1)->GetActive() == false &&
+					this->objects->at(i + 1)->GetPosition() == this->objects->at(i)->GetPosition())
+				{
+					this->objects->at(i + 1)->SetActive(true);
+				}
+			}
+		}
+	}
 }
 
 void Stage2::Render()

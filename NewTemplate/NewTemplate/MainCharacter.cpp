@@ -520,6 +520,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			switch (iter->GetObjectType())
 			{
 			case JAGUAR:
+			case GREEN_SOLDIER:
 			case SOLDIER: 
 			case BOSS:
 			case BUTTERFLY:

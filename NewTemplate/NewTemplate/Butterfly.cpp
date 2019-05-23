@@ -1,6 +1,6 @@
 #include "Butterfly.h"
 
-Butterfly::Butterfly(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2, int itemId) : Enemy(pos, appearanceDirection, limitX1, limitX2)
+Butterfly::Butterfly(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2) : Enemy(pos, appearanceDirection, limitX1, limitX2)
 //Butterfly::Butterfly(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2, Item * item) : Enemy(pos, appearanceDirection, limitX1, limitX2)
 {
 	this->fly = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_BUTTERFLY);
