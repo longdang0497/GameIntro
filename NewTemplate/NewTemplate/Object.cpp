@@ -106,7 +106,7 @@ void Object::Update(float deltaTime, std::vector<Object*>* objects)
 
 void Object::Render()
 {
-	//RenderBoundingBox();
+	RenderBoundingBox();
 }
 
 CollisionEvent* Object::SweptAABBEx(Object* coO)

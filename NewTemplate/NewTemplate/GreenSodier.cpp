@@ -4,12 +4,13 @@ GreenSodier::GreenSodier(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, 
 {
 	this->HP = 1;
 	this->SetObjectType(GREEN_SOLDIER);
+	this->SetPosition(pos.x, pos.y);
 	this->isActive = false;
 	this->state = state;
 	if (this->state == 0) // GREEN SOLDIER CHẠY
 		this->currentSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_GREEN_SOLDIERS_WALK);
 	else if (this->state == 1) // GREEN SOLDIER BẮN
-		this->currentSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_GREEN_SOLDIERS_SHOOT);
+		this->currentSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_GREEN_SOLDIERS_BAZOOKA);
 	else if (this->state == 2) // GREEN PLAYER CHẠY
 		this->currentSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_GREEN_PLAYER);
 }
@@ -42,10 +43,10 @@ void GreenSodier::Update(float deltaTime, std::vector<Object*>* objects)
 	}
 	// Xét theo camera bên trái
 	else {
-		/*if (Camera::GetInstance()->getPosition().x - this->position.x <= 3.0 && Camera::GetInstance()->getPosition().x - this->position.x >= 0.0) {
+		if (Camera::GetInstance()->getPosition().x - this->position.x <= 100.0 && Camera::GetInstance()->getPosition().x - this->position.x >= 0.0) {
 			this->isActive = true;
 			this->direction = 1;
-		}*/
+		}
 	}
 
 	if (!this->isActive) return;
@@ -84,19 +85,23 @@ void GreenSodier::Update(float deltaTime, std::vector<Object*>* objects)
 
 void GreenSodier::Render()
 {
-	if (!this->isActive) {
-		return;
-	}
+	if (this->isActive == true)
+	{
+		if (HP <= 0) {
+			return;
+		}
 
-	this->position.z = 0;
+		Object::Render();
+		this->position.z = 0;
 
-	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
+		D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
 
-	if (direction == RIGHT) {
-		this->currentSprite->DrawSprite(pos, true);
-	}
-	else {
-		this->currentSprite->DrawSprite(pos, false);
+		if (direction == RIGHT) {
+			this->currentSprite->DrawSprite(pos, true);
+		}
+		else {
+			this->currentSprite->DrawSprite(pos, false);
+		}
 	}
 }
 
@@ -148,12 +153,10 @@ void GreenSodier::GetBoundingBox(float & l, float & t, float & r, float & b)
 {
 	if (HP > 0)
 	{
-		this->objectWidth = currentSprite->GetWidth();
-		this->objectHeight = currentSprite->GetHeight();
 		l = position.x;
 		t = position.y;
-		r = l + objectWidth;
-		b = t + objectHeight;
+		r = l + currentSprite->GetWidth();
+		b = t + currentSprite->GetHeight();
 	}
 	else l = r = b = t = 0;
 }
