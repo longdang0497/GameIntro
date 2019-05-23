@@ -141,7 +141,6 @@ void Stage1::Update(float deltaTime)
 		MainCharacter::GetInstance()->SetState(STATE_IDLE);
 		fadeOut = true;
 	}
-	else
 	for (int i = 0; i < this->objects->size(); i++)
 	{
 		if (this->objects->at(i)->GetObjectType() == BUTTERFLY)
@@ -152,10 +151,6 @@ void Stage1::Update(float deltaTime)
 					this->objects->at(i + 1)->GetPosition() == this->objects->at(i)->GetPosition())
 				{
 					this->objects->at(i + 1)->SetActive(true);
-					/*Item * item = dynamic_cast<Item*>(this->objects->at(i + 1));
-					item->SetTimeAppear();
-					delete item;
-					item = NULL;*/
 				}
 			}
 		}

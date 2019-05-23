@@ -11,8 +11,7 @@ private:
 	Item * item;
 	bool firstCreate = false;
 public:
-	Butterfly(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2, int itemId);
-	//Butterfly(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2, Item *item);
+	Butterfly(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2);
 	~Butterfly();
 	void Update(float deltaTime, std::vector<Object*> *objects = NULL);
 	void Render();

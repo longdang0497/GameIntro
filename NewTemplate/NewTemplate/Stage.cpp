@@ -91,7 +91,7 @@ void Stage::InitEnemies(LPCWSTR filePath)
 		case BUTTERFLY_ID:
 		{
 			fs >> itemId;			
-			this->objects->push_back(new Butterfly(pos, direction, limit1, limit2, itemId));			
+			this->objects->push_back(new Butterfly(pos, direction, limit1, limit2));			
 			InitItems(pos, itemId);
 			break;
 		}

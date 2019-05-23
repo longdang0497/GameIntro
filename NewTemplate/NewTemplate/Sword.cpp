@@ -37,8 +37,8 @@ void Sword::Update(float t, vector<Object*> *object)
 		{
 
 		case JAGUAR:
-		case SOLDIER:
-		case BUTTERFLY:
+		case SOLDIER: case GREEN_SOLDIER:
+		case BUTTERFLY: case CROW:
 		case ZOMBIE:
 
 		{
