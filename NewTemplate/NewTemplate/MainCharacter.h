@@ -56,6 +56,10 @@ private:
 	bool HasShuriken;
 	DWORD StartHasShuriken;
 
+	int Lives;
+
+	bool IsRepawn;
+
 public:
 	MainCharacter();
 	~MainCharacter();
@@ -101,5 +105,14 @@ public:
 
 	int GetPlusScore() { return this->PlusScore; }
 
+
+	int GetLives() { return this->Lives; }
+
+	void LoseLive() { Lives--; }
+
+	bool GetRepawn() { return this->IsRepawn; }
+	void SetRepawn(bool s) { this->IsRepawn = s; }
+
+	void SubtractScore(int a) { this->score = this->score - a; }
 };
 

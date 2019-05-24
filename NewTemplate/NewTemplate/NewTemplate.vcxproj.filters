@@ -192,6 +192,9 @@
     <ClCompile Include="Shuriken.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
+    <ClCompile Include="EndStage.cpp">
+      <Filter>Source Files\Stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="trace.h">
@@ -328,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="Shuriken.h">
       <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EndStage.h">
+      <Filter>Header Files\Stage</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -198,7 +198,23 @@ void Stage1::FadeOutEffect()
 	else
 	{
 		fadeOut = false;
-		Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
-		ProcessGame::GetInstance(NULL, 0)->SetGameStage(STAGE2);
+
+		if (MainCharacter::GetInstance()->GetIsInTheEndOfMap())
+		{
+			Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
+			ProcessGame::GetInstance(NULL, 0)->SetGameStage(STAGE2);
+		}
+		else if (MainCharacter::GetInstance()->GetRepawn())
+		{
+			MainCharacter::GetInstance()->LoseLive();
+			MainCharacter::GetInstance()->SetPosition(50, 80);
+			MainCharacter::GetInstance()->SetHP(16);
+			MainCharacter::GetInstance()->SetRepawn(false);
+		}
+		else if (MainCharacter::GetInstance()->GetLives() < 0)
+		{
+			Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
+			ProcessGame::GetInstance(NULL, 0)->SetGameStage(END_STAGE);
+		}
 	}
 }

@@ -31,6 +31,8 @@ class HUD
 
 	DWORD bufferTime;
 
+	bool StopCounting;
+
 
 public:
 	~HUD();
@@ -43,5 +45,10 @@ public:
 	void ResetTime();
 
 	void SetEnemyHealth(int health);
+
+	void SubtractTime(int a) { this->time -= a; }
+	DWORD GetTime() { return this->time; }
+
+	void SetStopCounting(bool a) { this->StopCounting = a; }
 };
 

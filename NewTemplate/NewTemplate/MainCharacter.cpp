@@ -37,7 +37,11 @@ MainCharacter::MainCharacter()
 
 	PlusScore = 1;
 
+	Lives = 2;
+
 	this->StartDoubleScore = GetTickCount();
+
+	IsRepawn = false;
 
 }
 
@@ -200,7 +204,7 @@ void MainCharacter::Update(float t, vector<Object*> * object)
 
 	alpha = 255;
 
-	if (isHurting)
+	if (isHurting || IsRepawn)
 	{
 		alpha = 128;
 	}

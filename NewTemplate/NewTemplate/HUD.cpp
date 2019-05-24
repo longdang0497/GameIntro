@@ -54,7 +54,8 @@ void HUD::Draw(D3DXVECTOR2 position)
 
 	// state
 	text->DrawString("P -", { 97,23 });
-	text->DrawString("02", {122, 23 });
+	//text->DrawString("02", {122, 23 });
+	text->DrawString(IntToChar(MainCharacter::GetInstance()->GetLives(), 2), { 121, 23 });
 
 
 	Game::GetInstance()->Draw(150, 23, texBackground, 0, 0, 62, 48);
@@ -122,11 +123,15 @@ void HUD::SetEnemyHealth(int health)
 
 void HUD::Update(float dt)
 {
-	bufferTime += dt;
-	if (bufferTime >= 1000)
+
+	if (!StopCounting)
 	{
-		this->time -= 1;
-		bufferTime -= 1000;
+		bufferTime += dt;
+		if (bufferTime >= 1000)
+		{
+			this->time -= 1;
+			bufferTime -= 1000;
+		}
 	}
 }
 

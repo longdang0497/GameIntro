@@ -9,6 +9,7 @@
 #include "Stage3.h"
 #include "IntroStage.h"
 #include "KeyGame.h"
+#include "EndStage.h"
 
 
 

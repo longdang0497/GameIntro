@@ -9,7 +9,8 @@ enum GAME_STAGE {
 	Intro,
 	STAGE1,
 	STAGE2,
-	STAGE3
+	STAGE3,
+	END_STAGE
 };
 
 
@@ -82,6 +83,9 @@ enum GAME_STAGE {
 #define PATH_BUTTERFLY L"sprite\\enemies\\BUTTERFLY.txt"
 #define PATH_CROW L"sprite\\enemies\\CROW.txt"
 #define PATH_EXPLODE L"sprite\\enemies\\EXPLODE.txt"
+
+#define ID_RESULT 2504
+#define PATH_RESULT L"sprite\\Result.png"
 
 #define ID_TEXTURE_ENEMIES 3
 #define PATH_TEXTURE_ENEMIES L"sprite\\Enemies_Bosses.png"  //   <===== CÁC SPRITE BÊN DƯỚI SỬ DỤNG TEXTURE NÀY

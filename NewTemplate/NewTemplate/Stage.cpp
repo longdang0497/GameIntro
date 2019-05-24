@@ -193,7 +193,25 @@ void Stage::Update(float deltaTime)
 
 	if (MainCharacter::GetInstance()->GetPosition().y >= 270)
 	{
-		//chuyen toi man ket thuc ma chua viet code
+		fadeOut = true;
+		alpha = 180;
+		MainCharacter::GetInstance()->SetRepawn(true);
+		return;
+	}
+
+	if (MainCharacter::GetInstance()->GetHP() <= 0)
+	{
+		fadeOut = true;
+		alpha = 180;
+		MainCharacter::GetInstance()->SetRepawn(true);
+		return;
+	}
+
+	if (MainCharacter::GetInstance()->GetLives() < 0)
+	{
+		fadeOut = true;
+
+		
 		return;
 	}
 
