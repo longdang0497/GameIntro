@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 #include "Define.h"
+#include "Cell.h"
+
 using namespace std;
 
 
@@ -15,6 +17,9 @@ private:
 	int numOfRow;			// Số dòng của Grid (y)
 	int numOfColumn;		// Số cột của Grid (x)
 	Object ***cells;		// Với 3 tham số truyền vào lần lượt là: Số dòng, số cột, và số chiều sâu
+
+	//Cell ***cells; // 3 * tương ứng với đôi tượng mảng 2 chiều :p
+
 	float deltaTime;		// deltaTime này là cái số thời gian thực tế mà cái sprite nó được vẽ
 
 	void InitObjectForGrid();

@@ -55,6 +55,12 @@
     <Filter Include="Source Files\Board">
       <UniqueIdentifier>{510d239e-3820-4193-857b-336bb223cdab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Grid">
+      <UniqueIdentifier>{fb5e8d22-6d13-4355-8a29-22ef038619ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Grid">
+      <UniqueIdentifier>{43eab8fe-98c2-497d-95e0-5a55a0095d48}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -94,9 +100,6 @@
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
     <ClCompile Include="ProcessGame.cpp">
-      <Filter>Source Files\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Grid.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
     <ClCompile Include="MainCharacter.cpp">
@@ -195,6 +198,12 @@
     <ClCompile Include="EndStage.cpp">
       <Filter>Source Files\Stage</Filter>
     </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Cell.cpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="trace.h">
@@ -234,9 +243,6 @@
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="ProcessGame.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Grid.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="MainCharacter.h">
@@ -334,6 +340,12 @@
     </ClInclude>
     <ClInclude Include="EndStage.h">
       <Filter>Header Files\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Header Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Cell.h">
+      <Filter>Header Files\Grid</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

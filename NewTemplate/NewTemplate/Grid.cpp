@@ -29,16 +29,27 @@ void Grid::InitObjectForGrid()
 			this->cells[row][column] = NULL;
 		}
 	}
+
+	//this->cells = new Cell**[this->numOfRow];
+
+	//for (int row = 0; row < this->numOfRow; row++) {
+	//	this->cells[row] = new Cell*[this->numOfColumn];
+
+	//	for (int column = 0; column < this->numOfColumn; column++) {
+	//		this->cells[row][column] = new Cell();
+	//	}
+	//}
+
 }
 
-void Grid::PushObjectToVector(std::vector<Object*>* vector, Object * cell, Object* obj)
+void Grid::PushObjectToVector(std::vector<Object*>* vector, Object * objs, Object* obj)
 {
-	while (cell != NULL) {
+	while (objs != NULL) {
 
-		if (cell != obj) {
-			vector->push_back(cell);
+		if (objs != obj) {
+			vector->push_back(objs);
 		}
-		cell = cell->GetNextObj();
+		objs = objs->GetNextObj();
 	}
 }
 
@@ -65,6 +76,18 @@ void Grid::DeleteGrid()
 	}
 
 	delete[] this->cells;
+
+	//for (int row = 0; row < this->numOfRow; row++) {
+	//	for (int column = 0; column < this->numOfColumn; column++) {
+	//		this->cells[row][column]->Delete();
+
+	//		delete this->cells[row][column];
+	//	}
+
+	//	delete[] this->cells[row];
+	//}
+
+	//delete[] this->cells;
 }
 
 void Grid::InitGrid(int mapHeight, int mapWidth, bool isArray)
@@ -109,6 +132,9 @@ void Grid::Add(Object * obj)
 	if (obj->GetNextObj() != NULL) {
 		obj->GetNextObj()->SetPreObj(obj);
 	}
+
+	// Code cho Cell
+	//this->cells[row][column]->Add(obj);
 }
 
 void Grid::ReSetGrid(int height, int width, bool isArray)
@@ -139,6 +165,7 @@ vector<Object*>* Grid::GetCollisionObjects(Object * object)
 
 	// Lấy object ở cell hiện tại
 	this->PushObjectToVector(objects, this->cells[row][column], object);
+	//this->PushObjectToVector(objects, this->cells[row][column]->GetObjs(), object);
 
 	// Lấy các cell ở kế bên
 
@@ -182,6 +209,46 @@ vector<Object*>* Grid::GetCollisionObjects(Object * object)
 		}
 	}
 
+	//if (object->GetVeclocity().y < 0) { // Đang đi lên
+
+	//	if (row > 0) this->PushObjectToVector(objects, this->cells[row - 1][column]->GetObjs(), object);
+
+	//	if (column != column1) {
+	//		if (column1 <= this->numOfColumn - 1) this->PushObjectToVector(objects, this->cells[row][column1]->GetObjs(), object);
+
+	//		if (row > 0 && column1 <= this->numOfColumn - 1) this->PushObjectToVector(objects, this->cells[row - 1][column1]->GetObjs(), object);
+	//	}
+	//	else if (object->GetVeclocity().x < 0) { // Đang đi qua trái
+	//		if (column > 0) this->PushObjectToVector(objects, this->cells[row][column - 1]->GetObjs(), object);
+
+	//		if (row > 0 && column > 0) this->PushObjectToVector(objects, this->cells[row - 1][column - 1]->GetObjs(), object);
+	//	}
+	//	else { // Đang đi qua phải
+	//		if (column < this->numOfColumn - 1) this->PushObjectToVector(objects, this->cells[row][column + 1]->GetObjs(), object);
+	//		if (row > 0 && column < this->numOfColumn - 1) this->PushObjectToVector(objects, this->cells[row - 1][column + 1]->GetObjs(), object);
+
+	//	}
+	//}
+	//else {
+	//	if (row < this->numOfRow - 1) this->PushObjectToVector(objects, this->cells[row + 1][column]->GetObjs(), object);
+
+	//	if (column != column1) {
+	//		if (column1 <= this->numOfColumn - 1) this->PushObjectToVector(objects, this->cells[row][column1]->GetObjs(), object);
+
+	//		if (row > this->numOfRow - 1 && column1 <= this->numOfColumn - 1) this->PushObjectToVector(objects, this->cells[row + 1][column1]->GetObjs(), object);
+	//	}
+	//	else if (object->GetVeclocity().x < 0) { // Đang đi qua trái
+	//		if (column > 0) this->PushObjectToVector(objects, this->cells[row][column - 1]->GetObjs(), object);
+
+	//		if (row > this->numOfRow - 1 && column > 0) this->PushObjectToVector(objects, this->cells[row + 1][column - 1]->GetObjs(), object);
+	//	}
+	//	else { // Đang đi qua phải
+	//		if (column < this->numOfColumn - 1) this->PushObjectToVector(objects, this->cells[row][column + 1]->GetObjs(), object);
+	//		if (row > this->numOfRow - 1 && column < this->numOfColumn - 1) this->PushObjectToVector(objects, this->cells[row - 1][column + 1]->GetObjs(), object);
+
+	//	}
+	//}
+
 	return objects;
 }
 
@@ -217,6 +284,9 @@ void Grid::UpdateGrid(Object * object)
 	}
 
 	this->Add(object);
+
+	/*this->cells[oldRow][oldColumn]->Remove(object);
+	this->cells[newRow][newColumn]->Add(object);*/
 }
 
 Grid * Grid::GetInstance()

@@ -246,8 +246,6 @@ void Stage::Update(float deltaTime)
 		}
 		else if( (this->objects->at(i)->GetObjectType() != BRICK 
 			
-			/*&& this->objects->at(i)->GetPosition().x >= MainCharacter::GetInstance()->GetPosition().x - 200
-			&& this->objects->at(i)->GetPosition().x <= MainCharacter::GetInstance()->GetPosition().x + 150*/
 			&& this->objects->at(i)->GetPosition().x >= Camera::GetInstance()->getPosition().x - 100
 			&& this->objects->at(i)->GetPosition().x <= Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", NULL)->GetWidth()
 			|| (this->objects->at(i)->GetObjectType() == JAGUAR)
