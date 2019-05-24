@@ -18,6 +18,8 @@ class Game
 private: 
 	static Game * _instance;
 
+	GAME_STAGE gameStage;
+
 	HWND hWnd;
 
 	LPDIRECT3D9 d3d = NULL;						// Direct3D handle
@@ -49,6 +51,8 @@ public:
 	LPDIRECT3DSURFACE9 GetBackBuffer() { return backBuffer; }
 	LPD3DXSPRITE GetSpriteHandler() { return this->spriteHandler; }
 
+	void SetGameStage(GAME_STAGE gameStage) { this->gameStage = gameStage; }
+	GAME_STAGE GetGameStage() { return this->gameStage; }
 	
 
 	static Game * GetInstance() {
@@ -76,5 +80,7 @@ public:
 		float &ny);
 
 	static bool IsIntersect(RECT rectA, RECT rectB);
+
+
 };
 

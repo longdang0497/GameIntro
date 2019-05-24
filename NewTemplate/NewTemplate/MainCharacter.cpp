@@ -1,4 +1,4 @@
-
+﻿
 #include "MainCharacter.h"
 
 MainCharacter* MainCharacter::_instance = NULL;
@@ -261,6 +261,21 @@ void MainCharacter::Render()
 	if (HP == 0)
 		return;
 
+	// Cách này chỉ là đang fix tạm thôi nha <3
+	if (Game::GetInstance()->GetGameStage() == STAGE1 && this->position.x > 883 && this->position.x < 960
+		&& this->position.y + 31 > 154) {
+		this->position.y = 154 - 32;
+	}
+	else if (Game::GetInstance()->GetGameStage() == STAGE2) {
+		if (this->position.x >= 416 && this->position.x <= 576 && this->position.y + 31 > 151) {
+			this->position.y = 151 - 32;
+		}
+		else if (this->position.x >= 1309 && this->position.x <= 1600 && this->position.y + 31 > 152
+			|| this->position.x >= 2720 && this->position.x <= 2875 && this->position.y + 31 > 152) {
+			this->position.y = 152 - 32;
+		}
+	}
+
 	Object::Render();
 
 	this->position.z = 0;
@@ -268,9 +283,6 @@ void MainCharacter::Render()
 
 
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
-
-	if (position.x > 1000)
-		int r = 1;
 
 	if (direction == RIGHT)
 		this->currentSprite->DrawSprite(pos, true, alpha);
@@ -475,8 +487,8 @@ void MainCharacter::HandleCollision(vector<Object*> * objects)
 
 	//if (GetState() != STATE_ON_LADDER && GetState() != STATE_CLIMBING)
 	this->HandleCollisionWithStaticObject(staticObject);
-	if (!isHurting )
-		this->HandleCollisionWithMovingObject(movingObject);
+	//if (!isHurting )
+	//	this->HandleCollisionWithMovingObject(movingObject);
 
 
 }

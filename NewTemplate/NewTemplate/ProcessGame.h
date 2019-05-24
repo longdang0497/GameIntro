@@ -47,8 +47,6 @@ public:
 		this->gameStage = gameStage; 
 
 	}
-
-
 };
 
 

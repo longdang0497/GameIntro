@@ -13,7 +13,7 @@ Game::~Game()
 
 void Game::Init(HWND hWnd)
 {
-	
+	this->gameStage = Intro;
 
 	LPDIRECT3D9 d3d = Direct3DCreate9(D3D_SDK_VERSION);
 	this->hWnd = hWnd;
