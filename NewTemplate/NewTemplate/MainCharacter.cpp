@@ -35,6 +35,9 @@ MainCharacter::MainCharacter()
 
 	HasShuriken = false;
 
+	PlusScore = 1;
+
+	this->StartDoubleScore = GetTickCount();
 
 }
 
@@ -179,6 +182,11 @@ void MainCharacter::Update(float t, vector<Object*> * object)
 	if (isInTheEndOfMap)
 		return;
 
+	if (GetTickCount() - StartDoubleScore >= 6000)
+	{
+		PlusScore = 1;
+	}
+
 	if (StopWatch && GetTickCount() - StartStopWatch >= 6000)
 	{
 		StopWatch = false;
@@ -306,7 +314,7 @@ void MainCharacter::KeyBoardHandle()
 			Shuriken::GetInstance()->SetDirection(this->direction);
 			Shuriken::GetInstance()->Reset();
 			Shuriken::GetInstance()->SetIsActive(true);
-			
+
 		}
 
 		if (k->keyJump && allowJump) //(GetState() != STATE_JUMP || GetState() != STATE_JUMP_TO))
@@ -463,7 +471,7 @@ void MainCharacter::HandleCollision(vector<Object*> * objects)
 
 	//if (GetState() != STATE_ON_LADDER && GetState() != STATE_CLIMBING)
 	this->HandleCollisionWithStaticObject(staticObject);
-	if (!isHurting || ((StopWatch && !isHurting)))
+	if (!isHurting )
 		this->HandleCollisionWithMovingObject(movingObject);
 
 
@@ -496,7 +504,8 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
 
 		for (auto iter : *coEventsResult)
 		{
-			switch (iter->obj->GetObjectType()) {
+			switch (iter->obj->GetObjectType())
+			{
 			case BRICK:
 			{
 				if (nX != 0)
@@ -525,6 +534,10 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
 				}
 				break;
 			}
+			default:
+			{
+				break;
+			}
 
 			}
 		}
@@ -541,7 +554,8 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 {
 	for (auto iter : *objects)
 	{
-		if (iter->GetIsActive()) {
+		if (iter->GetIsActive())
+		{
 			switch (iter->GetObjectType())
 			{
 			case JAGUAR:
@@ -558,11 +572,13 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 				if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
 				{
 					{
+						if(!StopWatch)
 						SetState(STATE_HURT);
 					}
 
 					break;
 				}
+				break;
 			}
 			case HIDE_OBJECT:
 			{
@@ -586,22 +602,87 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			}
 			case LADDER:
 			{
-				SetState(STATE_ON_LADDER);
-				break;
+				float al, at, ar, ab, bl, bt, br, bb;
+				GetBoundingBox(al, at, ar, ab);
+				iter->GetBoundingBox(bl, bt, br, bb);
+				if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
+				{
+					SetState(STATE_ON_LADDER);
+					break;
+				}
 			}
 			case ITEM:
 			{
-				/*iter->SetActive(false);
-				Item* it = dynamic_cast<Item*>(iter);
-				if (it->GetObjID() == 2)
+				float al, at, ar, ab, bl, bt, br, bb;
+				GetBoundingBox(al, at, ar, ab);
+				iter->GetBoundingBox(bl, bt, br, bb);
+				if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
 				{
-					this->StopWatch = true;
-					this->StartStopWatch = GetTickCount();
+					iter->SetActive(false);
+					Item* it = dynamic_cast<Item*>(iter);
+					switch (it->GetObjID())
+					{
+					case 2:
+					{
+						this->StopWatch = true;
+						this->StartStopWatch = GetTickCount();
+						break;
+					}
+					case 1: //double score in time
+					{
+						PlusScore = 2;
+						break;
+					}
+					case 0: //bonus score
+					{
+						this->score += 100;
+						break;
+					}
+					case 4: //Restore
+					{	this->HP = 16;
+					break;
+					}
+					case 3://has shuriken
+					{
+						this->HasShuriken = true;
+						this->StartHasShuriken = GetTickCount();
+						break;
+					}
+					case 5:
+					{
+						this->score += 500;
+						break;
+					}
+					case 6:
+					{
+						this->score += 1000;
+						break;
+					}
+					case 8: //taoj vong lua
+					{
+						break; 
+					}
+					default:
+					{	
+						break;
+					}
+					}
 				}
-				break;*/
-			}
-			default:
 				break;
+
+
+
+
+
+				
+				break;
+			}
+			
+			default:
+			{
+				break;
+			}
+			
 			}
 		}
 	}
@@ -624,7 +705,9 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			case BUTTERFLY:
 			case ZOMBIE:
 			case ZOMBIE_SWORD:
-			{	SetState(STATE_HURT);
+			{	
+				if (!StopWatch)
+					SetState(STATE_HURT);
 			break;
 			}
 			case HIDE_OBJECT:
@@ -647,8 +730,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 				break;
 			}
 			case ITEM:
-			{		
-				iter->obj->SetActive(false);
+			{
 				iter->obj->SetActive(false);
 				Item* it = dynamic_cast<Item*>(iter->obj);
 				switch (it->GetObjID())
@@ -657,16 +739,31 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					this->StopWatch = true;
 					this->StartStopWatch = GetTickCount();
 					break;
-				case 3:
-				case 0:
-				case 1:
+				case 1: //double score in time
+					PlusScore = 2;
+					break;
+				case 0: //bonus score
+					this->score += 100;
+					break;
+				case 4: //Restore
+					this->HP = 16;
+					break;
+				case 3://has shuriken
 					this->HasShuriken = true;
 					this->StartHasShuriken = GetTickCount();
 					break;
+				case 5:
+					this->score += 500;
+					break;
+				case 6:
+					this->score += 1000;
+					break;
+				case 8: //taoj vong lua
+					break;
 				default:
 					break;
-				}			
-			break; 
+				}
+				break;
 			}
 			default:
 				break;

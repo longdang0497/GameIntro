@@ -47,6 +47,8 @@ private:
 
 	int alpha = 255; // dùng để vẽ nhân vật khi bị làm tổn thương
 
+	int PlusScore;
+	DWORD StartDoubleScore;
 
 	bool StopWatch;
 	DWORD StartStopWatch;
@@ -85,7 +87,7 @@ public:
 	void GetBoundingBox(float &l, float &t, float &r, float &b);
 
 	int GetScore() { return this->score; }
-	void Score() { this->score += 10; }
+	void Score() { this->score += 10*PlusScore; }
 
 	bool GetIsInTheEndOfMap() {
 		return isInTheEndOfMap;
@@ -96,6 +98,8 @@ public:
 	bool IsStopWatch() { return this->StopWatch; }
 
 	bool GetHasShuriken() { return this->HasShuriken; }
+
+	int GetPlusScore() { return this->PlusScore; }
 
 };
 

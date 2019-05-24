@@ -350,6 +350,7 @@ void Item::GetBoundingBox(float & l, float & t, float & r, float & b)
 			break;
 		}
 	}
+	else l = t = r = b = 0;
 }
 
 void Item::Destroy()
