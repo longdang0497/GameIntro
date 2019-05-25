@@ -487,8 +487,8 @@ void MainCharacter::HandleCollision(vector<Object*> * objects)
 
 	//if (GetState() != STATE_ON_LADDER && GetState() != STATE_CLIMBING)
 	this->HandleCollisionWithStaticObject(staticObject);
-	//if (!isHurting )
-	//	this->HandleCollisionWithMovingObject(movingObject);
+	/*if (!isHurting )
+		this->HandleCollisionWithMovingObject(movingObject);*/
 
 
 }
@@ -718,7 +718,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			case SOLDIER:
 			case BOSS:
 			case BOSS_BULLET:
-			case BUTTERFLY:
+			//case BUTTERFLY:
 			case ZOMBIE:
 			case ZOMBIE_SWORD:
 			{	
