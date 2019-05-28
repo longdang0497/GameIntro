@@ -485,10 +485,10 @@ void MainCharacter::HandleCollision(vector<Object*> * objects)
 			movingObject->push_back(iter);
 	}
 
-	//if (GetState() != STATE_ON_LADDER && GetState() != STATE_CLIMBING)
-	this->HandleCollisionWithStaticObject(staticObject);
-	/*if (!isHurting )
-		this->HandleCollisionWithMovingObject(movingObject);*/
+	if (GetState() != STATE_ON_LADDER && GetState() != STATE_CLIMBING)
+		this->HandleCollisionWithStaticObject(staticObject);
+	if (!isHurting)
+		this->HandleCollisionWithMovingObject(movingObject);
 
 
 }
@@ -534,9 +534,9 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
 					{
 						this->veclocity.y = 0;
 						isOnGround = true;
-						if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_HURT)
+						if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_HURT )
 						{
-							//position.y -= 10;
+							position.y -= 10;
 							startStanding = GetTickCount();
 							SetState(STATE_IDLE);
 						}
@@ -582,17 +582,20 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			case ZOMBIE:
 			case ZOMBIE_SWORD:
 			{
-				float al, at, ar, ab, bl, bt, br, bb;
-				GetBoundingBox(al, at, ar, ab);
-				iter->GetBoundingBox(bl, bt, br, bb);
-				if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
+				if (Demo)
 				{
+					float al, at, ar, ab, bl, bt, br, bb;
+					GetBoundingBox(al, at, ar, ab);
+					iter->GetBoundingBox(bl, bt, br, bb);
+					if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
 					{
-						if(!StopWatch)
-						SetState(STATE_HURT);
-					}
+						{
+							if (!StopWatch)
+								SetState(STATE_HURT);
+						}
 
-					break;
+						break;
+					}
 				}
 				break;
 			}
@@ -623,7 +626,8 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 				iter->GetBoundingBox(bl, bt, br, bb);
 				if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
 				{
-					SetState(STATE_ON_LADDER);
+					if(state!= STATE_ON_LADDER && state != STATE_CLIMBING)
+						SetState(STATE_ON_LADDER);
 					break;
 				}
 			}
@@ -723,7 +727,8 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			case ZOMBIE_SWORD:
 			{	
 				if (!StopWatch)
-					SetState(STATE_HURT);
+					if(Demo)
+						SetState(STATE_HURT);
 			break;
 			}
 			case HIDE_OBJECT:
@@ -741,8 +746,8 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			}
 			case LADDER:
 			{
-
-				SetState(STATE_ON_LADDER);
+				if (state != STATE_ON_LADDER && state != STATE_CLIMBING)
+					SetState(STATE_ON_LADDER);
 				break;
 			}
 			case ITEM:
@@ -796,36 +801,36 @@ void MainCharacter::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
 	l = position.x;
 	r = l + 22;
-	t = position.y;
-	b = t + 31;
+	//t = position.y;
+	//b = t + 31;
 
 
-	//if (state == STATE_SIT)
-	//{
-	//	//l = position.x;
-	//	t = position.y + 7;
-	//	//r = position.x + 17;
-	//	b = position.y + 31;
-	//}
-	//else if (state == STATE_JUMP || state == STATE_JUMP_TO)
-	//{
-	//	//l = position.x;
-	//	t = position.y;
-	//	//r = position.x + 21;
-	//	b = position.y + 21;
-	//}
-	//else if (state == STATE_SIT_ATTACK)
-	//{
-	//	//l = position.x;
-	//	t = position.y + 8;
-	//	//r = position.x + 17;
-	//	b = position.y + 31;
-	//}
-	//else
-	//{
-	//	//l = position.x;
-	//	t = position.y;
-	//	//r = position.x + 17;
-	//	b = position.y + 31;
-	//}
+	if (state == STATE_SIT)
+	{
+		//l = position.x;
+		t = position.y + 7;
+		//r = position.x + 17;
+		b = position.y + 31;
+	}
+	else if (state == STATE_JUMP || state == STATE_JUMP_TO)
+	{
+		//l = position.x;
+		t = position.y;
+		//r = position.x + 21;
+		b = position.y + 21;
+	}
+	else if (state == STATE_SIT_ATTACK)
+	{
+		//l = position.x;
+		t = position.y + 8;
+		//r = position.x + 17;
+		b = position.y + 31;
+	}
+	else
+	{
+		//l = position.x;
+		t = position.y;
+		//r = position.x + 17;
+		b = position.y + 31;
+	}
 }

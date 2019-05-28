@@ -207,6 +207,7 @@ void Stage1::FadeOutEffect()
 			Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
 			ProcessGame::GetInstance(NULL, 0)->SetGameStage(STAGE2);
 			Game::GetInstance()->SetGameStage(STAGE2);
+			
 		}
 		else if (MainCharacter::GetInstance()->GetRepawn())
 		{

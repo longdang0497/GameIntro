@@ -20,6 +20,8 @@ class MainCharacter : public Object
 {
 private:
 
+	bool Demo = false;
+
 	static MainCharacter* _instance;
 	MAIN_CHARACTER_STATE state;
 

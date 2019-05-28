@@ -72,7 +72,7 @@ void GreenSodier::Update(float deltaTime, std::vector<Object*>* objects)
 		}
 	}
 
-	if (!this->isActive) return;
+//	if (!this->isActive) return;
 
 	if (this->enemyAppearanceDirection == 0 && this->position.x < Camera::GetInstance()->getPosition().x - 3.0
 		|| this->position.x > Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", 1)->GetWidth()) {
@@ -101,7 +101,8 @@ void GreenSodier::Update(float deltaTime, std::vector<Object*>* objects)
 
 	this->veclocity.y += 0.0018f * deltaTime;
 
-	if (isOnGround) {
+	if (isOnGround)
+	{
 		if (this->state == 0 || this->state == 2)
 			this->veclocity.x = 0.08 * direction;
 		else
@@ -125,7 +126,7 @@ void GreenSodier::Update(float deltaTime, std::vector<Object*>* objects)
 
 void GreenSodier::Render()
 {
-	if (this->isActive == true)
+	//if (this->isActive == true)
 	{
 		if (HP <= 0) {
 			return;
