@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <Windows.h>
 #include "Define.h"
+#include <stddef.h>
 class Graphic
 {
 private:

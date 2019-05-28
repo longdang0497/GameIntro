@@ -54,13 +54,10 @@ void Cell::Delete()
 		Object* temp = this->objs;
 		this->objs = this->objs->GetNextObj();
 
-		this->objs->SetPreObj(NULL);
-
 		temp->SetPreObj(NULL);
 		temp->SetNextObj(NULL);
 
-		if (temp->GetObjectType() != MAIN_CHARACTER) {
+		if(temp->GetObjectType() != MAIN_CHARACTER)
 			delete temp;
-		}
 	}
 }

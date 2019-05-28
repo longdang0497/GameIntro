@@ -29,17 +29,15 @@ Eagle::Eagle(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2)
 
 void Eagle::Update(float deltaTime, std::vector<Object*>* objects)
 {
-	if (this->HP <= 0 || MainCharacter::GetInstance()->IsStopWatch() || GetTickCount() - this->lastReachTime <= EAGLE_FREEZE_TIME)
+	if (this->HP <= 0)
 		return;
 
 	this->sprite->UpdateSprite();
 
-	float mainPosX = MainCharacter::GetInstance()->GetPosition().x;
-
 	// Xét theo camera bên phải
 	if (this->enemyAppearanceDirection == 1) {
-		if (Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", 0)->GetWidth() - this->defaultPosition.x >= -2
-			&& Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", 0)->GetWidth() - this->defaultPosition.x <= 0) {
+		if (Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", NULL)->GetWidth() - this->defaultPosition.x >= -2
+			&& Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", NULL)->GetWidth() - this->defaultPosition.x <= 0) {
 
 			if (this->canAppearAgain) {
 				this->isActive = true;
@@ -67,11 +65,15 @@ void Eagle::Update(float deltaTime, std::vector<Object*>* objects)
 
 	if (!this->isActive) return;
 
-	if (this->CheckCurrentPosAndPos(this->position, this->currentPos, 0.0f, 0.5f)) {
+	if (GetTickCount() - this->lastReachTime <= EAGLE_FREEZE_TIME)
+		return;
+
+	if (this->CheckCurrentPosAndPos(this->position, this->currentPos, 0.0f, 1.0f)) {
 
 		float left = 0.0f ,top = 0.0f;
 
-		this->lastPos = this->currentPos;
+		this->lastPos.x = this->currentPos.x;
+		this->lastPos.y = this->currentPos.y;
 		this->lastReachTime = GetTickCount();
 
 		if (count % 2 == 0) {
@@ -90,19 +92,29 @@ void Eagle::Update(float deltaTime, std::vector<Object*>* objects)
 			top = EAGLE_LOWEST_POS_Y;
 
 			if (this->position.x >= MainCharacter::GetInstance()->GetPosition().x) {
-				left = MainCharacter::GetInstance()->GetPosition().x + this->limitX2;
-				this->flyingToRight = false;
+				left = this->lastPos.x + (this->limitX2 - this->limitX1);
+				this->flyingToRight = true;
 			}
 			else {
-				left = MainCharacter::GetInstance()->GetPosition().x - this->limitX2;
-				this->flyingToRight = true;
+				left = this->lastPos.x - (this->limitX2 - this->limitX1);
+				this->flyingToRight = false;
 			}
 		}
 
-		this->currentPos = { left, top, 0.0f };
+ 		this->currentPos = { left, top, 0.0f };
 		this->count++;
 	}
 	
+	CKeyGame* k = CKeyGame::getInstance();
+
+	if (k->keyRight)
+	{
+		this->currentPos.x += 2.0f;
+	}
+	else if(k->keyLeft) {
+		this->currentPos.x -= 2.0f;
+	}
+
 	if (this->flyingToRight)
 		this->direction = RIGHT;
 	else
@@ -117,6 +129,7 @@ void Eagle::Update(float deltaTime, std::vector<Object*>* objects)
 	// last Pos
 	float x0 = this->lastPos.x;
 	float y0 = this->lastPos.y;
+
 
 	// y = ax + b
 	// y0 = ax0 + b
@@ -134,11 +147,16 @@ void Eagle::Update(float deltaTime, std::vector<Object*>* objects)
 		this->position.x += this->veclocity.x * deltaTime;
 		this->position.y = a * this->position.x + b;
 	}
+
+	if (this->position.y < 150.0f && this->count >=2) {
+ 		int i = 1;
+	}
+
 }
 
 void Eagle::Render()
 {
-	if (!this->isActive || this->HP <= 0)
+	if (!this->isActive)
 		return;
 
 	Object::Render();

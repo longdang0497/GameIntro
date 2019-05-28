@@ -114,14 +114,12 @@ void Stage1::LoadResource()
 	fs2.close();
 
 
-
-
 	//this->InitEnemies(PATH_POS_ENEMIES_MAP_1);
 
 	 /*Enemy* e = new Bat({ 100, 100,0 }, 0, 0, 0);
 	 this->objects->push_back(e);*/
 
-	Enemy* e = new Eagle({ 300, 100, 0.0 }, 1, 20, 50);
+	Enemy* e = new Eagle({ 300, 100, 0.0 }, 1, 50, 70);
 	this->objects->push_back(e);
 
 	for (int i = 0; i < this->objects->size(); i++) {

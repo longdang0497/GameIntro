@@ -595,7 +595,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 						}
 
 						break;
-					}
+					}   
 				}
 				break;
 			}
@@ -688,13 +688,6 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					}
 					}
 				}
-				break;
-
-
-
-
-
-				
 				break;
 			}
 			

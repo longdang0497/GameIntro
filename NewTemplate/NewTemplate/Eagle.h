@@ -2,12 +2,13 @@
 #include "Enemy.h"
 #include "Define.h"
 #include "MainCharacter.h"
+#include "Graphic.h"
 #include <ctime>
 #include <cstdlib>
 
-#define EAGLE_VEC_X 1.5f
-#define EAGLE_HIGHTEST_POS_Y 198.0f
-#define EAGLE_LOWEST_POS_Y 230.0f
+#define EAGLE_VEC_X 0.13f
+#define EAGLE_HIGHTEST_POS_Y 160.0f
+#define EAGLE_LOWEST_POS_Y 190.0f
 #define EAGLE_FREEZE_TIME 200
 
 class Eagle : public Enemy
