@@ -19,7 +19,8 @@ public:
 	void Render();
 
 	static Stage2* GetInstance() {
-		if (_instance == NULL) _instance = new Stage2();
+		if (_instance == NULL) 
+			_instance = new Stage2();
 		return _instance;
 	}
 

@@ -322,7 +322,6 @@ void Stage::MoveNextPoint()
 
 }
 
-
 void Stage::AddZombieSword(ZombieSword *Zw)
 {
 	this->objects->push_back(Zw);

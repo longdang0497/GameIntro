@@ -6,7 +6,9 @@ Stage2::Stage2()
 {
 	MainCharacter::GetInstance()->SetIsInTheEndOfMap(false);
 	Grid::GetInstance()->ReSetGrid(STAGE2_HEIGHT, STAGE2_WIDTH, false);
+
 	MainCharacter::GetInstance()->SetPosition(50, 120);
+
 	this->LoadResource();
 	Camera::GetInstance()->setWorldBoundary(3072);
 	//Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
@@ -15,7 +17,7 @@ Stage2::Stage2()
 	SpecialPoint.push_back(1000);
 	SpecialPoint.push_back(1245);
 	SpecialPoint.push_back(2779);
-	MainCharacter::GetInstance()->SetPosition(50, 120);
+
 	alpha = 255;
 	fadeIn = true;
 	fadeOut = false;
