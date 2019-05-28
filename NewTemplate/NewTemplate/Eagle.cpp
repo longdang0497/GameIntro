@@ -1,40 +1,40 @@
 ﻿#include "Eagle.h"
 
+bool Eagle::CheckCurrentPosAndPos(D3DXVECTOR3 pos1, D3DXVECTOR3 pos2, float min, float max)
+{
+	float distanceX = floor(abs(pos1.x - pos2.x));
+	float distanceY = floor(abs(pos1.y - pos2.y));
+	return distanceX <= max && distanceX >= min || distanceY <= max && distanceY >= min;
+}
+
 Eagle::~Eagle()
 {
 	if (this->sprite != NULL) delete this->sprite;
 }
 
+// limitX1 dung de di chuyen dai bang o phia tren, limitX2 dung de di chuyen dai bang o phia duoi
 Eagle::Eagle(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2) : Enemy(pos, appearanceDirection, limitX1, limitX2)
 {
 	this->sprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_EAGLE);
-	this->SetObjectType(EAGLE);
 	this->HP = 1;
+	this->SetObjectType(EAGLE);
 	this->isActive = false;
-	this->flyingToBottom = false;
-	this->flyingToRight = false;
-	int count = 0;
-	this->currentPosition = defaultPosition;
-	this->lastPosition = defaultPosition;
-	this->SetVeclocity(0.1, 0);
-	this->amplitude = DEFAULT_AMPLITUDE;
+	this->count = 0;
+	this->canAppearAgain = true;
+	this->lastReachTime = GetTickCount();
+	this->currentPos = this->defaultPosition;
+	this->lastPos = this->defaultPosition;
+	this->SetVeclocity(EAGLE_VEC_X, 0);
 }
 
 void Eagle::Update(float deltaTime, std::vector<Object*>* objects)
 {
-	if (this->HP <= 0) {
-		return;
-	}
-
-	if (MainCharacter::GetInstance()->IsStopWatch())
+	if (this->HP <= 0 || MainCharacter::GetInstance()->IsStopWatch() || GetTickCount() - this->lastReachTime <= EAGLE_FREEZE_TIME)
 		return;
 
 	this->sprite->UpdateSprite();
 
-	if (GetTickCount() - this->lastReachTime <= FREEZE_TIME) {
-		return;
-	}
-
+	float mainPosX = MainCharacter::GetInstance()->GetPosition().x;
 
 	// Xét theo camera bên phải
 	if (this->enemyAppearanceDirection == 1) {
@@ -67,106 +67,81 @@ void Eagle::Update(float deltaTime, std::vector<Object*>* objects)
 
 	if (!this->isActive) return;
 
-	if (this->position.x <= Camera::GetInstance()->getPosition().x - 20 || this->position.x >= Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", 1)->GetWidth() + 10
-		|| this->amplitude == 0) {
-		this->Destroy();
-		return;
-	}
+	if (this->CheckCurrentPosAndPos(this->position, this->currentPos, 0.0f, 0.5f)) {
 
-	if (floor(abs(this->position.x - this->currentPosition.x)) <= 1 && floor(abs(this->position.x - this->currentPosition.x)) >= 0
-		|| floor(abs(this->position.y - this->currentPosition.y)) <= 1 && floor(abs(this->position.y - this->currentPosition.y) >= 0 && this->isActive)) {
+		float left = 0.0f ,top = 0.0f;
 
-		float left = 0.0f, top = 0.0f;
-
-		this->lastPosition.x = this->currentPosition.x;
-		this->lastPosition.y = this->currentPosition.y;
-
-
+		this->lastPos = this->currentPos;
 		this->lastReachTime = GetTickCount();
 
-
-
-
 		if (count % 2 == 0) {
-
-			if (MainCharacter::GetInstance()->GetPosition().x < this->position.x) {
+			top = EAGLE_HIGHTEST_POS_Y;
+			
+			if (this->position.x >= MainCharacter::GetInstance()->GetPosition().x) {
+				left = MainCharacter::GetInstance()->GetPosition().x - this->limitX1;
 				this->flyingToRight = false;
-				this->flyingToBottom = true;
-				left = MainCharacter::GetInstance()->GetPosition().x - this->amplitude;
 			}
 			else {
+				left = MainCharacter::GetInstance()->GetPosition().x + this->limitX1;
 				this->flyingToRight = true;
-				this->flyingToBottom = true;
-				left = MainCharacter::GetInstance()->GetPosition().x + this->amplitude;
 			}
-			top = MainCharacter::GetInstance()->GetPosition().y - 15;
-			this->amplitude -= 5;
-
-			this->currentPosition = { left, top, 0 };
-			this->count++;
-
-
 		}
 		else {
-			this->flyingToRight = MainCharacter::GetInstance()->GetPosition().x < this->position.x ? true : false;
-			this->flyingToBottom = false;
-			left = MainCharacter::GetInstance()->GetPosition().x < this->position.x ? this->position.x + 25 : this->position.x - 25;
-			if (count < 6) {
-				top = 210;
+			top = EAGLE_LOWEST_POS_Y;
+
+			if (this->position.x >= MainCharacter::GetInstance()->GetPosition().x) {
+				left = MainCharacter::GetInstance()->GetPosition().x + this->limitX2;
+				this->flyingToRight = false;
 			}
 			else {
-				top = 150;
+				left = MainCharacter::GetInstance()->GetPosition().x - this->limitX2;
+				this->flyingToRight = true;
 			}
-
-			this->currentPosition = { left, top, 0 };
-			this->count++;
 		}
 
-
-
+		this->currentPos = { left, top, 0.0f };
+		this->count++;
 	}
-
-
-	if (this->flyingToRight) {
+	
+	if (this->flyingToRight)
 		this->direction = RIGHT;
-	}
-	else {
+	else
 		this->direction = LEFT;
-	}
 
-	this->SetVx(0.18*this->direction);
+	this->SetVx(EAGLE_VEC_X * this->direction);
 
-	// current
-	float x1 = this->currentPosition.x;
-	float y1 = this->currentPosition.y;
+	// current Pos
+	float x1 = this->currentPos.x;
+	float y1 = this->currentPos.y;
 
-	// lastPosition
-	float x0 = this->lastPosition.x;
-	float y0 = this->lastPosition.y;
+	// last Pos
+	float x0 = this->lastPos.x;
+	float y0 = this->lastPos.y;
 
 	// y = ax + b
 	// y0 = ax0 + b
 	// y1 = ax1 + b
-	// Ra được thông số a, b
+	// Ra được thông số a, b 
 
-	if (x1 - x0 == 0.0)
-	{
+	if (x1 - x0 == 0) {
 		this->position.x = this->position.x;
 		this->position.y = this->position.y;
 	}
 	else {
 		float a = (y1 - y0) / (x1 - x0);
 		float b = y0 - a * x0;
+
 		this->position.x += this->veclocity.x * deltaTime;
 		this->position.y = a * this->position.x + b;
 	}
-
 }
 
 void Eagle::Render()
 {
-	if (!this->isActive)
+	if (!this->isActive || this->HP <= 0)
 		return;
+
+	Object::Render();
 
 	this->position.z = 0;
 
@@ -186,28 +161,24 @@ void Eagle::HandleCollision(vector<Object*>* objects)
 
 void Eagle::GetBoundingBox(float & l, float & t, float & r, float & b)
 {
-	if (HP > 0) {
+	if (this->HP > 0 && this->isActive) {
 		this->objectWidth = this->sprite->GetWidth();
 		this->objectHeight = this->sprite->GetHeight();
-		l = position.x;
-		t = position.y;
-		r = l + this->objectWidth;
+
+		l = this->position.x;
+		t = this->position.y;
 		b = t + this->objectHeight;
-	}
-	else {
-		l = t = r = b = 0;
+		r = l + this->objectWidth;
 	}
 }
 
 void Eagle::Destroy()
 {
-	this->position = defaultPosition;
 	this->HP = 1;
 	this->isActive = false;
-	this->flyingToBottom = false;
-	this->flyingToRight = false;
+	this->position = this->defaultPosition;
+	this->currentPos = this->defaultPosition;
+	this->lastPos = this->defaultPosition;
 	this->count = 0;
-	this->currentPosition = defaultPosition;
-	this->lastPosition = defaultPosition;
-	this->amplitude = DEFAULT_AMPLITUDE;
+	this->canAppearAgain = true;
 }

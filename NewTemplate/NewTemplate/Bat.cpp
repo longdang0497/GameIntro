@@ -19,7 +19,6 @@ void Bat::Update(float deltaTime, std::vector<Object*>* objects)
 	if (MainCharacter::GetInstance()->IsStopWatch())
 		return;
 
-
 	//Xuát hiện bên phải
 	if (this->enemyAppearanceDirection == 1) {
 		if (Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", 0)->GetWidth() - this->defaultPosition.x >= -2

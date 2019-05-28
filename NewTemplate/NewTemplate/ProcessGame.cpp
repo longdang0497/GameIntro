@@ -12,7 +12,7 @@ ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 
 	CKeyBoard::Create(hInstance, graphic->GetHWnd());
 	
-	this->gameStage = Intro;
+	this->gameStage = STAGE1;
 	
 	/*this->keyHandler = new KeyEventHandler();
 	game->InitKeyboard(this->keyHandler);*/

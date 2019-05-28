@@ -1,27 +1,33 @@
-#pragma once
+﻿#pragma once
 #include "Enemy.h"
 #include "Define.h"
 #include "MainCharacter.h"
 #include <ctime>
 #include <cstdlib>
 
-#define FREEZE_TIME 190
-#define DEFAULT_AMPLITUDE 40
+#define EAGLE_VEC_X 1.5f
+#define EAGLE_HIGHTEST_POS_Y 198.0f
+#define EAGLE_LOWEST_POS_Y 230.0f
+#define EAGLE_FREEZE_TIME 200
 
 class Eagle : public Enemy
 {
 private:
-	Sprite* sprite;
-	D3DXVECTOR3 currentPosition;
-	D3DXVECTOR3 lastPosition;
+	Sprite *sprite;
+	
+	int count;	// count này dùng để xác định và tính toán các vị trí tiếp theo của đại bàng
+
+	bool canAppearAgain;
+
 	bool flyingToRight;
 	bool flyingToBottom;
-	int count;
 
-	int amplitude = DEFAULT_AMPLITUDE;
+	DWORD  lastReachTime;
 
-	bool canAppearAgain = true;
-	DWORD lastReachTime = GetTickCount();
+	D3DXVECTOR3 currentPos;
+	D3DXVECTOR3 lastPos;
+
+	bool CheckCurrentPosAndPos(D3DXVECTOR3 pos1, D3DXVECTOR3 pos2, float min, float max);
 
 public:
 	~Eagle();

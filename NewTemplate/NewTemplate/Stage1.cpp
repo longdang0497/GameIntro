@@ -116,10 +116,13 @@ void Stage1::LoadResource()
 
 
 
-	this->InitEnemies(PATH_POS_ENEMIES_MAP_1);
+	//this->InitEnemies(PATH_POS_ENEMIES_MAP_1);
 
-	 //Enemy* e = new Bat({ 100, 100,0 }, 0, 0, 0);
-	 //this->objects->push_back(e);
+	 /*Enemy* e = new Bat({ 100, 100,0 }, 0, 0, 0);
+	 this->objects->push_back(e);*/
+
+	Enemy* e = new Eagle({ 300, 100, 0.0 }, 1, 20, 50);
+	this->objects->push_back(e);
 
 	for (int i = 0; i < this->objects->size(); i++) {
 		Grid::GetInstance()->Add(this->objects->at(i));
