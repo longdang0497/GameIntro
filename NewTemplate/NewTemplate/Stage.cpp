@@ -111,14 +111,19 @@ void Stage::InitEnemies(LPCWSTR filePath)
 			//this->objects->push_back(new Eagle(pos, direction, limit1, limit2));
 			break;
 		case ZOMBIE_ID:
+		{
 			z = new Zombie(pos, direction, limit1, limit2);
 			this->objects->push_back(z);
 			S = z->GetSwords();
 			for (auto iter : *S)
+		
 			{
+			
 				this->objects->push_back(iter);
+		
 			}
 			break;
+		}
 		case GREEN_SOLDIER_ID:
 		{
 			fs >> stateSoldiers;

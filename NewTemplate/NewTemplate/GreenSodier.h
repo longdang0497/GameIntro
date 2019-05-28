@@ -7,7 +7,7 @@
 class GreenSodier : public Enemy
 {
 private:
-	Sprite* currentSprite;
+
 	vector<BazookaBullet*> *bullets;
 	int state;
 

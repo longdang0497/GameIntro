@@ -7,7 +7,7 @@ Ladder::Ladder(int left, int top, int right, int bottom)
 	this->SetVeclocity(0, 0);
 	objectHeight = bottom - top;
 	objectWidth = right - left;
-	this->isActive = false;
+	this->isActive = true;
 	this->SetObjectType(LADDER);
 }
 
