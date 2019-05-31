@@ -4,7 +4,7 @@ Boss* Boss::_instance = NULL;
 
 Boss::Boss()
 {
-	this->HP = 14;
+	this->HP = 16;
 	this->boss = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_BOSS);
 	this->bossJump = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_BOSS_JUMP);
 	this->bossExplode = new BossExplode();
@@ -168,7 +168,19 @@ void Boss::GetBoundingBox(float & l, float & t, float & r, float & b)
 
 void Boss::Destroy()
 {
-	this->bossExplode->SetActive(this->position);
+	D3DXVECTOR3 d(rand()%30, rand() % 30, 0);
+	this->bossExplode->SetActive(this->position + d);
+	if (!isDeath)
+	{
+		isDeath = true;
+		StartExplode = GetTickCount();
+	}
+
+		if (GetTickCount() - StartExplode > 3000)
+		{
+			End = true;
+		}
+	
 }
 
 void Boss::Hurt() {

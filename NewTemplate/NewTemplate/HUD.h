@@ -15,6 +15,7 @@ class HUD
 	LPDIRECT3DTEXTURE9 texBackground;
 	LPDIRECT3DTEXTURE9 ShurikenSprite;
 	LPDIRECT3DTEXTURE9 texHealth;
+	LPDIRECT3DTEXTURE9 texWeapon;
 	unordered_map<int, RECT> listHealth;
 
 	Text* text;

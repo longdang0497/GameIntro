@@ -100,7 +100,7 @@ void EndStage::Render()
 		
 	}
 
-	text->DrawString(IntToChar1(Score, 6), { 50,150 });
+	text->DrawString(IntToChar1(Score, 6), { 80,150 });
 
 }
 

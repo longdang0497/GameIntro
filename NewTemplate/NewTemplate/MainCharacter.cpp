@@ -39,7 +39,7 @@ MainCharacter::MainCharacter()
 
 	Energy = 50;
 
-	SubWeapon = SW_none;
+	SubWeapon = SW_shuriken;
 
 }
 
@@ -664,6 +664,11 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					Item* it = dynamic_cast<Item*>(iter);
 					switch (it->GetObjID())
 					{
+					case 0: //enery + 5
+					{
+						this->Energy += 5;
+						break;
+					}
 					case 1: //enery + 10
 					{
 						this->Energy += 10;
@@ -675,11 +680,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 						this->StartStopWatch = GetTickCount();
 						break;
 					}
-					case 0: //enery + 5
-					{
-						this->Energy += 5;
-						break;
-					}
+					
 					case 3:
 					{
 						SubWeapon = SW_shuriken;
@@ -689,12 +690,6 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					case 4: //Restore
 					{	
 						SubWeapon = SW_windmill;
-						break;
-					}
-					case 9://jump Scroll
-					{
-
-						SubWeapon = SW_jump_Scroll_Kill;
 						break;
 					}
 					case 5:
@@ -709,7 +704,12 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					}
 					case 8: //taoj vong lua
 					{
-						break; 
+						break;
+					}
+					case 9://jump Scroll
+					{
+						SubWeapon = SW_jump_Scroll_Kill;
+						break;
 					}
 					default:
 					{	
@@ -788,6 +788,11 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 				Item* it = dynamic_cast<Item*>(iter->obj);
 				switch (it->GetObjID())
 				{
+				case 0: //enery + 5
+				{
+					this->Energy += 5;
+					break;
+				}
 				case 1: //enery + 10
 				{
 					this->Energy += 10;
@@ -799,11 +804,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					this->StartStopWatch = GetTickCount();
 					break;
 				}
-				case 0: //enery + 5
-				{
-					this->Energy += 5;
-					break;
-				}
+			
 				case 3:
 				{
 					SubWeapon = SW_shuriken;

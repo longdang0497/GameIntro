@@ -8,6 +8,7 @@ HUD::HUD()
 	this->texBackground = Texture::GetInstance()->Get(ID_TEX_HUD_BG);
 	this->ShurikenSprite = Texture::GetInstance()->Get(ID_TEXTURE_MAIN);
 	this->texHealth = Texture::GetInstance()->Get(ID_TEX_HEALTH);
+	this->texWeapon = Texture::GetInstance()->Get(ID_TEXTURE_WEAPON);
 	text = Text::GetInstance();
 	for (int i = 0; i < 3; i++)
 		listHealth.insert(pair<int, RECT>(i, { 5 * i, 0, 5 * (i + 1), 8 }));
@@ -64,10 +65,20 @@ void HUD::Draw(D3DXVECTOR2 position)
 
 	Game::GetInstance()->Draw(150, 23, texBackground, 0, 0, 62, 48);
 
-	//if (MainCharacter::GetInstance()->GetHasShuriken() == true)
-	//{
-	//	Game::GetInstance()->Draw(151, 24, ShurikenSprite , 278,88, 295, 105);
-	//}
+	switch (MainCharacter::GetInstance()->GetSubWeapon())
+	{
+	case SW_jump_Scroll_Kill:
+		Game::GetInstance()->Draw(165, 30, texWeapon, 0, 41, 32, 73);
+		break;
+	case SW_windmill:
+		Game::GetInstance()->Draw(165, 30, texWeapon, 0, 0, 32, 32);
+		break;
+	case SW_shuriken:
+		Game::GetInstance()->Draw(165, 30, texWeapon, 0, 126, 32, 158);
+		break;
+	default:
+		break;
+	}
 
 
 	// player's health

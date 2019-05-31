@@ -29,6 +29,7 @@ ProcessGame::ProcessGame(HINSTANCE hInstance, int nShowCmd)
 	texture->Add(ID_TEXTURE_BLACK, PATH_TEXTURE_BLACK);
 	texture->Add(ID_RESULT, PATH_RESULT);
 	texture->Add(ID_TEXTURE_ITEM, PATH_TEXTURE_ITEM);
+	texture->Add(ID_TEXTURE_WEAPON, PATH_TEXTURE_WEAPON);
 
 	texture->Add(ID_TEXTURE_ENEMIES, PATH_TEXTURE_ENEMIES);
 	

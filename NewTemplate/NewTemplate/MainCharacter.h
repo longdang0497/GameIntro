@@ -124,5 +124,7 @@ public:
 	int GetEnergy() { return this->Energy; }
 	void SetEnergy(int a) { this->Energy = a; }
 
+
+	SecondaryWeapon GetSubWeapon() { return this->SubWeapon; }
 };
 

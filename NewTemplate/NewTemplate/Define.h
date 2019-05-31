@@ -65,6 +65,9 @@ enum GAME_STAGE {
 #define ID_TEXTURE_ITEM 3105
 #define PATH_TEXTURE_ITEM L"sprite\\item.png"
 
+#define ID_TEXTURE_WEAPON 3205
+#define PATH_TEXTURE_WEAPON L"sprite\\Weapon.png"
+
 
 #define ID_TEXTURE_BLACK 1090
 #define PATH_TEXTURE_BLACK L"sprite\\black.jpg"	//  <===== CÁC SPRITE BÊN DƯỚI SỬ DỤNG TEXTURE NÀY

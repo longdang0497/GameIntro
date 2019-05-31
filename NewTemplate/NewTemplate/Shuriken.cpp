@@ -31,7 +31,7 @@ void Shuriken::Update(float t, vector<Object*> *object)
 
 	currentSprite->UpdateSprite();
 
-	if (abs(this->position.x - MainCharacter::GetInstance()->GetPosition().x) >= 70)
+	if (abs(this->position.x - MainCharacter::GetInstance()->GetPosition().x) >= 100)
 	{
 		if (direction == LEFT)
 			direction = RIGHT;

@@ -74,7 +74,17 @@ void Stage3::LoadResource()
 
 void Stage3::Update(float deltaTime)
 {
+	if (Boss::GetInstance()->GetEnd())
+	{
+		if (!fadeOut)
+		{
+			alpha = 200;
+			fadeOut = true;
+		}
+	}
 	Stage::Update(deltaTime);
+
+	
 
 }
 
@@ -122,8 +132,23 @@ void Stage3::FadeOutEffect()
 	else
 	{
 		fadeOut = false;
-		MainCharacter::GetInstance()->SetPosition(50, 120);
-		Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
-		ProcessGame::GetInstance(NULL, 0)->SetGameStage(STAGE3);
+
+		if (MainCharacter::GetInstance()->GetRepawn())
+		{
+			MainCharacter::GetInstance()->LoseLive();
+			MainCharacter::GetInstance()->SetPosition(50, 80);
+			MainCharacter::GetInstance()->SetHP(16);
+			MainCharacter::GetInstance()->SetRepawn(false);
+		}
+		else if (MainCharacter::GetInstance()->GetLives() < 0)
+		{
+			Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
+			ProcessGame::GetInstance(NULL, 0)->SetGameStage(END_STAGE);
+		}
+		else
+		{
+			Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
+			ProcessGame::GetInstance(NULL, 0)->SetGameStage(END_STAGE);
+		}
 	}
 }

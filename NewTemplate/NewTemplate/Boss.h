@@ -21,6 +21,10 @@ private:
 	DWORD hurtTime;
 	int countToShoot;
 
+	bool isDeath = false;
+	bool End = false;
+	DWORD StartExplode;
+
 	vector<BossBullet*> *bullets;
 
 	static Boss* _instance;
@@ -40,5 +44,7 @@ public:
 
 	void Hurt();
 	DWORD GetHurtTime() { return this->hurtTime; }
+
+	bool GetEnd() { return this->End; }
 };
 
