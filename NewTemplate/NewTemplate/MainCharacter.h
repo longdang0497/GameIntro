@@ -9,6 +9,7 @@
 #include "Enemy.h"
 #include "Item.h"
 #include "HideObject.h"
+#include "Windmill.h"
 #include "Shuriken.h"
 
 
@@ -16,11 +17,19 @@
 #define DEFAULT_MAIN_WIDTH 32
 #define DEFAULT_MAIN_HEIGHT 32
 
+enum SecondaryWeapon {
+	SW_none,
+	SW_shuriken,
+	SW_windmill,
+	SW_jump_Scroll_Kill
+};
+
+
 class MainCharacter : public Object
 {
 private:
 
-	bool Demo = false;
+	bool Demo = true;
 
 	static MainCharacter* _instance;
 	MAIN_CHARACTER_STATE state;
@@ -49,18 +58,18 @@ private:
 
 	int alpha = 255; // dùng để vẽ nhân vật khi bị làm tổn thương
 
-	int PlusScore;
-	DWORD StartDoubleScore;
-
+	
 	bool StopWatch;
 	DWORD StartStopWatch;
-
-	bool HasShuriken;
-	DWORD StartHasShuriken;
 
 	int Lives;
 
 	bool IsRepawn;
+
+	int Energy;
+
+	SecondaryWeapon SubWeapon;
+	
 
 public:
 	MainCharacter();
@@ -93,7 +102,7 @@ public:
 	void GetBoundingBox(float &l, float &t, float &r, float &b);
 
 	int GetScore() { return this->score; }
-	void Score() { this->score += 10*PlusScore; }
+	void Score() { this->score += 10; }
 
 	bool GetIsInTheEndOfMap() {
 		return isInTheEndOfMap;
@@ -103,11 +112,6 @@ public:
 
 	bool IsStopWatch() { return this->StopWatch; }
 
-	bool GetHasShuriken() { return this->HasShuriken; }
-
-	int GetPlusScore() { return this->PlusScore; }
-
-
 	int GetLives() { return this->Lives; }
 
 	void LoseLive() { Lives--; }
@@ -116,5 +120,9 @@ public:
 	void SetRepawn(bool s) { this->IsRepawn = s; }
 
 	void SubtractScore(int a) { this->score = this->score - a; }
+
+	int GetEnergy() { return this->Energy; }
+	void SetEnergy(int a) { this->Energy = a; }
+
 };
 

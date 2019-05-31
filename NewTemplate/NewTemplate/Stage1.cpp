@@ -114,7 +114,7 @@ void Stage1::LoadResource()
 	fs2.close();
 
 
-	//this->InitEnemies(PATH_POS_ENEMIES_MAP_1);
+	this->InitEnemies(PATH_POS_ENEMIES_MAP_1);
 
 	 /*Enemy* e = new Bat({ 100, 100,0 }, 0, 0, 0);
 	 this->objects->push_back(e);*/

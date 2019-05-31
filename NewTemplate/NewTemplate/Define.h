@@ -62,6 +62,10 @@ enum GAME_STAGE {
 #define PATH_MAIN_JUMP_SCROLL_KILL L"sprite\\main\\MAIN_JUMP_SCROLL_KILL.txt"
 #define PATH_MAIN_HURT L"sprite\\main\\MAIN_HURT.txt"
 
+#define ID_TEXTURE_ITEM 3105
+#define PATH_TEXTURE_ITEM L"sprite\\item.png"
+
+
 #define ID_TEXTURE_BLACK 1090
 #define PATH_TEXTURE_BLACK L"sprite\\black.jpg"	//  <===== CÁC SPRITE BÊN DƯỚI SỬ DỤNG TEXTURE NÀY
 
@@ -69,6 +73,7 @@ enum GAME_STAGE {
 
 #define PATH_SANDGLASS L"sprite\\item\\SANDGLASS.txt"
 #define PATH_SHURIKEN L"sprite\\item\\BIG_SHURIKEN.txt"
+#define PATH_WINDMILL L"sprite\\item\\WIND_MILL.txt"
 #define PATH_BLUE_POCKET L"sprite\\item\\BLUE_POCKET.txt"
 #define PATH_ORANGE_POCKET L"sprite\\item\\ORANGE_POCKET.txt"
 #define PATH_BLUE_DART L"sprite\\item\\ITEM_BLUE_DART.txt"
@@ -198,7 +203,8 @@ enum MAIN_CHARACTER_STATE {
 	STATE_JUMP_ATTACK_TO,
 	STATE_ON_LADDER,
 	STATE_CLIMBING,
-	STATE_FALL
+	STATE_FALL,
+	STATE_JUMP_SCROLL_HIT
 };
 
 // ========== ENEMIES STATE ==========

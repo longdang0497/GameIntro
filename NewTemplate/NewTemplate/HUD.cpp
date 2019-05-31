@@ -44,26 +44,30 @@ void HUD::Draw(D3DXVECTOR2 position)
 	text->DrawString(IntToChar(MainCharacter::GetInstance()->GetScore(), 6), { 49, 3 }); //49
 
 	// time
-	text->DrawString("TIME", { 150,3 });
-	text->DrawString(IntToChar(time, 6), { 183, 3 });
+	text->DrawString("TIME-", { 100,3 });
+	text->DrawString(IntToChar(time, 3), { 140, 3 });
 
 	// state
-	text->DrawString("STAGE - ", { 1,23 });
-	text->DrawString("03", { 50, 23 });
+	text->DrawString("STAGE-", { 167,3 });
+	text->DrawString("03", { 215, 3 });
 
 
 	// state
-	text->DrawString("P -", { 97,23 });
+	text->DrawString("P -", { 1,23 });
 	//text->DrawString("02", {122, 23 });
-	text->DrawString(IntToChar(MainCharacter::GetInstance()->GetLives(), 2), { 121, 23 });
+	text->DrawString(IntToChar(MainCharacter::GetInstance()->GetLives(), 2), { 25, 23 });
+
+	text->DrawString("ENERGY-", { 62,23 });
+	//text->DrawString("02", {122, 23 });
+	text->DrawString(IntToChar(MainCharacter::GetInstance()->GetEnergy(), 3), { 118, 23 });
 
 
 	Game::GetInstance()->Draw(150, 23, texBackground, 0, 0, 62, 48);
 
-	if (MainCharacter::GetInstance()->GetHasShuriken() == true)
-	{
-		Game::GetInstance()->Draw(151, 24, ShurikenSprite , 278,88, 295, 105);
-	}
+	//if (MainCharacter::GetInstance()->GetHasShuriken() == true)
+	//{
+	//	Game::GetInstance()->Draw(151, 24, ShurikenSprite , 278,88, 295, 105);
+	//}
 
 
 	// player's health

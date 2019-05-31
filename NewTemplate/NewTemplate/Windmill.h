@@ -2,28 +2,29 @@
 #include "Object.h"
 #include "Explode.h"
 #include "MainCharacter.h"
+#include "Camera.h"
 
-class Shuriken: public Object
+class Windmill: public Object
 {
 private:
 	//bool isActive;
 
-	Sprite* ShurikenSprite;
+	Sprite*WindmillSprite;
 
-	static Shuriken* _instance;
+	static Windmill* _instance;
 
 	Explode *explode;
 
-	int NumOfChangeDirection;
+	int LimitX1, LimitX2, Start, LimitY1, LimitY2, NumOfChangeDirection;
 	int nY;
 
 	DWORD StartTime;
 public:
-	Shuriken();
-	~Shuriken();
+	Windmill();
+	~Windmill();
 
-	static Shuriken* GetInstance() {
-		if (_instance == NULL) _instance = new Shuriken();
+	static Windmill* GetInstance() {
+		if (_instance == NULL) _instance = new Windmill();
 		return _instance;
 	}
 
@@ -39,7 +40,5 @@ public:
 	void checkCollisioWithEnemy(vector<Object*> *coObjects);
 
 	void Reset();
-
-	
 };
 

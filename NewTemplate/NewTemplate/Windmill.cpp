@@ -1,13 +1,14 @@
-#include "Shuriken.h"
+#include "Windmill.h"
 
-Shuriken* Shuriken::_instance = NULL;
 
-Shuriken::Shuriken()
+Windmill* Windmill::_instance = NULL;
+
+Windmill::Windmill()
 {
 	isActive = false;
 	direction = RIGHT;
-	ShurikenSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ITEM), PATH_SHURIKEN);
-	currentSprite = ShurikenSprite;
+	WindmillSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ITEM), PATH_WINDMILL);
+	currentSprite = WindmillSprite;
 	this->veclocity.x = 0;
 	this->veclocity.y = 0;
 	this->explode = new Explode();
@@ -15,40 +16,34 @@ Shuriken::Shuriken()
 }
 
 
-Shuriken::~Shuriken()
+Windmill::~Windmill()
 {
 
 }
 
-void Shuriken::Update(float t, vector<Object*> *object)
+void Windmill::Update(float t, vector<Object*> *object)
 {
 	this->explode->Update(deltaTime, object);
 	//position = MainCharacter::GetInstance()->GetPosition();
 
 
-	if (!isActive) 
+	if (!isActive)
 		return;
 
 	currentSprite->UpdateSprite();
 
-	if (abs(this->position.x - MainCharacter::GetInstance()->GetPosition().x) >= 70)
+	if (this->position.x < Camera::GetInstance()->getPosition().x || this->position.x > Camera::GetInstance()->getPosition().x + 276)
 	{
-		if (direction == LEFT)
-			direction = RIGHT;
-		else direction = LEFT;
-		NumOfChangeDirection += 1;
+		this->isActive = false;
 	}
 	position.x += 5 * direction;
 
-
-	if (this->NumOfChangeDirection >= 2 && abs(this->position.x - MainCharacter::GetInstance()->GetPosition().x) <= 10)
-		this->isActive = false;
 	//Xet  va cham
 	for (auto iter : *object)
 	{
 		switch (iter->GetObjectType())
 		{
-		
+
 		case GREEN_SOLDIER:
 
 		case JAGUAR:
@@ -109,7 +104,7 @@ void Shuriken::Update(float t, vector<Object*> *object)
 
 }
 
-void Shuriken::Render()
+void Windmill::Render()
 {
 	if (!isActive)
 		return;
@@ -119,16 +114,16 @@ void Shuriken::Render()
 	currentSprite->DrawSprite(pos, true);
 }
 
-void Shuriken::HandleCollision(vector<Object*>* objects)
+void Windmill::HandleCollision(vector<Object*>* objects)
 {
 }
 
-void Shuriken::CalCulatePosition()
+void Windmill::CalCulatePosition()
 {
 
 }
 
-void Shuriken::GetBoundingBox(float &l, float &t, float &r, float &b)
+void Windmill::GetBoundingBox(float &l, float &t, float &r, float &b)
 {
 	if (isActive)
 	{
@@ -143,12 +138,12 @@ void Shuriken::GetBoundingBox(float &l, float &t, float &r, float &b)
 	}
 }
 
-void Shuriken::checkCollisioWithEnemy(vector<Object*> *coObjects)
+void Windmill::checkCollisioWithEnemy(vector<Object*> *coObjects)
 {
 
 }
 
-void Shuriken::Reset()
+void Windmill::Reset()
 {
-	this->NumOfChangeDirection = 0;
+
 }

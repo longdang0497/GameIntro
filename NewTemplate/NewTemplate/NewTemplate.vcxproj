@@ -169,6 +169,7 @@
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="trace.cpp" />
+    <ClCompile Include="Windmill.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="Zombie.cpp" />
     <ClCompile Include="ZombieSword.cpp" />
@@ -218,6 +219,7 @@
     <ClInclude Include="Text.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="trace.h" />
+    <ClInclude Include="Windmill.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="Zombie.h" />
     <ClInclude Include="ZombieSword.h" />

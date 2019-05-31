@@ -31,17 +31,15 @@ MainCharacter::MainCharacter()
 	this->allowJump = false;
 
 	StartStopWatch = GetTickCount();
-	StartHasShuriken = GetTickCount();
-
-	HasShuriken = false;
-
-	PlusScore = 1;
 
 	Lives = 2;
 
-	this->StartDoubleScore = GetTickCount();
 
 	IsRepawn = false;
+
+	Energy = 50;
+
+	SubWeapon = SW_none;
 
 }
 
@@ -105,7 +103,10 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 		SetVx(0);
 		currentSprite = hitSprite;
 		break;
-
+	case STATE_JUMP_SCROLL_HIT:
+		SetVeclocity(0, -MAIN_JUMP_SPEED_Y);
+		currentSprite = jumpHitSprite;
+		break;
 	case STATE_SIT_ATTACK:
 		Sword::GetInstance()->setIsActive(true);
 		Sword::GetInstance()->SetDirection(direction);
@@ -186,19 +187,10 @@ void MainCharacter::Update(float t, vector<Object*> * object)
 	if (isInTheEndOfMap)
 		return;
 
-	if (GetTickCount() - StartDoubleScore >= 6000)
-	{
-		PlusScore = 1;
-	}
 
 	if (StopWatch && GetTickCount() - StartStopWatch >= 6000)
 	{
 		StopWatch = false;
-	}
-
-	if (HasShuriken && GetTickCount() - StartHasShuriken >= 6000)
-	{
-		HasShuriken = false;
 	}
 
 
@@ -214,6 +206,8 @@ void MainCharacter::Update(float t, vector<Object*> * object)
 	Sword::GetInstance()->Update(t, object);
 
 	Shuriken::GetInstance()->Update(t, object);
+
+	Windmill::GetInstance()->Update(t, object);
 
 	if (GetState() == STATE_ATTACK)
 	{
@@ -291,6 +285,7 @@ void MainCharacter::Render()
 
 	Sword::GetInstance()->Render();
 	Shuriken::GetInstance()->Render();
+	Windmill::GetInstance()->Render();
 
 }
 
@@ -323,14 +318,31 @@ void MainCharacter::KeyBoardHandle()
 	}
 	else if (isOnGround)
 	{
-		if (HasShuriken && k->keyChangeGameMode && Shuriken::GetInstance()->GetIsActive() == false)
+		if (k->keyChangeGameMode && Energy > 0)
 		{
-
-			Shuriken::GetInstance()->SetPosition(this->position.x, this->position.y);
-			Shuriken::GetInstance()->SetDirection(this->direction);
-			Shuriken::GetInstance()->Reset();
-			Shuriken::GetInstance()->SetIsActive(true);
-
+			if (SubWeapon == SW_jump_Scroll_Kill && allowJump && Energy>=5)
+			{
+				allowJump = false;
+				Energy -= 5;
+				SetState(STATE_JUMP_SCROLL_HIT);
+				isOnGround = false;
+			}
+			else if (SubWeapon == SW_shuriken && Shuriken::GetInstance()->GetIsActive() == false && Energy >= 5)
+			{
+				Shuriken::GetInstance()->SetPosition(this->position.x, this->position.y);
+				Shuriken::GetInstance()->SetDirection(this->direction);
+				Shuriken::GetInstance()->Reset();
+				Shuriken::GetInstance()->SetIsActive(true);
+				Energy -= 5;
+			}
+			else if (SubWeapon == SW_windmill && Windmill::GetInstance()->GetIsActive() == false && Energy >= 3)
+			{
+				Windmill::GetInstance()->SetPosition(this->position.x, this->position.y);
+				Windmill::GetInstance()->SetDirection(this->direction);
+				Windmill::GetInstance()->Reset();
+				Windmill::GetInstance()->SetIsActive(true);
+				Energy -= 3;
+			}
 		}
 
 		if (k->keyJump && allowJump) //(GetState() != STATE_JUMP || GetState() != STATE_JUMP_TO))
@@ -405,7 +417,7 @@ void MainCharacter::KeyBoardHandle()
 				SetState(STATE_JUMP_ATTACK_TO);
 		}
 
-		if ((GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_JUMP_ATTACK))
+		if ((GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_JUMP_ATTACK || GetState() == STATE_JUMP_SCROLL_HIT))
 		{
 			/*direction = LEFT;
 			if (GetState() == STATE_JUMP)
@@ -417,7 +429,7 @@ void MainCharacter::KeyBoardHandle()
 			if (k->keyLeft)
 			{
 				direction = LEFT;
-				if (GetState() == STATE_JUMP)
+				if (GetState() == STATE_JUMP || GetState()==STATE_JUMP_SCROLL_HIT)
 					SetState(STATE_JUMP_TO);
 				else if (GetState() == STATE_JUMP_ATTACK)
 					SetState(STATE_JUMP_ATTACK_TO);
@@ -429,7 +441,7 @@ void MainCharacter::KeyBoardHandle()
 			else if (k->keyRight)
 			{
 				direction = RIGHT;
-				if (GetState() == STATE_JUMP)
+				if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_SCROLL_HIT)
 					SetState(STATE_JUMP_TO);
 				else if (GetState() == STATE_JUMP_ATTACK)
 					SetState(STATE_JUMP_ATTACK_TO);
@@ -540,7 +552,7 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
 							startStanding = GetTickCount();
 							SetState(STATE_IDLE);
 						}
-						else if (GetState() == STATE_JUMP_ATTACK)
+						else if (GetState() == STATE_JUMP_ATTACK || GetState() == STATE_JUMP_SCROLL_HIT)
 						{
 							startStanding = GetTickCount();
 							SetState(STATE_IDLE);
@@ -591,7 +603,17 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					{
 						{
 							if (!StopWatch)
-								SetState(STATE_HURT);
+							{
+								if (GetState() == STATE_JUMP_SCROLL_HIT)
+								{
+									iter->SetHP(iter->GetHP() - 1);
+								}
+								else
+								{
+									if(Demo)
+										SetState(STATE_HURT);
+								}
+							}
 						}
 
 						break;
@@ -642,30 +664,37 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					Item* it = dynamic_cast<Item*>(iter);
 					switch (it->GetObjID())
 					{
+					case 1: //enery + 10
+					{
+						this->Energy += 10;
+						break;
+					}
 					case 2:
 					{
 						this->StopWatch = true;
 						this->StartStopWatch = GetTickCount();
 						break;
 					}
-					case 1: //double score in time
+					case 0: //enery + 5
 					{
-						PlusScore = 2;
+						this->Energy += 5;
 						break;
 					}
-					case 0: //bonus score
+					case 3:
 					{
-						this->score += 100;
+						SubWeapon = SW_shuriken;
+						break;
 						break;
 					}
 					case 4: //Restore
-					{	this->HP = 16;
-					break;
+					{	
+						SubWeapon = SW_windmill;
+						break;
 					}
-					case 3://has shuriken
+					case 9://jump Scroll
 					{
-						this->HasShuriken = true;
-						this->StartHasShuriken = GetTickCount();
+
+						SubWeapon = SW_jump_Scroll_Kill;
 						break;
 					}
 					case 5:
@@ -720,8 +749,18 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			case ZOMBIE_SWORD:
 			{	
 				if (!StopWatch)
-					if(Demo)
-						SetState(STATE_HURT);
+				{
+					if (GetState() == STATE_JUMP_SCROLL_HIT)
+					{
+						iter->obj->SetHP(iter->obj->GetHP() - 1);
+					}
+					else
+					{
+						if(Demo)
+							SetState(STATE_HURT);
+					}
+				}
+				
 			break;
 			}
 			case HIDE_OBJECT:
@@ -749,31 +788,53 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 				Item* it = dynamic_cast<Item*>(iter->obj);
 				switch (it->GetObjID())
 				{
+				case 1: //enery + 10
+				{
+					this->Energy += 10;
+					break;
+				}
 				case 2:
+				{
 					this->StopWatch = true;
 					this->StartStopWatch = GetTickCount();
 					break;
-				case 1: //double score in time
-					PlusScore = 2;
+				}
+				case 0: //enery + 5
+				{
+					this->Energy += 5;
 					break;
-				case 0: //bonus score
-					this->score += 100;
+				}
+				case 3:
+				{
+					SubWeapon = SW_shuriken;
 					break;
+					break;
+				}
 				case 4: //Restore
-					this->HP = 16;
+				{
+					SubWeapon = SW_windmill;
 					break;
-				case 3://has shuriken
-					this->HasShuriken = true;
-					this->StartHasShuriken = GetTickCount();
+				}
+				case 9://jump Scroll
+				{
+
+					SubWeapon = SW_jump_Scroll_Kill;
 					break;
+				}
 				case 5:
+				{
 					this->score += 500;
 					break;
+				}
 				case 6:
+				{
 					this->score += 1000;
 					break;
+				}
 				case 8: //taoj vong lua
+				{
 					break;
+				}
 				default:
 					break;
 				}

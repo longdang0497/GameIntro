@@ -204,6 +204,9 @@
     <ClCompile Include="Cell.cpp">
       <Filter>Source Files\Grid</Filter>
     </ClCompile>
+    <ClCompile Include="Windmill.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="trace.h">
@@ -346,6 +349,9 @@
     </ClInclude>
     <ClInclude Include="Cell.h">
       <Filter>Header Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Windmill.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
