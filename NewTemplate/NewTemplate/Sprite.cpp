@@ -1,7 +1,7 @@
 ﻿#include "Sprite.h"
 
 
-Sprite::Sprite(LPDIRECT3DTEXTURE9 texture, LPCWSTR filePath)
+Sprite::Sprite(LPDIRECT3DTEXTURE9 texture, LPCWSTR filePath, int Rate)
 {
 	if (texture == NULL) {
 		return;
@@ -14,6 +14,8 @@ Sprite::Sprite(LPDIRECT3DTEXTURE9 texture, LPCWSTR filePath)
 
 	this->SetSpritePositions(filePath);
 	isDone = false;
+
+	FrameRate = Rate;
 }
 
 Sprite::~Sprite()
@@ -71,7 +73,7 @@ void Sprite::UpdateSprite()
 	else
 	{
 		DWORD t =this->GetTime();
-		if (now - lastFrameTime > 100)
+		if (now - lastFrameTime > FrameRate)
 		{
 			lastFrameTime = now;
 			if (this->index == this->spritePositions->size()-1)

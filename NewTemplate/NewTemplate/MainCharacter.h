@@ -13,6 +13,7 @@
 #include "Shuriken.h"
 
 
+#define MAIN_RATE 50
 
 #define DEFAULT_MAIN_WIDTH 32
 #define DEFAULT_MAIN_HEIGHT 32

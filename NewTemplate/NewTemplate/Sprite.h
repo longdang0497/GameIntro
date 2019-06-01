@@ -29,8 +29,10 @@ private:
 
 	void SetSpritePositions(LPCWSTR filePath);
 
+	int FrameRate;
+
 public:
-	Sprite(LPDIRECT3DTEXTURE9, LPCWSTR); // Phương thức mới dùng để khỏi tạo sprite và dựa hoàn toàn vào file
+	Sprite(LPDIRECT3DTEXTURE9, LPCWSTR,int Rate = 100); // Phương thức mới dùng để khỏi tạo sprite và dựa hoàn toàn vào file
 	~Sprite();
 
 	void UpdateSprite();
