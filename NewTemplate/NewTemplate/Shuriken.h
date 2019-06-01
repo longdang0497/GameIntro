@@ -15,9 +15,8 @@ private:
 	Explode *explode;
 
 	int NumOfChangeDirection;
-	int nY;
 
-	DWORD StartTime;
+	DWORD AllowChangeDirection;
 public:
 	Shuriken();
 	~Shuriken();

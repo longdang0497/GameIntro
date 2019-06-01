@@ -37,7 +37,7 @@ MainCharacter::MainCharacter()
 
 	IsRepawn = false;
 
-	Energy = 50;
+	Energy = 100;
 
 	SubWeapon = SW_shuriken;
 
@@ -337,7 +337,7 @@ void MainCharacter::KeyBoardHandle()
 			}
 			else if (SubWeapon == SW_windmill && Windmill::GetInstance()->GetIsActive() == false && Energy >= 3)
 			{
-				Windmill::GetInstance()->SetPosition(this->position.x, this->position.y);
+				Windmill::GetInstance()->SetPosition(this->position.x, this->position.y+5);
 				Windmill::GetInstance()->SetDirection(this->direction);
 				Windmill::GetInstance()->Reset();
 				Windmill::GetInstance()->SetIsActive(true);
@@ -345,7 +345,7 @@ void MainCharacter::KeyBoardHandle()
 			}
 		}
 
-		if (k->keyJump && allowJump) //(GetState() != STATE_JUMP || GetState() != STATE_JUMP_TO))
+		else if (k->keyJump && allowJump) //(GetState() != STATE_JUMP || GetState() != STATE_JUMP_TO))
 		{
 			allowJump = false;
 			SetState(STATE_JUMP);
@@ -592,6 +592,8 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			case SOLDIER:
 			case BOSS:
 			case ZOMBIE:
+			case BAT:
+			case EAGLE:
 			case ZOMBIE_SWORD:
 			{
 				if (Demo)
@@ -660,61 +662,76 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 				iter->GetBoundingBox(bl, bt, br, bb);
 				if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
 				{
-					iter->SetActive(false);
-					Item* it = dynamic_cast<Item*>(iter);
-					switch (it->GetObjID())
+					if (iter->GetActive())
 					{
-					case 0: //enery + 5
-					{
-						this->Energy += 5;
-						break;
-					}
-					case 1: //enery + 10
-					{
-						this->Energy += 10;
-						break;
-					}
-					case 2:
-					{
-						this->StopWatch = true;
-						this->StartStopWatch = GetTickCount();
-						break;
-					}
-					
-					case 3:
-					{
-						SubWeapon = SW_shuriken;
-						break;
-						break;
-					}
-					case 4: //Restore
-					{	
-						SubWeapon = SW_windmill;
-						break;
-					}
-					case 5:
-					{
-						this->score += 500;
-						break;
-					}
-					case 6:
-					{
-						this->score += 1000;
-						break;
-					}
-					case 8: //taoj vong lua
-					{
-						break;
-					}
-					case 9://jump Scroll
-					{
-						SubWeapon = SW_jump_Scroll_Kill;
-						break;
-					}
-					default:
-					{	
-						break;
-					}
+						iter->SetActive(false);
+						Item* it = dynamic_cast<Item*>(iter);
+						switch (it->GetObjID())
+						{
+						case 0: //enery + 5
+						{
+							this->Energy += it->GetValue();
+							it->SetValue(0);
+							it->SetActive(false);
+							break;
+						}
+						case 1: //enery + 10
+						{
+							this->Energy += it->GetValue();
+							it->SetValue(0);
+							it->SetActive(false);
+							break;
+						}
+						case 2:
+						{
+							this->StopWatch = true;
+							this->StartStopWatch = GetTickCount();
+							break;
+						}
+
+						case 3:
+						{
+							SubWeapon = SW_windmill;
+							break;
+							break;
+						}
+						case 4: //Restore
+						{
+							SubWeapon = SW_shuriken;
+							break;
+						}
+						case 5:
+						{
+							this->score += 500;
+							break;
+						}
+						case 6:
+						{
+							this->score += 1000;
+							break;
+						}
+						case 8: //taoj vong lua
+						{
+							break;
+						}
+						case 11://jump Scroll
+						{
+							SubWeapon = SW_jump_Scroll_Kill;
+							break;
+						}
+						case 9://jump Scroll
+						{
+							this->HP += 16;
+							if (this->HP > 16)
+								this->HP = 16;
+
+							break;
+						}
+						default:
+						{
+							break;
+						}
+						}
 					}
 				}
 				break;
@@ -743,6 +760,8 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			case JAGUAR:
 			case SOLDIER:
 			case BOSS:
+			case BAT:
+			case EAGLE:
 			case BOSS_BULLET:
 			//case BUTTERFLY:
 			case ZOMBIE:
@@ -784,60 +803,70 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			}
 			case ITEM:
 			{
-				iter->obj->SetActive(false);
-				Item* it = dynamic_cast<Item*>(iter->obj);
-				switch (it->GetObjID())
+				if (iter->obj->GetActive())
 				{
-				case 0: //enery + 5
-				{
-					this->Energy += 5;
-					break;
-				}
-				case 1: //enery + 10
-				{
-					this->Energy += 10;
-					break;
-				}
-				case 2:
-				{
-					this->StopWatch = true;
-					this->StartStopWatch = GetTickCount();
-					break;
-				}
-			
-				case 3:
-				{
-					SubWeapon = SW_shuriken;
-					break;
-					break;
-				}
-				case 4: //Restore
-				{
-					SubWeapon = SW_windmill;
-					break;
-				}
-				case 9://jump Scroll
-				{
+					iter->obj->SetActive(false);
+					Item* it = dynamic_cast<Item*>(iter->obj);
+					switch (it->GetObjID())
+					{
+					case 0: //enery + 5
+					{
+						this->Energy += it->GetValue();
+						it->SetValue(0);
+						it->SetActive(false);
+						break;
+					}
+					case 1: //enery + 10
+					{
+						this->Energy += it->GetValue();
+						it->SetValue(0);
+						it->SetActive(false);
+						break;
+					}
+					case 2:
+					{
+						this->StopWatch = true;
+						this->StartStopWatch = GetTickCount();
+						break;
+					}
 
-					SubWeapon = SW_jump_Scroll_Kill;
-					break;
-				}
-				case 5:
-				{
-					this->score += 500;
-					break;
-				}
-				case 6:
-				{
-					this->score += 1000;
-					break;
-				}
-				case 8: //taoj vong lua
-				{
-					break;
-				}
-				default:
-					break;
+					case 3:
+					{
+						SubWeapon =  SW_windmill;
+						break;
+						break;
+					}
+					case 4: //Restore
+					{
+						SubWeapon = SW_shuriken;
+						break;
+					}
+					case 9://jump Scroll
+					{
+						this->HP += 16;
+						if (this->HP > 16)
+							this->HP = 16;
+						
+						break;
+					}
+					case 5:
+					{
+						this->score += 500;
+						break;
+					}
+					case 6:
+					{
+						this->score += 1000;
+						break;
+					}
+					case 11: 
+					{
+						SubWeapon = SW_jump_Scroll_Kill;
+						break;
+					}
+					default:
+						break;
+					}
 				}
 				break;
 			}

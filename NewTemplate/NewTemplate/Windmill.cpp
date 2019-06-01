@@ -51,6 +51,8 @@ void Windmill::Update(float t, vector<Object*> *object)
 
 		case BUTTERFLY:
 		case CROW:
+		case BAT:
+		case EAGLE:
 		case ZOMBIE:
 		case ZOMBIE_SWORD:
 

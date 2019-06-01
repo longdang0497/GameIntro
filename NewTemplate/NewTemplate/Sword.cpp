@@ -43,7 +43,8 @@ void Sword::Update(float t, vector<Object*> *object)
 		
 		case JAGUAR:
 		case SOLDIER: 
-		
+		case BAT:
+		case EAGLE:
 		case BUTTERFLY: 
 		case CROW:
 		case ZOMBIE:
@@ -96,29 +97,35 @@ void Sword::Update(float t, vector<Object*> *object)
 		}
 	}
 
-	//// sweptAABB colision
-	//vector<CollisionEvent*> *coEvents = new vector<CollisionEvent*>();
-	//coEvents->clear();
+	// sweptAABB colision
+	vector<CollisionEvent*> *coEvents = new vector<CollisionEvent*>();
+	coEvents->clear();
 
-	//CalcPotentialCollisions(object, coEvents);
+	CalcPotentialCollisions(object, coEvents);
 
-	//for (auto iter : *coEvents)
-	//{
-	//	switch (iter->obj->GetObjectType())
-	//	{
-	//	case JAGUAR:
-	//	case SOLDIER:
-	//	case BUTTERFLY:
-	//	case ZOMBIE:
-	//		iter->obj->SetHP(0);
-	//		MainCharacter::GetInstance()->Score();
-	//		break;
-	//	default:
-	//		break;
-	//	}
-	//}
-	//for (auto iter : *coEvents) delete iter;
-	//coEvents->clear();
+	for (auto iter : *coEvents)
+	{
+		switch (iter->obj->GetObjectType())
+		{
+		case GREEN_SOLDIER:
+		case JAGUAR:
+		case SOLDIER:
+		case BUTTERFLY:
+		case CROW:
+		case ZOMBIE:
+		case ZOMBIE_SWORD:
+		{	
+			iter->obj->SetHP(0);
+			MainCharacter::GetInstance()->Score();
+			this->explode->SetActive(D3DXVECTOR3(this->position.x, this->position.y, 0));
+			break;
+		}
+		default:
+			break;
+		}
+	}
+	for (auto iter : *coEvents) delete iter;
+	coEvents->clear();
 
 
 

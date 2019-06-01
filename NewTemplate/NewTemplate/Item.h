@@ -24,6 +24,9 @@ protected:
 	Sprite * bigShuriken;
 	Sprite * itemFire;
 	Sprite * sandglass;
+	Sprite * jumpscroll;
+
+	int value = 0;
 public:
 	Item();
 	Item(D3DXVECTOR3 pos, int objectID);
@@ -51,6 +54,9 @@ public:
 	void HandleCollision(vector<Object*> *objects);
 	void GetBoundingBox(float &l, float &t, float &r, float &b);
 	void Destroy();
+
+	int GetValue() { return this->value; }
+	void SetValue(int a) { this->value = a; }
 };
 
 

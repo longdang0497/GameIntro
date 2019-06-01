@@ -31,6 +31,7 @@ void Texture::Add(int id, LPCWSTR filePath)
 		D3DX_DEFAULT,
 		D3DX_DEFAULT,
 		TRANSPARENT_COLOR,
+		
 		&info,
 		NULL,
 		&texture);								// Created texture pointer

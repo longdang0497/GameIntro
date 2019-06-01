@@ -31,12 +31,13 @@ void Shuriken::Update(float t, vector<Object*> *object)
 
 	currentSprite->UpdateSprite();
 
-	if (abs(this->position.x - MainCharacter::GetInstance()->GetPosition().x) >= 100)
+	if (abs(this->position.x - MainCharacter::GetInstance()->GetPosition().x) >= 100 && (GetTickCount() - AllowChangeDirection >= 30))
 	{
 		if (direction == LEFT)
 			direction = RIGHT;
 		else direction = LEFT;
 		NumOfChangeDirection += 1;
+		AllowChangeDirection = GetTickCount();
 	}
 	position.x += 5 * direction;
 
@@ -57,6 +58,8 @@ void Shuriken::Update(float t, vector<Object*> *object)
 		case BUTTERFLY:
 		case CROW:
 		case ZOMBIE:
+		case BAT:
+		case EAGLE:
 		case ZOMBIE_SWORD:
 
 		{
@@ -151,4 +154,5 @@ void Shuriken::checkCollisioWithEnemy(vector<Object*> *coObjects)
 void Shuriken::Reset()
 {
 	this->NumOfChangeDirection = 0;
+	AllowChangeDirection = GetTickCount();
 }

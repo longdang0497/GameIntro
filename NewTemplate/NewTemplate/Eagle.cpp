@@ -32,6 +32,9 @@ void Eagle::Update(float deltaTime, std::vector<Object*>* objects)
 	if (this->HP <= 0)
 		return;
 
+	if (MainCharacter::GetInstance()->IsStopWatch())
+		return;
+
 	this->sprite->UpdateSprite();
 
 	// Xét theo camera bên phải

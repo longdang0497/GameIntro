@@ -92,9 +92,11 @@ void Item::InitItemSprite()
 {
 	switch (this->objectID) {
 	case BLUE_R_ID: // SPIRITUAL STRENGTH 5 POINTS
+		this->value = 5;
 		this->blueR = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_BLUE_R);
 		break;
 	case ORANGE_R_ID: // SPIRITUAL STRENGTH 10 POINTS
+		this->value = 10;
 		this->orangeR = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_ORANGE_R);
 		break;
 	case BLUE_DART_ID: // THROWING STAR
@@ -125,6 +127,9 @@ void Item::InitItemSprite()
 		break;
 	case SANDGLASS_ID: // TIME FREEZE
 		this->sandglass = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_SANDGLASS);
+		break;
+	case JUMP_SCROLL: // ALLOW JUMP_SCROLL
+		this->jumpscroll = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_JUMP_SCROLL);
 		break;
 	}
 }
@@ -182,6 +187,9 @@ void Item::Update(float deltaTime, std::vector<Object*>* objects)
 			break;
 		case SANDGLASS_ID: // TIME FREEZE
 			this->sandglass->UpdateSprite();
+			break;
+		case JUMP_SCROLL: // TIME FREEZE
+			this->jumpscroll->UpdateSprite();
 			break;
 		}				
 
@@ -253,6 +261,9 @@ void Item::Render()
 			break;
 		case SANDGLASS_ID: // TIME FREEZE
 			this->sandglass->DrawSprite(pos, false, alpha);
+			break;
+		case JUMP_SCROLL: // TIME FREEZE
+			this->jumpscroll->DrawSprite(pos, false, alpha);
 			break;
 		}
 	}
@@ -347,6 +358,10 @@ void Item::GetBoundingBox(float & l, float & t, float & r, float & b)
 		case SANDGLASS_ID: // TIME FREEZE
 			r = l + sandglass->GetWidth();
 			b = t + sandglass->GetHeight();
+			break;
+		case JUMP_SCROLL: // TIME FREEZE
+			r = l + jumpscroll->GetWidth();
+			b = t + jumpscroll->GetHeight();
 			break;
 		}
 	}
