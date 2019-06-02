@@ -14,6 +14,7 @@ Game::~Game()
 void Game::Init(HWND hWnd)
 {
 	this->gameStage = Intro;
+	this->currentId = 1;
 
 	LPDIRECT3D9 d3d = Direct3DCreate9(D3D_SDK_VERSION);
 	this->hWnd = hWnd;

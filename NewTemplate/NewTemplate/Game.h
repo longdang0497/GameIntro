@@ -35,7 +35,7 @@ private:
 	DIDEVICEOBJECTDATA keyEvents[KEYBOARD_BUFFER_SIZE];		// Buffered keyboard data
 
 	Input * keyHandler;
-	
+	int currentId;
 
 public:
 	void Init(HWND hWnd);
@@ -61,6 +61,9 @@ public:
 	};
 
 	HWND GetHWnd() { return this->hWnd; }
+
+	int GetCurrentId() { return this->currentId; }
+	void IncreaseId() { this->currentId++; }
 
 	~Game();
 
