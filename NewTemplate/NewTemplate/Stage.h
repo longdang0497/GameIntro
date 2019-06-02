@@ -28,12 +28,13 @@
 #include "Item.h"
 #include "Crow.h"
 #include "BazookaBullet.h"
+#include "Sound.h"
 
 class Stage
 {
 protected:
 	vector<Object*> *objects;
-
+	HWND window_handler;
 	Map* map;
 	//Item * item;
 
@@ -44,7 +45,6 @@ protected:
 
 	DWORD TimeToFade;
 	int alpha = 255;
-
 public:
 	Stage();
 	~Stage();

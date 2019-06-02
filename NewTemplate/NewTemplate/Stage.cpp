@@ -5,6 +5,8 @@ Stage::Stage()
 	this->objects = new vector<Object*>();
 
 	HUD::GetInstance();
+	GameSound::GetInstance();
+	window_handler = Game::GetInstance()->GetHWnd();
 }
 
 Stage::~Stage()

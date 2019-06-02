@@ -83,6 +83,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>false</ConformanceMode>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>d3dx9.lib;d3d9.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;d3dcompiler.lib;avrt.lib;winmm.lib;dinput8.lib;dxguid.lib;comctl32.lib;dxerr.lib;legacy_stdio_definitions.lib;dsound.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -136,6 +137,9 @@
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Crow.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="DXUT.cpp" />
+    <ClCompile Include="DXUTenum.cpp" />
+    <ClCompile Include="DXUTmisc.cpp" />
     <ClCompile Include="Eagle.cpp" />
     <ClCompile Include="EndStage.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -158,8 +162,11 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ProcessGame.cpp" />
+    <ClCompile Include="SDKsound.cpp" />
+    <ClCompile Include="SDKwavefile.cpp" />
     <ClCompile Include="Shuriken.cpp" />
     <ClCompile Include="Soldier.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Stage1.cpp" />
@@ -187,6 +194,9 @@
     <ClInclude Include="Crow.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="DXUT.h" />
+    <ClInclude Include="DXUTenum.h" />
+    <ClInclude Include="DXUTmisc.h" />
     <ClInclude Include="Eagle.h" />
     <ClInclude Include="EndStage.h" />
     <ClInclude Include="Enemy.h" />
@@ -208,8 +218,11 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ProcessGame.h" />
+    <ClInclude Include="SDKsound.h" />
+    <ClInclude Include="SDKwavefile.h" />
     <ClInclude Include="Shuriken.h" />
     <ClInclude Include="Soldier.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Stage1.h" />

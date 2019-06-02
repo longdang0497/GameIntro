@@ -249,3 +249,8 @@ enum BOSS_STATE {
 #define	RIGHT 1
 #define UP 1
 #define DOWN -1
+
+//================ GAME SOUND =============================================
+#define STAGE1_SOUND L"sound\\STAGE1.wav"
+#define STAGE2_SOUND L"sound\\STAGE2.wav"
+//================ END GAME SOUND =========================================

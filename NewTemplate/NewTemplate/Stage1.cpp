@@ -26,10 +26,21 @@ Stage1::Stage1()
 
 Stage1::~Stage1()
 {
+	if (soundS1 != nullptr)
+		delete (soundS1);
+	soundS1 = nullptr;
 }
 
 void Stage1::LoadResource()
 {
+	bool soundInit = GameSound::GetInstance()->Init(this->window_handler);
+	if (soundInit == false)
+		return;
+	else
+	{
+		soundS1 = GameSound::GetInstance()->LoadSound(STAGE1_SOUND);
+		GameSound::GetInstance()->Loopsound(soundS1);
+	}
 
 	this->objects->push_back(MainCharacter::GetInstance());
 
