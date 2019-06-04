@@ -41,6 +41,8 @@ MainCharacter::MainCharacter()
 
 	SubWeapon = SW_shuriken;
 
+	this->explode = new Explode();
+
 }
 
 MainCharacter::~MainCharacter()
@@ -187,6 +189,7 @@ void MainCharacter::Update(float t, vector<Object*> * object)
 	if (isInTheEndOfMap)
 		return;
 
+	this->explode->Update(deltaTime, object);
 
 	if (StopWatch && GetTickCount() - StartStopWatch >= 6000)
 	{
@@ -254,6 +257,8 @@ void MainCharacter::Render()
 {
 	if (HP == 0)
 		return;
+
+	this->explode->Render();
 
 	// Cách này chỉ là đang fix tạm thôi nha <3
 	if (Game::GetInstance()->GetGameStage() == STAGE1 && this->position.x > 883 && this->position.x < 960
@@ -608,6 +613,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 							{
 								if (GetState() == STATE_JUMP_SCROLL_HIT)
 								{
+									this->explode->SetActive(iter->GetPosition());
 									iter->SetHP(iter->GetHP() - 1);
 								}
 								else
@@ -728,6 +734,11 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 
 							break;
 						}
+						case 12:
+						{
+							this->Lives += 1;
+							break;
+						}
 						default:
 						{
 							break;
@@ -772,7 +783,8 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 				{
 					if (GetState() == STATE_JUMP_SCROLL_HIT)
 					{
-						iter->obj->SetHP(iter->obj->GetHP() - 1);
+						this->explode->SetActive(iter->obj->GetPosition());
+						iter->obj->SetHP(0);
 					}
 					else
 					{
@@ -864,6 +876,11 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					case 11: 
 					{
 						SubWeapon = SW_jump_Scroll_Kill;
+						break;
+					}
+					case 12:
+					{
+						this->Lives += 1;
 						break;
 					}
 					default:

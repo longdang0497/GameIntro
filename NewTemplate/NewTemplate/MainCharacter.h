@@ -5,11 +5,13 @@
 #include "Define.h"
 #include "KeyGame.h"
 #include "Sword.h"
+#include "Explode.h"
 #include "Camera.h"
 #include "Enemy.h"
 #include "Item.h"
 #include "HideObject.h"
 #include "Windmill.h"
+#include "Text.h"
 #include "Shuriken.h"
 
 
@@ -71,6 +73,8 @@ private:
 
 	SecondaryWeapon SubWeapon;
 	
+
+	Explode *explode;
 
 public:
 	MainCharacter();

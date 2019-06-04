@@ -151,43 +151,7 @@ void Stage::InitEnemies(LPCWSTR filePath)
 
 void Stage::InitItems(D3DXVECTOR3 pos, int objectID)
 {
-	switch (objectID) {
-	case BLUE_R_ID:
-		this->objects->push_back(new Item(pos, BLUE_R_ID));
-		break;
-	case ORANGE_R_ID:
-		this->objects->push_back(new Item(pos, ORANGE_R_ID));
-		break;
-	case BLUE_DART_ID:
-		this->objects->push_back(new Item(pos, BLUE_DART_ID));
-		break;
-	case ORANGE_DART_ID:
-		this->objects->push_back(new Item(pos, ORANGE_DART_ID));
-		break;
-	case BLUE_POCKET_ID:
-		this->objects->push_back(new Item(pos, BLUE_POCKET_ID));
-		break;
-	case ORANGE_POCKET_ID:
-		this->objects->push_back(new Item(pos, ORANGE_POCKET_ID));
-		break;
-	case BLUE_JAR_ID:
-		this->objects->push_back(new Item(pos, BLUE_JAR_ID));
-		break;
-	case ORANGE_JAR_ID:
-		this->objects->push_back(new Item(pos, ORANGE_JAR_ID));
-		break;
-	case BIG_SHURIKEN_ID:
-		this->objects->push_back(new Item(pos, BIG_SHURIKEN_ID));
-		break;
-	case SANDGLASS_ID:
-		this->objects->push_back(new Item(pos, SANDGLASS_ID));
-		break;
-	case ITEM_FIRE_ID:
-		this->objects->push_back(new Item(pos, ITEM_FIRE_ID));
-		break;
-	default:
-		break;
-	}
+	this->objects->push_back(new Item(pos, objectID));
 }
 
 void Stage::Update(float deltaTime)
