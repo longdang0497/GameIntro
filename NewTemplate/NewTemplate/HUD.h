@@ -51,5 +51,7 @@ public:
 	DWORD GetTime() { return this->time; }
 
 	void SetStopCounting(bool a) { this->StopCounting = a; }
+
+	void ReSetTime() { this->time = 150; }
 };
 

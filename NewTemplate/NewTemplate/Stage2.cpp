@@ -4,6 +4,7 @@ Stage2* Stage2::_instance = NULL;
 
 Stage2::Stage2()
 {
+	HUD::GetInstance()->ReSetTime();
 	MainCharacter::GetInstance()->SetIsInTheEndOfMap(false);
 	Grid::GetInstance()->ReSetGrid(STAGE2_HEIGHT, STAGE2_WIDTH, false);
 

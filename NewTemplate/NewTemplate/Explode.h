@@ -7,9 +7,10 @@ class Explode : public Object
 {
 private:
 	Sprite * sprite;
+	int type;
 	DWORD activeTime;
 public:
-	Explode();
+	Explode(int type = 1);
 	~Explode();
 
 	void Update(float deltaTime, std::vector<Object*> *objects = NULL);

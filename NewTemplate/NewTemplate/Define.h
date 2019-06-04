@@ -92,7 +92,8 @@ enum GAME_STAGE {
 #define PATH_BOSS_EXPLODE L"sprite\\boss\\BOSS_EXPLODE.txt"
 #define PATH_BUTTERFLY L"sprite\\enemies\\BUTTERFLY.txt"
 #define PATH_CROW L"sprite\\enemies\\CROW.txt"
-#define PATH_EXPLODE L"sprite\\enemies\\EXPLODE.txt"
+#define PATH_EXPLODE1 L"sprite\\enemies\\EXPLODE1.txt"
+#define PATH_EXPLODE2 L"sprite\\enemies\\EXPLODE2.txt"
 
 #define ID_RESULT 2504
 #define PATH_RESULT L"sprite\\Result.png"
@@ -153,7 +154,7 @@ enum GAME_STAGE {
 #define ID_TEX_HUD_BG	2001
 #define ID_TEX_HEALTH	2002
 
-#define PATH_TEX_FONT	L"sprite\\Board\\font.png"
+#define PATH_TEX_FONT	L"sprite\\Board\\font.jpg"
 #define PATH_TEX_HUD_BG	L"sprite\\Board\\board.png"
 #define PATH_TEX_HEALTH	L"sprite\\Board\\health.png"
 

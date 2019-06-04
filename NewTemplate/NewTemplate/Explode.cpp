@@ -2,9 +2,13 @@
 
 
 
-Explode::Explode()
+Explode::Explode(int type)
 {
-	this->sprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_EXPLODE);
+	this->type = type;
+	if(type==1)
+		this->sprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_EXPLODE1);
+	else
+		this->sprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_EXPLODE2);
 	this->isActive = false;
 	this->SetPosition(100, 100);
 	this->SetVeclocity(0, 0);
