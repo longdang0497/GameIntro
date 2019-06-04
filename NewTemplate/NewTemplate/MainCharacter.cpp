@@ -73,6 +73,8 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 	case STATE_FALL:
 		veclocity.x += -0.08 * direction;
 		veclocity.y = -0.08;
+		//veclocity.x = 0;
+		//veclocity.y = 0;
 		currentSprite = standSprite;
 		break;
 	case STATE_IDLE:
@@ -578,6 +580,7 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
 				}
 				break;
 			}
+			
 			default:
 			{
 				break;
