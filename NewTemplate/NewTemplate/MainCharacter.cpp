@@ -212,6 +212,8 @@ void MainCharacter::Update(float t, vector<Object*> * object)
 
 	Windmill::GetInstance()->Update(t, object);
 
+	Flames::GetInstance()->Update(t, object);
+
 	if (GetState() == STATE_ATTACK)
 	{
 		if (hitSprite->getDone())
@@ -290,6 +292,7 @@ void MainCharacter::Render()
 
 	Sword::GetInstance()->Render();
 	Shuriken::GetInstance()->Render();
+	Flames::GetInstance()->Render();
 	Windmill::GetInstance()->Render();
 
 }
@@ -347,6 +350,14 @@ void MainCharacter::KeyBoardHandle()
 				Windmill::GetInstance()->Reset();
 				Windmill::GetInstance()->SetIsActive(true);
 				Energy -= 3;
+			}
+			else if (SubWeapon == SW_Flames && Flames::GetInstance()->GetIsActive() == false && Energy >= 5)
+			{
+				Flames::GetInstance()->SetPosition(this->position.x, this->position.y);
+				Flames::GetInstance()->SetDirection(this->direction);
+				Flames::GetInstance()->Reset();
+				Flames::GetInstance()->SetIsActive(true);
+				Energy -= 5;
 			}
 		}
 
@@ -739,6 +750,11 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 							this->Lives += 1;
 							break;
 						}
+						case 13:
+						{
+							this->SubWeapon = SW_Flames;
+							break;
+						}
 						default:
 						{
 							break;
@@ -881,6 +897,11 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					case 12:
 					{
 						this->Lives += 1;
+						break;
+					}
+					case 13:
+					{
+						this->SubWeapon = SW_Flames;
 						break;
 					}
 					default:

@@ -78,6 +78,9 @@ void HUD::Draw(D3DXVECTOR2 position)
 	case SW_shuriken:
 		Game::GetInstance()->Draw(185, 28, texWeapon, 0, 126, 32, 158);
 		break;
+	case SW_Flames:
+		Game::GetInstance()->Draw(185, 28, texWeapon, 0, 84, 32, 116);
+		break;
 	default:
 		break;
 	}

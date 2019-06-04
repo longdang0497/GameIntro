@@ -49,6 +49,8 @@ enum GAME_STAGE {
 #define BLUE_JAR_ID 10
 #define JUMP_SCROLL 11
 #define PLUS_LIVE_ID 12
+#define FLAMES_ID 13
+#define FIRE_WHEEL_ID 14
 
 // =========== TEXTURE + SPRITE
 #define ID_TEXTURE_MAIN 0
@@ -90,6 +92,9 @@ enum GAME_STAGE {
 #define PATH_BLUE_JAR L"sprite\\item\\BLUE_JAR.txt"
 #define PATH_JUMP_SCROLL L"sprite\\item\\JUMP_SCROLL.txt"
 #define PATH_PLUS_LIVE L"sprite\\item\\PLUS_LIVE.txt"
+#define PATH_FLAMES L"sprite\\item\\FLAMES.txt"
+#define PATH_SW_FLAMES L"sprite\\item\\SW_FLAMES.txt"
+#define PATH_FIRE_WHEEL L"sprite\\item\\FIRE_WHEEL.txt"
 
 #define PATH_BOSS_EXPLODE L"sprite\\boss\\BOSS_EXPLODE.txt"
 #define PATH_BUTTERFLY L"sprite\\enemies\\BUTTERFLY.txt"

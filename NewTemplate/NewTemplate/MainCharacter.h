@@ -10,6 +10,7 @@
 #include "Enemy.h"
 #include "Item.h"
 #include "HideObject.h"
+#include "Flames.h"
 #include "Windmill.h"
 #include "Text.h"
 #include "Shuriken.h"
@@ -24,7 +25,8 @@ enum SecondaryWeapon {
 	SW_none,
 	SW_shuriken,
 	SW_windmill,
-	SW_jump_Scroll_Kill
+	SW_jump_Scroll_Kill,
+	SW_Flames
 };
 
 
@@ -72,7 +74,6 @@ private:
 	int Energy;
 
 	SecondaryWeapon SubWeapon;
-	
 
 	Explode *explode;
 

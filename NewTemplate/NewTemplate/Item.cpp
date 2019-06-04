@@ -81,8 +81,11 @@ void Item::InitItemSprite()
 	case JUMP_SCROLL: // ALLOW JUMP_SCROLL
 		this->currentSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_JUMP_SCROLL);
 		break;
-	case PLUS_LIVE_ID: // ALLOW JUMP_SCROLL
+	case PLUS_LIVE_ID: 
 		this->currentSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_PLUS_LIVE);
+		break;
+	case FLAMES_ID:
+		this->currentSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_FLAMES);
 		break;
 	}
 }
