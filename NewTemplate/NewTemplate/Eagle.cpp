@@ -159,7 +159,7 @@ void Eagle::Update(float deltaTime, std::vector<Object*>* objects)
 
 void Eagle::Render()
 {
-	if (!this->isActive)
+	if (!this->isActive || this->HP<=0)
 		return;
 
 	Object::Render();

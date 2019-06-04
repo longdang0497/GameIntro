@@ -310,7 +310,7 @@ void MainCharacter::KeyBoardHandle()
 		{
 			currentSprite = jumpScrollSprite;
 			direction *= -1;
-			SetVy(-0.15f);
+			SetVy(-0.3f);
 			SetState(STATE_JUMP_TO);
 		}
 		else
@@ -633,6 +633,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					HideObject* h = dynamic_cast<HideObject*> (iter);
 					if ((h->getType() == TOP_LADDER || h->getType() == BOTTOM_LADDER) && (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING))
 					{
+						//SetVy(0);
 						SetState(STATE_FALL);
 					}
 					else if (h->getType() == END_MAP)
@@ -787,6 +788,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 				HideObject* h = dynamic_cast<HideObject*> (iter->obj);
 				if ((h->getType() == TOP_LADDER || h->getType() == BOTTOM_LADDER) && (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING))
 				{
+					
 					SetState(STATE_FALL);
 				}
 				else if (h->getType() == END_MAP)
