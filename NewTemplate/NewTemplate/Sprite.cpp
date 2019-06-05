@@ -1,7 +1,7 @@
 ﻿#include "Sprite.h"
 
 
-Sprite::Sprite(LPDIRECT3DTEXTURE9 texture, LPCWSTR filePath, int Rate)
+Sprite::Sprite(LPDIRECT3DTEXTURE9 texture, LPCWSTR filePath,  int Rate)
 {
 	if (texture == NULL) {
 		return;

@@ -7,7 +7,6 @@ Boss::Boss()
 	this->HP = 16;
 	this->boss = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_BOSS);
 	this->bossJump = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ENEMIES), PATH_BOSS_JUMP);
-	this->bossExplode = new BossExplode();
 	this->SetObjectType(BOSS);
 	this->isActive = true;
 	this->direction = LEFT;
@@ -28,20 +27,48 @@ Boss::Boss()
 	this->bullets->push_back(bullet2);
 	this->bullets->push_back(bullet3);
 	this->hurtTime = GetTickCount();
+
+	this->isDeath = false;
+
+	this->bossExplodes = new vector<BossExplode*>();
+
+	BossExplode* bossExplode = new BossExplode();
+	BossExplode* bossExplode1 = new BossExplode();
+	BossExplode* bossExplode2 = new BossExplode();
+	BossExplode* bossExplode3 = new BossExplode();
+
+	this->bossExplodes->push_back(bossExplode);
+	this->bossExplodes->push_back(bossExplode1);
+	this->bossExplodes->push_back(bossExplode2);
+	this->bossExplodes->push_back(bossExplode3);
+
+
 }
 
 // 513 y = 4 x2 - 868 x + 111178
 void Boss::Update(float deltaTime, std::vector<Object*>* objects)
 {
-	this->bossExplode->Update(deltaTime, new vector<Object*>());
+	for (auto it : *this->bossExplodes) {
+		it->Update(deltaTime, new vector<Object*>());
+	}
 
 	if (!this->isActive || GetTickCount() - this->freezeTime < FREEZE_TIME) {
 		return;
 	}
 
-
-	if (this->HP <= 0) {
+	if (this->HP <= 0 && !this->isDeath) {
 		this->Destroy();
+		this->isDeath = true;
+
+		StartExplode = GetTickCount();
+		return;
+	}
+
+	if (this->HP <= 0 && this->isDeath) {
+		if (GetTickCount() - StartExplode > 5000)
+		{
+
+		}
 		return;
 	}
 
@@ -108,6 +135,10 @@ void Boss::Update(float deltaTime, std::vector<Object*>* objects)
 
 void Boss::Render()
 {
+	for (auto it : *this->bossExplodes) {
+		it->Render();
+	}
+
 	if (!this->isActive) {
 		return;
 	}
@@ -146,7 +177,7 @@ void Boss::Render()
 		break;
 	}
 
-	this->bossExplode->Render();
+
 }
 
 void Boss::HandleCollision(vector<Object*>* objects)
@@ -168,19 +199,12 @@ void Boss::GetBoundingBox(float & l, float & t, float & r, float & b)
 
 void Boss::Destroy()
 {
-	D3DXVECTOR3 d(rand()%30, rand() % 30, 0);
-	this->bossExplode->SetActive(this->position + d);
-	if (!isDeath)
-	{
-		isDeath = true;
-		StartExplode = GetTickCount();
-	}
+	this->bossExplodes->at(0)->SetActive({ this->position.x - 3, this->position.y, 0 });
+	this->bossExplodes->at(1)->SetActive({ this->position.x + BOSS_WIDTH - 10, this->position.y + 5, 0 });
+	this->bossExplodes->at(2)->SetActive({ this->position.x - 3, this->position.y + BOSS_HEIGHT - 8, 0 });
+	this->bossExplodes->at(3)->SetActive({ this->position.x + BOSS_WIDTH - 10, this->position.y + BOSS_HEIGHT - 1, 0 });
 
-		if (GetTickCount() - StartExplode > 3000)
-		{
-			End = true;
-		}
-	
+
 }
 
 void Boss::Hurt() {
