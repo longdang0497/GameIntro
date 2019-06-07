@@ -45,6 +45,15 @@ protected:
 
 	DWORD TimeToFade;
 	int alpha = 255;
+
+	GameSound * jumpSound;
+	CSound * jumpS;
+
+	GameSound * getItemSound;
+	CSound * getItem;
+
+	GameSound * mainSlashSound;
+	CSound * mainSlash;
 public:
 	Stage();
 	~Stage();

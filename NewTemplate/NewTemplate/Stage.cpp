@@ -7,11 +7,34 @@ Stage::Stage()
 	HUD::GetInstance();
 	GameSound::GetInstance();
 	window_handler = Game::GetInstance()->GetHWnd();
+
+	jumpSound = new GameSound();
+	bool soundInit = jumpSound->Init(this->window_handler);
+	if (soundInit == false)
+		return;
+	else
+		jumpS = jumpSound->LoadSound(MAIN_JUMP_SOUND);
+
+	mainSlashSound = new GameSound();
+	bool soundInitSlash = mainSlashSound->Init(this->window_handler);
+	if (soundInitSlash == false)
+		return;
+	else
+		mainSlash = mainSlashSound->LoadSound(MAIN_SLASH_SOUND);
+
+	getItemSound = new GameSound();
+	bool soundInitItem = getItemSound->Init(this->window_handler);
+	if (soundInitItem == false)
+		return;
+	else
+		getItem = getItemSound->LoadSound(GET_ITEM_SOUND);
 }
 
 Stage::~Stage()
 {
-	//if (item != nullptr) delete item;
+	if (jumpSound != nullptr) 
+		delete(jumpSound);
+	jumpSound = nullptr;
 }
 
 void Stage::InitStaticObjects(RECT rect, vector<RECT> *staticObjects)
@@ -230,7 +253,18 @@ void Stage::Update(float deltaTime)
 		MoveNextPoint();
 	}
 
-
+	/*if (MainCharacter::GetInstance()->GetState() == STATE_JUMP || MainCharacter::GetInstance()->GetState() == STATE_JUMP_ATTACK
+		|| MainCharacter::GetInstance()->GetState() == STATE_JUMP_SCROLL_HIT || MainCharacter::GetInstance()->GetState() == STATE_JUMP_ATTACK_TO
+		|| MainCharacter::GetInstance()->GetState() == STATE_JUMP_TO)*/
+	if (k->keyJump)
+		jumpSound->Playsound(jumpS);
+	if (k->keyAttack)
+		mainSlashSound->Playsound(mainSlash);
+	if (MainCharacter::GetInstance()->GetGotItem() == true)
+	{
+		getItemSound->Playsound(getItem);
+		MainCharacter::GetInstance()->SetGotItem(false);
+	}
 
 	HUD::GetInstance()->Update(deltaTime);
 

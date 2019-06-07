@@ -664,7 +664,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 				{
 					if (iter->GetActive())
 					{
-						iter->SetActive(false);
+						iter->SetActive(false);						
 						Item* it = dynamic_cast<Item*>(iter);
 						switch (it->GetObjID())
 						{
@@ -673,6 +673,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 							this->Energy += it->GetValue();
 							it->SetValue(0);
 							it->SetActive(false);
+							this->alreadyGotItem = true;
 							break;
 						}
 						case 1: //enery + 10
@@ -680,11 +681,13 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 							this->Energy += it->GetValue();
 							it->SetValue(0);
 							it->SetActive(false);
+							this->alreadyGotItem = true;
 							break;
 						}
 						case 2:
 						{
 							this->StopWatch = true;
+							this->alreadyGotItem = true;
 							this->StartStopWatch = GetTickCount();
 							break;
 						}
@@ -692,31 +695,37 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 						case 3:
 						{
 							SubWeapon = SW_windmill;
+							this->alreadyGotItem = true;
 							break;
 							break;
 						}
 						case 4: //Restore
 						{
 							SubWeapon = SW_shuriken;
+							this->alreadyGotItem = true;
 							break;
 						}
 						case 5:
 						{
 							this->score += 500;
+							this->alreadyGotItem = true;
 							break;
 						}
 						case 6:
 						{
 							this->score += 1000;
+							this->alreadyGotItem = true;
 							break;
 						}
 						case 8: //taoj vong lua
 						{
+							this->alreadyGotItem = true;
 							break;
 						}
 						case 11://jump Scroll
 						{
 							SubWeapon = SW_jump_Scroll_Kill;
+							this->alreadyGotItem = true;
 							break;
 						}
 						case 9://jump Scroll
@@ -724,7 +733,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 							this->HP += 16;
 							if (this->HP > 16)
 								this->HP = 16;
-
+							this->alreadyGotItem = true;
 							break;
 						}
 						default:
