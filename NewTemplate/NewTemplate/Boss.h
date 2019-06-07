@@ -15,7 +15,9 @@ class Boss : public Object
 private:
 	Sprite* boss;
 	Sprite* bossJump;
-	BossExplode* bossExplode;
+
+	vector<BossExplode*> *bossExplodes;
+
 	BOSS_STATE bossState;
 	DWORD freezeTime;
 	DWORD hurtTime;

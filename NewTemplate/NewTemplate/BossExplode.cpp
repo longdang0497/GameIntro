@@ -26,6 +26,7 @@ void BossExplode::Update(float deltaTime, std::vector<Object*>* objects)
 		return;
 	}
 
+	this->sprite->UpdateSprite();
 }
 
 void BossExplode::Render()
@@ -36,7 +37,13 @@ void BossExplode::Render()
 
 	D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
 
-	this->sprite->DrawSprite(pos, true, 128);
+	if (this->sprite->GetIndex() == 1) {
+		this->sprite->DrawSprite({pos.x - 8, pos.y - 8, 0}, true, 128);
+	}
+	else {
+		this->sprite->DrawSprite(pos, true, 128);
+	}
+
 }
 
 void BossExplode::HandleCollision(vector<Object*>* objects)

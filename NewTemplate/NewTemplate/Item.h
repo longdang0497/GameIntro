@@ -13,19 +13,7 @@ protected:
 	int objectID;
 	float timeAppear = 0;
 
-	Sprite * blueR;
-	Sprite * orangeR;
-	Sprite * blueDart;
-	Sprite * orangeDart;
-	Sprite * blueJar;
-	Sprite * orangeJar;
-	Sprite * bluePocket;
-	Sprite * orangePocket;
-	Sprite * bigShuriken;
-	Sprite * itemFire;
-	Sprite * sandglass;
-	Sprite * jumpscroll;
-
+	
 	int value = 0;
 public:
 	Item();

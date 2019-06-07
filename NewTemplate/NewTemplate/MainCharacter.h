@@ -5,11 +5,14 @@
 #include "Define.h"
 #include "KeyGame.h"
 #include "Sword.h"
+#include "Explode.h"
 #include "Camera.h"
 #include "Enemy.h"
 #include "Item.h"
 #include "HideObject.h"
+#include "Flames.h"
 #include "Windmill.h"
+#include "Text.h"
 #include "Shuriken.h"
 
 
@@ -22,7 +25,8 @@ enum SecondaryWeapon {
 	SW_none,
 	SW_shuriken,
 	SW_windmill,
-	SW_jump_Scroll_Kill
+	SW_jump_Scroll_Kill,
+	SW_Flames
 };
 
 
@@ -72,6 +76,7 @@ private:
 	SecondaryWeapon SubWeapon;
 	
 	bool alreadyGotItem = false;
+	Explode *explode;
 public:
 	MainCharacter();
 	~MainCharacter();

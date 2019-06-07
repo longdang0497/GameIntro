@@ -32,7 +32,7 @@ private:
 	int FrameRate;
 
 public:
-	Sprite(LPDIRECT3DTEXTURE9, LPCWSTR,int Rate = 100); // Phương thức mới dùng để khỏi tạo sprite và dựa hoàn toàn vào file
+	Sprite(LPDIRECT3DTEXTURE9, LPCWSTR, int Rate = 100); // Phương thức mới dùng để khỏi tạo sprite và dựa hoàn toàn vào file
 	~Sprite();
 
 	void UpdateSprite();

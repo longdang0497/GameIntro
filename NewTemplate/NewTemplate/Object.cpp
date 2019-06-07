@@ -6,6 +6,8 @@ Object::Object()
 	this->isActive = true;
 	this->nextObj = NULL;
 	this->preObj = NULL;
+	this->objectId = Game::GetInstance()->GetCurrentId();
+	Game::GetInstance()->IncreaseId();
 }
 
 Object::~Object()

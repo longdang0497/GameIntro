@@ -19,8 +19,6 @@ BossBullet::BossBullet()
 BossBullet::~BossBullet()
 {
 
-
-
 }
 
 void BossBullet::Update(float deltaTime, std::vector<Object*>* objects)

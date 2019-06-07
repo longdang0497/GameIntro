@@ -48,6 +48,9 @@ enum GAME_STAGE {
 #define ORANGE_JAR_ID 9
 #define BLUE_JAR_ID 10
 #define JUMP_SCROLL 11
+#define PLUS_LIVE_ID 12
+#define FLAMES_ID 13
+#define FIRE_WHEEL_ID 14
 
 // =========== TEXTURE + SPRITE
 #define ID_TEXTURE_MAIN 0
@@ -88,11 +91,16 @@ enum GAME_STAGE {
 #define PATH_ORANGE_JAR L"sprite\\item\\ORANGE_JAR.txt"
 #define PATH_BLUE_JAR L"sprite\\item\\BLUE_JAR.txt"
 #define PATH_JUMP_SCROLL L"sprite\\item\\JUMP_SCROLL.txt"
+#define PATH_PLUS_LIVE L"sprite\\item\\PLUS_LIVE.txt"
+#define PATH_FLAMES L"sprite\\item\\FLAMES.txt"
+#define PATH_SW_FLAMES L"sprite\\item\\SW_FLAMES.txt"
+#define PATH_FIRE_WHEEL L"sprite\\item\\FIRE_WHEEL.txt"
 
 #define PATH_BOSS_EXPLODE L"sprite\\boss\\BOSS_EXPLODE.txt"
 #define PATH_BUTTERFLY L"sprite\\enemies\\BUTTERFLY.txt"
 #define PATH_CROW L"sprite\\enemies\\CROW.txt"
-#define PATH_EXPLODE L"sprite\\enemies\\EXPLODE.txt"
+#define PATH_EXPLODE1 L"sprite\\enemies\\EXPLODE1.txt"
+#define PATH_EXPLODE2 L"sprite\\enemies\\EXPLODE2.txt"
 
 #define ID_RESULT 2504
 #define PATH_RESULT L"sprite\\Result.png"
@@ -153,7 +161,7 @@ enum GAME_STAGE {
 #define ID_TEX_HUD_BG	2001
 #define ID_TEX_HEALTH	2002
 
-#define PATH_TEX_FONT	L"sprite\\Board\\font.png"
+#define PATH_TEX_FONT	L"sprite\\Board\\font.jpg"
 #define PATH_TEX_HUD_BG	L"sprite\\Board\\board.png"
 #define PATH_TEX_HEALTH	L"sprite\\Board\\health.png"
 

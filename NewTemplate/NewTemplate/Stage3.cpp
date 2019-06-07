@@ -4,6 +4,7 @@ Stage3* Stage3::_instance = NULL;
 
 Stage3::Stage3()
 {
+	HUD::GetInstance()->ReSetTime();
 	Grid::GetInstance()->ReSetGrid(STAGE3_WIDTH, STAGE3_HEIGHT, false);
 	MainCharacter::GetInstance()->SetIsInTheEndOfMap(false);
 	this->LoadResource();

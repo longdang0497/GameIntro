@@ -41,6 +41,8 @@ MainCharacter::MainCharacter()
 
 	SubWeapon = SW_shuriken;
 
+	this->explode = new Explode();
+
 }
 
 MainCharacter::~MainCharacter()
@@ -71,6 +73,8 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 	case STATE_FALL:
 		veclocity.x += -0.08 * direction;
 		veclocity.y = -0.08;
+		//veclocity.x = 0;
+		//veclocity.y = 0;
 		currentSprite = standSprite;
 		break;
 	case STATE_IDLE:
@@ -187,6 +191,7 @@ void MainCharacter::Update(float t, vector<Object*> * object)
 	if (isInTheEndOfMap)
 		return;
 
+	this->explode->Update(deltaTime, object);
 
 	if (StopWatch && GetTickCount() - StartStopWatch >= 6000)
 	{
@@ -208,6 +213,8 @@ void MainCharacter::Update(float t, vector<Object*> * object)
 	Shuriken::GetInstance()->Update(t, object);
 
 	Windmill::GetInstance()->Update(t, object);
+
+	Flames::GetInstance()->Update(t, object);
 
 	if (GetState() == STATE_ATTACK)
 	{
@@ -255,6 +262,8 @@ void MainCharacter::Render()
 	if (HP == 0)
 		return;
 
+	this->explode->Render();
+
 	// Cách này chỉ là đang fix tạm thôi nha <3
 	if (Game::GetInstance()->GetGameStage() == STAGE1 && this->position.x > 883 && this->position.x < 960
 		&& this->position.y + 31 > 154) {
@@ -285,6 +294,7 @@ void MainCharacter::Render()
 
 	Sword::GetInstance()->Render();
 	Shuriken::GetInstance()->Render();
+	Flames::GetInstance()->Render();
 	Windmill::GetInstance()->Render();
 
 }
@@ -310,7 +320,7 @@ void MainCharacter::KeyBoardHandle()
 		{
 			currentSprite = jumpScrollSprite;
 			direction *= -1;
-			SetVy(-0.15f);
+			SetVy(-0.3f);
 			SetState(STATE_JUMP_TO);
 		}
 		else
@@ -342,6 +352,14 @@ void MainCharacter::KeyBoardHandle()
 				Windmill::GetInstance()->Reset();
 				Windmill::GetInstance()->SetIsActive(true);
 				Energy -= 3;
+			}
+			else if (SubWeapon == SW_Flames && Flames::GetInstance()->GetIsActive() == false && Energy >= 5)
+			{
+				Flames::GetInstance()->SetPosition(this->position.x, this->position.y);
+				Flames::GetInstance()->SetDirection(this->direction);
+				Flames::GetInstance()->Reset();
+				Flames::GetInstance()->SetIsActive(true);
+				Energy -= 5;
 			}
 		}
 
@@ -562,6 +580,7 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
 				}
 				break;
 			}
+			
 			default:
 			{
 				break;
@@ -608,6 +627,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 							{
 								if (GetState() == STATE_JUMP_SCROLL_HIT)
 								{
+									this->explode->SetActive(iter->GetPosition());
 									iter->SetHP(iter->GetHP() - 1);
 								}
 								else
@@ -633,6 +653,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					HideObject* h = dynamic_cast<HideObject*> (iter);
 					if ((h->getType() == TOP_LADDER || h->getType() == BOTTOM_LADDER) && (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING))
 					{
+						//SetVy(0);
 						SetState(STATE_FALL);
 					}
 					else if (h->getType() == END_MAP)
@@ -736,6 +757,16 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 							this->alreadyGotItem = true;
 							break;
 						}
+						case 12:
+						{
+							this->Lives += 1;
+							break;
+						}
+						case 13:
+						{
+							this->SubWeapon = SW_Flames;
+							break;
+						}
 						default:
 						{
 							break;
@@ -780,7 +811,8 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 				{
 					if (GetState() == STATE_JUMP_SCROLL_HIT)
 					{
-						iter->obj->SetHP(iter->obj->GetHP() - 1);
+						this->explode->SetActive(iter->obj->GetPosition());
+						iter->obj->SetHP(0);
 					}
 					else
 					{
@@ -796,6 +828,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 				HideObject* h = dynamic_cast<HideObject*> (iter->obj);
 				if ((h->getType() == TOP_LADDER || h->getType() == BOTTOM_LADDER) && (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING))
 				{
+					
 					SetState(STATE_FALL);
 				}
 				else if (h->getType() == END_MAP)
@@ -871,6 +904,16 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					case 11: 
 					{
 						SubWeapon = SW_jump_Scroll_Kill;
+						break;
+					}
+					case 12:
+					{
+						this->Lives += 1;
+						break;
+					}
+					case 13:
+					{
+						this->SubWeapon = SW_Flames;
 						break;
 					}
 					default:

@@ -45,12 +45,12 @@ void HUD::Draw(D3DXVECTOR2 position)
 	text->DrawString(IntToChar(MainCharacter::GetInstance()->GetScore(), 6), { 49, 3 }); //49
 
 	// time
-	text->DrawString("TIME-", { 100,3 });
-	text->DrawString(IntToChar(time, 3), { 140, 3 });
+	text->DrawString("TIME-", { 105,3 });
+	text->DrawString(IntToChar(time, 3), { 145, 3 });
 
 	// state
-	text->DrawString("STAGE-", { 167,3 });
-	text->DrawString("03", { 215, 3 });
+	text->DrawString("STAGE-", { 177,3 });
+	text->DrawString("03", { 225, 3 });
 
 
 	// state
@@ -60,22 +60,26 @@ void HUD::Draw(D3DXVECTOR2 position)
 
 	text->DrawString("ENERGY-", { 62,23 });
 	//text->DrawString("02", {122, 23 });
+	//Game::GetInstance()->Draw(62, 28, ShurikenSprite, 6, 111, 13, 117);
 	text->DrawString(IntToChar(MainCharacter::GetInstance()->GetEnergy(), 3), { 118, 23 });
 
 
-	Game::GetInstance()->Draw(150, 23, texBackground, 0, 0, 42, 42);
+	Game::GetInstance()->Draw(180, 23, texBackground, 0, 0, 42, 42);
 
 	switch (MainCharacter::GetInstance()->GetSubWeapon())
 	{
 	case SW_jump_Scroll_Kill:
-		Game::GetInstance()->Draw(155, 28, texWeapon, 0, 41, 32, 73);
+		Game::GetInstance()->Draw(185, 28, texWeapon, 0, 41, 32, 73);
 		break;
 	case SW_windmill:
-		Game::GetInstance()->Draw(155, 28, texWeapon, 0, 0, 32, 32);
+		Game::GetInstance()->Draw(185, 28, texWeapon, 0, 0, 32, 32);
 		
 		break;
 	case SW_shuriken:
-		Game::GetInstance()->Draw(155, 28, texWeapon, 0, 126, 32, 158);
+		Game::GetInstance()->Draw(185, 28, texWeapon, 0, 126, 32, 158);
+		break;
+	case SW_Flames:
+		Game::GetInstance()->Draw(185, 28, texWeapon, 0, 84, 32, 116);
 		break;
 	default:
 		break;

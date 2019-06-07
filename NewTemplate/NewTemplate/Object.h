@@ -39,6 +39,7 @@ protected:
 
 	bool isOnGround;
 	int HP;
+	int objectId;
 public:
 	Object();
 	~Object();
@@ -104,6 +105,8 @@ public:
 
 	bool GetActive() { return this->isActive; }
 	void SetActive(bool value) { this->isActive = value; }
+
+	int GetObjectId() { return this->objectId; }
 };
 
 

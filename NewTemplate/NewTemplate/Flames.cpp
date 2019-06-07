@@ -1,55 +1,47 @@
-#include "Shuriken.h"
+#include "Flames.h"
 
-Shuriken* Shuriken::_instance = NULL;
+Flames* Flames::_instance = NULL;
 
-Shuriken::Shuriken()
+Flames::Flames()
 {
 	isActive = false;
 	direction = RIGHT;
-	ShurikenSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ITEM), PATH_SHURIKEN);
-	currentSprite = ShurikenSprite;
+	currentSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_SW_FLAMES);
 	this->veclocity.x = 0;
 	this->veclocity.y = 0;
 	this->explode = new Explode();
-	NumOfChangeDirection = 0;
 }
 
 
-Shuriken::~Shuriken()
+Flames::~Flames()
 {
 
 }
 
-void Shuriken::Update(float t, vector<Object*> *object)
+void Flames::Update(float t, vector<Object*> *object)
 {
 	this->explode->Update(deltaTime, object);
 	//position = MainCharacter::GetInstance()->GetPosition();
 
 
-	if (!isActive) 
+	if (!isActive)
 		return;
 
 	currentSprite->UpdateSprite();
 
-	if (abs(this->position.x - MainCharacter::GetInstance()->GetPosition().x) >= 100 && (GetTickCount() - AllowChangeDirection >= 50))
+	if (this->position.x < Camera::GetInstance()->getPosition().x || this->position.x > Camera::GetInstance()->getPosition().x + 276)
 	{
-		if (direction == LEFT)
-			direction = RIGHT;
-		else direction = LEFT;
-		NumOfChangeDirection += 1;
-		AllowChangeDirection = GetTickCount();
-	}
-	position.x += 5 * direction;
-
-
-	if (this->NumOfChangeDirection >= 2 && abs(this->position.x - MainCharacter::GetInstance()->GetPosition().x) <= 10)
 		this->isActive = false;
+	}
+	position.x += 3 * direction;
+	position.y += -0.1*t  ;
+
 	//Xet  va cham
 	for (auto iter : *object)
 	{
 		switch (iter->GetObjectType())
 		{
-		
+
 		case GREEN_SOLDIER:
 
 		case JAGUAR:
@@ -57,9 +49,9 @@ void Shuriken::Update(float t, vector<Object*> *object)
 
 		case BUTTERFLY:
 		case CROW:
-		case ZOMBIE:
 		case BAT:
 		case EAGLE:
+		case ZOMBIE:
 		case ZOMBIE_SWORD:
 
 		{
@@ -112,7 +104,7 @@ void Shuriken::Update(float t, vector<Object*> *object)
 
 }
 
-void Shuriken::Render()
+void Flames::Render()
 {
 	if (!isActive)
 		return;
@@ -122,16 +114,16 @@ void Shuriken::Render()
 	currentSprite->DrawSprite(pos, true);
 }
 
-void Shuriken::HandleCollision(vector<Object*>* objects)
+void Flames::HandleCollision(vector<Object*>* objects)
 {
 }
 
-void Shuriken::CalCulatePosition()
+void Flames::CalCulatePosition()
 {
 
 }
 
-void Shuriken::GetBoundingBox(float &l, float &t, float &r, float &b)
+void Flames::GetBoundingBox(float &l, float &t, float &r, float &b)
 {
 	if (isActive)
 	{
@@ -146,13 +138,13 @@ void Shuriken::GetBoundingBox(float &l, float &t, float &r, float &b)
 	}
 }
 
-void Shuriken::checkCollisioWithEnemy(vector<Object*> *coObjects)
+void Flames::checkCollisioWithEnemy(vector<Object*> *coObjects)
 {
 
 }
 
-void Shuriken::Reset()
+void Flames::Reset()
 {
-	this->NumOfChangeDirection = 0;
-	AllowChangeDirection = GetTickCount();
+
 }
+
