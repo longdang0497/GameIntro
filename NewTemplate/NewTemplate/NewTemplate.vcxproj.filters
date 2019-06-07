@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Grid">
       <UniqueIdentifier>{43eab8fe-98c2-497d-95e0-5a55a0095d48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Sound">
+      <UniqueIdentifier>{d1144d96-fe59-40ad-9ceb-947d6e19e1d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sound">
+      <UniqueIdentifier>{03c8fc83-a85e-4e9c-bce2-248aa7a214c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -207,6 +213,23 @@
     <ClCompile Include="Windmill.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
+    <ClCompile Include="DXUT.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUTenum.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUTmisc.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKsound.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKwavefile.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files\Framework</Filter>
     <ClCompile Include="Flames.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
@@ -356,6 +379,23 @@
     <ClInclude Include="Windmill.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
+    <ClInclude Include="DXUT.h">
+      <Filter>Header Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUTenum.h">
+      <Filter>Header Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUTmisc.h">
+      <Filter>Header Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKsound.h">
+      <Filter>Header Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKwavefile.h">
+      <Filter>Header Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files\Framework</Filter>
     <ClInclude Include="Flames.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>

@@ -10,6 +10,8 @@ private:
 	static Stage1 * _instance;
 
 	int numOfJaguar = 0;
+
+	CSound * soundS1;
 public:
 	Stage1();
 	~Stage1();
@@ -25,5 +27,8 @@ public:
 
 	void FadeInEffect();
 	void FadeOutEffect();
+
+	void SetCSound(CSound * value) { this->soundS1 = value; }
+	CSound * GetCSound() { return this->soundS1; }
 };
 

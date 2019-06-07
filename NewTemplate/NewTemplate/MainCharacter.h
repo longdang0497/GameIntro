@@ -74,9 +74,9 @@ private:
 	int Energy;
 
 	SecondaryWeapon SubWeapon;
-
+	
+	bool alreadyGotItem = false;
 	Explode *explode;
-
 public:
 	MainCharacter();
 	~MainCharacter();
@@ -130,6 +130,8 @@ public:
 	int GetEnergy() { return this->Energy; }
 	void SetEnergy(int a) { this->Energy = a; }
 
+	bool GetGotItem() { return this->alreadyGotItem; }
+	void SetGotItem(bool value) { this->alreadyGotItem = value; }
 
 	SecondaryWeapon GetSubWeapon() { return this->SubWeapon; }
 };

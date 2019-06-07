@@ -10,6 +10,7 @@ class Stage2: public Stage
 private:
 	static Stage2 * _instance;
 
+	CSound * soundS2;
 public:
 	Stage2();
 	~Stage2();
