@@ -48,7 +48,7 @@ void Jaguar::Update(float deltaTime, std::vector<Object*>* objects)
 	this->veclocity.y += 0.0015f*deltaTime;
 
 	if (isOnGround) {
-		this->veclocity.x = 0.2*direction;
+		this->veclocity.x = 0.15*direction;
 		this->jaguar->UpdateSprite();
 	}
 
