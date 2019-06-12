@@ -10,6 +10,7 @@ private:
 	static Stage1 * _instance;
 
 	int numOfJaguar = 0;
+	CSound * soundS1;
 public:
 	Stage1();
 	~Stage1();
