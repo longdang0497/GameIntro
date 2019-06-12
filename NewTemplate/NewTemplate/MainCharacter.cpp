@@ -765,6 +765,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 						}
 						}
 					}
+					this->alreadyGotItem = true;
 				}
 				break;
 			}
