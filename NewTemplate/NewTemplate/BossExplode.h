@@ -1,7 +1,7 @@
 #pragma once
 #include "Object.h"
 
-#define ACTIVE_TIME 5000
+#define ACTIVE_TIME 4000
 class BossExplode : Object
 {
 private:

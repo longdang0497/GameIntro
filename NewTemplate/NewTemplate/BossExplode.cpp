@@ -58,4 +58,5 @@ void BossExplode::SetActive(D3DXVECTOR3 pos)
 {
 	this->SetPosition(pos.x, pos.y);
 	this->isActive = true;
+	this->timeActive = GetTickCount();
 }

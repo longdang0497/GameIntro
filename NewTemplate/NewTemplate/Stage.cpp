@@ -5,11 +5,44 @@ Stage::Stage()
 	this->objects = new vector<Object*>();
 
 	HUD::GetInstance();
+	GameSound::GetInstance();
+	window_handler = Game::GetInstance()->GetHWnd();
+
+	jumpSound = new GameSound();
+	bool soundInit = jumpSound->Init(this->window_handler);
+	if (soundInit == false)
+		return;
+	else
+		jumpS = jumpSound->LoadSound(MAIN_JUMP_SOUND);
+
+	mainSlashSound = new GameSound();
+	bool soundInitSlash = mainSlashSound->Init(this->window_handler);
+	if (soundInitSlash == false)
+		return;
+	else
+		mainSlash = mainSlashSound->LoadSound(MAIN_SLASH_SOUND);
+
+	getItemSound = new GameSound();
+	bool soundInitItem = getItemSound->Init(this->window_handler);
+	if (soundInitItem == false)
+		return;
+	else
+		getItem = getItemSound->LoadSound(GET_ITEM_SOUND);
 }
 
 Stage::~Stage()
 {
-	//if (item != nullptr) delete item;
+	if (jumpSound != nullptr)
+		delete(jumpSound);
+	jumpSound = nullptr;
+
+	if (getItemSound != nullptr)
+		delete(getItemSound);
+	getItemSound = nullptr;
+
+	if (mainSlashSound != nullptr)
+		delete(mainSlashSound);
+	mainSlashSound = nullptr;
 }
 
 void Stage::InitStaticObjects(RECT rect, vector<RECT> *staticObjects)
@@ -108,7 +141,7 @@ void Stage::InitEnemies(LPCWSTR filePath)
 			break;
 		}
 		case EAGLE_ID:
-			//this->objects->push_back(new Eagle(pos, direction, limit1, limit2));
+			this->objects->push_back(new Eagle(pos, 1, 50, 70));
 			break;
 		case ZOMBIE_ID:
 		{
@@ -157,8 +190,12 @@ void Stage::InitItems(D3DXVECTOR3 pos, int objectID)
 void Stage::Update(float deltaTime)
 {
 
-	if (fadeIn || fadeOut)
-		return;
+	if (fadeIn || fadeOut) {
+		if (Game::GetInstance()->GetGameStage() != STAGE3) {
+			return;
+		}
+	}
+		
 
 	if (MainCharacter::GetInstance()->GetPosition().y >= 270)
 	{
@@ -190,6 +227,15 @@ void Stage::Update(float deltaTime)
 	if (k->keyMoveNextPoint)
 	{
 		MoveNextPoint();
+	}
+	if (k->keyJump)
+		jumpSound->Playsound(jumpS);
+	if (k->keyAttack)
+		mainSlashSound->Playsound(mainSlash);
+	if (MainCharacter::GetInstance()->GetGotItem() == true)
+	{
+		getItemSound->Playsound(getItem);
+		MainCharacter::GetInstance()->SetGotItem(false);
 	}
 
 

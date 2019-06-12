@@ -30,6 +30,13 @@ Stage1::~Stage1()
 
 void Stage1::LoadResource()
 {
+	this->objects->clear();
+	MainCharacter::GetInstance()->SetPosition(30.0f,186.8f);
+	bool soundInit = GameSound::GetInstance()->Init(this->window_handler);
+	if (soundInit == false)
+		return;
+	else
+		soundS1 = GameSound::GetInstance()->LoadSound(STAGE1_SOUND);
 
 	this->objects->push_back(MainCharacter::GetInstance());
 
@@ -119,8 +126,8 @@ void Stage1::LoadResource()
 	 /*Enemy* e = new Bat({ 100, 100,0 }, 0, 0, 0);
 	 this->objects->push_back(e);*/
 
-	Enemy* e = new Eagle({ 300, 100, 0.0 }, 1, 50, 70);
-	this->objects->push_back(e);
+	//Enemy* e = new Eagle({ 300, 100, 0.0 }, 1, 50, 70);
+	//this->objects->push_back(e);
 
 	for (int i = 0; i < this->objects->size(); i++) {
 		Grid::GetInstance()->Add(this->objects->at(i));
@@ -177,6 +184,7 @@ void Stage1::FadeInEffect()
 			TimeToFade = GetTickCount();
 			alpha -= 1;
 		}
+		GameSound::GetInstance()->Loopsound(soundS1);
 	}
 	else
 	{
@@ -203,6 +211,7 @@ void Stage1::FadeOutEffect()
 		if (MainCharacter::GetInstance()->GetIsInTheEndOfMap())
 		{
 			Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
+			GameSound::GetInstance()->Stopsound(soundS1);
 			ProcessGame::GetInstance(NULL, 0)->SetGameStage(STAGE2);
 			Game::GetInstance()->SetGameStage(STAGE2);
 			
@@ -217,6 +226,7 @@ void Stage1::FadeOutEffect()
 		else if (MainCharacter::GetInstance()->GetLives() < 0)
 		{
 			Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
+			GameSound::GetInstance()->Stopsound(soundS1);
 			ProcessGame::GetInstance(NULL, 0)->SetGameStage(END_STAGE);
 		}
 	}

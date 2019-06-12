@@ -34,7 +34,7 @@ class MainCharacter : public Object
 {
 private:
 
-	bool Demo = false;
+	bool Demo = true;
 
 	static MainCharacter* _instance;
 	MAIN_CHARACTER_STATE state;
@@ -76,7 +76,7 @@ private:
 	SecondaryWeapon SubWeapon;
 
 	Explode *explode;
-
+	bool alreadyGotItem = false;
 public:
 	MainCharacter();
 	~MainCharacter();
@@ -130,6 +130,8 @@ public:
 	int GetEnergy() { return this->Energy; }
 	void SetEnergy(int a) { this->Energy = a; }
 
+	bool GetGotItem() { return this->alreadyGotItem; }
+	void SetGotItem(bool value) { this->alreadyGotItem = value; }
 
 	SecondaryWeapon GetSubWeapon() { return this->SubWeapon; }
 };

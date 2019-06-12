@@ -1,52 +1,28 @@
 #pragma once
-#include "dsound.h"
-#include "windows.h"
-#include <map>
-#include <string>
-#include <iostream>
-#include <mmsystem.h>
-#pragma comment(lib, "dsound.lib")
-#pragma comment(lib, "dxguid.lib")
-#pragma comment(lib, "winmm.lib")
+#include <dsound.h>
+#include "SDKsound.h"
+#include "SDKwavefile.h"
+using namespace std;
 
-
-class Sound
+//function prototypes
+class GameSound
 {
-	struct WaveHeaderStruct
-	{
-		char chunkId[4];
-		unsigned long chunkSize;
-		char format[4];
-		char subChunkId[4];
-		unsigned long subChunkSize;
-		unsigned short audioFormat;
-		unsigned short numChannels;
-		unsigned long sampleRate;
-		unsigned long bytesPerSecond;
-		unsigned short blockAlign;
-		unsigned short bitsPerSample;
-		char dataChunkId[4];
-		unsigned long dataSize;
-	};
-	float volume;
-	void static create(HWND hWnd);
-	void setVolume(float percentage, std::string name = "");
-	void loadSound(char* fileName, std::string name);
-	void play(std::string name, bool infiniteLoop, int times);
-	void stop(std::string name = "");
-	float getVolume();
-	~Sound();
-	static Sound* getInstance();
-	void mute();
-	void unMute();
-	void cleanUp();
-private:
-	Sound(HWND hWnd);
-	static Sound * instance;
-	IDirectSound8* pDevice;
-	IDirectSoundBuffer* primaryBuffer;
-	std::map<std::string, IDirectSoundBuffer8*> soundBufferMap;
-	bool isMute;
+	//primary DirectSound object
+	CSoundManager *dsound;
+	static GameSound* _instance;
+public:
+	GameSound();
 
+	static GameSound* GetInstance() {
+		if (_instance == NULL) _instance = new GameSound();
+		return _instance;
+	}
+
+	bool InitializeDirectSound(HWND);
+	bool Init(HWND);
+	CSound *LoadSound(LPTSTR);
+	void Playsound(CSound *);
+	void Loopsound(CSound *);
+	void Stopsound(CSound *);
+	static bool m_isSoundOff;
 };
-
