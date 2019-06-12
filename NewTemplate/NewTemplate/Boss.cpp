@@ -17,6 +17,7 @@ Boss::Boss()
 	this->bossState = BOSS_STAND;
 	this->countToShoot = 3;
 	this->SetPosition(191, 178);
+	this->isDeath = false;
 
 	this->bullets = new vector<BossBullet*>();
 	BossBullet *bullet1 = new BossBullet();
@@ -65,9 +66,9 @@ void Boss::Update(float deltaTime, std::vector<Object*>* objects)
 	}
 
 	if (this->HP <= 0 && this->isDeath) {
-		if (GetTickCount() - StartExplode > 5000)
+		if (GetTickCount() - StartExplode > 4000)
 		{
-
+			this->End = true;
 		}
 		return;
 	}
@@ -135,9 +136,8 @@ void Boss::Update(float deltaTime, std::vector<Object*>* objects)
 
 void Boss::Render()
 {
-	for (auto it : *this->bossExplodes) {
-		it->Render();
-	}
+
+	Object::Render();
 
 	if (!this->isActive) {
 		return;
@@ -177,7 +177,9 @@ void Boss::Render()
 		break;
 	}
 
-
+	for (auto it : *this->bossExplodes) {
+		it->Render();
+	}
 }
 
 void Boss::HandleCollision(vector<Object*>* objects)
@@ -188,10 +190,10 @@ void Boss::HandleCollision(vector<Object*>* objects)
 void Boss::GetBoundingBox(float & l, float & t, float & r, float & b)
 {
 	if (this->HP > 0) {
-		l = position.x;
+		l = position.x + 2;
 		t = position.y;
-		r = l + objectWidth;
-		b = t + objectHeight;
+		r = l + objectWidth - 2;
+		b = t + objectHeight - 5;
 	}
 	else
 		l = t = r = b = 0;
@@ -203,8 +205,6 @@ void Boss::Destroy()
 	this->bossExplodes->at(1)->SetActive({ this->position.x + BOSS_WIDTH - 10, this->position.y + 5, 0 });
 	this->bossExplodes->at(2)->SetActive({ this->position.x - 3, this->position.y + BOSS_HEIGHT - 8, 0 });
 	this->bossExplodes->at(3)->SetActive({ this->position.x + BOSS_WIDTH - 10, this->position.y + BOSS_HEIGHT - 1, 0 });
-
-
 }
 
 void Boss::Hurt() {

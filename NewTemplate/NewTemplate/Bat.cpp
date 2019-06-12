@@ -13,6 +13,7 @@ Bat::Bat(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX2) : E
 void Bat::Update(float deltaTime, std::vector<Object*>* objects)
 {
 	if (this->HP <= 0 ) {
+		this->Destroy();
 		return;
 	}
 
@@ -75,6 +76,14 @@ void Bat::HandleCollision(vector<Object*>* objects)
 
 void Bat::GetBoundingBox(float & l, float & t, float & r, float & b)
 {
+	if (this->isActive) {
+		t = this->position.y;
+		l = this->position.x;
+		r = l + 15;
+		b = t + 13;
+	}
+	else
+		l = t = r = b = 0;
 }
 
 void Bat::Destroy()

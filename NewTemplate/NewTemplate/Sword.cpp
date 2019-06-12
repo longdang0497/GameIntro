@@ -40,7 +40,6 @@ void Sword::Update(float t, vector<Object*> *object)
 		switch (iter->GetObjectType())
 		{
 		case GREEN_SOLDIER:
-		
 		case JAGUAR:
 		case SOLDIER: 
 		case BAT:

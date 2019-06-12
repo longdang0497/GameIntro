@@ -23,6 +23,10 @@ Stage3::~Stage3()
 
 void Stage3::LoadResource()
 {
+	this->objects->clear();
+
+	MainCharacter::GetInstance()->SetPosition(30.0f, 193.8f);
+
 	this->objects->push_back(MainCharacter::GetInstance());
 
 	this->map = new Map(PATH_POS_MAP_3, PATH_TEXTURE_MAP_3, ID_TEXTURE_MAP_3);
@@ -55,7 +59,6 @@ void Stage3::LoadResource()
 	}
 
 	fs.close();
-	MainCharacter::GetInstance()->SetPosition(50, 120);
 
 	this->objects->push_back(Boss::GetInstance());
 
@@ -92,10 +95,6 @@ void Stage3::Update(float deltaTime)
 void Stage3::Render()
 {
 	Stage::Render();
-	if (fadeIn)
-	{
-		FadeInEffect();
-	}
 	if (fadeOut)
 		FadeOutEffect();
 }

@@ -30,7 +30,8 @@ Stage1::~Stage1()
 
 void Stage1::LoadResource()
 {
-
+	this->objects->clear();
+	MainCharacter::GetInstance()->SetPosition(30.0f,186.8f);
 	this->objects->push_back(MainCharacter::GetInstance());
 
 	this->map = new Map(PATH_POS_MAP_1, PATH_TEXTURE_MAP_1, ID_TEXTURE_MAP_1);
@@ -119,8 +120,8 @@ void Stage1::LoadResource()
 	 /*Enemy* e = new Bat({ 100, 100,0 }, 0, 0, 0);
 	 this->objects->push_back(e);*/
 
-	Enemy* e = new Eagle({ 300, 100, 0.0 }, 1, 50, 70);
-	this->objects->push_back(e);
+	//Enemy* e = new Eagle({ 300, 100, 0.0 }, 1, 50, 70);
+	//this->objects->push_back(e);
 
 	for (int i = 0; i < this->objects->size(); i++) {
 		Grid::GetInstance()->Add(this->objects->at(i));

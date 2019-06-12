@@ -35,6 +35,8 @@ void Stage2::LoadResource()
 {
 	objects->clear();
 
+	MainCharacter::GetInstance()->SetPosition(10.0f, 183.8f);
+
 	this->objects->push_back(MainCharacter::GetInstance());
 	
 

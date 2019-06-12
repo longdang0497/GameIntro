@@ -610,6 +610,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			case BAZOOKA_BULLET:
 			case SOLDIER:
 			case BOSS:
+			case BOSS_BULLET:
 			case ZOMBIE:
 			case BAT:
 			case EAGLE:
@@ -790,11 +791,8 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			{
 			case JAGUAR:
 			case SOLDIER:
-			case BOSS:
 			case BAT:
 			case EAGLE:
-			case BOSS_BULLET:
-			//case BUTTERFLY:
 			case ZOMBIE:
 			case ZOMBIE_SWORD:
 			{	
@@ -926,8 +924,8 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 
 void MainCharacter::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
-	l = position.x;
-	r = l + 22;
+	l = position.x + 2;
+	r = l + 18;
 	//t = position.y;
 	//b = t + 31;
 

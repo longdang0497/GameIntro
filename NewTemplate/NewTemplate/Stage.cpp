@@ -108,7 +108,7 @@ void Stage::InitEnemies(LPCWSTR filePath)
 			break;
 		}
 		case EAGLE_ID:
-			//this->objects->push_back(new Eagle(pos, direction, limit1, limit2));
+			this->objects->push_back(new Eagle(pos, 1, 50, 70));
 			break;
 		case ZOMBIE_ID:
 		{
@@ -157,8 +157,12 @@ void Stage::InitItems(D3DXVECTOR3 pos, int objectID)
 void Stage::Update(float deltaTime)
 {
 
-	if (fadeIn || fadeOut)
-		return;
+	if (fadeIn || fadeOut) {
+		if (Game::GetInstance()->GetGameStage() != STAGE3) {
+			return;
+		}
+	}
+		
 
 	if (MainCharacter::GetInstance()->GetPosition().y >= 270)
 	{
