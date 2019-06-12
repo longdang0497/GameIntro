@@ -12,6 +12,7 @@
 #include "EndStage.h"
 
 
+
 class ProcessGame
 {
 private:
@@ -21,6 +22,9 @@ private:
 
 	DWORD Time; //dung cho chuyen canh
 	int alpha;
+
+
+
 
 public:
 	ProcessGame(HINSTANCE hInstance, int nShowCmd);

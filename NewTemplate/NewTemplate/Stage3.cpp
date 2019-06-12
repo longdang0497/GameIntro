@@ -23,12 +23,6 @@ Stage3::~Stage3()
 
 void Stage3::LoadResource()
 {
-	bool soundInit = GameSound::GetInstance()->Init(this->window_handler);
-	if (soundInit == false)
-		return;
-	else
-		soundS3 = GameSound::GetInstance()->LoadSound(STAGE3_SOUND);
-
 	this->objects->push_back(MainCharacter::GetInstance());
 
 	this->map = new Map(PATH_POS_MAP_3, PATH_TEXTURE_MAP_3, ID_TEXTURE_MAP_3);
@@ -116,7 +110,6 @@ void Stage3::FadeInEffect()
 			TimeToFade = GetTickCount();
 			alpha -= 1;
 		}
-		GameSound::GetInstance()->Loopsound(soundS3);
 	}
 	else
 	{
@@ -152,13 +145,11 @@ void Stage3::FadeOutEffect()
 		{
 			Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
 			ProcessGame::GetInstance(NULL, 0)->SetGameStage(END_STAGE);
-			GameSound::GetInstance()->Stopsound(soundS3);
 		}
 		else
 		{
 			Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
 			ProcessGame::GetInstance(NULL, 0)->SetGameStage(END_STAGE);
-			GameSound::GetInstance()->Stopsound(soundS3);
 		}
 	}
 }

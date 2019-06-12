@@ -26,18 +26,10 @@ Stage1::Stage1()
 
 Stage1::~Stage1()
 {
-	if (soundS1 != nullptr)
-		delete (soundS1);
-	soundS1 = nullptr;
 }
 
 void Stage1::LoadResource()
 {
-	bool soundInit = GameSound::GetInstance()->Init(this->window_handler);
-	if (soundInit == false)
-		return;
-	else
-		soundS1 = GameSound::GetInstance()->LoadSound(STAGE1_SOUND);		
 
 	this->objects->push_back(MainCharacter::GetInstance());
 
@@ -185,18 +177,16 @@ void Stage1::FadeInEffect()
 			TimeToFade = GetTickCount();
 			alpha -= 1;
 		}
-		GameSound::GetInstance()->Loopsound(soundS1);
 	}
 	else
 	{
 		fadeIn = false;
 		TimeToFade = GetTickCount();
 	}
-	
 }
 
 void Stage1::FadeOutEffect()
-{	
+{
 	if (alpha < 255)
 	{
 		if (GetTickCount() - TimeToFade > 20)
@@ -212,10 +202,10 @@ void Stage1::FadeOutEffect()
 
 		if (MainCharacter::GetInstance()->GetIsInTheEndOfMap())
 		{
-			GameSound::GetInstance()->Stopsound(soundS1);
 			Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
 			ProcessGame::GetInstance(NULL, 0)->SetGameStage(STAGE2);
-			Game::GetInstance()->SetGameStage(STAGE2);			
+			Game::GetInstance()->SetGameStage(STAGE2);
+			
 		}
 		else if (MainCharacter::GetInstance()->GetRepawn())
 		{
@@ -226,9 +216,8 @@ void Stage1::FadeOutEffect()
 		}
 		else if (MainCharacter::GetInstance()->GetLives() < 0)
 		{
-			GameSound::GetInstance()->Stopsound(soundS1);
 			Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
-			ProcessGame::GetInstance(NULL, 0)->SetGameStage(END_STAGE);			
+			ProcessGame::GetInstance(NULL, 0)->SetGameStage(END_STAGE);
 		}
-	}	
+	}
 }

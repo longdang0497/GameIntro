@@ -52,7 +52,7 @@ void Soldier::Update(float deltaTime, std::vector<Object*>* objects)
 	this->veclocity.y += 0.0015f*deltaTime;
 
 	if (isOnGround) {
-		this->veclocity.x = 0.015*direction;
+		this->veclocity.x = 0.02*direction;
 		this->currentSprite->UpdateSprite();
 	}
 

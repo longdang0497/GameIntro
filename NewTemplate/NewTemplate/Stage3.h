@@ -7,8 +7,6 @@ class Stage3 : public Stage
 {
 private:
 	static Stage3* _instance;
-
-	CSound * soundS3;
 public:
 	Stage3();
 	~Stage3();
