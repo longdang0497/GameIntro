@@ -65,7 +65,7 @@ void Zombie::Update(float deltaTime, std::vector<Object*>* objects)
 
 	int t = MainCharacter::GetInstance()->GetPosition().x;
 
-	if (abs(t - position.x) <= 100)
+	if (abs(t - position.x) <= 300)
 	{
 		currentSprite = ZombieKill;
 	}
