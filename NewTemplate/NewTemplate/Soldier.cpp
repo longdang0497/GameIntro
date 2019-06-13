@@ -22,10 +22,10 @@ void Soldier::Update(float deltaTime, std::vector<Object*>* objects)
 		return;
 	
 
-	if (limitX1 != 0  && limitX2!=0)
+	if (limitX1 != 0 && limitX2 != 0)
 
 	{
-		if ( position.x >= limitX2 && direction == RIGHT)
+		if (position.x >= limitX2 && direction == RIGHT)
 		{
 			direction = LEFT;
 		}
@@ -35,6 +35,8 @@ void Soldier::Update(float deltaTime, std::vector<Object*>* objects)
 			direction = RIGHT;
 		}
 	}
+	else if (limitX1 == 0 && limitX2 == 0)
+		this->veclocity.x = 0;
 
 	int t = MainCharacter::GetInstance()->GetPosition().x;
 

@@ -59,14 +59,14 @@ void GreenSodier::Update(float deltaTime, std::vector<Object*>* objects)
 	// Xét theo camera bên phải
 	if (this->enemyAppearanceDirection == 1) {
 		int temp = Camera::GetInstance()->getPosition().x + Graphic::GetInstance(NULL, NULL, L"", 1)->GetWidth();
-		if (temp - this->position.x <= 3.0 && temp - this->position.x >= 0.0) {
+		if (temp - this->position.x <= 3.0 && temp - this->position.x >= 0.0 && this->isActive == false) {
 			this->isActive = true;
 			this->direction = -1;
 		}
 	}
 	// Xét theo camera bên trái
 	else {
-		if (Camera::GetInstance()->getPosition().x - this->position.x <= 5.0 && Camera::GetInstance()->getPosition().x - this->position.x >= 0.0) {
+		if (Camera::GetInstance()->getPosition().x - this->position.x <= 8.0 && Camera::GetInstance()->getPosition().x - this->position.x >= 3.0 && this->isActive == false) {
 			this->isActive = true;
 			this->direction = 1;
 		}
@@ -80,13 +80,14 @@ void GreenSodier::Update(float deltaTime, std::vector<Object*>* objects)
 		return;
 	}
 
-	if (position.x >= limitX2 && direction == RIGHT)
+	if (position.x >= limitX2 && direction == RIGHT && limitX2 != 1738)
 		direction = LEFT;
+	
+	if (position.x <= limitX1 && direction == LEFT && limitX1 != 1609)
+		direction = RIGHT;		
 
-	if (position.x <= limitX1 && direction == LEFT)
-		direction = RIGHT;
-
-	if (GetTickCount() - WaitTime > 1200 && !isShooting && state == 1)
+	DWORD temp = GetTickCount() - WaitTime;
+	if (temp >= 10000 && !isShooting && state == 1)
 	{
 		count = 0;
 		isShooting = true;

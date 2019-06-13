@@ -11,7 +11,7 @@ private:
 	int spriteDirection;
 
 	DWORD changeSpriteDirectionTime;
-
+	DWORD WaitTime;
 public:
 	BazookaBullet();
 	BazookaBullet(D3DXVECTOR3 pos, int direction);

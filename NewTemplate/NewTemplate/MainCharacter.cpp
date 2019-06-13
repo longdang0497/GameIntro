@@ -605,16 +605,16 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 		{
 			switch (iter->GetObjectType())
 			{
-			case JAGUAR:
-			case GREEN_SOLDIER:
-			case BAZOOKA_BULLET:
+			//case JAGUAR:
+			//case GREEN_SOLDIER:
+			//case BAZOOKA_BULLET:
 			case SOLDIER:
 			case BOSS:
-			case BOSS_BULLET:
+			//case BOSS_BULLET:
 			case ZOMBIE:
-			case BAT:
-			case EAGLE:
-			case ZOMBIE_SWORD:
+			//case BAT:
+			//case EAGLE:
+			//case ZOMBIE_SWORD:
 			{
 				if (Demo)
 				{
@@ -790,10 +790,10 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 		if (iter->obj->GetIsActive()) {
 			switch (iter->obj->GetObjectType())
 			{
-			case JAGUAR:
+			//case JAGUAR:
 			case SOLDIER:
-			case BAT:
-			case EAGLE:
+			//case BAT:
+			//case EAGLE:
 			case ZOMBIE:
 			case ZOMBIE_SWORD:
 			{	

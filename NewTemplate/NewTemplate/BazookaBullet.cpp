@@ -11,6 +11,7 @@ BazookaBullet::BazookaBullet()
 	spriteDirection = RIGHT;
 	isActive = false;
 	changeSpriteDirectionTime = GetTickCount();
+	WaitTime = GetTickCount();
 }
 
 BazookaBullet::~BazookaBullet()
@@ -45,15 +46,13 @@ void BazookaBullet::Update(float deltaTime, vector<Object*>* object)
 
 		Object::Update(deltaTime, object);
 
-		if (GetTickCount() - changeSpriteDirectionTime >= 50)
+		DWORD temp = GetTickCount() - WaitTime;
+		if (temp >= 15000)
 		{
-			if (spriteDirection == LEFT)
-				spriteDirection = RIGHT;
-			else
-				spriteDirection = LEFT;
-
-			changeSpriteDirectionTime = GetTickCount();
+			//this->isActive = false;
+			this->HP = 0;
 		}
+
 		//this->veclocity.x = 0.1f*direction;
 		//this->veclocity.y = 0;
 		
