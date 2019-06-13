@@ -330,7 +330,7 @@ void MainCharacter::KeyBoardHandle()
 	{
 		if (k->keyChangeGameMode && Energy > 0)
 		{
-			if (SubWeapon == SW_jump_Scroll_Kill && allowJump && Energy>=5)
+			if (SubWeapon == SW_jump_Scroll_Kill && allowJump && Energy >= 5)
 			{
 				allowJump = false;
 				Energy -= 5;
@@ -347,7 +347,7 @@ void MainCharacter::KeyBoardHandle()
 			}
 			else if (SubWeapon == SW_windmill && Windmill::GetInstance()->GetIsActive() == false && Energy >= 3)
 			{
-				Windmill::GetInstance()->SetPosition(this->position.x, this->position.y+5);
+				Windmill::GetInstance()->SetPosition(this->position.x, this->position.y + 5);
 				Windmill::GetInstance()->SetDirection(this->direction);
 				Windmill::GetInstance()->Reset();
 				Windmill::GetInstance()->SetIsActive(true);
@@ -447,7 +447,7 @@ void MainCharacter::KeyBoardHandle()
 			if (k->keyLeft)
 			{
 				direction = LEFT;
-				if (GetState() == STATE_JUMP || GetState()==STATE_JUMP_SCROLL_HIT)
+				if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_SCROLL_HIT)
 					SetState(STATE_JUMP_TO);
 				else if (GetState() == STATE_JUMP_ATTACK)
 					SetState(STATE_JUMP_ATTACK_TO);
@@ -537,6 +537,7 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
 		this->PlusPosition(this->deltaX, this->deltaY);
 		isOnGround = false;
 
+
 	}
 	else {
 		float minTx, minTy, nX = 0, nY;
@@ -564,7 +565,7 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
 					{
 						this->veclocity.y = 0;
 						isOnGround = true;
-						if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_HURT )
+						if (GetState() == STATE_JUMP || GetState() == STATE_JUMP_TO || GetState() == STATE_HURT)
 						{
 							position.y -= 10;
 							startStanding = GetTickCount();
@@ -580,7 +581,7 @@ void MainCharacter::HandleCollisionWithStaticObject(vector<Object*> * objects)
 				}
 				break;
 			}
-			
+
 			default:
 			{
 				break;
@@ -633,14 +634,14 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 								}
 								else
 								{
-									if(Demo)
+									if (Demo)
 										SetState(STATE_HURT);
 								}
 							}
 						}
 
 						break;
-					}   
+					}
 				}
 				break;
 			}
@@ -672,36 +673,34 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 				iter->GetBoundingBox(bl, bt, br, bb);
 				if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
 				{
-					if(state!= STATE_ON_LADDER && state != STATE_CLIMBING)
+					if (state != STATE_ON_LADDER && state != STATE_CLIMBING)
 						SetState(STATE_ON_LADDER);
 					break;
 				}
+				break;
 			}
 			case ITEM:
 			{
-				float al, at, ar, ab, bl, bt, br, bb;
-				GetBoundingBox(al, at, ar, ab);
-				iter->GetBoundingBox(bl, bt, br, bb);
-				if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
+				if (iter->GetActive() && iter->GetHP() > 0)
 				{
-					if (iter->GetActive())
+					float al, at, ar, ab, bl, bt, br, bb;
+					GetBoundingBox(al, at, ar, ab);
+					iter->GetBoundingBox(bl, bt, br, bb);
+					if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
 					{
 						iter->SetActive(false);
 						Item* it = dynamic_cast<Item*>(iter);
+						it->SetHP(0);
 						switch (it->GetObjID())
 						{
 						case 0: //enery + 5
 						{
-							this->Energy += it->GetValue();
-							it->SetValue(0);
-							it->SetActive(false);
+							this->Energy += 5;
 							break;
 						}
 						case 1: //enery + 10
 						{
-							this->Energy += it->GetValue();
-							it->SetValue(0);
-							it->SetActive(false);
+							this->Energy += 10;
 							break;
 						}
 						case 2:
@@ -715,7 +714,6 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 						{
 							SubWeapon = SW_windmill;
 							break;
-							break;
 						}
 						case 4: //Restore
 						{
@@ -724,6 +722,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 						}
 						case 5:
 						{
+
 							this->score += 500;
 							break;
 						}
@@ -746,7 +745,6 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 							this->HP += 16;
 							if (this->HP > 16)
 								this->HP = 16;
-
 							break;
 						}
 						case 12:
@@ -769,12 +767,12 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 				}
 				break;
 			}
-			
+
 			default:
 			{
 				break;
 			}
-			
+
 			}
 		}
 	}
@@ -796,7 +794,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			case EAGLE:
 			case ZOMBIE:
 			case ZOMBIE_SWORD:
-			{	
+			{
 				if (!StopWatch)
 				{
 					if (GetState() == STATE_JUMP_SCROLL_HIT)
@@ -806,19 +804,19 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 					}
 					else
 					{
-						if(Demo)
+						if (Demo)
 							SetState(STATE_HURT);
 					}
 				}
-				
-			break;
+
+				break;
 			}
 			case HIDE_OBJECT:
 			{
 				HideObject* h = dynamic_cast<HideObject*> (iter->obj);
 				if ((h->getType() == TOP_LADDER || h->getType() == BOTTOM_LADDER) && (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING))
 				{
-					
+
 					SetState(STATE_FALL);
 				}
 				else if (h->getType() == END_MAP)
@@ -835,23 +833,21 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			}
 			case ITEM:
 			{
-				if (iter->obj->GetActive())
+				if (iter->obj->GetActive() && iter->obj->GetHP()>0)
 				{
 					iter->obj->SetActive(false);
+					iter->obj->SetHP(0);
 					Item* it = dynamic_cast<Item*>(iter->obj);
 					switch (it->GetObjID())
 					{
 					case 0: //enery + 5
 					{
-						this->Energy += it->GetValue();
-						it->SetValue(0);
-						it->SetActive(false);
+						this->Energy += 5;
 						break;
 					}
 					case 1: //enery + 10
 					{
-						this->Energy += it->GetValue();
-						it->SetValue(0);
+						this->Energy += 10;
 						it->SetActive(false);
 						break;
 					}
@@ -864,21 +860,12 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 
 					case 3:
 					{
-						SubWeapon =  SW_windmill;
-						break;
+						SubWeapon = SW_windmill;
 						break;
 					}
 					case 4: //Restore
 					{
 						SubWeapon = SW_shuriken;
-						break;
-					}
-					case 9://jump Scroll
-					{
-						this->HP += 16;
-						if (this->HP > 16)
-							this->HP = 16;
-						
 						break;
 					}
 					case 5:
@@ -891,9 +878,20 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 						this->score += 1000;
 						break;
 					}
-					case 11: 
+					case 8: //taoj vong lua
+					{
+						break;
+					}
+					case 11://jump Scroll
 					{
 						SubWeapon = SW_jump_Scroll_Kill;
+						break;
+					}
+					case 9://jump Scroll
+					{
+						this->HP += 16;
+						if (this->HP > 16)
+							this->HP = 16;
 						break;
 					}
 					case 12:
@@ -907,9 +905,12 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 						break;
 					}
 					default:
+					{
 						break;
 					}
+					}
 				}
+				this->alreadyGotItem = true;
 				break;
 			}
 			default:
@@ -926,7 +927,7 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 void MainCharacter::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
 	l = position.x + 2;
-	r = l + 18;
+	r = l + 16;
 	//t = position.y;
 	//b = t + 31;
 
@@ -952,6 +953,7 @@ void MainCharacter::GetBoundingBox(float& l, float& t, float& r, float& b)
 		//r = position.x + 17;
 		b = position.y + 31;
 	}
+
 	else
 	{
 		//l = position.x;

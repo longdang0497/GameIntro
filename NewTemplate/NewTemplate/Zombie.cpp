@@ -15,12 +15,12 @@ Zombie::Zombie(D3DXVECTOR3 pos, int appearanceDirection, int limitX1, int limitX
 
 	this->Swords = new vector<ZombieSword*>();
 	ZombieSword *S1 = new ZombieSword();
-	ZombieSword *S2 = new ZombieSword();
-	ZombieSword *S3 = new ZombieSword();
+	//ZombieSword *S2 = new ZombieSword();
+	//ZombieSword *S3 = new ZombieSword();
 
 	Swords->push_back(S1);
-	Swords->push_back(S2); 
-	Swords->push_back(S3);
+	/*Swords->push_back(S2); 
+	Swords->push_back(S3);*/
 
 	WaitTime = GetTickCount();
 	Throwing = false;
@@ -52,7 +52,7 @@ void Zombie::Update(float deltaTime, std::vector<Object*>* objects)
 		direction = RIGHT;
 	}
 
-	if (GetTickCount() - WaitTime > 1200 && !Throwing && currentSprite == ZombieKill)
+	if (GetTickCount() - WaitTime > 2000 && !Throwing && currentSprite == ZombieKill)
 	{
 		count = 0;
 		Throwing = true;
@@ -183,7 +183,7 @@ void Zombie::Destroy()
 
 void Zombie::Throw()
 {
-	if(count!=3)
+	if(count!=1)
 	{
 		if (GetTickCount() - WaitNext >= 400)
 		{

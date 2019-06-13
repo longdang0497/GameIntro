@@ -103,8 +103,10 @@ void GreenSodier::Update(float deltaTime, std::vector<Object*>* objects)
 
 	if (isOnGround)
 	{
-		if (this->state == 0 || this->state == 2)
+		if (this->state == 2)
 			this->veclocity.x = 0.08 * direction;
+		else if(this->state == 0)
+			this->veclocity.x = 0.04 * direction;
 		else
 			this->veclocity.x = 0;
 		this->currentSprite->UpdateSprite();

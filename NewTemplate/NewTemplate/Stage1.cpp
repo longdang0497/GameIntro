@@ -13,7 +13,7 @@ Stage1::Stage1()
 	Camera::GetInstance()->setWorldBoundary(2048);
 
 	SpecialPoint.push_back(0);
-	SpecialPoint.push_back(750);
+	SpecialPoint.push_back(700);
 	SpecialPoint.push_back(1880);
 
 	alpha = 255;
