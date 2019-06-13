@@ -1,6 +1,6 @@
 ﻿#include "Item.h"
 
-Item* Item::_instance = NULL;
+//Item* Item::_instance = NULL;
 
 Item::Item()
 {
@@ -42,11 +42,9 @@ void Item::InitItemSprite()
 {
 	switch (this->objectID) {
 	case BLUE_R_ID: // SPIRITUAL STRENGTH 5 POINTS
-		this->value = 5;
 		this->currentSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_BLUE_R);
 		break;
 	case ORANGE_R_ID: // SPIRITUAL STRENGTH 10 POINTS
-		this->value = 10;
 		this->currentSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_MAIN), PATH_ORANGE_R);
 		break;
 	case BLUE_DART_ID: // THROWING STAR
@@ -101,6 +99,7 @@ void Item::Update(float deltaTime, std::vector<Object*>* objects)
 	{
 		if (HP <= 0)
 			return;
+
 		alpha = 255;
 
 		Object::Update(deltaTime, objects);
@@ -135,10 +134,13 @@ void Item::Update(float deltaTime, std::vector<Object*>* objects)
 
 void Item::Render()
 {
+
+
 	if (this->isActive == true)
 	{
 		if (HP <= 0)
 			return;
+
 
 		Object::Render();
 		this->position.z = 0;
@@ -146,6 +148,7 @@ void Item::Render()
 		D3DXVECTOR3 pos = Camera::GetInstance()->transformObjectPosition(position);
 		this->currentSprite->DrawSprite(pos, false, alpha);
 	}
+	
 }
 
 void Item::HandleCollision(vector<Object*>* objects)
@@ -188,7 +191,9 @@ void Item::HandleCollision(vector<Object*>* objects)
 
 void Item::GetBoundingBox(float & l, float & t, float & r, float & b)
 {
-	if (this->isActive == true)
+	
+
+	if (this->isActive == true && HP > 0)
 	{
 		l = position.x;
 		t = position.y;

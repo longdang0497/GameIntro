@@ -5,7 +5,7 @@
 class Item : public Object
 {
 protected:
-	static Item* _instance;
+	//static Item* _instance;
 	int strength;
 	int alpha = 255;	// Sử dụng khi item hết thời gian hiển thị
 	//D3DXVECTOR3 defaultPosition;
@@ -13,8 +13,7 @@ protected:
 	int objectID;
 	float timeAppear = 0;
 
-	
-	int value = 0;
+
 public:
 	Item();
 	Item(D3DXVECTOR3 pos, int objectID);
@@ -30,10 +29,10 @@ public:
 
 	/*D3DXVECTOR3 GetPosition() { return this->defaultPosition; }
 	void SetPo(D3DXVECTOR3 value) { this->strength = value; }*/
-	static Item* GetInstance() {
-		if (_instance == NULL) _instance = new Item();
-		return _instance;
-	}
+	//static Item* GetInstance() {
+	//	if (_instance == NULL) _instance = new Item();
+	//	return _instance;
+	//}
 
 	//void SetTimeAppear() { this->startAppear = GetTickCount(); }
 
@@ -43,8 +42,6 @@ public:
 	void GetBoundingBox(float &l, float &t, float &r, float &b);
 	void Destroy();
 
-	int GetValue() { return this->value; }
-	void SetValue(int a) { this->value = a; }
 };
 
 
