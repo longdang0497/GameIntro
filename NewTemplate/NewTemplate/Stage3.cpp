@@ -143,6 +143,7 @@ void Stage3::FadeOutEffect()
 		{
 			MainCharacter::GetInstance()->LoseLive();
 			MainCharacter::GetInstance()->SetPosition(50, 80);
+			MainCharacter::GetInstance()->SetDirection(RIGHT);
 			MainCharacter::GetInstance()->SetHP(16);
 			MainCharacter::GetInstance()->SetRepawn(false);
 		}

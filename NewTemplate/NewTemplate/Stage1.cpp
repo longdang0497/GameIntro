@@ -221,6 +221,7 @@ void Stage1::FadeOutEffect()
 			MainCharacter::GetInstance()->LoseLive();
 			MainCharacter::GetInstance()->SetPosition(50, 80);
 			MainCharacter::GetInstance()->SetHP(16);
+			MainCharacter::GetInstance()->SetDirection(RIGHT);
 			this->ResetEnemyPosition();
 			MainCharacter::GetInstance()->SetRepawn(false);
 		}

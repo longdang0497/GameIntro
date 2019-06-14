@@ -17,6 +17,9 @@ public:
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 
 	HIDE_OBJECT_TYPE getType() { return this->type; }
+
+	float GetTop();
+	float GetBottom();
 	
 };
 

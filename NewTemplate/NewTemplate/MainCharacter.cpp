@@ -143,7 +143,7 @@ void MainCharacter::SetState(MAIN_CHARACTER_STATE value)
 	case STATE_HURT:
 		currentSprite = hurtSprite;
 		this->Hurt();
-		SetVeclocity(-0.15 * direction, -0.2);
+		SetVeclocity(-0.1 * direction, -0.2);
 		isOnGround = false;
 		startHurting = GetTickCount();
 		isHurting = true;
@@ -606,16 +606,16 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 		{
 			switch (iter->GetObjectType())
 			{
-			//case JAGUAR:
-			//case GREEN_SOLDIER:
-			//case BAZOOKA_BULLET:
+			case JAGUAR:
+			case GREEN_SOLDIER:
+			case BAZOOKA_BULLET:
 			case SOLDIER:
 			case BOSS:
-			//case BOSS_BULLET:
+			case BOSS_BULLET:
 			case ZOMBIE:
-			//case BAT:
-			//case EAGLE:
-			//case ZOMBIE_SWORD:
+			case BAT:
+			case EAGLE:
+			case ZOMBIE_SWORD:
 			{
 				if (Demo)
 				{
@@ -653,11 +653,23 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 				if (Game::GetInstance()->IsIntersect({ long(al),long(at),long(ar),long(ab) }, { long(bl), long(bt), long(br), long(bb) }))
 				{
 					HideObject* h = dynamic_cast<HideObject*> (iter);
-					if ((h->getType() == TOP_LADDER || h->getType() == BOTTOM_LADDER) && (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING))
+					//if ((h->getType() == TOP_LADDER || h->getType() == BOTTOM_LADDER) && (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING))
+					//{
+					//	//SetVy(0);
+					//	SetState(STATE_FALL);
+					//}
+					if (h->getType() == TOP_LADDER && GetState() == STATE_CLIMBING)
 					{
-						//SetVy(0);
-						SetState(STATE_FALL);
+						if (this->position.y< h->GetBottom())
+							this->position.y = h->GetBottom();
 					}
+					else
+						if (h->getType() == BOTTOM_LADDER
+							&& GetState() == STATE_CLIMBING)
+						{
+							if ((this->position.y + 31) > h->GetTop())
+								this->position.y = h->GetTop()-31;
+						}
 					else if (h->getType() == END_MAP)
 					{
 						isInTheEndOfMap = true;
@@ -788,10 +800,10 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 		if (iter->obj->GetIsActive()) {
 			switch (iter->obj->GetObjectType())
 			{
-			//case JAGUAR:
+			case JAGUAR:
 			case SOLDIER:
-			//case BAT:
-			//case EAGLE:
+			case BAT:
+			case EAGLE:
 			case ZOMBIE:
 			case ZOMBIE_SWORD:
 			{
@@ -814,11 +826,27 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 			case HIDE_OBJECT:
 			{
 				HideObject* h = dynamic_cast<HideObject*> (iter->obj);
-				if ((h->getType() == TOP_LADDER || h->getType() == BOTTOM_LADDER) && (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING))
-				{
+				//if ((h->getType() == TOP_LADDER || h->getType() == BOTTOM_LADDER) && (GetState() == STATE_ON_LADDER || GetState() == STATE_CLIMBING))
+				//{
 
-					SetState(STATE_FALL);
+				//	//SetState(STATE_FALL);
+
+
+
+
+				//}
+
+				if (h->getType() == TOP_LADDER && GetState() == STATE_CLIMBING)
+				{
+					if (this->position.y < h->GetBottom())
+						this->position.y = h->GetBottom();
 				}
+				else 
+					if (h->getType() == BOTTOM_LADDER && GetState() == STATE_CLIMBING)
+					{
+						if ((this->position.y + 31) > h->GetTop())
+							this->position.y = h->GetTop()-31;
+					}
 				else if (h->getType() == END_MAP)
 				{
 					isInTheEndOfMap = true;

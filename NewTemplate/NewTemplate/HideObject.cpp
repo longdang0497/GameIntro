@@ -46,4 +46,14 @@ void HideObject::GetBoundingBox(float& l, float& t, float& r, float& b)
 	b = t + objectHeight;
 }
 
+float HideObject::GetBottom()
+{
+	return this->position.y  + objectHeight;
+}
+
+float HideObject::GetTop()
+{
+	return this->position.y;
+}
+
 
