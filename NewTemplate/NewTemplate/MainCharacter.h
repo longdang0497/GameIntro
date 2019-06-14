@@ -34,7 +34,7 @@ class MainCharacter : public Object
 {
 private:
 
-	bool Demo = false;
+	bool Demo = true;
 
 	static MainCharacter* _instance;
 	MAIN_CHARACTER_STATE state;

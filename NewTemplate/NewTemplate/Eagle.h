@@ -10,6 +10,8 @@
 #define EAGLE_HIGHTEST_POS_Y 160.0f
 #define EAGLE_LOWEST_POS_Y 190.0f
 #define EAGLE_FREEZE_TIME 200
+#define EAGLE_HIGHTER_LIMIT 50
+#define EAGLE_LOWER_LIMIT 70
 
 class Eagle : public Enemy
 {

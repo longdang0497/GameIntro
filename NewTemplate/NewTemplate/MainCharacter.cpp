@@ -274,8 +274,12 @@ void MainCharacter::Render()
 			this->position.y = 151 - 32;
 		}
 		else if (this->position.x >= 1309 && this->position.x <= 1600 && this->position.y + 31 > 152
-			|| this->position.x >= 2720 && this->position.x <= 2875 && this->position.y + 31 > 152) {
+			|| this->position.x >= 2720 && this->position.x <= 2875 && this->position.y + 31 > 152
+			|| this->position.x >= 2146 && this->position.x <= 2239 && this->position.y + 31 > 152) {
 			this->position.y = 152 - 32;
+		}
+		else if (this->position.x >= 1088 && this->position.x <= 1182 && this->position.y + 31 > 120) {
+			this->position.y = 120 - 32;
 		}
 	}
 

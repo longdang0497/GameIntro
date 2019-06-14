@@ -141,7 +141,7 @@ void Stage::InitEnemies(LPCWSTR filePath)
 			break;
 		}
 		case EAGLE_ID:
-			this->objects->push_back(new Eagle(pos, 1, 50, 70));
+			this->objects->push_back(new Eagle(pos, 1, limit1, limit2));
 			break;
 		case ZOMBIE_ID:
 		{

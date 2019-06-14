@@ -80,26 +80,32 @@ void Eagle::Update(float deltaTime, std::vector<Object*>* objects)
 		this->lastReachTime = GetTickCount();
 
 		if (count % 2 == 0) {
-			top = EAGLE_HIGHTEST_POS_Y;
+			if (this->limitX1 == 0)
+				top = EAGLE_HIGHTEST_POS_Y;
+			else
+				top = this->limitX1;
 			
 			if (this->position.x >= MainCharacter::GetInstance()->GetPosition().x) {
-				left = MainCharacter::GetInstance()->GetPosition().x - this->limitX1;
+				left = MainCharacter::GetInstance()->GetPosition().x - EAGLE_HIGHTER_LIMIT;
 				this->flyingToRight = false;
 			}
 			else {
-				left = MainCharacter::GetInstance()->GetPosition().x + this->limitX1;
+				left = MainCharacter::GetInstance()->GetPosition().x + EAGLE_HIGHTER_LIMIT;
 				this->flyingToRight = true;
 			}
 		}
 		else {
-			top = EAGLE_LOWEST_POS_Y;
+			if (this->limitX2 == 0)
+				top = EAGLE_LOWEST_POS_Y;
+			else
+				top = this->limitX2;
 
 			if (this->position.x >= MainCharacter::GetInstance()->GetPosition().x) {
-				left = this->lastPos.x + (this->limitX2 - this->limitX1);
+				left = this->lastPos.x + (EAGLE_LOWER_LIMIT - EAGLE_HIGHTER_LIMIT);
 				this->flyingToRight = true;
 			}
 			else {
-				left = this->lastPos.x - (this->limitX2 - this->limitX1);
+				left = this->lastPos.x - (EAGLE_LOWER_LIMIT - EAGLE_HIGHTER_LIMIT);
 				this->flyingToRight = false;
 			}
 		}
