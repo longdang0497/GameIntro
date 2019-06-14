@@ -81,4 +81,6 @@ public:
 
 	void AddZombieSword(ZombieSword *Zw);
 	void AddBazookaBullet(BazookaBullet *bullet);
+
+	void ResetEnemyPosition();
 };

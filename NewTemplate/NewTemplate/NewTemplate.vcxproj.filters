@@ -362,9 +362,6 @@
     <ClInclude Include="BazookaBullet.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Stage3.h">
-      <Filter>Header Files\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Shuriken.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
@@ -400,6 +397,9 @@
     </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage3.h">
+      <Filter>Header Files\Stage</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

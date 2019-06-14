@@ -17,6 +17,7 @@ protected:
 	int objectWidth;
 	int objectHeight;
 	D3DXVECTOR3 position;  // Vị trí hiện tại của object
+	D3DXVECTOR3 defaultPosition;  // Vị trí khoi ttao của object
 	D3DXVECTOR3 lastPos;	// Vị trí trước đó của object
 	D3DXVECTOR3 veclocity;  // Vận tốc của Object
 	OBJECT_TYPE objectType;
@@ -107,6 +108,9 @@ public:
 	void SetActive(bool value) { this->isActive = value; }
 
 	int GetObjectId() { return this->objectId; }
+
+
+	void ResetPosition();
 };
 
 

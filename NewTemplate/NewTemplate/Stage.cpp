@@ -341,3 +341,22 @@ void Stage::AddBazookaBullet(BazookaBullet * bullet)
 {
 	this->objects->push_back(bullet);
 }
+
+void Stage::ResetEnemyPosition()
+{
+	for (int i = 0; i < this->objects->size(); i++) {
+		switch (this->objects->at(i)->GetObjectType())
+		{
+		case JAGUAR:
+		case GREEN_SOLDIER:
+		case SOLDIER:
+		case ZOMBIE:
+		case BAT:
+		case EAGLE:
+			this->objects->at(i)->ResetPosition();
+			break;
+		default:
+			break;
+		}
+	}
+}

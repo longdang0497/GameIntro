@@ -10,7 +10,7 @@ protected:
 	int enemyAppearanceDirection;
 	int limitX1;
 	int limitX2;
-	D3DXVECTOR3 defaultPosition;
+	
 	int flagAppear = false;
 public:
 	Enemy(D3DXVECTOR3 pos, int enemyAppearanceDirection, int LimitX1, int LimitX2);

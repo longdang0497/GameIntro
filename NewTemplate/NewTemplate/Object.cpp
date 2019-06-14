@@ -108,7 +108,7 @@ void Object::Update(float deltaTime, std::vector<Object*>* objects)
 
 void Object::Render()
 {
-	 RenderBoundingBox();
+	 //RenderBoundingBox();
 }
 
 CollisionEvent* Object::SweptAABBEx(Object* coO)
@@ -142,4 +142,12 @@ CollisionEvent* Object::SweptAABBEx(Object* coO)
 
 	CollisionEvent * e = new CollisionEvent(t, nx, ny, coO);
 	return e;
+}
+
+
+void Object::ResetPosition()
+{
+	this->position = this->defaultPosition;
+	this->HP = 1;
+//	this->isActive = true;
 }
