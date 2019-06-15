@@ -26,8 +26,6 @@ Stage2::Stage2()
 	TimeToFade = GetTickCount();
 }
 
-
-
 Stage2::~Stage2()
 {
 }
@@ -166,7 +164,6 @@ void Stage2::LoadResource()
 
 void Stage2::Update(float deltaTime)
 {
-
 	Stage::Update(deltaTime);
 
 	if (MainCharacter::GetInstance()->GetIsInTheEndOfMap())
@@ -185,6 +182,17 @@ void Stage2::Update(float deltaTime)
 				{
 					this->objects->at(i + 1)->SetActive(true);
 				}
+			}
+		}
+		else if (this->objects->at(i)->GetObjectType() == GREEN_SOLDIER)
+		{
+			GreenSodier * grSoldier = dynamic_cast<GreenSodier * >(this->objects->at(i));
+			if (grSoldier->GetStateGreenSoldier() == 1)
+			{
+				if (MainCharacter::GetInstance()->GetPosition().x <= grSoldier->GetPosition().x)
+					grSoldier->SetDirection(LEFT);
+				else
+					grSoldier->SetDirection(RIGHT);
 			}
 		}
 	}

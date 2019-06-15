@@ -27,5 +27,8 @@ public:
 	void Shoot();
 
 	vector<BazookaBullet*>* GetBullets();
+
+	int GetStateGreenSoldier() { return this->state; }
+	void SetStateGreenSoldier(int value) { this->state = value; }
 };
 
