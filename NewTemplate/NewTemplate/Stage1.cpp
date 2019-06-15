@@ -30,14 +30,14 @@ Stage1::~Stage1()
 
 void Stage1::LoadResource()
 {
-	this->objects->clear();
-	MainCharacter::GetInstance()->SetPosition(30.0f,186.8f);
 	bool soundInit = GameSound::GetInstance()->Init(this->window_handler);
 	if (soundInit == false)
 		return;
 	else
 		soundS1 = GameSound::GetInstance()->LoadSound(STAGE1_SOUND);
 
+	this->objects->clear();
+	MainCharacter::GetInstance()->SetPosition(30.0f,186.8f);
 	this->objects->push_back(MainCharacter::GetInstance());
 
 	this->map = new Map(PATH_POS_MAP_1, PATH_TEXTURE_MAP_1, ID_TEXTURE_MAP_1);
@@ -230,9 +230,12 @@ void Stage1::FadeOutEffect()
 			MainCharacter::GetInstance()->SetDirection(RIGHT);
 
 
+	
+
 			Grid::GetInstance()->ReSetGrid(STAGE1_HEIGHT, STAGE1_WIDTH, false);
 
 			this->LoadResource();
+			GameSound::GetInstance()->Loopsound(soundS1);
 
 		
 			MainCharacter::GetInstance()->SetRepawn(false);

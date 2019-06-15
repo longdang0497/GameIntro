@@ -257,6 +257,7 @@ void Stage2::FadeOutEffect()
 		//	this->ResetEnemyPosition();
 			Grid::GetInstance()->ReSetGrid(STAGE2_HEIGHT, STAGE2_WIDTH, false);
 			this->LoadResource();
+			GameSound::GetInstance()->Loopsound(soundS2);
 			MainCharacter::GetInstance()->SetDirection(RIGHT);
 			MainCharacter::GetInstance()->SetRepawn(false);
 		}
