@@ -7,17 +7,18 @@ Stage2::Stage2()
 	HUD::GetInstance()->ReSetTime();
 	MainCharacter::GetInstance()->SetIsInTheEndOfMap(false);
 	Grid::GetInstance()->ReSetGrid(STAGE2_HEIGHT, STAGE2_WIDTH, false);
+	this->LoadResource();
 
 	MainCharacter::GetInstance()->SetPosition(50, 120);
 
-	this->LoadResource();
+
 	Camera::GetInstance()->setWorldBoundary(3072);
 	//Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
 
 	SpecialPoint.push_back(0);
 	SpecialPoint.push_back(1000);
 	SpecialPoint.push_back(1245);
-	SpecialPoint.push_back(2779);
+	SpecialPoint.push_back(2998);
 
 	alpha = 255;
 	fadeIn = true;
@@ -250,21 +251,24 @@ void Stage2::FadeOutEffect()
 			ProcessGame::GetInstance(NULL, 0)->SetGameStage(STAGE3);
 			Game::GetInstance()->SetGameStage(STAGE3);
 		}
-		else if (MainCharacter::GetInstance()->GetRepawn())
-		{
-			MainCharacter::GetInstance()->LoseLive();
-			MainCharacter::GetInstance()->SetPosition(50, 80);
-			MainCharacter::GetInstance()->SetHP(16);
-			this->ResetEnemyPosition();
-			MainCharacter::GetInstance()->SetDirection(RIGHT);
-			MainCharacter::GetInstance()->SetRepawn(false);
-		}
 		else if (MainCharacter::GetInstance()->GetLives() < 0)
 		{
 			Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
 			GameSound::GetInstance()->Stopsound(soundS2);
 			ProcessGame::GetInstance(NULL, 0)->SetGameStage(END_STAGE);
 		}
+		else if (MainCharacter::GetInstance()->GetRepawn())
+		{
+			MainCharacter::GetInstance()->LoseLive();
+			MainCharacter::GetInstance()->SetPosition(50, 80);
+			MainCharacter::GetInstance()->SetHP(16);
+		//	this->ResetEnemyPosition();
+			Grid::GetInstance()->ReSetGrid(STAGE2_HEIGHT, STAGE2_WIDTH, false);
+			this->LoadResource();
+			MainCharacter::GetInstance()->SetDirection(RIGHT);
+			MainCharacter::GetInstance()->SetRepawn(false);
+		}
+	
 	}
 	/*if (alpha < 255)
 	{

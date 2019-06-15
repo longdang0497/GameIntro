@@ -80,10 +80,10 @@ void GreenSodier::Update(float deltaTime, std::vector<Object*>* objects)
 		return;
 	}
 
-	if (position.x >= limitX2 && direction == RIGHT && limitX2 != 1738)
+	if (position.x >= limitX2 && direction == RIGHT)
 		direction = LEFT;
 	
-	if (position.x <= limitX1 && direction == LEFT && limitX1 != 1609)
+	if (position.x <= limitX1 && direction == LEFT)
 		direction = RIGHT;		
 
 	DWORD temp = GetTickCount() - WaitTime;
@@ -213,7 +213,7 @@ void GreenSodier::GetBoundingBox(float & l, float & t, float & r, float & b)
 
 void GreenSodier::Destroy()
 {
-	this->position = defaultPosition;
+	//this->position = defaultPosition;
 	//this->position.y -= 2;
 	this->HP = 1;
 	this->isActive = false;
