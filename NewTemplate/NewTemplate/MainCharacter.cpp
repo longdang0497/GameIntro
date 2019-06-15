@@ -778,8 +778,9 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 							break;
 						}
 						}
+						this->alreadyGotItem = true;
 					}
-					this->alreadyGotItem = true;
+				
 				}
 				break;
 			}
@@ -941,8 +942,9 @@ void MainCharacter::HandleCollisionWithMovingObject(vector<Object*> * objects)
 						break;
 					}
 					}
+					this->alreadyGotItem = true;
 				}
-				this->alreadyGotItem = true;
+				
 				break;
 			}
 			default:
