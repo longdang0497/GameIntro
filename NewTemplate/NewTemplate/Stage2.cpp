@@ -7,10 +7,11 @@ Stage2::Stage2()
 	HUD::GetInstance()->ReSetTime();
 	MainCharacter::GetInstance()->SetIsInTheEndOfMap(false);
 	Grid::GetInstance()->ReSetGrid(STAGE2_HEIGHT, STAGE2_WIDTH, false);
+	this->LoadResource();
 
 	MainCharacter::GetInstance()->SetPosition(50, 120);
 
-	this->LoadResource();
+
 	Camera::GetInstance()->setWorldBoundary(3072);
 	//Camera::GetInstance()->setPosition(D3DXVECTOR2(0, 0));
 
@@ -254,6 +255,8 @@ void Stage2::FadeOutEffect()
 			MainCharacter::GetInstance()->SetPosition(50, 80);
 			MainCharacter::GetInstance()->SetHP(16);
 		//	this->ResetEnemyPosition();
+			Grid::GetInstance()->ReSetGrid(STAGE2_HEIGHT, STAGE2_WIDTH, false);
+			this->LoadResource();
 			MainCharacter::GetInstance()->SetDirection(RIGHT);
 			MainCharacter::GetInstance()->SetRepawn(false);
 		}

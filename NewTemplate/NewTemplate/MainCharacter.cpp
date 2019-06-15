@@ -185,18 +185,27 @@ void MainCharacter::Reset(float x, float y)
 
 void MainCharacter::Update(float t, vector<Object*> * object)
 {
+	if (StopWatch && GetTickCount() - StartStopWatch >= 6000)
+	{
+		StopWatch = false;
+	} 
+
+
 	if (HP == 0)
+	{
+		Shuriken::GetInstance()->setIsActive(false);
+		Windmill::GetInstance()->setIsActive(false);
+		Shuriken::GetInstance()->setIsActive(false);
 		return;
+
+	}
 
 	if (isInTheEndOfMap)
 		return;
 
 	this->explode->Update(deltaTime, object);
 
-	if (StopWatch && GetTickCount() - StartStopWatch >= 6000)
-	{
-		StopWatch = false;
-	}
+	
 
 
 	alpha = 255;

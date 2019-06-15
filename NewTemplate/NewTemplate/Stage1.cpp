@@ -228,7 +228,13 @@ void Stage1::FadeOutEffect()
 			MainCharacter::GetInstance()->SetPosition(50, 80);
 			MainCharacter::GetInstance()->SetHP(16);
 			MainCharacter::GetInstance()->SetDirection(RIGHT);
-		//	this->ResetEnemyPosition();
+
+
+			Grid::GetInstance()->ReSetGrid(STAGE1_HEIGHT, STAGE1_WIDTH, false);
+
+			this->LoadResource();
+
+		
 			MainCharacter::GetInstance()->SetRepawn(false);
 		}
 	
