@@ -274,9 +274,13 @@ void MainCharacter::Render()
 	this->explode->Render();
 
 	// Cách này chỉ là đang fix tạm thôi nha <3
-	if (Game::GetInstance()->GetGameStage() == STAGE1 && this->position.x > 883 && this->position.x < 960
-		&& this->position.y + 31 > 154) {
-		this->position.y = 154 - 32;
+	if (Game::GetInstance()->GetGameStage() == STAGE1){
+		if (this->position.x > 883 && this->position.x < 960 && this->position.y + 31 > 154) {
+			this->position.y = 154 - 32;
+		}
+		else if (this->position.x > 1798 && this->position.x < 2048 && this->position.y + 31 > 218) {
+			this->position.y = 218 - 32;
+		}
 	}
 	else if (Game::GetInstance()->GetGameStage() == STAGE2) {
 		if (this->position.x >= 416 && this->position.x <= 576 && this->position.y + 31 > 151) {
@@ -289,6 +293,11 @@ void MainCharacter::Render()
 		}
 		else if (this->position.x >= 1088 && this->position.x <= 1182 && this->position.y + 31 > 120) {
 			this->position.y = 120 - 32;
+		}
+	}
+	else if (Game::GetInstance()->GetGameStage() == STAGE3) {
+		if (this->position.x > 26 && this->position.x < 224 && this->position.y + 31 > 225) {
+			this->position.y = 225 - 32;
 		}
 	}
 
