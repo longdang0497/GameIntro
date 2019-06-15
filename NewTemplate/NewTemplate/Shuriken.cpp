@@ -6,7 +6,7 @@ Shuriken::Shuriken()
 {
 	isActive = false;
 	direction = RIGHT;
-	ShurikenSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ITEM), PATH_SHURIKEN);
+	ShurikenSprite = new Sprite(Texture::GetInstance()->Get(ID_TEXTURE_ITEM), PATH_SHURIKEN_SW);
 	currentSprite = ShurikenSprite;
 	this->veclocity.x = 0;
 	this->veclocity.y = 0;

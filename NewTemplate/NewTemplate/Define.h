@@ -80,6 +80,7 @@ enum GAME_STAGE {
 
 #define PATH_SANDGLASS L"sprite\\item\\SANDGLASS.txt"
 #define PATH_SHURIKEN L"sprite\\item\\BIG_SHURIKEN.txt"
+#define PATH_SHURIKEN_SW L"sprite\\item\\BIG_SHURIKEN_SW.txt"
 #define PATH_WINDMILL L"sprite\\item\\WIND_MILL.txt"
 #define PATH_BLUE_POCKET L"sprite\\item\\BLUE_POCKET.txt"
 #define PATH_ORANGE_POCKET L"sprite\\item\\ORANGE_POCKET.txt"
